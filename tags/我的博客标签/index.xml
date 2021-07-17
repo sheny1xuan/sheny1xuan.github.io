@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>我的博客标签 on Hugo</title>
-    <link>/tags/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%A0%87%E7%AD%BE/</link>
+    <link>sheny1xuan.github.io/tags/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%A0%87%E7%AD%BE/</link>
     <description>Recent content in 我的博客标签 on Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 17 Jul 2021 18:20:16 +0800</lastBuildDate><atom:link href="/tags/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%A0%87%E7%AD%BE/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 17 Jul 2021 18:20:16 +0800</lastBuildDate><atom:link href="sheny1xuan.github.io/tags/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%A0%87%E7%AD%BE/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>My First Post</title>
-      <link>/posts/my-first-post/</link>
+      <link>sheny1xuan.github.io/posts/my-first-post/</link>
       <pubDate>Sat, 17 Jul 2021 18:20:16 +0800</pubDate>
       
-      <guid>/posts/my-first-post/</guid>
+      <guid>sheny1xuan.github.io/posts/my-first-post/</guid>
       <description>test for hugo</description>
     </item>
     
