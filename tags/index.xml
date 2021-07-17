@@ -1,45 +1,63 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on Hugo</title>
-    <link>sheny1xuan.github.io/tags/</link>
-    <description>Recent content in Tags on Hugo</description>
+    <title>Tags on Y.1</title>
+    <link>https://sheny1xuan.github.io/tags/</link>
+    <description>Recent content in Tags on Y.1</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sat, 17 Jul 2021 18:20:16 +0800</lastBuildDate><atom:link href="sheny1xuan.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <language>en</language>
+    <lastBuildDate>Thu, 11 Apr 2019 14:26:00 +0800</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>我的博客标签</title>
-      <link>sheny1xuan.github.io/tags/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%A0%87%E7%AD%BE/</link>
-      <pubDate>Sat, 17 Jul 2021 18:20:16 +0800</pubDate>
+      <title>中文</title>
+      <link>https://sheny1xuan.github.io/tags/%E4%B8%AD%E6%96%87/</link>
+      <pubDate>Thu, 11 Apr 2019 14:26:00 +0800</pubDate>
       
-      <guid>sheny1xuan.github.io/tags/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%A0%87%E7%AD%BE/</guid>
+      <guid>https://sheny1xuan.github.io/tags/%E4%B8%AD%E6%96%87/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>css</title>
-      <link>sheny1xuan.github.io/tags/css/</link>
-      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+      <title>真言</title>
+      <link>https://sheny1xuan.github.io/tags/%E7%9C%9F%E8%A8%80/</link>
+      <pubDate>Thu, 11 Apr 2019 14:26:00 +0800</pubDate>
       
-      <guid>sheny1xuan.github.io/tags/css/</guid>
+      <guid>https://sheny1xuan.github.io/tags/%E7%9C%9F%E8%A8%80/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>html</title>
-      <link>sheny1xuan.github.io/tags/html/</link>
-      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+      <title>体系</title>
+      <link>https://sheny1xuan.github.io/tags/%E4%BD%93%E7%B3%BB/</link>
+      <pubDate>Wed, 10 Apr 2019 14:26:00 +0800</pubDate>
       
-      <guid>sheny1xuan.github.io/tags/html/</guid>
+      <guid>https://sheny1xuan.github.io/tags/%E4%BD%93%E7%B3%BB/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>markdown</title>
-      <link>sheny1xuan.github.io/tags/markdown/</link>
-      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+      <title>日本語</title>
+      <link>https://sheny1xuan.github.io/tags/%E6%97%A5%E6%9C%AC%E8%AA%9E/</link>
+      <pubDate>Wed, 10 Apr 2019 14:26:00 +0800</pubDate>
       
-      <guid>sheny1xuan.github.io/tags/markdown/</guid>
+      <guid>https://sheny1xuan.github.io/tags/%E6%97%A5%E6%9C%AC%E8%AA%9E/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>English</title>
+      <link>https://sheny1xuan.github.io/tags/english/</link>
+      <pubDate>Mon, 01 Apr 2019 14:26:00 +0800</pubDate>
+      
+      <guid>https://sheny1xuan.github.io/tags/english/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Theme</title>
+      <link>https://sheny1xuan.github.io/tags/theme/</link>
+      <pubDate>Mon, 01 Apr 2019 14:26:00 +0800</pubDate>
+      
+      <guid>https://sheny1xuan.github.io/tags/theme/</guid>
       <description></description>
     </item>
     
