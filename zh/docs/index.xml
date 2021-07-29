@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Docs on blog title</title>
+    <link>https://sheny1xuan.github.io/zh/docs/</link>
+    <description>Recent content in Docs on blog title</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <copyright>&amp;copy;2019-{year}, All Rights Reserved</copyright>
+    <lastBuildDate>Sat, 11 Jan 2020 14:09:21 +0900</lastBuildDate>
+    
+        <atom:link href="https://sheny1xuan.github.io/zh/docs/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+      
+      <item>
+        <title>Depth 1</title>
+        <link>https://sheny1xuan.github.io/zh/docs/depth1/</link>
+        <pubDate>Fri, 28 Feb 2020 10:08:56 +0900</pubDate>
+        
+        <guid>https://sheny1xuan.github.io/zh/docs/depth1/</guid>
+        <description></description>
+      </item>
+      
+      <item>
+        <title>Getting Started</title>
+        <link>https://sheny1xuan.github.io/zh/docs/gettingstarted/</link>
+        <pubDate>Tue, 28 Jan 2020 00:34:39 +0900</pubDate>
+        
+        <guid>https://sheny1xuan.github.io/zh/docs/gettingstarted/</guid>
+        <description></description>
+      </item>
+      
+      <item>
+        <title>Content Management</title>
+        <link>https://sheny1xuan.github.io/zh/docs/contentmanagement/</link>
+        <pubDate>Tue, 28 Jan 2020 00:36:39 +0900</pubDate>
+        
+        <guid>https://sheny1xuan.github.io/zh/docs/contentmanagement/</guid>
+        <description></description>
+      </item>
+      
+    
+  </channel>
+</rss>

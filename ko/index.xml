@@ -2,13 +2,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ZDoc</title>
-    <link>http://example.org/</link>
+    <link>https://sheny1xuan.github.io/ko/</link>
     <description>Recent content on ZDoc</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <copyright>&amp;copy;{year}, All Rights Reserved</copyright>
+    <language>ko</language>
+    <copyright>&amp;copy;2019-{year}, All Rights Reserved</copyright>
     
-        <atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://sheny1xuan.github.io/ko/index.xml" rel="self" type="application/rss+xml" />
     
     
     
