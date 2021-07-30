@@ -4,10 +4,10 @@
         <link>https://sheny1xuan.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/</link>
         <description>二叉树 - 标签 - stonex</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sheny1xuan@163.com (Shen)</managingEditor>
-            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Fri, 30 Jul 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Thu, 29 Jul 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="self" type="application/rss+xml" /><item>
     <title>1104.二叉树寻路</title>
     <link>https://sheny1xuan.github.io/1104/</link>
-    <pubDate>Fri, 30 Jul 2021 00:00:00 &#43;0000</pubDate>
+    <pubDate>Thu, 29 Jul 2021 00:00:00 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://sheny1xuan.github.io/1104/</guid>
     <description><![CDATA[1104. 二叉树寻路 完全二叉树规律 $i_{father} = i_{child}/2$ 所以先找到该节点对称的结点，再利用完全二叉树的规律即可 完全二叉树一行的开始是$2^{row - 1}$,结束是$]]></description>
