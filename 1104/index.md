@@ -11,7 +11,7 @@
 + 完全二叉树一行的开始是$2^{row - 1}$,结束是$2^{row}-1$
 + 下一行的开始是$2^{row}$
 
-![](http://picture-table.oss-cn-beijing.aliyuncs.com/img/1104.png)
+![](https://picture-table.oss-cn-beijing.aliyuncs.com/img/1104.png)
 
 ``` cpp
 class Solution {
