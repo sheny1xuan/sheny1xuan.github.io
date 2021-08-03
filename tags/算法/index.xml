@@ -1,10 +1,10 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>每日一题 - 分类 - stonex</title>
-        <link>https://sheny1xuan.github.io/categories/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</link>
-        <description>每日一题 - 分类 - stonex</description>
+        <title>算法 - 标签 - stonex</title>
+        <link>https://sheny1xuan.github.io/tags/%E7%AE%97%E6%B3%95/</link>
+        <description>算法 - 标签 - stonex</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sheny1xuan@163.com (Shen)</managingEditor>
-            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Tue, 03 Aug 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/categories/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Tue, 03 Aug 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/%E7%AE%97%E6%B3%95/" rel="self" type="application/rss+xml" /><item>
     <title>lc581.最短无序连续子数组</title>
     <link>https://sheny1xuan.github.io/lc581/</link>
     <pubDate>Tue, 03 Aug 2021 00:00:00 &#43;0000</pubDate>
