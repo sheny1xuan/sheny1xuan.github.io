@@ -1,4 +1,4 @@
-# 987.二叉树的垂序遍历
+# lc987.二叉树的垂序遍历
 
 
 ## [987. 二叉树的垂序遍历](https://leetcode-cn.com/problems/vertical-order-traversal-of-a-binary-tree/)
