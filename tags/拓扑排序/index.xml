@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>拓扑排序 - 标签 - stonex</title>
+        <link>https://sheny1xuan.github.io/tags/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/</link>
+        <description>拓扑排序 - 标签 - stonex</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sheny1xuan@163.com (Shen)</managingEditor>
+            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Thu, 05 Aug 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/" rel="self" type="application/rss+xml" /><item>
+    <title>lc802.找到最终的安全状态</title>
+    <link>https://sheny1xuan.github.io/lc802/</link>
+    <pubDate>Thu, 05 Aug 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc802/</guid>
+    <description><![CDATA[802. 找到最终的安全状态 染色法(DFS) 理解题目的意思：无论怎么走必定到达终点 也就是说该节点不能与环相连接 三色标记 label[i]表示当前结点的]]></description>
+</item></channel>
+</rss>
