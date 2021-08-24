@@ -5,32 +5,32 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title> - stonex</title><meta name="Description" content="Welcome to my&#39;blog!"><meta property="og:title" content="" />
+        <title>acwing基础课ch3-最小生成树_二分图 - stonex</title><meta name="Description" content="Welcome to my&#39;blog!"><meta property="og:title" content="acwing基础课ch3-最小生成树_二分图" />
 <meta property="og:description" content="最小生成树与二分图 最小生成树 生成树：包含所有节点的无环图。 最小生成树：权值和最小的生成树。 朴素Prim算法 $O(n^2)$ 初始化所有点的距离 遍历n个点，每" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://sheny1xuan.github.io/ch3_%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%E4%B8%8E%E4%BA%8C%E5%88%86%E5%9B%BE/" /><meta property="og:image" content="https://sheny1xuan.github.io/logo.png"/><meta property="article:section" content="posts" />
-
-
+<meta property="article:published_time" content="2021-08-24T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-08-24T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://sheny1xuan.github.io/logo.png"/>
 
-<meta name="twitter:title" content=""/>
+<meta name="twitter:title" content="acwing基础课ch3-最小生成树_二分图"/>
 <meta name="twitter:description" content="最小生成树与二分图 最小生成树 生成树：包含所有节点的无环图。 最小生成树：权值和最小的生成树。 朴素Prim算法 $O(n^2)$ 初始化所有点的距离 遍历n个点，每"/>
 <meta name="application-name" content="Stonex">
 <meta name="apple-mobile-web-app-title" content="Stonex"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://sheny1xuan.github.io/ch3_%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%E4%B8%8E%E4%BA%8C%E5%88%86%E5%9B%BE/" /><link rel="prev" href="https://sheny1xuan.github.io/ch3_%E6%9C%80%E7%9F%AD%E8%B7%AF%E9%97%AE%E9%A2%98/" /><link rel="next" href="https://sheny1xuan.github.io/ch3_%E5%9B%BE%E5%9F%BA%E7%A1%80_%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://sheny1xuan.github.io/ch3_%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%E4%B8%8E%E4%BA%8C%E5%88%86%E5%9B%BE/" /><link rel="prev" href="https://sheny1xuan.github.io/ch3_%E6%9C%80%E7%9F%AD%E8%B7%AF%E9%97%AE%E9%A2%98/" /><link rel="next" href="https://sheny1xuan.github.io/ch3_bfs_dfs/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "",
+        "headline": "acwing基础课ch3-最小生成树_二分图",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/sheny1xuan.github.io\/ch3_%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%E4%B8%8E%E4%BA%8C%E5%88%86%E5%9B%BE\/"
-        },"genre": "posts","wordcount":  1371 ,
-        "url": "https:\/\/sheny1xuan.github.io\/ch3_%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%E4%B8%8E%E4%BA%8C%E5%88%86%E5%9B%BE\/","publisher": {
+        },"genre": "posts","keywords": "算法基础课, leetcode, 算法, 最小生成树, 二分图","wordcount":  1371 ,
+        "url": "https:\/\/sheny1xuan.github.io\/ch3_%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%E4%B8%8E%E4%BA%8C%E5%88%86%E5%9B%BE\/","datePublished": "2021-08-24T00:00:00+00:00","dateModified": "2021-08-24T00:00:00+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
@@ -104,9 +104,9 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animated flipInX"></h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Shen</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1371 字&nbsp;
+        </div><article class="page single"><h1 class="single-title animated flipInX">acwing基础课ch3-最小生成树_二分图</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Shen</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE/"><i class="far fa-folder fa-fw"></i>算法基础课</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-08-24">2021-08-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1371 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -115,8 +115,9 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#最小生成树与二分图">最小生成树与二分图</a>
+    <li>
       <ul>
+        <li><a href="#最小生成树与二分图">最小生成树与二分图</a></li>
         <li><a href="#最小生成树">最小生成树</a>
           <ul>
             <li><a href="#朴素prim算法">朴素Prim算法</a></li>
@@ -133,7 +134,7 @@
     </li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h1 id="最小生成树与二分图">最小生成树与二分图</h1>
+            </div><div class="content" id="content"><h2 id="最小生成树与二分图">最小生成树与二分图</h2>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -686,7 +687,7 @@
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 0001-01-01</span>
+                <span>更新于 2021-08-24</span>
             </div>
             <div class="post-info-license"></div>
         </div>
@@ -699,14 +700,14 @@
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE/">算法基础课</a>,&nbsp;<a href="/tags/leetcode/">leetcode</a>,&nbsp;<a href="/tags/%E7%AE%97%E6%B3%95/">算法</a>,&nbsp;<a href="/tags/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/">最小生成树</a>,&nbsp;<a href="/tags/%E4%BA%8C%E5%88%86%E5%9B%BE/">二分图</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/ch3_%E6%9C%80%E7%9F%AD%E8%B7%AF%E9%97%AE%E9%A2%98/" class="prev" rel="prev" title=""><i class="fas fa-angle-left fa-fw"></i></a>
-            <a href="/ch3_%E5%9B%BE%E5%9F%BA%E7%A1%80_%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/" class="next" rel="next" title=""><i class="fas fa-angle-right fa-fw"></i></a></div>
+    <div class="post-nav"><a href="/ch3_%E6%9C%80%E7%9F%AD%E8%B7%AF%E9%97%AE%E9%A2%98/" class="prev" rel="prev" title="acwing基础课ch3-最短路问题"><i class="fas fa-angle-left fa-fw"></i>acwing基础课ch3-最短路问题</a>
+            <a href="/ch3_bfs_dfs/" class="next" rel="next" title="acwing基础课ch3-搜索算法">acwing基础课ch3-搜索算法<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 
 

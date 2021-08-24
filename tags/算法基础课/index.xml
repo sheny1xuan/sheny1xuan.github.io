@@ -61,18 +61,18 @@
     <guid>https://sheny1xuan.github.io/ch2_%E5%AD%97%E5%85%B8%E6%A0%91/</guid>
     <description><![CDATA[字典树 作用 高效地存储与查找字符串。(O(logn)的时间复杂度进行查找) 支持两种操作：插入一个字符串(insert) 查找是否存在一个字符串(]]></description>
 </item><item>
+    <title>acwing基础课ch2-字符串问题</title>
+    <link>https://sheny1xuan.github.io/ch2_string/</link>
+    <pubDate>Tue, 24 Aug 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/ch2_string/</guid>
+    <description><![CDATA[字符串问题 字符串单模匹配 给你一个字符串haystack和needle，找出needle再haystack中第一个出现的位置。 如果needle]]></description>
+</item><item>
     <title>acwing基础课ch2-并查集</title>
     <link>https://sheny1xuan.github.io/ch2_%E5%B9%B6%E6%9F%A5%E9%9B%86/</link>
     <pubDate>Tue, 24 Aug 2021 00:00:00 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://sheny1xuan.github.io/ch2_%E5%B9%B6%E6%9F%A5%E9%9B%86/</guid>
     <description><![CDATA[并查集 并查集是什么 Union,Find,Set 并查集包含Union,Find,Set3个关键词，是一种维护集合的基本操作。 并查集是一种用树表示的集合，树根的编号表示集]]></description>
-</item><item>
-    <title>acwing基础课ch2-栈</title>
-    <link>https://sheny1xuan.github.io/ch2_stack/</link>
-    <pubDate>Tue, 24 Aug 2021 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://sheny1xuan.github.io/ch2_stack/</guid>
-    <description><![CDATA[栈 栈的静态实现 维护一个栈顶的指针，哨兵为0，当栈顶指针指向0的时候，整个栈为空栈。 栈的STL操作 栈模板题 静态实现 Ac828.模拟栈 1 2 3 4 5]]></description>
 </item></channel>
 </rss>

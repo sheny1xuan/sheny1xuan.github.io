@@ -4,7 +4,14 @@
         <link>https://sheny1xuan.github.io/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/</link>
         <description>字符串 - 标签 - stonex</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sheny1xuan@163.com (Shen)</managingEditor>
-            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Sat, 21 Aug 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Tue, 24 Aug 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="self" type="application/rss+xml" /><item>
+    <title>acwing基础课ch2-字符串问题</title>
+    <link>https://sheny1xuan.github.io/ch2_string/</link>
+    <pubDate>Tue, 24 Aug 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/ch2_string/</guid>
+    <description><![CDATA[字符串问题 字符串单模匹配 给你一个字符串haystack和needle，找出needle再haystack中第一个出现的位置。 如果needle]]></description>
+</item><item>
     <title>lc443. 压缩字符串</title>
     <link>https://sheny1xuan.github.io/lc443/</link>
     <pubDate>Sat, 21 Aug 2021 00:00:00 &#43;0000</pubDate>
