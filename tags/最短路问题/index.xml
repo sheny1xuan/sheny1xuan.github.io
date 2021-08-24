@@ -4,7 +4,21 @@
         <link>https://sheny1xuan.github.io/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF%E9%97%AE%E9%A2%98/</link>
         <description>最短路问题 - 标签 - stonex</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sheny1xuan@163.com (Shen)</managingEditor>
-            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Mon, 02 Aug 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF%E9%97%AE%E9%A2%98/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Tue, 24 Aug 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF%E9%97%AE%E9%A2%98/" rel="self" type="application/rss+xml" /><item>
+    <title>lc787. K站中转内最便宜的航班</title>
+    <link>https://sheny1xuan.github.io/lc787/</link>
+    <pubDate>Tue, 24 Aug 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc787/</guid>
+    <description><![CDATA[787. K 站中转内最便宜的航班 Bellman_ford算法解决有边数限制的最短路问题 K站中转就是最多有k+1条边的最短路问题 acwing模板题 1 2]]></description>
+</item><item>
+    <title>lc789.逃脱阻碍者</title>
+    <link>https://sheny1xuan.github.io/lc789/</link>
+    <pubDate>Sun, 22 Aug 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc789/</guid>
+    <description><![CDATA[789. 逃脱阻碍者 起始点和阻碍者应该同时沿着最短路向目标移动。 由于类似于棋盘的网格状，因此最短路径距离就是曼哈顿距离。 存在以下三种情况。 存在任一阻]]></description>
+</item><item>
     <title>lc743.网络延迟时间</title>
     <link>https://sheny1xuan.github.io/lc743/</link>
     <pubDate>Mon, 02 Aug 2021 00:00:00 &#43;0000</pubDate>

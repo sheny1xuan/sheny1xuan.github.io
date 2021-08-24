@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>数学 - 标签 - stonex</title>
+        <link>https://sheny1xuan.github.io/tags/%E6%95%B0%E5%AD%A6/</link>
+        <description>数学 - 标签 - stonex</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sheny1xuan@163.com (Shen)</managingEditor>
+            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Sun, 22 Aug 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/%E6%95%B0%E5%AD%A6/" rel="self" type="application/rss+xml" /><item>
+    <title>lc789.逃脱阻碍者</title>
+    <link>https://sheny1xuan.github.io/lc789/</link>
+    <pubDate>Sun, 22 Aug 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc789/</guid>
+    <description><![CDATA[789. 逃脱阻碍者 起始点和阻碍者应该同时沿着最短路向目标移动。 由于类似于棋盘的网格状，因此最短路径距离就是曼哈顿距离。 存在以下三种情况。 存在任一阻]]></description>
+</item></channel>
+</rss>

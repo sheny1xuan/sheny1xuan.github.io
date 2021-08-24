@@ -4,7 +4,28 @@
         <link>https://sheny1xuan.github.io/tags/%E5%8F%8C%E6%8C%87%E9%92%88/</link>
         <description>双指针 - 标签 - stonex</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sheny1xuan@163.com (Shen)</managingEditor>
-            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Tue, 10 Aug 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Tue, 24 Aug 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" rel="self" type="application/rss+xml" /><item>
+    <title>acwing基础课ch1-双指针</title>
+    <link>https://sheny1xuan.github.io/ch1_%E5%8F%8C%E6%8C%87%E9%92%88/</link>
+    <pubDate>Tue, 24 Aug 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/ch1_%E5%8F%8C%E6%8C%87%E9%92%88/</guid>
+    <description><![CDATA[双指针 两个序列双指针 归并排序 一个序列同向双指针 双指针利用某种性质将暴力(n^2)的算法优化到O(n). 实现split() 最长连续不重复子序列]]></description>
+</item><item>
+    <title>lc443. 压缩字符串</title>
+    <link>https://sheny1xuan.github.io/lc443/</link>
+    <pubDate>Sat, 21 Aug 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc443/</guid>
+    <description><![CDATA[443. 压缩字符串 使用额外空间 两种情况进行判断是否需要在结果中添加该字符 如果该字符是最后一个字符 或者该字符与下一个字符不相同 $T:O(n)$ $S:O(n)$ 1 2 3 4 5 6 7 8 9]]></description>
+</item><item>
+    <title>lc345.反转字符串中的元音字母</title>
+    <link>https://sheny1xuan.github.io/lc345/</link>
+    <pubDate>Thu, 19 Aug 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc345/</guid>
+    <description><![CDATA[345. 反转字符串中的元音字母 双指针 这里可以使用string.find(c)，如果找到了该字母返回该字母的下标，否则返回std::npos，这个是]]></description>
+</item><item>
     <title>lc413.等差数列划分</title>
     <link>https://sheny1xuan.github.io/lc413/</link>
     <pubDate>Tue, 10 Aug 2021 00:00:00 &#43;0000</pubDate>

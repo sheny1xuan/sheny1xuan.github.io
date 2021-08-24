@@ -4,13 +4,62 @@
         <link>https://sheny1xuan.github.io/categories/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</link>
         <description>每日一题 - 分类 - stonex</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sheny1xuan@163.com (Shen)</managingEditor>
-            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Thu, 12 Aug 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/categories/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Tue, 24 Aug 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/categories/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" rel="self" type="application/rss+xml" /><item>
+    <title>lc787. K站中转内最便宜的航班</title>
+    <link>https://sheny1xuan.github.io/lc787/</link>
+    <pubDate>Tue, 24 Aug 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc787/</guid>
+    <description><![CDATA[787. K 站中转内最便宜的航班 Bellman_ford算法解决有边数限制的最短路问题 K站中转就是最多有k+1条边的最短路问题 acwing模板题 1 2]]></description>
+</item><item>
+    <title>lc1646.获取生成数组中的最大值</title>
+    <link>https://sheny1xuan.github.io/lc1646/</link>
+    <pubDate>Mon, 23 Aug 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc1646/</guid>
+    <description><![CDATA[1646. 获取生成数组中的最大值 分两种情况 奇数：nums[i] = nums[i / 2] 偶数：nums[i] = nums[i / 2] + nums[i / 2 + 1] 模拟 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17]]></description>
+</item><item>
+    <title>lc789.逃脱阻碍者</title>
+    <link>https://sheny1xuan.github.io/lc789/</link>
+    <pubDate>Sun, 22 Aug 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc789/</guid>
+    <description><![CDATA[789. 逃脱阻碍者 起始点和阻碍者应该同时沿着最短路向目标移动。 由于类似于棋盘的网格状，因此最短路径距离就是曼哈顿距离。 存在以下三种情况。 存在任一阻]]></description>
+</item><item>
+    <title>lc443. 压缩字符串</title>
+    <link>https://sheny1xuan.github.io/lc443/</link>
+    <pubDate>Sat, 21 Aug 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc443/</guid>
+    <description><![CDATA[443. 压缩字符串 使用额外空间 两种情况进行判断是否需要在结果中添加该字符 如果该字符是最后一个字符 或者该字符与下一个字符不相同 $T:O(n)$ $S:O(n)$ 1 2 3 4 5 6 7 8 9]]></description>
+</item><item>
+    <title>lc541.反转字符串II</title>
+    <link>https://sheny1xuan.github.io/lc541/</link>
+    <pubDate>Fri, 20 Aug 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc541/</guid>
+    <description><![CDATA[541. 反转字符串 II 按照题意进行翻转即可，使用reverse传入泛型指针进行翻转 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 class Solution { public: string reverseStr(string s, int k) { int n = s.size(), cur]]></description>
+</item><item>
+    <title>lc345.反转字符串中的元音字母</title>
+    <link>https://sheny1xuan.github.io/lc345/</link>
+    <pubDate>Thu, 19 Aug 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc345/</guid>
+    <description><![CDATA[345. 反转字符串中的元音字母 双指针 这里可以使用string.find(c)，如果找到了该字母返回该字母的下标，否则返回std::npos，这个是]]></description>
+</item><item>
     <title>lc516.最长回文子序列</title>
     <link>https://sheny1xuan.github.io/lc516/</link>
     <pubDate>Thu, 12 Aug 2021 00:00:00 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://sheny1xuan.github.io/lc516/</guid>
     <description><![CDATA[516. 最长回文子序列 暴力 枚举所有的子序列(子集) $T:O(n2^n)$ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 class Solution { public: int ans = 1; void dfs(string&amp; s, string&amp; path, int idx){ // cout &lt;&lt; path &lt;&lt;]]></description>
+</item><item>
+    <title>446.等差数列划分 II - 子序列</title>
+    <link>https://sheny1xuan.github.io/lc446/</link>
+    <pubDate>Wed, 11 Aug 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc446/</guid>
+    <description><![CDATA[446. 等差数列划分 II - 子序列 暴力枚举所有子序列 枚举子集就是枚举所有的子序列 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 typedef long long LL; class Solution {]]></description>
 </item><item>
     <title>lc413.等差数列划分</title>
     <link>https://sheny1xuan.github.io/lc413/</link>
@@ -25,47 +74,5 @@
     <author>作者</author>
     <guid>https://sheny1xuan.github.io/lc802/</guid>
     <description><![CDATA[802. 找到最终的安全状态 染色法(DFS) 理解题目的意思：无论怎么走必定到达终点 也就是说该节点不能与环相连接 三色标记 label[i]表示当前结点的]]></description>
-</item><item>
-    <title>lc611.有效三角形的个数</title>
-    <link>https://sheny1xuan.github.io/lc611/</link>
-    <pubDate>Wed, 04 Aug 2021 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc611/</guid>
-    <description><![CDATA[611.有效三角形的个数 DFS超时 $T:O(2^n)$ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 class Solution { public: int res = 0; void dfs(vector&lt;int&gt;&amp; nums, vector&lt;int&gt;&amp; path, int idx){ if(path.size() &gt;= 3){ int a = path[0], b = path[1],]]></description>
-</item><item>
-    <title>lc581.最短无序连续子数组</title>
-    <link>https://sheny1xuan.github.io/lc581/</link>
-    <pubDate>Tue, 03 Aug 2021 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc581/</guid>
-    <description><![CDATA[581. 最短无序连续子数组 排序+双指针 T:O(nlogn) 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 class Solution { public: int findUnsortedSubarray(vector&lt;int&gt;&amp; nums) { vector&lt;int&gt; cpy(nums.begin(), nums.end()); sort(cpy.begin(), cpy.end()); int l = -1, r = nums.size(); for(int i = 0; i]]></description>
-</item><item>
-    <title>lc743.网络延迟时间</title>
-    <link>https://sheny1xuan.github.io/lc743/</link>
-    <pubDate>Mon, 02 Aug 2021 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc743/</guid>
-    <description><![CDATA[743. 网络延迟时间 dijkstra最短路问题 题意为找距离k最短路径中的最大值作为传递时间 Cpp Tips:在对象内初始化vector注意事项 class]]></description>
-</item><item>
-    <title>lc987.二叉树的垂序遍历</title>
-    <link>https://sheny1xuan.github.io/lc987/</link>
-    <pubDate>Sat, 31 Jul 2021 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc987/</guid>
-    <description><![CDATA[987. 二叉树的垂序遍历 利用三元组记录每个节点[列，行，节点值] 之后进行排序，默认的排序方式就是先按列从小到大排序，再按行从小到大排序，最后按节点]]></description>
-</item><item>
-    <title>lc171.Excel表列序号</title>
-    <link>https://sheny1xuan.github.io/lc171/</link>
-    <pubDate>Fri, 30 Jul 2021 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc171/</guid>
-    <description><![CDATA[171. Excel 表列序号 正向遍历 1 2 3 4 5 6 7 8 9 10 11 12 13 class Solution { public: int titleToNumber(string columnTitle) { // 正向遍历-&gt;叠加权重 int ans = 0, n = columnTitle.size(); for(int i = 0; i &lt; n; i++){ ans = columnTitle[i] - &#39;A&#39; + ans * 26 +]]></description>
-</item><item>
-    <title>lc1104.二叉树寻路</title>
-    <link>https://sheny1xuan.github.io/lc1104/</link>
-    <pubDate>Thu, 29 Jul 2021 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc1104/</guid>
-    <description><![CDATA[1104. 二叉树寻路 完全二叉树规律 $i_{father} = i_{child}/2$ 所以先找到该节点对称的结点，再利用完全二叉树的规律即可 完全二叉树一行的开始是$2^{row - 1}$,结束是$]]></description>
 </item></channel>
 </rss>

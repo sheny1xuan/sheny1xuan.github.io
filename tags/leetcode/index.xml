@@ -4,68 +4,75 @@
         <link>https://sheny1xuan.github.io/tags/leetcode/</link>
         <description>leetcode - 标签 - stonex</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sheny1xuan@163.com (Shen)</managingEditor>
-            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Thu, 12 Aug 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/leetcode/" rel="self" type="application/rss+xml" /><item>
-    <title>lc516.最长回文子序列</title>
-    <link>https://sheny1xuan.github.io/lc516/</link>
-    <pubDate>Thu, 12 Aug 2021 00:00:00 &#43;0000</pubDate>
+            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Tue, 24 Aug 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/leetcode/" rel="self" type="application/rss+xml" /><item>
+    <title>acwing基础课ch1-位运算</title>
+    <link>https://sheny1xuan.github.io/ch1_%E4%BD%8D%E8%BF%90%E7%AE%97/</link>
+    <pubDate>Tue, 24 Aug 2021 00:00:00 &#43;0000</pubDate>
     <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc516/</guid>
-    <description><![CDATA[516. 最长回文子序列 暴力 枚举所有的子序列(子集) $T:O(n2^n)$ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 class Solution { public: int ans = 1; void dfs(string&amp; s, string&amp; path, int idx){ // cout &lt;&lt; path &lt;&lt;]]></description>
+    <guid>https://sheny1xuan.github.io/ch1_%E4%BD%8D%E8%BF%90%E7%AE%97/</guid>
+    <description><![CDATA[位运算 位的统计问题 计算n的二进制表示中第k位 先把第k位移动到最后一位， 然后进行判断。 lowbit(x)运算：返回x的最后一位1的位置 -x = ~x +]]></description>
 </item><item>
-    <title>lc413.等差数列划分</title>
-    <link>https://sheny1xuan.github.io/lc413/</link>
-    <pubDate>Tue, 10 Aug 2021 00:00:00 &#43;0000</pubDate>
+    <title>acwing基础课ch1-前缀和与差分</title>
+    <link>https://sheny1xuan.github.io/ch1_%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E5%B7%AE%E5%88%86/</link>
+    <pubDate>Tue, 24 Aug 2021 00:00:00 &#43;0000</pubDate>
     <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc413/</guid>
-    <description><![CDATA[413. 等差数列划分 暴力 枚举所有的子数组，之后对每一个数组进行判断是否满足等差数列的条件 $O(n^3)$：$O(n^2)$枚举所有数组，$O(n)]]></description>
+    <guid>https://sheny1xuan.github.io/ch1_%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E5%B7%AE%E5%88%86/</guid>
+    <description><![CDATA[前缀和 一维前缀和 利用存储的部分前缀和快速计算部分数组的和 前缀和数组长度为n+1 s[0] = 0, s[i]表示nums[i]前所有数的和，不包括nums[]]></description>
 </item><item>
-    <title>lc802.找到最终的安全状态</title>
-    <link>https://sheny1xuan.github.io/lc802/</link>
-    <pubDate>Thu, 05 Aug 2021 00:00:00 &#43;0000</pubDate>
+    <title>acwing基础课ch1-双指针</title>
+    <link>https://sheny1xuan.github.io/ch1_%E5%8F%8C%E6%8C%87%E9%92%88/</link>
+    <pubDate>Tue, 24 Aug 2021 00:00:00 &#43;0000</pubDate>
     <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc802/</guid>
-    <description><![CDATA[802. 找到最终的安全状态 染色法(DFS) 理解题目的意思：无论怎么走必定到达终点 也就是说该节点不能与环相连接 三色标记 label[i]表示当前结点的]]></description>
+    <guid>https://sheny1xuan.github.io/ch1_%E5%8F%8C%E6%8C%87%E9%92%88/</guid>
+    <description><![CDATA[双指针 两个序列双指针 归并排序 一个序列同向双指针 双指针利用某种性质将暴力(n^2)的算法优化到O(n). 实现split() 最长连续不重复子序列]]></description>
 </item><item>
-    <title>lc611.有效三角形的个数</title>
-    <link>https://sheny1xuan.github.io/lc611/</link>
-    <pubDate>Wed, 04 Aug 2021 00:00:00 &#43;0000</pubDate>
+    <title>acwing基础课ch1-排序问题</title>
+    <link>https://sheny1xuan.github.io/ch1_%E6%8E%92%E5%BA%8F%E9%97%AE%E9%A2%98/</link>
+    <pubDate>Tue, 24 Aug 2021 00:00:00 &#43;0000</pubDate>
     <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc611/</guid>
-    <description><![CDATA[611.有效三角形的个数 DFS超时 $T:O(2^n)$ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 class Solution { public: int res = 0; void dfs(vector&lt;int&gt;&amp; nums, vector&lt;int&gt;&amp; path, int idx){ if(path.size() &gt;= 3){ int a = path[0], b = path[1],]]></description>
+    <guid>https://sheny1xuan.github.io/ch1_%E6%8E%92%E5%BA%8F%E9%97%AE%E9%A2%98/</guid>
+    <description><![CDATA[排序 分类 复杂度分析 快速排序 基于分治思想 主要步骤 确定分界点x，随机(一般为左端点) 调整范围，左半边小于等于x，右半边大于等于x（双指针）。 如果]]></description>
 </item><item>
-    <title>lc581.最短无序连续子数组</title>
-    <link>https://sheny1xuan.github.io/lc581/</link>
-    <pubDate>Tue, 03 Aug 2021 00:00:00 &#43;0000</pubDate>
+    <title>acwing基础课ch1-高精度运算</title>
+    <link>https://sheny1xuan.github.io/ch1_%E9%AB%98%E7%B2%BE%E5%BA%A6%E8%BF%90%E7%AE%97/</link>
+    <pubDate>Tue, 24 Aug 2021 00:00:00 &#43;0000</pubDate>
     <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc581/</guid>
-    <description><![CDATA[581. 最短无序连续子数组 排序+双指针 T:O(nlogn) 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 class Solution { public: int findUnsortedSubarray(vector&lt;int&gt;&amp; nums) { vector&lt;int&gt; cpy(nums.begin(), nums.end()); sort(cpy.begin(), cpy.end()); int l = -1, r = nums.size(); for(int i = 0; i]]></description>
+    <guid>https://sheny1xuan.github.io/ch1_%E9%AB%98%E7%B2%BE%E5%BA%A6%E8%BF%90%E7%AE%97/</guid>
+    <description><![CDATA[高精度运算 数据存储 利用数组倒序存储大的数据，进位在最后一位添加一个数十分方便。 高精度加法 模拟加法进位 字符串输入，取反存入数组中 计算返回数组倒]]></description>
 </item><item>
-    <title>lc743.网络延迟时间</title>
-    <link>https://sheny1xuan.github.io/lc743/</link>
-    <pubDate>Mon, 02 Aug 2021 00:00:00 &#43;0000</pubDate>
+    <title>acwing基础课ch2-哈希表</title>
+    <link>https://sheny1xuan.github.io/ch2_%E5%93%88%E5%B8%8C%E8%A1%A8/</link>
+    <pubDate>Tue, 24 Aug 2021 00:00:00 &#43;0000</pubDate>
     <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc743/</guid>
-    <description><![CDATA[743. 网络延迟时间 dijkstra最短路问题 题意为找距离k最短路径中的最大值作为传递时间 Cpp Tips:在对象内初始化vector注意事项 class]]></description>
+    <guid>https://sheny1xuan.github.io/ch2_%E5%93%88%E5%B8%8C%E8%A1%A8/</guid>
+    <description><![CDATA[哈希表 将一个复杂的数据结构进行映射。 (key-value)pair的关系。 哈希表基本元素 key-value映射 哈希函数 哈希冲突解决方法 哈希函]]></description>
 </item><item>
-    <title>lc987.二叉树的垂序遍历</title>
-    <link>https://sheny1xuan.github.io/lc987/</link>
-    <pubDate>Sat, 31 Jul 2021 00:00:00 &#43;0000</pubDate>
+    <title>acwing基础课ch2-堆</title>
+    <link>https://sheny1xuan.github.io/ch2_%E5%A0%86/</link>
+    <pubDate>Tue, 24 Aug 2021 00:00:00 &#43;0000</pubDate>
     <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc987/</guid>
-    <description><![CDATA[987. 二叉树的垂序遍历 利用三元组记录每个节点[列，行，节点值] 之后进行排序，默认的排序方式就是先按列从小到大排序，再按行从小到大排序，最后按节点]]></description>
+    <guid>https://sheny1xuan.github.io/ch2_%E5%A0%86/</guid>
+    <description><![CDATA[堆/优先队列 堆是什么 堆是一颗完全二叉树。 大顶堆：父亲结点的值大于左右子树的结点。 小顶堆：父亲结点的值小于左右子树的结点。 堆的操作与优点 优点 O]]></description>
 </item><item>
-    <title>lc171.Excel表列序号</title>
-    <link>https://sheny1xuan.github.io/lc171/</link>
-    <pubDate>Fri, 30 Jul 2021 00:00:00 &#43;0000</pubDate>
+    <title>acwing基础课ch2-字典树</title>
+    <link>https://sheny1xuan.github.io/ch2_%E5%AD%97%E5%85%B8%E6%A0%91/</link>
+    <pubDate>Tue, 24 Aug 2021 00:00:00 &#43;0000</pubDate>
     <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc171/</guid>
-    <description><![CDATA[171. Excel 表列序号 正向遍历 1 2 3 4 5 6 7 8 9 10 11 12 13 class Solution { public: int titleToNumber(string columnTitle) { // 正向遍历-&gt;叠加权重 int ans = 0, n = columnTitle.size(); for(int i = 0; i &lt; n; i++){ ans = columnTitle[i] - &#39;A&#39; + ans * 26 +]]></description>
+    <guid>https://sheny1xuan.github.io/ch2_%E5%AD%97%E5%85%B8%E6%A0%91/</guid>
+    <description><![CDATA[字典树 作用 高效地存储与查找字符串。(O(logn)的时间复杂度进行查找) 支持两种操作：插入一个字符串(insert) 查找是否存在一个字符串(]]></description>
 </item><item>
-    <title>lc1104.二叉树寻路</title>
-    <link>https://sheny1xuan.github.io/lc1104/</link>
-    <pubDate>Thu, 29 Jul 2021 00:00:00 &#43;0000</pubDate>
+    <title>acwing基础课ch2-并查集</title>
+    <link>https://sheny1xuan.github.io/ch2_%E5%B9%B6%E6%9F%A5%E9%9B%86/</link>
+    <pubDate>Tue, 24 Aug 2021 00:00:00 &#43;0000</pubDate>
     <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc1104/</guid>
-    <description><![CDATA[1104. 二叉树寻路 完全二叉树规律 $i_{father} = i_{child}/2$ 所以先找到该节点对称的结点，再利用完全二叉树的规律即可 完全二叉树一行的开始是$2^{row - 1}$,结束是$]]></description>
+    <guid>https://sheny1xuan.github.io/ch2_%E5%B9%B6%E6%9F%A5%E9%9B%86/</guid>
+    <description><![CDATA[并查集 并查集是什么 Union,Find,Set 并查集包含Union,Find,Set3个关键词，是一种维护集合的基本操作。 并查集是一种用树表示的集合，树根的编号表示集]]></description>
+</item><item>
+    <title>acwing基础课ch2-栈</title>
+    <link>https://sheny1xuan.github.io/ch2_stack/</link>
+    <pubDate>Tue, 24 Aug 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/ch2_stack/</guid>
+    <description><![CDATA[栈 栈的静态实现 维护一个栈顶的指针，哨兵为0，当栈顶指针指向0的时候，整个栈为空栈。 栈的STL操作 栈模板题 静态实现 Ac828.模拟栈 1 2 3 4 5]]></description>
 </item></channel>
 </rss>

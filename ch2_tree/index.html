@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title> - stonex</title><meta name="Description" content="Welcome to my&#39;blog!"><meta property="og:title" content="" />
+<meta property="og:description" content="树 基础知识 树的基础知识 二叉树的基础知识 二叉树的存储与建立 二叉树结点的查找与插入 二叉查找树(BST) 平衡二叉树AVL树 平衡二叉树的插入 哈夫曼树" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sheny1xuan.github.io/ch2_tree/" /><meta property="og:image" content="https://sheny1xuan.github.io/logo.png"/><meta property="article:section" content="posts" />
+
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://sheny1xuan.github.io/logo.png"/>
+
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="树 基础知识 树的基础知识 二叉树的基础知识 二叉树的存储与建立 二叉树结点的查找与插入 二叉查找树(BST) 平衡二叉树AVL树 平衡二叉树的插入 哈夫曼树"/>
+<meta name="application-name" content="Stonex">
+<meta name="apple-mobile-web-app-title" content="Stonex"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://sheny1xuan.github.io/ch2_tree/" /><link rel="prev" href="https://sheny1xuan.github.io/ch3_bfs_dfs/" /><link rel="next" href="https://sheny1xuan.github.io/ch2_string/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/sheny1xuan.github.io\/ch2_tree\/"
+        },"genre": "posts","wordcount":  2745 ,
+        "url": "https:\/\/sheny1xuan.github.io\/ch2_tree\/","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Shen"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="stonex">Home</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="stonex">Home</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX"></h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Shen</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2745 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#树">树</a>
+      <ul>
+        <li><a href="#基础知识">基础知识</a></li>
+        <li><a href="#树的基础知识">树的基础知识</a></li>
+        <li><a href="#二叉树的基础知识">二叉树的基础知识</a>
+          <ul>
+            <li><a href="#二叉树的存储与建立">二叉树的存储与建立</a></li>
+            <li><a href="#二叉树结点的查找与插入">二叉树结点的查找与插入</a></li>
+            <li><a href="#二叉树的遍历">二叉树的遍历</a></li>
+          </ul>
+        </li>
+        <li><a href="#二叉查找树bst">二叉查找树BST</a>
+          <ul>
+            <li><a href="#二叉查找树的删除操作">二叉查找树的删除操作</a>
+              <ul>
+                <li>
+                  <ul>
+                    <li>
+                      <ul>
+                        <li><a href="#heading"></a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><a href="#平衡二叉树avl树">平衡二叉树AVL树</a></li>
+          </ul>
+        </li>
+        <li><a href="#平衡二叉树的插入">平衡二叉树的插入</a></li>
+        <li><a href="#哈夫曼树">哈夫曼树</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="树">树</h1>
+<h2 id="基础知识">基础知识</h2>
+<ul>
+<li><i class="far fa-check-square fa-fw"></i> <a href="#%e6%a0%91%e7%9a%84%e5%9f%ba%e7%a1%80%e7%9f%a5%e8%af%86" rel="">树的基础知识</a></li>
+<li><i class="far fa-check-square fa-fw"></i> <a href="#%e4%ba%8c%e5%8f%89%e6%a0%91%e7%9a%84%e5%9f%ba%e7%a1%80%e7%9f%a5%e8%af%86" rel="">二叉树的基础知识</a></li>
+<li><i class="far fa-check-square fa-fw"></i> <a href="#%e4%ba%8c%e5%8f%89%e6%a0%91%e7%9a%84%e5%ad%98%e5%82%a8%e4%b8%8e%e5%bb%ba%e7%ab%8b" rel="">二叉树的存储与建立</a></li>
+<li><i class="far fa-check-square fa-fw"></i> <a href="#%e4%ba%8c%e5%8f%89%e6%a0%91%e7%bb%93%e7%82%b9%e7%9a%84%e6%9f%a5%e6%89%be%e4%b8%8e%e6%8f%92%e5%85%a5" rel="">二叉树结点的查找与插入</a></li>
+<li><i class="far fa-check-square fa-fw"></i> <a href="#%e4%ba%8c%e5%8f%89%e6%9f%a5%e6%89%be%e6%a0%91BST" rel="">二叉查找树(BST)</a></li>
+<li><i class="far fa-check-square fa-fw"></i> <a href="#%e5%b9%b3%e8%a1%a1%e4%ba%8c%e5%8f%89%e6%a0%91AVL%e6%a0%91" rel="">平衡二叉树AVL树</a></li>
+<li><i class="far fa-check-square fa-fw"></i> <a href="#%e5%b9%b3%e8%a1%a1%e4%ba%8c%e5%8f%89%e6%a0%91%e7%9a%84%e6%8f%92%e5%85%a5" rel="">平衡二叉树的插入</a></li>
+<li><i class="far fa-check-square fa-fw"></i> <a href="#%e5%93%88%e5%a4%ab%e6%9b%bc%e6%a0%91" rel="">哈夫曼树</a></li>
+<li><i class="far fa-check-square fa-fw"></i> <a href="#%e4%ba%8c%e5%8f%89%e6%a0%91%e7%9a%84%e9%81%8d%e5%8e%86" rel="">二叉树的遍历</a></li>
+</ul>
+<h2 id="树的基础知识">树的基础知识</h2>
+<ul>
+<li>树的静态存储：用数组表示所有子树的索引。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">struct</span> <span class="nc">node</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">data</span><span class="p">;</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">child</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>树的先根遍历</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">PreOrder</span><span class="p">(</span><span class="kt">int</span> <span class="n">root</span><span class="p">){</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">Node</span><span class="p">[</span><span class="n">root</span><span class="p">].</span><span class="n">data</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; &#34;</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">Node</span><span class="p">[</span><span class="n">root</span><span class="p">].</span><span class="n">child</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">){</span>
+        <span class="n">PreOrder</span><span class="p">(</span><span class="n">Node</span><span class="p">[</span><span class="n">root</span><span class="p">].</span><span class="n">child</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="二叉树的基础知识">二叉树的基础知识</h2>
+<ul>
+<li>二叉树的基本知识
+二叉树与度为2的树的区别，二叉树严格区分左右树</li>
+<li>二叉树的递归定义
+<ul>
+<li>边界条件：二叉树没有根节点，是一棵空树</li>
+<li>递归式：二叉树由根节点，左右子树组成，且左右子树都是二叉树。</li>
+</ul>
+</li>
+<li>满二叉树
+<ul>
+<li>每一层节点个数都达到了当前层能达到的最大节点数。</li>
+</ul>
+</li>
+<li>完全二叉树
+<ul>
+<li>除最后一层外，其余层的节点个数都达到了当前层能达到的最大结点数。
+最后一层存在从左到右的连续若干结点。</li>
+</ul>
+</li>
+</ul>
+<h3 id="二叉树的存储与建立">二叉树的存储与建立</h3>
+<ul>
+<li>二叉链表</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">typedef</span> <span class="k">struct</span> <span class="nc">Node</span><span class="p">{</span>
+    <span class="kt">char</span> <span class="n">data</span><span class="p">;</span>
+    <span class="n">Node</span> <span class="o">*</span><span class="n">left</span><span class="p">,</span> <span class="o">*</span><span class="n">right</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>二叉树的建立-递归建树</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">creatTree</span><span class="p">(</span><span class="n">Node</span><span class="o">*</span> <span class="o">&amp;</span><span class="n">root</span><span class="p">){</span>
+	<span class="kt">char</span> <span class="n">data</span><span class="p">;</span>
+	<span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">data</span><span class="p">;</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">data</span><span class="o">==</span><span class="sc">&#39;#&#39;</span><span class="p">)</span>
+		<span class="n">root</span><span class="o">=</span><span class="k">nullptr</span><span class="p">;</span>
+	<span class="k">else</span><span class="p">{</span>
+		<span class="n">root</span><span class="o">=</span><span class="k">new</span> <span class="n">Node</span><span class="p">;</span>
+		<span class="n">root</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">;</span>
+		<span class="n">creatTree</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+		<span class="n">creatTree</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="二叉树结点的查找与插入">二叉树结点的查找与插入</h3>
+<ul>
+<li>二叉树结点的查找与插入
+递归插入结点：
+递归边界：遇到空节点，插入结点。
+递归条件：左子树搜索，右子树搜索。
+tip:$root = NULL$表示结点不存在，而$*root = NULL$表示结点内容不存在</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">search</span><span class="p">(</span><span class="n">node</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">newdata</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">){</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">data</span> <span class="o">==</span> <span class="n">x</span><span class="p">){</span>
+        <span class="n">root</span> <span class="o">-&gt;</span> <span class="n">data</span> <span class="o">=</span> <span class="n">newdata</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">search</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">left</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">newdata</span><span class="p">);</span>
+    <span class="n">search</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">right</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">newdata</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="二叉树的遍历">二叉树的遍历</h3>
+<ul>
+<li>二叉树的遍历
+<ul>
+<li>先序遍历：<strong>先处理根节点</strong>;。序列的第一个元素一定是根节点。</li>
+<li>中序遍历：<strong>先处理左子树</strong>，后访问根节点。知道根节点可以确定左右子树。</li>
+<li>后序遍历：<strong>先处理左右子树</strong>，后访问根节点。序列的最后一个元素一定是根节点</li>
+<li>因此，知道先序遍历(或后序遍历)和<strong>中序遍历</strong>可以重建二叉树。</li>
+</ul>
+</li>
+<li>先序：第一次遇到就访问</li>
+<li>中序：第二次遇到访问</li>
+<li>后序：第二次遇到访问
+<strong>递归写法</strong></li>
+<li>先序遍历</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">preTravel</span><span class="p">(</span><span class="n">Node</span><span class="o">*</span> <span class="n">root</span><span class="p">){</span>
+
+	<span class="k">if</span><span class="p">(</span><span class="n">root</span><span class="o">==</span><span class="k">nullptr</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+	<span class="n">pvisit</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+	<span class="n">preTravel</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+	<span class="n">preTravel</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>中序遍历</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">midTravel</span><span class="p">(</span><span class="n">Node</span> <span class="o">*</span><span class="n">root</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="n">midTravel</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">left</span><span class="p">);</span>
+    <span class="n">pvisit</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+    <span class="n">midTravel</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">right</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>后序遍历</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">postTravel</span><span class="p">(</span><span class="n">Node</span><span class="o">*</span> <span class="n">root</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="n">postTravel</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">left</span><span class="p">);</span>
+    <span class="n">postTravel</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">right</span><span class="p">);</span>
+    <span class="n">pvisit</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>非递归遍历-难理解</strong></p>
+<ul>
+<li>先序遍历:通用模板化简版本</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">preorderTraversal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="n">TreeNode</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">root</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+        <span class="n">stack</span> <span class="o">=</span> <span class="p">[</span><span class="n">root</span><span class="p">]</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">while</span> <span class="n">stack</span><span class="p">:</span>
+            <span class="n">root</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">root</span><span class="o">.</span><span class="n">right</span><span class="p">:</span>
+                <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">root</span><span class="o">.</span><span class="n">left</span><span class="p">:</span>
+                <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">left</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>统一的迭代写法</strong></li>
+<li>用栈模拟，<strong>先访问谁</strong>，<strong>谁后入栈</strong></li>
+<li><strong>先序</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">preorderTraversal</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">result</span><span class="p">;</span>
+        <span class="n">stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">*&gt;</span> <span class="n">st</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="n">st</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+        <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">st</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+            <span class="n">TreeNode</span><span class="o">*</span> <span class="n">node</span> <span class="o">=</span> <span class="n">st</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">node</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">st</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">)</span> <span class="n">st</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>  <span class="c1">// 右
+</span><span class="c1"></span>                <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">)</span> <span class="n">st</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>    <span class="c1">// 左
+</span><span class="c1"></span>                <span class="n">st</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>                          <span class="c1">// 中
+</span><span class="c1"></span>                <span class="n">st</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="n">st</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+                <span class="n">node</span> <span class="o">=</span> <span class="n">st</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+                <span class="n">st</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+                <span class="n">result</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>中序</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">inorderTraversal</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">result</span><span class="p">;</span>
+        <span class="n">stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">*&gt;</span> <span class="n">st</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="n">st</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+        <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">st</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+            <span class="n">TreeNode</span><span class="o">*</span> <span class="n">node</span> <span class="o">=</span> <span class="n">st</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">node</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">st</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span> <span class="c1">// 将该节点弹出，避免重复操作，下面再将右中左节点添加到栈中
+</span><span class="c1"></span>                <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">)</span> <span class="n">st</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>  <span class="c1">// 添加右节点（空节点不入栈）
+</span><span class="c1"></span>
+                <span class="n">st</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>                          <span class="c1">// 添加中节点
+</span><span class="c1"></span>                <span class="n">st</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span> <span class="c1">// 中节点访问过，但是还没有处理，加入空节点做为标记。
+</span><span class="c1"></span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">)</span> <span class="n">st</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>    <span class="c1">// 添加左节点（空节点不入栈）
+</span><span class="c1"></span>            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="c1">// 只有遇到空节点的时候，才将下一个节点放进结果集
+</span><span class="c1"></span>                <span class="n">st</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>           <span class="c1">// 将空节点弹出
+</span><span class="c1"></span>                <span class="n">node</span> <span class="o">=</span> <span class="n">st</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>    <span class="c1">// 重新取出栈中元素
+</span><span class="c1"></span>                <span class="n">st</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+                <span class="n">result</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span> <span class="c1">// 加入到结果集
+</span><span class="c1"></span>            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>后序</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">postorderTraversal</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">result</span><span class="p">;</span>
+        <span class="n">stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">*&gt;</span> <span class="n">st</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="n">st</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+        <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">st</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+            <span class="n">TreeNode</span><span class="o">*</span> <span class="n">node</span> <span class="o">=</span> <span class="n">st</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">node</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">st</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+                <span class="n">st</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>                          <span class="c1">// 中
+</span><span class="c1"></span>                <span class="n">st</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">)</span> <span class="n">st</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>  <span class="c1">// 右
+</span><span class="c1"></span>                <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">)</span> <span class="n">st</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>    <span class="c1">// 左
+</span><span class="c1"></span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="n">st</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+                <span class="n">node</span> <span class="o">=</span> <span class="n">st</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+                <span class="n">st</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+                <span class="n">result</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>BFS层序遍历</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">broadTravel</span><span class="p">(</span><span class="n">Node</span><span class="o">*</span> <span class="n">root</span><span class="p">){</span>
+	<span class="n">queue</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">*&gt;</span> <span class="n">que</span><span class="p">;</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span>
+		<span class="k">return</span><span class="p">;</span>
+	<span class="n">que</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+	<span class="n">Node</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
+	<span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">que</span><span class="p">.</span><span class="n">empty</span><span class="p">()){</span>
+		<span class="n">p</span> <span class="o">=</span> <span class="n">que</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+		<span class="n">pvisit</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+		<span class="n">que</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">p</span> <span class="o">-&gt;</span> <span class="n">left</span><span class="p">)</span> <span class="n">que</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">p</span> <span class="o">-&gt;</span> <span class="n">left</span><span class="p">);</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">p</span> <span class="o">-&gt;</span> <span class="n">right</span><span class="p">)</span> <span class="n">que</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">p</span> <span class="o">-&gt;</span> <span class="n">right</span><span class="p">);</span>
+	<span class="p">}</span> 
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="二叉查找树bst">二叉查找树BST</h2>
+<p><strong>定义</strong></p>
+<ul>
+<li>二叉查找树由根节点和左右子树组成，且左右子树都是二叉查找树。</li>
+<li>左子树数据小于根节点，右子树数据大于根节点。</li>
+<li>左子树$\leq$ 根节点 $\leq$ 右子树</li>
+<li>二叉查找树的<strong>中序</strong>遍历是有序的。</li>
+</ul>
+<p><strong>基本操作</strong></p>
+<ul>
+<li>查找：递归查找-可以根据查找树特性进行优化。</li>
+<li>插入：在树中查找不到的位置就是需要插入的位置。</li>
+</ul>
+<h3 id="二叉查找树的删除操作">二叉查找树的删除操作</h3>
+<ul>
+<li>时间复杂度是$O(h)$，$h$为查找树的高度。</li>
+<li>删除一个节点有两种方式-左子树的最大节点作为新节点(前驱)，右子树的最小节点作为新节点(后继)。</li>
+<li>删除过程
+<ul>
+<li>查找节点</li>
+<li>查找到节点删除节点
+<ul>
+<li>首先处理特殊情况-如果欲删除结点是叶结点，直接将叶结点地址设为NULL，释放叶结点内存。</li>
+<li>如果非叶结点，使用前驱或后继的方式，删除节点不用改变节点间关系。只需要将欲删除节点的数据域的内容使用前驱结点的内容替代，递归删除前驱结点即可。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">deleteNode</span><span class="p">(</span><span class="n">Node</span><span class="o">*</span> <span class="o">&amp;</span><span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">data</span> <span class="o">==</span> <span class="n">x</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">left</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">){</span> <span class="c1">//左子树找最大值
+</span><span class="c1"></span>            <span class="n">Node</span><span class="o">*</span> <span class="n">pre</span> <span class="o">=</span> <span class="n">findMax</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">left</span><span class="p">);</span>
+            <span class="n">root</span> <span class="o">-&gt;</span> <span class="n">data</span> <span class="o">=</span> <span class="n">pre</span> <span class="o">-&gt;</span> <span class="n">data</span><span class="p">;</span>
+            <span class="n">deleteNode</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">left</span><span class="p">,</span> <span class="n">pre</span> <span class="o">-&gt;</span> <span class="n">data</span><span class="p">)</span>
+        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+            <span class="n">Node</span><span class="o">*</span> <span class="n">pre</span> <span class="o">=</span> <span class="n">findMax</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">right</span><span class="p">);</span>
+            <span class="n">root</span> <span class="o">-&gt;</span> <span class="n">data</span> <span class="o">=</span> <span class="n">pre</span> <span class="o">-&gt;</span> <span class="n">data</span><span class="p">;</span>
+            <span class="n">deleteNode</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">right</span><span class="p">,</span> <span class="n">pre</span> <span class="o">-&gt;</span> <span class="n">data</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">data</span> <span class="o">&gt;</span> <span class="n">x</span><span class="p">){</span>
+        <span class="n">deleteNode</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">left</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+        <span class="n">deleteNode</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">right</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h6 id="heading"></h6>
+<h3 id="平衡二叉树avl树">平衡二叉树AVL树</h3>
+<ul>
+<li>平衡二叉树是是仍是二叉查找树。</li>
+<li>平衡因子-左右子树的高度之差。</li>
+<li>平衡二叉树的平衡因子时刻小于2，因此平衡二叉树的高度可以保持在$O(logn)$。</li>
+</ul>
+<p><strong>节点定义</strong>
+AVL树结点需要记录结点的高度。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">struct</span> <span class="nc">Node</span><span class="p">{</span>
+    <span class="kt">int</span> <span class="n">data</span><span class="p">,</span> <span class="n">height</span><span class="p">;</span>
+    <span class="n">Node</span> <span class="o">*</span><span class="n">left</span><span class="p">,</span> <span class="o">*</span><span class="n">right</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>获取节点高度</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="nf">getHeight</span><span class="p">(</span><span class="n">Node</span><span class="o">*</span> <span class="n">root</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">root</span> <span class="o">-&gt;</span> <span class="n">height</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>获取平衡因子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="nf">getBalanceFactor</span><span class="p">(</span><span class="n">Node</span><span class="o">*</span> <span class="n">root</span><span class="p">){</span>
+    <span class="k">return</span> <span class="n">getHeight</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">left</span><span class="p">)</span> <span class="o">-</span> <span class="n">getHeight</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">right</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>更新结点高度</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">void4</span> <span class="nf">getBalanceFactor</span><span class="p">(</span><span class="n">Node</span><span class="o">*</span> <span class="n">root</span><span class="p">){</span>
+    <span class="n">root</span> <span class="o">-&gt;</span> <span class="n">height</span> <span class="o">=</span> <span class="n">max</span> <span class="p">(</span><span class="n">getHeight</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">left</span><span class="p">),</span> <span class="n">getHeight</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">right</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>平衡二叉树的查找</strong>
+平衡二叉树的查找与二叉查找树完全相同，时间复杂度为$O(logn)$。</p>
+<h2 id="平衡二叉树的插入">平衡二叉树的插入</h2>
+<blockquote>
+<p>图片参考:https://blog.csdn.net/fxkcsdn/article/details/81674653</p>
+</blockquote>
+<p>首先定义：右节点-右子树的根节点，左节点-左子树的根节点。</p>
+<p><strong>左旋</strong></p>
+<ul>
+<li>用右节点代替树的根节点。右节点的左子树变为原根节点的右子树。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">L</span><span class="p">(</span><span class="n">Node</span><span class="o">*</span> <span class="n">root</span><span class="p">){</span>
+    <span class="n">Node</span><span class="o">*</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">root</span> <span class="o">-&gt;</span> <span class="n">right</span><span class="p">;</span>
+    <span class="n">root</span> <span class="o">-&gt;</span> <span class="n">right</span> <span class="o">=</span> <span class="n">temp</span> <span class="o">-&gt;</span> <span class="n">left</span><span class="p">;</span>
+    <span class="n">temp</span> <span class="o">-&gt;</span> <span class="n">left</span> <span class="o">=</span> <span class="n">root</span><span class="p">;</span>
+    <span class="n">updateHeight</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+    <span class="n">updateHeight</span><span class="p">(</span><span class="n">temp</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">temp</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>右旋</strong></p>
+<ul>
+<li>用左节点代替树的根节点。左节点的右子树变为原根节点的左子树。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">R</span><span class="p">(</span><span class="n">Node</span><span class="o">*</span> <span class="n">root</span><span class="p">){</span>
+    <span class="n">Node</span><span class="o">*</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">root</span> <span class="o">-&gt;</span> <span class="n">left</span><span class="p">;</span>
+    <span class="n">root</span> <span class="o">-&gt;</span> <span class="n">left</span> <span class="o">=</span> <span class="n">temp</span> <span class="o">-&gt;</span> <span class="n">right</span><span class="p">;</span>
+    <span class="n">temp</span> <span class="o">-&gt;</span> <span class="n">right</span> <span class="o">=</span> <span class="n">root</span><span class="p">;</span>
+    <span class="n">updateHeight</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+    <span class="n">updateHeight</span><span class="p">(</span><span class="n">temp</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">temp</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>平衡二叉树的插入</strong></p>
+<ul>
+<li>只要把最靠近的失衡结点调整正常，路径上所有的结点都会平衡。</li>
+<li>根据失衡情况可分为4种情况$LL, LR, RL, RR$，图解参考算法笔记324</li>
+<li>$LL:$右旋根节点。</li>
+<li>$LR:$先转换为$LL$。</li>
+<li>$RR:$左旋根节点。</li>
+<li>$RL:$先转换为$RR$。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">insert</span><span class="p">(</span><span class="n">Node</span><span class="o">*</span> <span class="o">&amp;</span><span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">v</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">){</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">newNode</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">v</span> <span class="o">&lt;</span> <span class="n">root</span> <span class="o">-&gt;</span> <span class="n">v</span><span class="p">){</span>
+        <span class="n">insert</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">left</span><span class="p">,</span> <span class="n">v</span><span class="p">);</span>
+        <span class="n">updateHeight</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">getBalanceFactor</span><span class="p">(</span><span class="n">root</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">getBalanceFactor</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">left</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">//LL
+</span><span class="c1"></span>            <span class="p">{</span>
+                <span class="n">R</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+            <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">getBalanceFactor</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">left</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">){</span>  <span class="c1">//LR
+</span><span class="c1"></span>                <span class="n">L</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">left</span><span class="p">);</span>
+                <span class="n">R</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+        <span class="n">insert</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">right</span><span class="p">,</span> <span class="n">v</span><span class="p">);</span>
+        <span class="n">updateHeight</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">getBalanceFactor</span><span class="p">(</span><span class="n">root</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">2</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">getBalanceFactor</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">right</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="c1">//RR
+</span><span class="c1"></span>            <span class="p">{</span>
+                <span class="n">L</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+            <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">getBalanceFactor</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">right</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">){</span> <span class="c1">//RL
+</span><span class="c1"></span>                <span class="n">R</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">right</span><span class="p">);</span>
+                <span class="n">L</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="哈夫曼树">哈夫曼树</h2>
+<ul>
+<li>结点带权路径长度
+<ul>
+<li>结点的权值乘以其路径长度(到根节点经过的边数)</li>
+<li><strong>树的带权路径长度是所有叶结点带权路径长度之和</strong>。</li>
+</ul>
+</li>
+<li>带权路径长度最小的树。</li>
+<li>哈夫曼树建树思想
+<ul>
+<li>反复选择两个权值最小的结点进行合并(包括新合并产生的结点)，直到只剩下一个元素(根节点)。</li>
+<li>使用最小堆，每次选择最小的两个元素。合并后，将新产生的结点加入堆中。</li>
+</ul>
+</li>
+<li>哈夫曼编码
+<ul>
+<li>哈夫曼编码是一种前缀编码(0/1编码)，某个词的编码不会作为另外一个词的前缀。</li>
+</ul>
+</li>
+</ul>
+<p><strong>合并果子问题</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#include</span><span class="cpf">&lt;cstdio&gt;</span><span class="cp">
+</span><span class="cp">#include</span><span class="cpf">&lt;algorithm&gt;</span><span class="cp">
+</span><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="c1">// 小顶堆
+</span><span class="c1"></span><span class="n">priority_queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">greater</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">q</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">temp</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">n</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">temp</span><span class="p">);</span>
+        <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">temp</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">q</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">){</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+        <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+        <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+        <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">);</span>
+        <span class="n">ans</span> <span class="o">+=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="n">ans</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 0001-01-01</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/ch3_bfs_dfs/" class="prev" rel="prev" title=""><i class="fas fa-angle-left fa-fw"></i></a>
+            <a href="/ch2_string/" class="next" rel="next" title=""><i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      renderMathInElement(document.body, {
+              delimiters: [
+                  {left: "$$", right: "$$", display: true},
+                  {left: "$", right: "$", display: false}
+              ]
+          });
+    });
+</script>
+
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.86.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021</span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":30},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
