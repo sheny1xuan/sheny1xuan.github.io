@@ -4,7 +4,28 @@
         <link>https://sheny1xuan.github.io/categories/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</link>
         <description>每日一题 - 分类 - stonex</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sheny1xuan@163.com (Shen)</managingEditor>
-            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Tue, 24 Aug 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/categories/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Sat, 28 Aug 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/categories/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" rel="self" type="application/rss+xml" /><item>
+    <title>lc1480. 一维数组的动态和</title>
+    <link>https://sheny1xuan.github.io/lc1480/</link>
+    <pubDate>Sat, 28 Aug 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc1480/</guid>
+    <description><![CDATA[1480. 一维数组的动态和 前缀和 pre[i]表示前i个数的和 返回i+1-&gt;end 1 2 3 4 5 6 7 8 9 10 11 12 class Solution { public: vector&lt;int&gt; runningSum(vector&lt;int&gt;&amp; nums) { int n = nums.size(); vector&lt;int&gt; pre(n + 1, 0); for(int i]]></description>
+</item><item>
+    <title>lc881. 救生艇</title>
+    <link>https://sheny1xuan.github.io/lc881/</link>
+    <pubDate>Thu, 26 Aug 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc881/</guid>
+    <description><![CDATA[881. 救生艇 贪心+双指针 $T:O(nlogn)$ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 class Solution { public: int numRescueBoats(vector&lt;int&gt;&amp; people, int limit) { sort(people.begin(), people.end()); int n = people.size(), cnt = 0; // 双指针+贪心 // 从小到大进行排序 //]]></description>
+</item><item>
+    <title>lc797.所有可能的路径</title>
+    <link>https://sheny1xuan.github.io/lc797/</link>
+    <pubDate>Wed, 25 Aug 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc797/</guid>
+    <description><![CDATA[797. 所有可能的路径 DFS 有向无环图DAG不会重复访问同一个点，所以不需要记录这些点是否访问过。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 class Solution {]]></description>
+</item><item>
     <title>lc787. K站中转内最便宜的航班</title>
     <link>https://sheny1xuan.github.io/lc787/</link>
     <pubDate>Tue, 24 Aug 2021 00:00:00 &#43;0000</pubDate>
@@ -53,26 +74,5 @@
     <author>作者</author>
     <guid>https://sheny1xuan.github.io/lc516/</guid>
     <description><![CDATA[516. 最长回文子序列 暴力 枚举所有的子序列(子集) $T:O(n2^n)$ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 class Solution { public: int ans = 1; void dfs(string&amp; s, string&amp; path, int idx){ // cout &lt;&lt; path &lt;&lt;]]></description>
-</item><item>
-    <title>lc446.等差数列划分 II - 子序列</title>
-    <link>https://sheny1xuan.github.io/lc446/</link>
-    <pubDate>Wed, 11 Aug 2021 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc446/</guid>
-    <description><![CDATA[446. 等差数列划分 II - 子序列 暴力枚举所有子序列 枚举子集就是枚举所有的子序列 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 typedef long long LL; class Solution {]]></description>
-</item><item>
-    <title>lc413.等差数列划分</title>
-    <link>https://sheny1xuan.github.io/lc413/</link>
-    <pubDate>Tue, 10 Aug 2021 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc413/</guid>
-    <description><![CDATA[413. 等差数列划分 暴力 枚举所有的子数组，之后对每一个数组进行判断是否满足等差数列的条件 $O(n^3)$：$O(n^2)$枚举所有数组，$O(n)]]></description>
-</item><item>
-    <title>lc802.找到最终的安全状态</title>
-    <link>https://sheny1xuan.github.io/lc802/</link>
-    <pubDate>Thu, 05 Aug 2021 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc802/</guid>
-    <description><![CDATA[802. 找到最终的安全状态 染色法(DFS) 理解题目的意思：无论怎么走必定到达终点 也就是说该节点不能与环相连接 三色标记 label[i]表示当前结点的]]></description>
 </item></channel>
 </rss>

@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>前缀和 - 标签 - stonex</title>
+        <link>https://sheny1xuan.github.io/tags/%E5%89%8D%E7%BC%80%E5%92%8C/</link>
+        <description>前缀和 - 标签 - stonex</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sheny1xuan@163.com (Shen)</managingEditor>
+            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Sat, 28 Aug 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" rel="self" type="application/rss+xml" /><item>
+    <title>lc1480. 一维数组的动态和</title>
+    <link>https://sheny1xuan.github.io/lc1480/</link>
+    <pubDate>Sat, 28 Aug 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc1480/</guid>
+    <description><![CDATA[1480. 一维数组的动态和 前缀和 pre[i]表示前i个数的和 返回i+1-&gt;end 1 2 3 4 5 6 7 8 9 10 11 12 class Solution { public: vector&lt;int&gt; runningSum(vector&lt;int&gt;&amp; nums) { int n = nums.size(); vector&lt;int&gt; pre(n + 1, 0); for(int i]]></description>
+</item></channel>
+</rss>
