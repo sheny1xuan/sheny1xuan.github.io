@@ -4,7 +4,14 @@
         <link>https://sheny1xuan.github.io/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/</link>
         <description>字符串 - 标签 - stonex</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sheny1xuan@163.com (Shen)</managingEditor>
-            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Tue, 24 Aug 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Wed, 01 Sep 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="self" type="application/rss+xml" /><item>
+    <title>lc165. 比较版本号</title>
+    <link>https://sheny1xuan.github.io/lc165/</link>
+    <pubDate>Wed, 01 Sep 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc165/</guid>
+    <description><![CDATA[165. 比较版本号 split后双指针比较 先对字符串做split提取出每个小的版本号 之后对每个小版本号进行比较即可。 $T:O(n)$ $S:O(n)$ 1 2 3 4 5 6 7 8 9 10 11 12 13 14]]></description>
+</item><item>
     <title>acwing基础课ch2-字符串问题</title>
     <link>https://sheny1xuan.github.io/ch2_string/</link>
     <pubDate>Tue, 24 Aug 2021 00:00:00 &#43;0000</pubDate>

@@ -33,96 +33,7 @@
 
 ### [Acwing785. 快速排序](https://www.acwing.com/problem/content/787/)
 
-+ 一直选取做边界会超时
-+ 选择中值或者随机取值则不会超时。
-+ while循环结束后$q[l...j]<=x, q[j+1...r]>=x$
-+ j的取值范围为$l, r-1$，所以不会一直不划分边界
-+ 只能取大于或者小于号是因为交换原来的数字进行了限位，不会产生数组溢出的问题。
-
-``` cpp
-#include <iostream>
-#include <algorithm>
-
-using namespace std;
-
-const int N = 1e5 + 10;
-
-int a[N];
-
-void Quick_Sort(int a[], int l, int r){
-    if(l >= r)  return;
-    // 注意这里i,j都与开始值差一位
-    int x = a[l], i = l - 1, j = r + 1;
-    // 循环结束后,a[l...j] <= x, a[j+1...r] >= x
-    while(i < j){
-        // 这里不能用等号，是因为交换让目标值做限位的作用
-        while(a[++i] < x);
-        while(a[--j] > x);
-        if(i < j)   swap(a[i], a[j]);
-    }
-    cout <<l << ' '<< r << ' ' << j << ' ' << endl;
-    // j取值范围时[l, r-1]不存在0和n区间无限循环
-    // j最小值大于等于l
-    Quick_Sort(a, l, j);
-    Quick_Sort(a, j+1, r);
-}
-
-int main(){
-    int n;
-    scanf("%d",&n);
-    for(int i = 0;i < n; i++){
-        scanf("%d", &a[i]);
-    }
-    Quick_Sort(a, 0, n-1);
-    for(int i = 0;i < n; i++){
-        printf("%d ", a[i]);
-    }
-    return 0;
-}
-```
-
-+ 快慢指针版本，数据量较大时候，由于多次交换，会超时。
-
-``` cpp
-#include <iostream>
-#include <algorithm>
-
-using namespace std;
-
-const int N = 1e5 + 10;
-
-int a[N];
-
-void Quick_Sort(int a[], int l, int r){
-    // 快慢指针版本
-    if(l >= r)  return;
-    swap(a[l], a[l + r >> 1]);
-    int x = a[l], i = l;
-    for(int j = l+1; j <= r; j++){
-        if(a[j] <= x){
-            swap(a[j], a[++i]);
-        }
-    }
-    swap(a[i], a[l]);
-    Quick_Sort(a, l, i-1);
-    Quick_Sort(a, i+1, r);
-}
-
-int main(){
-    int n;
-    scanf("%d",&n);
-    for(int i = 0;i < n; i++){
-        scanf("%d", &a[i]);
-    }
-    Quick_Sort(a, 0, n-1);
-    for(int i = 0;i < n; i++){
-        printf("%d ", a[i]);
-    }
-    return 0;
-}
-```
-
-+ 快速选择切分，递归进行左右半边的区间排序
+###### 快速选择切分，递归进行左右半边的区间排序
 
 ``` cpp
 #include <iostream>
@@ -174,11 +85,13 @@ int main(){
 }
 ```
 
+##### 高级短代码做法
 
-
-### [786. 第k个小的数](https://www.acwing.com/problem/content/description/788/)
-
-+ 二分的快速选择切分
++ 一直选取做边界会超时
++ 选择中值或者随机取值则不会超时。
++ while循环结束后$q[l...j]<=x, q[j+1...r]>=x$
++ j的取值范围为$l, r-1$，所以不会一直不划分边界
++ 只能取大于或者小于号是因为交换原来的数字进行了限位，不会产生数组溢出的问题。
 
 ``` cpp
 #include <iostream>
@@ -186,12 +99,121 @@ int main(){
 
 using namespace std;
 
+const int N = 1e5 + 10;
+
+int a[N];
+
+void Quick_Sort(int a[], int l, int r){
+    if(l >= r)  return;
+    // 注意这里i,j都与开始值差一位
+    int x = a[l], i = l - 1, j = r + 1;
+    // 循环结束后,a[l...j] <= x, a[j+1...r] >= x
+    while(i < j){
+        // 这里不能用等号，是因为交换让目标值做限位的作用
+        while(a[++i] < x);
+        while(a[--j] > x);
+        if(i < j)   swap(a[i], a[j]);
+    }
+    cout <<l << ' '<< r << ' ' << j << ' ' << endl;
+    // j取值范围时[l, r-1]不存在0和n区间无限循环
+    // j最小值大于等于l
+    Quick_Sort(a, l, j);
+    Quick_Sort(a, j+1, r);
+}
+
+int main(){
+    int n;
+    scanf("%d",&n);
+    for(int i = 0;i < n; i++){
+        scanf("%d", &a[i]);
+    }
+    Quick_Sort(a, 0, n-1);
+    for(int i = 0;i < n; i++){
+        printf("%d ", a[i]);
+    }
+    return 0;
+}
+```
+
+###### 快慢指针版本，数据量较大时候，由于多次交换，会超时。
+
+``` cpp
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+const int N = 1e5 + 10;
+
+int a[N];
+
+void Quick_Sort(int a[], int l, int r){
+    // 快慢指针版本
+    if(l >= r)  return;
+    swap(a[l], a[l + r >> 1]);
+    int x = a[l], i = l;
+    for(int j = l+1; j <= r; j++){
+        if(a[j] <= x){
+            swap(a[j], a[++i]);
+        }
+    }
+    swap(a[i], a[l]);
+    Quick_Sort(a, l, i-1);
+    Quick_Sort(a, i+1, r);
+}
+
+int main(){
+    int n;
+    scanf("%d",&n);
+    for(int i = 0;i < n; i++){
+        scanf("%d", &a[i]);
+    }
+    Quick_Sort(a, 0, n-1);
+    for(int i = 0;i < n; i++){
+        printf("%d ", a[i]);
+    }
+    return 0;
+}
+```
+
+
+
+
+### [786. 第k个小的数](https://www.acwing.com/problem/content/description/788/)
+
+#### 排序
+
++ $T:O(nlogn), S:O(logn)$
+
+#### 大顶堆
+
++ $T:O(nlogk),S:O(k)$，结果有序
+
+#### 快速选择
+
++ 平均复杂度：$T:O(n),S:O(logn)$
++ 最坏复杂度：$T:O(n^2),S:O(n)$
+
+###### 快慢指针的快速选择切分
+
+``` cpp
+#include <iostream>
+#include <algorithm>
+#include <stdlib.h>
+
+using namespace std;
+
 const int N = 1e5+10;
 int a[N];
 
 int Quick_Select(int a[], int l, int r){
+    // 添加随机性
+    int rand_idx = rand() % (r - l + 1) + l;
+    swap(a[rand_idx], a[l]);
+    
     int x = a[l], i = l, j = r + 1;
     while(i < j){
+        // 注意这里有无等号没有影响
         while(a[++i] < x){
             if(i >= r)   break;
         }
@@ -229,7 +251,7 @@ int main(){
 }
 ```
 
-+ 高级基于快速排序的快速选择。
+###### 高级基于快速排序的快速选择。
 
 ``` cpp
 #include <iostream>

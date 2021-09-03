@@ -4,7 +4,28 @@
         <link>https://sheny1xuan.github.io/tags/%E7%AE%97%E6%B3%95/</link>
         <description>算法 - 标签 - stonex</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sheny1xuan@163.com (Shen)</managingEditor>
-            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Sat, 28 Aug 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/%E7%AE%97%E6%B3%95/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Wed, 01 Sep 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/%E7%AE%97%E6%B3%95/" rel="self" type="application/rss+xml" /><item>
+    <title>lc165. 比较版本号</title>
+    <link>https://sheny1xuan.github.io/lc165/</link>
+    <pubDate>Wed, 01 Sep 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc165/</guid>
+    <description><![CDATA[165. 比较版本号 split后双指针比较 先对字符串做split提取出每个小的版本号 之后对每个小版本号进行比较即可。 $T:O(n)$ $S:O(n)$ 1 2 3 4 5 6 7 8 9 10 11 12 13 14]]></description>
+</item><item>
+    <title>lc1109.航班预订统计</title>
+    <link>https://sheny1xuan.github.io/lc1109/</link>
+    <pubDate>Tue, 31 Aug 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc1109/</guid>
+    <description><![CDATA[1109. 航班预订统计 差分用于快速处理区间的增量。 当我们需要对某一数组$a[n]$,区间$[l,r]$之间添加一个增量$inc$时，也就是对差分数组]]></description>
+</item><item>
+    <title>lc528.按权重随机选择</title>
+    <link>https://sheny1xuan.github.io/lc528/</link>
+    <pubDate>Mon, 30 Aug 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc528/</guid>
+    <description><![CDATA[528. 按权重随机选择 题目的意思是根据下标不同的权重产生随机数 $w[i]$代表产生随机数$i$的权重 首先将计算所有数的和，然后依次计算前缀和，均匀]]></description>
+</item><item>
     <title>lc1480. 一维数组的动态和</title>
     <link>https://sheny1xuan.github.io/lc1480/</link>
     <pubDate>Sat, 28 Aug 2021 00:00:00 &#43;0000</pubDate>
@@ -53,26 +74,5 @@
     <author>作者</author>
     <guid>https://sheny1xuan.github.io/ch1_%E6%8E%92%E5%BA%8F%E9%97%AE%E9%A2%98/</guid>
     <description><![CDATA[排序 分类 复杂度分析 快速排序 基于分治思想 主要步骤 确定分界点x，随机(一般为左端点) 调整范围，左半边小于等于x，右半边大于等于x（双指针）。 如果]]></description>
-</item><item>
-    <title>acwing基础课ch1-高精度运算</title>
-    <link>https://sheny1xuan.github.io/ch1_%E9%AB%98%E7%B2%BE%E5%BA%A6%E8%BF%90%E7%AE%97/</link>
-    <pubDate>Tue, 24 Aug 2021 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://sheny1xuan.github.io/ch1_%E9%AB%98%E7%B2%BE%E5%BA%A6%E8%BF%90%E7%AE%97/</guid>
-    <description><![CDATA[高精度运算 数据存储 利用数组倒序存储大的数据，进位在最后一位添加一个数十分方便。 高精度加法 模拟加法进位 字符串输入，取反存入数组中 计算返回数组倒]]></description>
-</item><item>
-    <title>acwing基础课ch2-哈希表</title>
-    <link>https://sheny1xuan.github.io/ch2_%E5%93%88%E5%B8%8C%E8%A1%A8/</link>
-    <pubDate>Tue, 24 Aug 2021 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://sheny1xuan.github.io/ch2_%E5%93%88%E5%B8%8C%E8%A1%A8/</guid>
-    <description><![CDATA[哈希表 将一个复杂的数据结构进行映射。 (key-value)pair的关系。 哈希表基本元素 key-value映射 哈希函数 哈希冲突解决方法 哈希函]]></description>
-</item><item>
-    <title>acwing基础课ch2-堆</title>
-    <link>https://sheny1xuan.github.io/ch2_%E5%A0%86/</link>
-    <pubDate>Tue, 24 Aug 2021 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://sheny1xuan.github.io/ch2_%E5%A0%86/</guid>
-    <description><![CDATA[堆/优先队列 堆是什么 堆是一颗完全二叉树。 大顶堆：父亲结点的值大于左右子树的结点。 小顶堆：父亲结点的值小于左右子树的结点。 堆的操作与优点 优点 O]]></description>
 </item></channel>
 </rss>
