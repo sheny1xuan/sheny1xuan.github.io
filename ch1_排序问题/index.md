@@ -206,14 +206,15 @@ using namespace std;
 const int N = 1e5+10;
 int a[N];
 
-int Quick_Select(int a[], int l, int r){
+int Quick_Select(int a[], int l, int r, int k){
+    if(l >= r)  return a[l];
+    
     // 添加随机性
     int rand_idx = rand() % (r - l + 1) + l;
     swap(a[rand_idx], a[l]);
     
     int x = a[l], i = l, j = r + 1;
     while(i < j){
-        // 注意这里有无等号没有影响
         while(a[++i] < x){
             if(i >= r)   break;
         }
@@ -223,28 +224,21 @@ int Quick_Select(int a[], int l, int r){
         if(i < j) swap(a[i], a[j]);
     }
     swap(a[l], a[j]);
-    return j;
+    
+    if(j - l + 1 == k)  return a[j];
+    else if(j - l + 1 > k)  return Quick_Select(a, l, j - 1, k);
+    else return Quick_Select(a, j + 1, r, k - (j - l + 1));
 }
+
 int main(){
     int n, k;
     cin >> n >> k;
     for(int i = 0; i < n; i++){
         scanf("%d", &a[i]);
     }
-    int l = 0, r = n-1;
-    while(l <= r){
-        int t = Quick_Select(a, l, r);
-        if(t == k - 1){
-            cout << a[t] << endl;
-            return 0;
-        }
-        else if(t > k - 1){
-            r = t - 1;
-        }
-        else{
-            l = t + 1;
-        }
-    }
+    int l = 0, r = n - 1;
+    
+    cout << Quick_Select(a, l, r, k) << endl;
 
     return 0;
     

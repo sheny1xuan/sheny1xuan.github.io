@@ -4,7 +4,14 @@
         <link>https://sheny1xuan.github.io/tags/%E5%A0%86/</link>
         <description>堆 - 标签 - stonex</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sheny1xuan@163.com (Shen)</managingEditor>
-            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Tue, 24 Aug 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/%E5%A0%86/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Wed, 08 Sep 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/%E5%A0%86/" rel="self" type="application/rss+xml" /><item>
+    <title>lc502. IPO</title>
+    <link>https://sheny1xuan.github.io/lc502/</link>
+    <pubDate>Wed, 08 Sep 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc502/</guid>
+    <description><![CDATA[502. IPO 如果没有k的限制：依次将资本消耗从小到大进行排序，然后投资capital[i],之后w+=profits[i] 有了k的限制 首先仍是将资本]]></description>
+</item><item>
     <title>acwing基础课ch2-堆</title>
     <link>https://sheny1xuan.github.io/ch2_%E5%A0%86/</link>
     <pubDate>Tue, 24 Aug 2021 00:00:00 &#43;0000</pubDate>

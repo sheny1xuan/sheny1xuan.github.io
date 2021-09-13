@@ -4,7 +4,14 @@
         <link>https://sheny1xuan.github.io/tags/%E6%A8%A1%E6%8B%9F/</link>
         <description>模拟 - 标签 - stonex</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sheny1xuan@163.com (Shen)</managingEditor>
-            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Mon, 23 Aug 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/%E6%A8%A1%E6%8B%9F/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Thu, 09 Sep 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/%E6%A8%A1%E6%8B%9F/" rel="self" type="application/rss+xml" /><item>
+    <title>lc68. 文本左右对齐</title>
+    <link>https://sheny1xuan.github.io/lc68/</link>
+    <pubDate>Thu, 09 Sep 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc68/</guid>
+    <description><![CDATA[68. 文本左右对齐 首先理解题目：这道题要求除了最后一行两端对齐，最后一行靠左对齐。 首先先计算每一行可以放哪些单词 之后将计算每行放多少空格，额外需]]></description>
+</item><item>
     <title>lc1646.获取生成数组中的最大值</title>
     <link>https://sheny1xuan.github.io/lc1646/</link>
     <pubDate>Mon, 23 Aug 2021 00:00:00 &#43;0000</pubDate>
