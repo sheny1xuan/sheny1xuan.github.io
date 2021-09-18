@@ -4,9 +4,44 @@
         <link>https://sheny1xuan.github.io/</link>
         <description>Welcome to my&#39;blog!</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sheny1xuan@163.com (Shen)</managingEditor>
-            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Mon, 13 Sep 2021 00:00:00 &#43;0000</lastBuildDate>
+            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Sat, 18 Sep 2021 00:00:00 &#43;0000</lastBuildDate>
             <atom:link href="https://sheny1xuan.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>lc292.Nim 游戏</title>
+    <link>https://sheny1xuan.github.io/lc292/</link>
+    <pubDate>Sat, 18 Sep 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc292/</guid>
+    <description><![CDATA[292. Nim 游戏 博弈论 博弈论问题一般是两方进行对抗的问题 首先如果有3枚以下的石头，那么我方一定获胜。如果有4枚石头，我方一定能获胜。 考虑5颗石头的情]]></description>
+</item><item>
+    <title>lc36.有效的数独</title>
+    <link>https://sheny1xuan.github.io/lc36/</link>
+    <pubDate>Fri, 17 Sep 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc36/</guid>
+    <description><![CDATA[36.有效的数独 暴力遍历 遍历每一行，每一列，每个block进行检查。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36]]></description>
+</item><item>
+    <title>lc212.单词搜索II</title>
+    <link>https://sheny1xuan.github.io/lc212/</link>
+    <pubDate>Thu, 16 Sep 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc212/</guid>
+    <description><![CDATA[212.单词搜索 II 字典树+dfs 首先将目标单词依次插入到字典树当中，方便dfs时进行查询 对所有起点进行dfs，如果当前字符与字典树匹配，继续]]></description>
+</item><item>
+    <title>lc162.寻找峰值</title>
+    <link>https://sheny1xuan.github.io/lc162/</link>
+    <pubDate>Wed, 15 Sep 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc162/</guid>
+    <description><![CDATA[162. 寻找峰值 寻找最大值 依照题意$-1,n$位置都是比任意值要小，而且数组中没有任意两个数字完全相同，所以 最大值肯定是目标值之一。 1 2 3 4 5 6 class]]></description>
+</item><item>
+    <title>lc524.通过删除字母匹配到字典里最长单词</title>
+    <link>https://sheny1xuan.github.io/lc524/</link>
+    <pubDate>Tue, 14 Sep 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc524/</guid>
+    <description><![CDATA[524. 通过删除字母匹配到字典里最长单词 排序+双指针 双指针：判断一个字符串是不是另一个字符串的子串采用双指针,$T:O(n)$ 排序：首先按照字符串]]></description>
+</item><item>
     <title>447.回旋镖的数量</title>
     <link>https://sheny1xuan.github.io/lc447/</link>
     <pubDate>Mon, 13 Sep 2021 00:00:00 &#43;0000</pubDate>
@@ -41,40 +76,5 @@
     <author>作者</author>
     <guid>https://sheny1xuan.github.io/lc502/</guid>
     <description><![CDATA[502. IPO 如果没有k的限制：依次将资本消耗从小到大进行排序，然后投资capital[i],之后w+=profits[i] 有了k的限制 首先仍是将资本]]></description>
-</item><item>
-    <title>lc165. 比较版本号</title>
-    <link>https://sheny1xuan.github.io/lc165/</link>
-    <pubDate>Wed, 01 Sep 2021 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc165/</guid>
-    <description><![CDATA[165. 比较版本号 split后双指针比较 先对字符串做split提取出每个小的版本号 之后对每个小版本号进行比较即可。 $T:O(n)$ $S:O(n)$ 1 2 3 4 5 6 7 8 9 10 11 12 13 14]]></description>
-</item><item>
-    <title>lc1109.航班预订统计</title>
-    <link>https://sheny1xuan.github.io/lc1109/</link>
-    <pubDate>Tue, 31 Aug 2021 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc1109/</guid>
-    <description><![CDATA[1109. 航班预订统计 差分用于快速处理区间的增量。 当我们需要对某一数组$a[n]$,区间$[l,r]$之间添加一个增量$inc$时，也就是对差分数组]]></description>
-</item><item>
-    <title>lc528.按权重随机选择</title>
-    <link>https://sheny1xuan.github.io/lc528/</link>
-    <pubDate>Mon, 30 Aug 2021 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc528/</guid>
-    <description><![CDATA[528. 按权重随机选择 题目的意思是根据下标不同的权重产生随机数 $w[i]$代表产生随机数$i$的权重 首先将计算所有数的和，然后依次计算前缀和，均匀]]></description>
-</item><item>
-    <title>lc1480. 一维数组的动态和</title>
-    <link>https://sheny1xuan.github.io/lc1480/</link>
-    <pubDate>Sat, 28 Aug 2021 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc1480/</guid>
-    <description><![CDATA[1480. 一维数组的动态和 前缀和 pre[i]表示前i个数的和 返回i+1-&gt;end 1 2 3 4 5 6 7 8 9 10 11 12 class Solution { public: vector&lt;int&gt; runningSum(vector&lt;int&gt;&amp; nums) { int n = nums.size(); vector&lt;int&gt; pre(n + 1, 0); for(int i]]></description>
-</item><item>
-    <title>lc881. 救生艇</title>
-    <link>https://sheny1xuan.github.io/lc881/</link>
-    <pubDate>Thu, 26 Aug 2021 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc881/</guid>
-    <description><![CDATA[881. 救生艇 贪心+双指针 $T:O(nlogn)$ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 class Solution { public: int numRescueBoats(vector&lt;int&gt;&amp; people, int limit) { sort(people.begin(), people.end()); int n = people.size(), cnt = 0; // 双指针+贪心 // 从小到大进行排序 //]]></description>
 </item></channel>
 </rss>
