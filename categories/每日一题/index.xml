@@ -40,13 +40,6 @@
     <guid>https://sheny1xuan.github.io/lc36/</guid>
     <description><![CDATA[36.有效的数独 暴力遍历 遍历每一行，每一列，每个block进行检查。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36]]></description>
 </item><item>
-    <title>lc212.单词搜索II</title>
-    <link>https://sheny1xuan.github.io/lc212/</link>
-    <pubDate>Thu, 16 Sep 2021 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc212/</guid>
-    <description><![CDATA[212.单词搜索 II 字典树+dfs 首先将目标单词依次插入到字典树当中，方便dfs时进行查询 对所有起点进行dfs，如果当前字符与字典树匹配，继续]]></description>
-</item><item>
     <title>lc162.寻找峰值</title>
     <link>https://sheny1xuan.github.io/lc162/</link>
     <pubDate>Wed, 15 Sep 2021 00:00:00 &#43;0000</pubDate>
@@ -74,5 +67,12 @@
     <author>作者</author>
     <guid>https://sheny1xuan.github.io/lc600/</guid>
     <description><![CDATA[600. 不含连续1的非负整数 暴力位运算 $O(n)$ 注意运算符优先级：“单算移关与，异或逻条赋” 关系运算符优先级要比位运算优先级要高。 1 2 3 4 5 6 7 8 9 10 11 12]]></description>
+</item><item>
+    <title>lc68. 文本左右对齐</title>
+    <link>https://sheny1xuan.github.io/lc68/</link>
+    <pubDate>Thu, 09 Sep 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc68/</guid>
+    <description><![CDATA[68. 文本左右对齐 首先理解题目：这道题要求除了最后一行两端对齐，最后一行靠左对齐。 首先先计算每一行可以放哪些单词 之后将计算每行放多少空格，额外需]]></description>
 </item></channel>
 </rss>
