@@ -4,7 +4,21 @@
         <link>https://sheny1xuan.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</link>
         <description>动态规划 - 标签 - stonex</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sheny1xuan@163.com (Shen)</managingEditor>
-            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Wed, 11 Aug 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Mon, 20 Sep 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="self" type="application/rss+xml" /><item>
+    <title>lc673.最长递增子序列的个数</title>
+    <link>https://sheny1xuan.github.io/lc673/</link>
+    <pubDate>Mon, 20 Sep 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc673/</guid>
+    <description><![CDATA[673.最长递增子序列的个数 维护一个计数数组，记录每个递增子序列的个数。 按照最长递增子序列的遍历方式，如果$nums[i] &gt; nums[j]$ 如果$f[i]]]></description>
+</item><item>
+    <title>lc650.只有两个键的键盘</title>
+    <link>https://sheny1xuan.github.io/lc650/</link>
+    <pubDate>Sun, 19 Sep 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc650/</guid>
+    <description><![CDATA[650.只有两个键的键盘 动态规划 $O(n^2)$ 考虑状态$f[i]$为输出恰好为$i$个$A$时的最少操作此时 ${i % j == 0}, f[i] = min{(f[i], f[j] + i / j)}$，对$j$复]]></description>
+</item><item>
     <title>lc446.等差数列划分 II - 子序列</title>
     <link>https://sheny1xuan.github.io/lc446/</link>
     <pubDate>Wed, 11 Aug 2021 00:00:00 &#43;0000</pubDate>
