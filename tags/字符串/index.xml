@@ -60,12 +60,5 @@
     <author>作者</author>
     <guid>https://sheny1xuan.github.io/lc345/</guid>
     <description><![CDATA[345. 反转字符串中的元音字母 双指针 这里可以使用string.find(c)，如果找到了该字母返回该字母的下标，否则返回std::npos，这个是]]></description>
-</item><item>
-    <title>lc212.单词搜索 II</title>
-    <link>https://sheny1xuan.github.io/lc212/</link>
-    <pubDate>Fri, 30 Jul 2021 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc212/</guid>
-    <description><![CDATA[212.单词搜索 II 字典树+dfs 首先将目标单词依次插入到字典树当中，方便dfs时进行查询 对所有起点进行dfs，如果当前字符与字典树匹配，继续]]></description>
 </item></channel>
 </rss>
