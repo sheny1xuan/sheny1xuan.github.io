@@ -4,7 +4,14 @@
         <link>https://sheny1xuan.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</link>
         <description>动态规划 - 标签 - stonex</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sheny1xuan@163.com (Shen)</managingEditor>
-            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Mon, 20 Sep 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Sat, 25 Sep 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="self" type="application/rss+xml" /><item>
+    <title>lc583.两个字符串的删除操作</title>
+    <link>https://sheny1xuan.github.io/lc583/</link>
+    <pubDate>Sat, 25 Sep 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc583/</guid>
+    <description><![CDATA[583.两个字符串的删除操作 最长公共子序列 给定两个字符串word1和word2，找出使两个字符串变为相同需要删除的字母的最少的个数 可以把这个]]></description>
+</item><item>
     <title>lc673.最长递增子序列的个数</title>
     <link>https://sheny1xuan.github.io/lc673/</link>
     <pubDate>Mon, 20 Sep 2021 00:00:00 &#43;0000</pubDate>

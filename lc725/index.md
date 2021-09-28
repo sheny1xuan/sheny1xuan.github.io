@@ -1,22 +1,5 @@
----
-title: "lc725.分隔链表"
-subtitle: ""
-date: 2021-09-22
-lastmod: 2021-09-22
-draft: false
-author: ""
-authorLink: ""
-description: ""
-license: ""
+# lc725.分隔链表
 
-tags: ["链表","leetcode", "算法"]
-categories: ["每日一题"]
-
-#  是否在主页隐藏一篇文章
-hiddenFromHomePage : true
-#  是否在搜索结果中隐藏一篇文章
-hiddenFromSearch : false
----
 
 
 
@@ -75,4 +58,5 @@ public:
     }
 };
 ```
+
 

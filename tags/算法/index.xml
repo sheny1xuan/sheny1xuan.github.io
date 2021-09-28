@@ -4,7 +4,42 @@
         <link>https://sheny1xuan.github.io/tags/%E7%AE%97%E6%B3%95/</link>
         <description>算法 - 标签 - stonex</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sheny1xuan@163.com (Shen)</managingEditor>
-            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Tue, 21 Sep 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/%E7%AE%97%E6%B3%95/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Tue, 28 Sep 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/%E7%AE%97%E6%B3%95/" rel="self" type="application/rss+xml" /><item>
+    <title>lc437.路径总和 III</title>
+    <link>https://sheny1xuan.github.io/lc437/</link>
+    <pubDate>Tue, 28 Sep 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc437/</guid>
+    <description><![CDATA[437.路径总和 III dfs+bfs 因为从每个结点开始都有可能向下产生指定的路径和，所以我们可以从每个结点开始遍历，找到从该节点向下的所有的路径和。 1 2 3 4]]></description>
+</item><item>
+    <title>lc371.两整数之和</title>
+    <link>https://sheny1xuan.github.io/lc371/</link>
+    <pubDate>Sun, 26 Sep 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc371/</guid>
+    <description><![CDATA[371.两整数之和 不使用+进行加法运算 两个数无进位加法的结果是a^b 两个数产生进位的位是a&amp;b，进位的结果就是(a&amp;b)&l]]></description>
+</item><item>
+    <title>lc583.两个字符串的删除操作</title>
+    <link>https://sheny1xuan.github.io/lc583/</link>
+    <pubDate>Sat, 25 Sep 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc583/</guid>
+    <description><![CDATA[583.两个字符串的删除操作 最长公共子序列 给定两个字符串word1和word2，找出使两个字符串变为相同需要删除的字母的最少的个数 可以把这个]]></description>
+</item><item>
+    <title> .扁平化多级双向链表</title>
+    <link>https://sheny1xuan.github.io/lc430/</link>
+    <pubDate>Fri, 24 Sep 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc430/</guid>
+    <description><![CDATA[430.扁平化多级双向链表 迭代 没碰到一个有child部分的节点，找到当前节点儿子链表的尾结点tail，将该链表添加到当前链表中，当前节点的c]]></description>
+</item><item>
+    <title>lc725.分隔链表</title>
+    <link>https://sheny1xuan.github.io/lc725/</link>
+    <pubDate>Wed, 22 Sep 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc725/</guid>
+    <description><![CDATA[725.分隔链表 计算每一部分的长度之后，每次数出指定长度的结点即可。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36]]></description>
+</item><item>
     <title>lc58.最后一个单词的长度</title>
     <link>https://sheny1xuan.github.io/lc58/</link>
     <pubDate>Tue, 21 Sep 2021 00:00:00 &#43;0000</pubDate>
@@ -39,40 +74,5 @@
     <author>作者</author>
     <guid>https://sheny1xuan.github.io/lc36/</guid>
     <description><![CDATA[36.有效的数独 暴力遍历 遍历每一行，每一列，每个block进行检查。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36]]></description>
-</item><item>
-    <title>lc162.寻找峰值</title>
-    <link>https://sheny1xuan.github.io/lc162/</link>
-    <pubDate>Wed, 15 Sep 2021 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc162/</guid>
-    <description><![CDATA[162. 寻找峰值 寻找最大值 依照题意$-1,n$位置都是比任意值要小，而且数组中没有任意两个数字完全相同，所以 最大值肯定是目标值之一。 1 2 3 4 5 6 class]]></description>
-</item><item>
-    <title>lc524.通过删除字母匹配到字典里最长单词</title>
-    <link>https://sheny1xuan.github.io/lc524/</link>
-    <pubDate>Tue, 14 Sep 2021 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc524/</guid>
-    <description><![CDATA[524. 通过删除字母匹配到字典里最长单词 排序+双指针 双指针：判断一个字符串是不是另一个字符串的子串采用双指针,$T:O(n)$ 排序：首先按照字符串]]></description>
-</item><item>
-    <title>lc447.回旋镖的数量</title>
-    <link>https://sheny1xuan.github.io/lc447/</link>
-    <pubDate>Mon, 13 Sep 2021 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc447/</guid>
-    <description><![CDATA[447. 回旋镖的数量 计算两两点之间的距离 假如相同距离的点为$n$个的话，则满足条件的三元组有$A_{n}^{2} = n * (n - 1)$个 1 2 3 4 5 6 7 8]]></description>
-</item><item>
-    <title>lc600.不含连续1的非负整数</title>
-    <link>https://sheny1xuan.github.io/lc600/</link>
-    <pubDate>Sat, 11 Sep 2021 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc600/</guid>
-    <description><![CDATA[600. 不含连续1的非负整数 暴力位运算 $O(n)$ 注意运算符优先级：“单算移关与，异或逻条赋” 关系运算符优先级要比位运算优先级要高。 1 2 3 4 5 6 7 8 9 10 11 12]]></description>
-</item><item>
-    <title>tips1-运算符优先级口诀</title>
-    <link>https://sheny1xuan.github.io/%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6%E5%8F%A3%E8%AF%80/</link>
-    <pubDate>Sat, 11 Sep 2021 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://sheny1xuan.github.io/%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6%E5%8F%A3%E8%AF%80/</guid>
-    <description><![CDATA[运算符优先级口诀 “单算移关与，异或逻条赋” “单”表示单目运算符：逻辑非(!),按位取反(~),自增(++),自减(&ndash;),取地址(]]></description>
 </item></channel>
 </rss>
