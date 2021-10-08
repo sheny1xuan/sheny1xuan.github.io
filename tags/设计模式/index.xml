@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>设计模式 - 标签 - stonex</title>
+        <link>https://sheny1xuan.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</link>
+        <description>设计模式 - 标签 - stonex</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sheny1xuan@163.com (Shen)</managingEditor>
+            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Tue, 05 Oct 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="self" type="application/rss+xml" /><item>
+    <title>DesignPattern-迭代器</title>
+    <link>https://sheny1xuan.github.io/designpattern-%E8%BF%AD%E4%BB%A3%E5%99%A8/</link>
+    <pubDate>Tue, 05 Oct 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/designpattern-%E8%BF%AD%E4%BB%A3%E5%99%A8/</guid>
+    <description><![CDATA[迭代器模式 对于一个容器提供一种方法顺序访问容器中的各个元素，而不必暴露该对象的内部表示。 常常使用的方法有:next()下一个元素，hasNe]]></description>
+</item></channel>
+</rss>
