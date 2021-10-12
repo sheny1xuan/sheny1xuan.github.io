@@ -3,7 +3,7 @@ Descripttion:
 version: 
 Author: Stonex
 Date: 2021-10-12 14:39:33
-LastEditTime: 2021-10-12 15:25:40
+LastEditTime: 2021-10-12 17:46:13
 '''
 import time
 import os
@@ -20,8 +20,8 @@ def updateDate(file_name):
         lines.append(line)
         print(line)
 
-    lines[3] = bytes('date:' + write_time + '\n', encoding="utf8")
-    lines[4] = bytes('lastmod:' + write_time + '\n', encoding="utf8")
+    lines[3] = bytes('date: ' + write_time + '\n', encoding="utf8")
+    lines[4] = bytes('lastmod: ' + write_time + '\n', encoding="utf8")
     
     fd = open(file_name, 'wb+')
     for line in lines:

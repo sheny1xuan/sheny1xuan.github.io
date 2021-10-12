@@ -1,0 +1,80 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>stonex</title>
+        <link>https://sheny1xuan.github.io/</link>
+        <description>Welcome to my&#39;blog!</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sheny1xuan@163.com (Shen)</managingEditor>
+            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Tue, 12 Oct 2021 00:00:00 &#43;0000</lastBuildDate>
+            <atom:link href="https://sheny1xuan.github.io/index.xml" rel="self" type="application/rss+xml" />
+        <item>
+    <title>lc29.两数相除</title>
+    <link>https://sheny1xuan.github.io/lc29/</link>
+    <pubDate>Tue, 12 Oct 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc29/</guid>
+    <description><![CDATA[29.两数相除 二分查找+快速乘 快速乘：根据每一位的权重进行乘法。 对于$y/x$查找第一个$x*?&lt;y$的数。 $T:O(log^2n)$]]></description>
+</item><item>
+    <title>lc441.排列硬币</title>
+    <link>https://sheny1xuan.github.io/lc441/</link>
+    <pubDate>Sun, 10 Oct 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc441/</guid>
+    <description><![CDATA[441.排列硬币 二分查找 1-k行求和相当于等差数列求和s=(k+1)k/2 目的是求出来最后一个行的和小于等于n的行。 注意会爆int $T:O(n)$ 1 2 3 4]]></description>
+</item><item>
+    <title>lc352.将数据流变为多个不相交区间</title>
+    <link>https://sheny1xuan.github.io/lc352/</link>
+    <pubDate>Sat, 09 Oct 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc352/</guid>
+    <description><![CDATA[352.将数据流变为多个不相交区间 有序哈希 可以考虑将一个区间左值作为key，右值作为val进行哈希。 每次加入一个值考虑其最近的两个区间，这里]]></description>
+</item><item>
+    <title>lc187.重复的DNA序列</title>
+    <link>https://sheny1xuan.github.io/lc187/</link>
+    <pubDate>Fri, 08 Oct 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc187/</guid>
+    <description><![CDATA[187.重复的DNA序列 哈希表 哈希表记录每一个子串出现的次数，出现两次的子串加入到结果中（不重不漏）。 注意substr操作是复制整个子串，需]]></description>
+</item><item>
+    <title>ModernCpp-右值引用</title>
+    <link>https://sheny1xuan.github.io/moderncpp-%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8/</link>
+    <pubDate>Fri, 08 Oct 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/moderncpp-%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8/</guid>
+    <description><![CDATA[右值引用：延长临时变量的生命周期，解决将亡值的问题 认识右值引用 考虑如下一种情况，下面这样情况，由于x是一个临时变量，在代码块结束后，因为该变]]></description>
+</item><item>
+    <title>lc434.字符串中的单词数</title>
+    <link>https://sheny1xuan.github.io/lc434/</link>
+    <pubDate>Thu, 07 Oct 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc434/</guid>
+    <description><![CDATA[434.字符串中的单词数 实现split 双指针 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 class Solution { public: int countSegments(string s) { int cnt = 0; for(int i = 0, j = 0; j &lt; s.size(); ) { if(s[j] != &#39; &#39;)]]></description>
+</item><item>
+    <title>lc414.第三大的数</title>
+    <link>https://sheny1xuan.github.io/lc414/</link>
+    <pubDate>Wed, 06 Oct 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc414/</guid>
+    <description><![CDATA[414.第三大的数 设置三个哨兵a，b，c，依次为$a&gt;b&gt;c$如果一个数满足在区间内，则可以更新对应的数。 如果num &gt; a, c = b, b]]></description>
+</item><item>
+    <title>DesignPattern-迭代器</title>
+    <link>https://sheny1xuan.github.io/designpattern-%E8%BF%AD%E4%BB%A3%E5%99%A8/</link>
+    <pubDate>Tue, 05 Oct 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/designpattern-%E8%BF%AD%E4%BB%A3%E5%99%A8/</guid>
+    <description><![CDATA[迭代器模式 对于一个容器提供一种方法顺序访问容器中的各个元素，而不必暴露该对象的内部表示。 常常使用的方法有:next()下一个元素，hasNe]]></description>
+</item><item>
+    <title>lc482.密钥格式化</title>
+    <link>https://sheny1xuan.github.io/lc482/</link>
+    <pubDate>Mon, 04 Oct 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc482/</guid>
+    <description><![CDATA[482. 密钥格式化 逆序遍历 逆序遍历可以不必计算因为不够而产生的余数部分。 注意原地操作，由于字符串添加或者删除一个字符的时间复杂度是$O(n)$，所]]></description>
+</item><item>
+    <title>seata-at</title>
+    <link>https://sheny1xuan.github.io/seata-at/</link>
+    <pubDate>Fri, 01 Oct 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/seata-at/</guid>
+    <description><![CDATA[常量 空指针 参考资料 modern-cpp-tutorial https://www.zhihu.com/question/35614219]]></description>
+</item></channel>
+</rss>

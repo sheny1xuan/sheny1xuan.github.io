@@ -1,0 +1,29 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>二分查找 - 标签 - stonex</title>
+        <link>https://sheny1xuan.github.io/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/</link>
+        <description>二分查找 - 标签 - stonex</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sheny1xuan@163.com (Shen)</managingEditor>
+            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Sun, 10 Oct 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" rel="self" type="application/rss+xml" /><item>
+    <title>lc441.排列硬币</title>
+    <link>https://sheny1xuan.github.io/lc441/</link>
+    <pubDate>Sun, 10 Oct 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc441/</guid>
+    <description><![CDATA[441.排列硬币 二分查找 1-k行求和相当于等差数列求和s=(k+1)k/2 目的是求出来最后一个行的和小于等于n的行。 注意会爆int $T:O(n)$ 1 2 3 4]]></description>
+</item><item>
+    <title>lc162.寻找峰值</title>
+    <link>https://sheny1xuan.github.io/lc162/</link>
+    <pubDate>Wed, 15 Sep 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc162/</guid>
+    <description><![CDATA[162. 寻找峰值 寻找最大值 依照题意$-1,n$位置都是比任意值要小，而且数组中没有任意两个数字完全相同，所以 最大值肯定是目标值之一。 1 2 3 4 5 6 class]]></description>
+</item><item>
+    <title>lc1337.矩阵中战斗力最弱的K行</title>
+    <link>https://sheny1xuan.github.io/lc1337/</link>
+    <pubDate>Thu, 29 Jul 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc1337/</guid>
+    <description><![CDATA[1337. 矩阵中战斗力最弱的 K 行 二分查找+topK 1总是排在前面，所以我们只需要通过二分查找找到最后一个1的位置。 再利用最小堆找出topK小的数 T:O(mlogn+klogm) O]]></description>
+</item></channel>
+</rss>

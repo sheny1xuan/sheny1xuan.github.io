@@ -1,0 +1,22 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>贪心 - 标签 - stonex</title>
+        <link>https://sheny1xuan.github.io/tags/%E8%B4%AA%E5%BF%83/</link>
+        <description>贪心 - 标签 - stonex</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sheny1xuan@163.com (Shen)</managingEditor>
+            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Wed, 08 Sep 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/%E8%B4%AA%E5%BF%83/" rel="self" type="application/rss+xml" /><item>
+    <title>lc502. IPO</title>
+    <link>https://sheny1xuan.github.io/lc502/</link>
+    <pubDate>Wed, 08 Sep 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc502/</guid>
+    <description><![CDATA[502. IPO 如果没有k的限制：依次将资本消耗从小到大进行排序，然后投资capital[i],之后w+=profits[i] 有了k的限制 首先仍是将资本]]></description>
+</item><item>
+    <title>lc881. 救生艇</title>
+    <link>https://sheny1xuan.github.io/lc881/</link>
+    <pubDate>Thu, 26 Aug 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc881/</guid>
+    <description><![CDATA[881. 救生艇 贪心+双指针 $T:O(nlogn)$ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 class Solution { public: int numRescueBoats(vector&lt;int&gt;&amp; people, int limit) { sort(people.begin(), people.end()); int n = people.size(), cnt = 0; // 双指针+贪心 // 从小到大进行排序 //]]></description>
+</item></channel>
+</rss>
