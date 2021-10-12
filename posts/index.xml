@@ -26,13 +26,6 @@
     <guid>https://sheny1xuan.github.io/lc352/</guid>
     <description><![CDATA[352.将数据流变为多个不相交区间 有序哈希 可以考虑将一个区间左值作为key，右值作为val进行哈希。 每次加入一个值考虑其最近的两个区间，这里]]></description>
 </item><item>
-    <title>lc187.重复的DNA序列</title>
-    <link>https://sheny1xuan.github.io/lc187/</link>
-    <pubDate>Fri, 08 Oct 2021 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc187/</guid>
-    <description><![CDATA[187.重复的DNA序列 哈希表 哈希表记录每一个子串出现的次数，出现两次的子串加入到结果中（不重不漏）。 注意substr操作是复制整个子串，需]]></description>
-</item><item>
     <title>ModernCpp-右值引用</title>
     <link>https://sheny1xuan.github.io/moderncpp-%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8/</link>
     <pubDate>Fri, 08 Oct 2021 00:00:00 &#43;0000</pubDate>
@@ -74,5 +67,12 @@
     <author>作者</author>
     <guid>https://sheny1xuan.github.io/seata-at/</guid>
     <description><![CDATA[常量 空指针 参考资料 modern-cpp-tutorial https://www.zhihu.com/question/35614219]]></description>
+</item><item>
+    <title>lc223.矩形面积</title>
+    <link>https://sheny1xuan.github.io/lc223/</link>
+    <pubDate>Thu, 30 Sep 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc223/</guid>
+    <description><![CDATA[223.矩形面积 简单的考虑 计算两个图形的重叠部分，如果两个图形无重复，直接返回两个图的面积和。 考虑不重叠的情况b1x &gt;= ax2 || ax1 &gt;= bx2 || ay2 &lt;= by1 || ay1]]></description>
 </item></channel>
 </rss>
