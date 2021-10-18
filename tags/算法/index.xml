@@ -4,7 +4,21 @@
         <link>https://sheny1xuan.github.io/tags/%E7%AE%97%E6%B3%95/</link>
         <description>算法 - 标签 - stonex</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sheny1xuan@163.com (Shen)</managingEditor>
-            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Tue, 12 Oct 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/%E7%AE%97%E6%B3%95/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Mon, 18 Oct 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/%E7%AE%97%E6%B3%95/" rel="self" type="application/rss+xml" /><item>
+    <title>lc2033.获取单值网格的最小操作数</title>
+    <link>https://sheny1xuan.github.io/lc2033/</link>
+    <pubDate>Mon, 18 Oct 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc2033/</guid>
+    <description><![CDATA[2033.获取单值网格的最小操作数 中位数 什么情况下，所有的数都可以通过加减x变为同一个数。可以选择第一个数作为base，其他所有的数与bas]]></description>
+</item><item>
+    <title>lc38.外观数列</title>
+    <link>https://sheny1xuan.github.io/lc38/</link>
+    <pubDate>Fri, 15 Oct 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc38/</guid>
+    <description><![CDATA[38.外观数列 字符串模拟 双指针逐位进行模拟。 注意最后结尾的时候，要对最后的字符进行单独处理。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24]]></description>
+</item><item>
     <title>lc29.两数相除</title>
     <link>https://sheny1xuan.github.io/lc29/</link>
     <pubDate>Tue, 12 Oct 2021 00:00:00 &#43;0000</pubDate>
@@ -60,19 +74,5 @@
     <author>作者</author>
     <guid>https://sheny1xuan.github.io/lc437/</guid>
     <description><![CDATA[437.路径总和 III dfs+bfs 因为从每个结点开始都有可能向下产生指定的路径和，所以我们可以从每个结点开始遍历，找到从该节点向下的所有的路径和。 1 2 3 4]]></description>
-</item><item>
-    <title>lc371.两整数之和</title>
-    <link>https://sheny1xuan.github.io/lc371/</link>
-    <pubDate>Sun, 26 Sep 2021 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc371/</guid>
-    <description><![CDATA[371.两整数之和 不使用+进行加法运算 两个数无进位加法的结果是a^b 两个数产生进位的位是a&amp;b，进位的结果就是(a&amp;b)&l]]></description>
-</item><item>
-    <title>lc583.两个字符串的删除操作</title>
-    <link>https://sheny1xuan.github.io/lc583/</link>
-    <pubDate>Sat, 25 Sep 2021 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc583/</guid>
-    <description><![CDATA[583.两个字符串的删除操作 最长公共子序列 给定两个字符串word1和word2，找出使两个字符串变为相同需要删除的字母的最少的个数 可以把这个]]></description>
 </item></channel>
 </rss>

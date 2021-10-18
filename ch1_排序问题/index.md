@@ -46,16 +46,17 @@ const int N = 1e5 + 10;
 int a[N];
 
 int Quick_Select(int a[], int l, int r){
+    if(l >= r) {
+        return l; 
+    }
     swap(a[l], a[l+r>>1]);
     int x = a[l] ,i = l, j = r+1;
     // 如果超出了数据范围break即可
     while(i < j){
-        while(a[++i] < x){
-            if(i >= r)  break;
-        }
-        while(a[--j] > x){
-            if(j <= l)  break;
-        }
+        // i最差为r
+        while(i < r && a[++i] < x);
+        // j最差为l
+        while(j > l && a[--j] > x);
         if(i < j)   swap(a[i], a[j]);
     }
     swap(a[l], a[j]);
@@ -215,12 +216,10 @@ int Quick_Select(int a[], int l, int r, int k){
     
     int x = a[l], i = l, j = r + 1;
     while(i < j){
-        while(a[++i] < x){
-            if(i >= r)   break;
-        }
-        while(a[--j] > x){
-            if(j <= l)   break;
-        }
+        // i 最差为 r
+        while(i < r && a[++i] < x);
+        // j 最差为 l
+        while(j > l && a[--j] > x);
         if(i < j) swap(a[i], a[j]);
     }
     swap(a[l], a[j]);
