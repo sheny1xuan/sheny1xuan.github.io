@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>数组 - 标签 - stonex</title>
+        <link>https://sheny1xuan.github.io/tags/%E6%95%B0%E7%BB%84/</link>
+        <description>数组 - 标签 - stonex</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sheny1xuan@163.com (Shen)</managingEditor>
+            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Wed, 20 Oct 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/%E6%95%B0%E7%BB%84/" rel="self" type="application/rss+xml" /><item>
+    <title>lc453.最小操作次数使数组元素相等</title>
+    <link>https://sheny1xuan.github.io/lc453/</link>
+    <pubDate>Wed, 20 Oct 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc453/</guid>
+    <description><![CDATA[453.最小操作次数使数组元素相等 使其他每个元素就是相当于对一个元素减1 操作到最后所有元素应该等于最小的元素。 1 2 3 4 5 6 7 8 9 10 11 12 13 class Solution]]></description>
+</item></channel>
+</rss>

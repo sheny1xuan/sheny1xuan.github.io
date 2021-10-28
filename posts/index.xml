@@ -4,7 +4,49 @@
         <link>https://sheny1xuan.github.io/posts/</link>
         <description>所有文章 | stonex</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sheny1xuan@163.com (Shen)</managingEditor>
-            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Mon, 18 Oct 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Thu, 28 Oct 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>lc869.重新排序得到 2 的幂</title>
+    <link>https://sheny1xuan.github.io/lc869/</link>
+    <pubDate>Thu, 28 Oct 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc869/</guid>
+    <description><![CDATA[869.重新排序得到 2 的幂 排列+LBit 计算所有的排列 对每一个排列通过LBit判断其是否是2的幂(2的幂只有一位为1)。 T:O(m!)，m是]]></description>
+</item><item>
+    <title>lc378.有序矩阵中第K小的元素</title>
+    <link>https://sheny1xuan.github.io/lc378/</link>
+    <pubDate>Mon, 25 Oct 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc378/</guid>
+    <description><![CDATA[378.有序矩阵中第 K 小的元素 如何判断一个数num在矩阵中处于第k小？从左下角向上移动，如果当前位置matrix[x][y] &lt;= num，那么说]]></description>
+</item><item>
+    <title>lc638.大礼包</title>
+    <link>https://sheny1xuan.github.io/lc638/</link>
+    <pubDate>Sun, 24 Oct 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc638/</guid>
+    <description><![CDATA[638.大礼包 DFS 将每个单独的商品处理成一个礼包 对于每一个礼包有两种选择(好像完全背包问题):直接选择下一个礼包;继续选择这个礼包。 $T:O(]]></description>
+</item><item>
+    <title>lc1755.最接近目标值的子序列和</title>
+    <link>https://sheny1xuan.github.io/lc1775/</link>
+    <pubDate>Thu, 21 Oct 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc1775/</guid>
+    <description><![CDATA[1755.最接近目标值的子序列和 折半搜索 数据范围比较小，但是没有到小到可以直接搜索的地步。 可以将整个数据分成两部分分别进行搜索，最后进行合并]]></description>
+</item><item>
+    <title>lc453.最小操作次数使数组元素相等</title>
+    <link>https://sheny1xuan.github.io/lc453/</link>
+    <pubDate>Wed, 20 Oct 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc453/</guid>
+    <description><![CDATA[453.最小操作次数使数组元素相等 使其他每个元素就是相当于对一个元素减1 操作到最后所有元素应该等于最小的元素。 1 2 3 4 5 6 7 8 9 10 11 12 13 class Solution]]></description>
+</item><item>
+    <title>lc211.添加与搜索单词 - 数据结构设计</title>
+    <link>https://sheny1xuan.github.io/lc211/</link>
+    <pubDate>Tue, 19 Oct 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc211/</guid>
+    <description><![CDATA[211.添加与搜索单词 - 数据结构设计 Trie的通配符匹配 需要新建一个TrieNode表示Trie树的结点。 对于通配符.需要遍历所有的子树，所]]></description>
+</item><item>
     <title>lc2033.获取单值网格的最小操作数</title>
     <link>https://sheny1xuan.github.io/lc2033/</link>
     <pubDate>Mon, 18 Oct 2021 00:00:00 &#43;0000</pubDate>
@@ -32,47 +74,5 @@
     <author>作者</author>
     <guid>https://sheny1xuan.github.io/lc441/</guid>
     <description><![CDATA[441.排列硬币 二分查找 1-k行求和相当于等差数列求和s=(k+1)k/2 目的是求出来最后一个行的和小于等于n的行。 注意会爆int $T:O(n)$ 1 2 3 4]]></description>
-</item><item>
-    <title>lc352.将数据流变为多个不相交区间</title>
-    <link>https://sheny1xuan.github.io/lc352/</link>
-    <pubDate>Sat, 09 Oct 2021 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc352/</guid>
-    <description><![CDATA[352.将数据流变为多个不相交区间 有序哈希 可以考虑将一个区间左值作为key，右值作为val进行哈希。 每次加入一个值考虑其最近的两个区间，这里]]></description>
-</item><item>
-    <title>ModernCpp-右值引用</title>
-    <link>https://sheny1xuan.github.io/moderncpp-%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8/</link>
-    <pubDate>Fri, 08 Oct 2021 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://sheny1xuan.github.io/moderncpp-%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8/</guid>
-    <description><![CDATA[右值引用：延长临时变量的生命周期，解决将亡值的问题 认识右值引用 考虑如下一种情况，下面这样情况，由于x是一个临时变量，在代码块结束后，因为该变]]></description>
-</item><item>
-    <title>lc434.字符串中的单词数</title>
-    <link>https://sheny1xuan.github.io/lc434/</link>
-    <pubDate>Thu, 07 Oct 2021 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc434/</guid>
-    <description><![CDATA[434.字符串中的单词数 实现split 双指针 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 class Solution { public: int countSegments(string s) { int cnt = 0; for(int i = 0, j = 0; j &lt; s.size(); ) { if(s[j] != &#39; &#39;)]]></description>
-</item><item>
-    <title>lc414.第三大的数</title>
-    <link>https://sheny1xuan.github.io/lc414/</link>
-    <pubDate>Wed, 06 Oct 2021 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc414/</guid>
-    <description><![CDATA[414.第三大的数 设置三个哨兵a，b，c，依次为$a&gt;b&gt;c$如果一个数满足在区间内，则可以更新对应的数。 如果num &gt; a, c = b, b]]></description>
-</item><item>
-    <title>DesignPattern-迭代器</title>
-    <link>https://sheny1xuan.github.io/designpattern-%E8%BF%AD%E4%BB%A3%E5%99%A8/</link>
-    <pubDate>Tue, 05 Oct 2021 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://sheny1xuan.github.io/designpattern-%E8%BF%AD%E4%BB%A3%E5%99%A8/</guid>
-    <description><![CDATA[迭代器模式 对于一个容器提供一种方法顺序访问容器中的各个元素，而不必暴露该对象的内部表示。 常常使用的方法有:next()下一个元素，hasNe]]></description>
-</item><item>
-    <title>lc482.密钥格式化</title>
-    <link>https://sheny1xuan.github.io/lc482/</link>
-    <pubDate>Mon, 04 Oct 2021 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc482/</guid>
-    <description><![CDATA[482. 密钥格式化 逆序遍历 逆序遍历可以不必计算因为不够而产生的余数部分。 注意原地操作，由于字符串添加或者删除一个字符的时间复杂度是$O(n)$，所]]></description>
 </item></channel>
 </rss>
