@@ -4,7 +4,14 @@
         <link>https://sheny1xuan.github.io/tags/leetcode/</link>
         <description>leetcode - 标签 - stonex</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sheny1xuan@163.com (Shen)</managingEditor>
-            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Thu, 28 Oct 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/leetcode/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Tue, 02 Nov 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/leetcode/" rel="self" type="application/rss+xml" /><item>
+    <title>lc687.最长同值路径</title>
+    <link>https://sheny1xuan.github.io/lc687/</link>
+    <pubDate>Tue, 02 Nov 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc687/</guid>
+    <description><![CDATA[687.最长同值路径 如果是普通的图，那么这个题目就是岛屿问题(DFS)，最大的连通图。 但是由于有限制是单条路径，所以要返回左右子树的路径最大]]></description>
+</item><item>
     <title>lc869.重新排序得到 2 的幂</title>
     <link>https://sheny1xuan.github.io/lc869/</link>
     <pubDate>Thu, 28 Oct 2021 00:00:00 &#43;0000</pubDate>
@@ -67,12 +74,5 @@
     <author>作者</author>
     <guid>https://sheny1xuan.github.io/lc29/</guid>
     <description><![CDATA[29.两数相除 二分查找+快速乘 快速乘：根据每一位的权重进行乘法。 对于$y/x$查找第一个$x*?&lt;y$的数。 $T:O(log^2n)$]]></description>
-</item><item>
-    <title>lc441.排列硬币</title>
-    <link>https://sheny1xuan.github.io/lc441/</link>
-    <pubDate>Sun, 10 Oct 2021 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc441/</guid>
-    <description><![CDATA[441.排列硬币 二分查找 1-k行求和相当于等差数列求和s=(k+1)k/2 目的是求出来最后一个行的和小于等于n的行。 注意会爆int $T:O(n)$ 1 2 3 4]]></description>
 </item></channel>
 </rss>
