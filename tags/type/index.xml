@@ -4,7 +4,14 @@
         <link>https://sheny1xuan.github.io/tags/type/</link>
         <description>type - 标签 - stonex</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sheny1xuan@163.com (Shen)</managingEditor>
-            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Tue, 12 Oct 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/type/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Thu, 04 Nov 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/type/" rel="self" type="application/rss+xml" /><item>
+    <title>lc124.二叉树中的最大路径和</title>
+    <link>https://sheny1xuan.github.io/lc124/</link>
+    <pubDate>Thu, 04 Nov 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc124/</guid>
+    <description><![CDATA[124.二叉树中的最大路径和 1 2 a b c 最大路径可能有三种情况 $b \rightarrow a \rightarrow c $ $b \rightarrow a \rightarrow a&rsquo;father$ $c \rightarrow a \rightarrow a&rsquo;father$ 该节点向上返回值为该节点能够提供的最大路径 小于零]]></description>
+</item><item>
     <title>lc29.两数相除</title>
     <link>https://sheny1xuan.github.io/lc29/</link>
     <pubDate>Tue, 12 Oct 2021 00:00:00 &#43;0000</pubDate>

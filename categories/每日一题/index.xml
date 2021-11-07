@@ -4,7 +4,14 @@
         <link>https://sheny1xuan.github.io/categories/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</link>
         <description>每日一题 - 分类 - stonex</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sheny1xuan@163.com (Shen)</managingEditor>
-            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Tue, 02 Nov 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/categories/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Thu, 04 Nov 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/categories/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" rel="self" type="application/rss+xml" /><item>
+    <title>lc124.二叉树中的最大路径和</title>
+    <link>https://sheny1xuan.github.io/lc124/</link>
+    <pubDate>Thu, 04 Nov 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc124/</guid>
+    <description><![CDATA[124.二叉树中的最大路径和 1 2 a b c 最大路径可能有三种情况 $b \rightarrow a \rightarrow c $ $b \rightarrow a \rightarrow a&rsquo;father$ $c \rightarrow a \rightarrow a&rsquo;father$ 该节点向上返回值为该节点能够提供的最大路径 小于零]]></description>
+</item><item>
     <title>lc687.最长同值路径</title>
     <link>https://sheny1xuan.github.io/lc687/</link>
     <pubDate>Tue, 02 Nov 2021 00:00:00 &#43;0000</pubDate>
@@ -67,12 +74,5 @@
     <author>作者</author>
     <guid>https://sheny1xuan.github.io/lc38/</guid>
     <description><![CDATA[38.外观数列 字符串模拟 双指针逐位进行模拟。 注意最后结尾的时候，要对最后的字符进行单独处理。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24]]></description>
-</item><item>
-    <title>lc29.两数相除</title>
-    <link>https://sheny1xuan.github.io/lc29/</link>
-    <pubDate>Tue, 12 Oct 2021 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc29/</guid>
-    <description><![CDATA[29.两数相除 二分查找+快速乘 快速乘：根据每一位的权重进行乘法。 对于$y/x$查找第一个$x*?&lt;y$的数。 $T:O(log^2n)$]]></description>
 </item></channel>
 </rss>
