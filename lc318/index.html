@@ -5,32 +5,32 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>lc124.二叉树中的最大路径和 - stonex</title><meta name="Description" content="Welcome to my&#39;blog!"><meta property="og:title" content="lc124.二叉树中的最大路径和" />
-<meta property="og:description" content="124.二叉树中的最大路径和 1 2 a b c 最大路径可能有三种情况 $b \rightarrow a \rightarrow c $ $b \rightarrow a \rightarrow a&rsquo;father$ $c \rightarrow a \rightarrow a&rsquo;father$ 该节点向上返回值为该节点能够提供的最大路径 小于零" />
+        <title>lc318.最大单词长度乘积 - stonex</title><meta name="Description" content="Welcome to my&#39;blog!"><meta property="og:title" content="lc318.最大单词长度乘积" />
+<meta property="og:description" content="318.最大单词长度乘积 位运算哈希 考虑暴力求解，对每一个字符串进行哈希，之后遍历剩余的字符串检查是否重复 $T:O(n^2l)$,$n$是字符" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://sheny1xuan.github.io/lc124/" /><meta property="og:image" content="https://sheny1xuan.github.io/logo.png"/><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-11-04T00:00:00+00:00" />
-<meta property="article:modified_time" content="2021-11-04T00:00:00+00:00" />
+<meta property="og:url" content="https://sheny1xuan.github.io/lc318/" /><meta property="og:image" content="https://sheny1xuan.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-11-17T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-11-17T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://sheny1xuan.github.io/logo.png"/>
 
-<meta name="twitter:title" content="lc124.二叉树中的最大路径和"/>
-<meta name="twitter:description" content="124.二叉树中的最大路径和 1 2 a b c 最大路径可能有三种情况 $b \rightarrow a \rightarrow c $ $b \rightarrow a \rightarrow a&rsquo;father$ $c \rightarrow a \rightarrow a&rsquo;father$ 该节点向上返回值为该节点能够提供的最大路径 小于零"/>
+<meta name="twitter:title" content="lc318.最大单词长度乘积"/>
+<meta name="twitter:description" content="318.最大单词长度乘积 位运算哈希 考虑暴力求解，对每一个字符串进行哈希，之后遍历剩余的字符串检查是否重复 $T:O(n^2l)$,$n$是字符"/>
 <meta name="application-name" content="Stonex">
 <meta name="apple-mobile-web-app-title" content="Stonex"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://sheny1xuan.github.io/lc124/" /><link rel="prev" href="https://sheny1xuan.github.io/lc687/" /><link rel="next" href="https://sheny1xuan.github.io/lc318/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://sheny1xuan.github.io/lc318/" /><link rel="prev" href="https://sheny1xuan.github.io/lc124/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "lc124.二叉树中的最大路径和",
+        "headline": "lc318.最大单词长度乘积",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/sheny1xuan.github.io\/lc124\/"
-        },"genre": "posts","keywords": "type, leetcode, 算法","wordcount":  292 ,
-        "url": "https:\/\/sheny1xuan.github.io\/lc124\/","datePublished": "2021-11-04T00:00:00+00:00","dateModified": "2021-11-04T00:00:00+00:00","publisher": {
+            "@id": "https:\/\/sheny1xuan.github.io\/lc318\/"
+        },"genre": "posts","keywords": "位运算, leetcode, 算法","wordcount":  295 ,
+        "url": "https:\/\/sheny1xuan.github.io\/lc318\/","datePublished": "2021-11-17T00:00:00+00:00","dateModified": "2021-11-17T00:00:00+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
@@ -104,9 +104,9 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animated flipInX">lc124.二叉树中的最大路径和</h1><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animated flipInX">lc318.最大单词长度乘积</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Shen</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/"><i class="far fa-folder fa-fw"></i>每日一题</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-11-04">2021-11-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 292 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-11-17">2021-11-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 295 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -117,49 +117,20 @@
   <ul>
     <li>
       <ul>
-        <li><a href="#124二叉树中的最大路径和httpsleetcode-cncomproblemsbinary-tree-maximum-path-sum"><a href="https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/">124.二叉树中的最大路径和</a></a>
+        <li><a href="#318最大单词长度乘积httpsleetcode-cncomproblemsmaximum-product-of-word-lengths"><a href="https://leetcode-cn.com/problems/maximum-product-of-word-lengths/">318.最大单词长度乘积</a></a>
           <ul>
-            <li><a href="#类似题目">类似题目</a></li>
+            <li><a href="#位运算哈希">位运算哈希</a></li>
           </ul>
         </li>
       </ul>
     </li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h2 id="124二叉树中的最大路径和httpsleetcode-cncomproblemsbinary-tree-maximum-path-sum"><a href="https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/" target="_blank" rel="noopener noreffer">124.二叉树中的最大路径和</a></h2>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">    a
-b       c
-</code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>最大路径可能有三种情况
+            </div><div class="content" id="content"><h2 id="318最大单词长度乘积httpsleetcode-cncomproblemsmaximum-product-of-word-lengths"><a href="https://leetcode-cn.com/problems/maximum-product-of-word-lengths/" target="_blank" rel="noopener noreffer">318.最大单词长度乘积</a></h2>
+<h3 id="位运算哈希">位运算哈希</h3>
 <ul>
-<li>$b \rightarrow a \rightarrow c $</li>
-<li>$b \rightarrow a \rightarrow a&rsquo;father$</li>
-<li>$c \rightarrow a \rightarrow a&rsquo;father$</li>
-</ul>
-</li>
-<li>该节点向上返回值为该节点能够提供的最大路径
-<ul>
-<li>小于零时，舍弃该结点的儿子结点。</li>
-<li>如果以该节点作为最优路径根节点
-<ul>
-<li>$path = left + right + root -&gt; val$</li>
-</ul>
-</li>
-<li>如果该节点作为左右子树的结点
-<ul>
-<li>$return \ max(left, right) + root -&gt; val$</li>
-</ul>
-</li>
-</ul>
-</li>
+<li>考虑暴力求解，对每一个字符串进行哈希，之后遍历剩余的字符串检查是否重复 $T:O(n^2l)$,$n$是字符串的个数,$l$是每个字符串的平均长度，不能通过。</li>
+<li>提前对每个字符串进行哈希，利用26位存储每个字符哈希的结果。$T:O(26*n^2 + nl)$</li>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -195,56 +166,47 @@ b       c
 </span><span class="lnt">30
 </span><span class="lnt">31
 </span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cm">/**
-</span><span class="cm"> * Definition for a binary tree node.
-</span><span class="cm"> * struct TreeNode {
-</span><span class="cm"> *     int val;
-</span><span class="cm"> *     TreeNode *left;
-</span><span class="cm"> *     TreeNode *right;
-</span><span class="cm"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
-</span><span class="cm"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-</span><span class="cm"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-</span><span class="cm"> * };
-</span><span class="cm"> */</span>
-<span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
-    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">INT_MIN</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="nf">maxPathSum</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
-        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="c1">// return root substree maxval
-</span><span class="c1"></span>    <span class="kt">int</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">maxProduct</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">words</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">words</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">f</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">c</span><span class="p">:</span> <span class="n">words</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">{</span>
+                <span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">|=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">c</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="p">);</span>
+            <span class="p">}</span>
         <span class="p">}</span>
 
-        <span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
-        <span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="kt">bool</span> <span class="n">ok</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+                <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="mi">26</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">k</span><span class="p">)),</span> <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">k</span><span class="p">));</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">y</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="n">ok</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+                        <span class="k">break</span><span class="p">;</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
 
-        <span class="c1">// subtree value
-</span><span class="c1"></span>        <span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">l</span> <span class="o">+</span> <span class="n">r</span> <span class="o">+</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">,</span> <span class="n">ans</span><span class="p">);</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">ok</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">words</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">size</span><span class="p">()</span> <span class="o">*</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">words</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">size</span><span class="p">());</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
 
-        <span class="k">return</span> <span class="n">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="o">+</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">};</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="类似题目">类似题目</h3>
-<ul>
-<li><a href="https://leetcode-cn.com/problems/longest-univalue-path/" target="_blank" rel="noopener noreffer">687. 最长同值路径</a></li>
-<li><a href="https://leetcode-cn.com/problems/diameter-of-binary-tree/" target="_blank" rel="noopener noreffer">543. 二叉树的直径</a></li>
-</ul>
-</div><div class="post-footer" id="post-footer">
+</div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2021-11-04</span>
+                <span>更新于 2021-11-17</span>
             </div>
             <div class="post-info-license"></div>
         </div>
@@ -257,14 +219,13 @@ b       c
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/type/">type</a>,&nbsp;<a href="/tags/leetcode/">leetcode</a>,&nbsp;<a href="/tags/%E7%AE%97%E6%B3%95/">算法</a></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/">位运算</a>,&nbsp;<a href="/tags/leetcode/">leetcode</a>,&nbsp;<a href="/tags/%E7%AE%97%E6%B3%95/">算法</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/lc687/" class="prev" rel="prev" title="lc687.最长同值路径"><i class="fas fa-angle-left fa-fw"></i>lc687.最长同值路径</a>
-            <a href="/lc318/" class="next" rel="next" title="lc318.最大单词长度乘积">lc318.最大单词长度乘积<i class="fas fa-angle-right fa-fw"></i></a></div>
+    <div class="post-nav"><a href="/lc124/" class="prev" rel="prev" title="lc124.二叉树中的最大路径和"><i class="fas fa-angle-left fa-fw"></i>lc124.二叉树中的最大路径和</a></div>
 </div>
 
 

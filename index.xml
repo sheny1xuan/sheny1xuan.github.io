@@ -4,9 +4,16 @@
         <link>https://sheny1xuan.github.io/</link>
         <description>Welcome to my&#39;blog!</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sheny1xuan@163.com (Shen)</managingEditor>
-            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Thu, 04 Nov 2021 00:00:00 &#43;0000</lastBuildDate>
+            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Wed, 17 Nov 2021 00:00:00 &#43;0000</lastBuildDate>
             <atom:link href="https://sheny1xuan.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>lc318.最大单词长度乘积</title>
+    <link>https://sheny1xuan.github.io/lc318/</link>
+    <pubDate>Wed, 17 Nov 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc318/</guid>
+    <description><![CDATA[318.最大单词长度乘积 位运算哈希 考虑暴力求解，对每一个字符串进行哈希，之后遍历剩余的字符串检查是否重复 $T:O(n^2l)$,$n$是字符]]></description>
+</item><item>
     <title>lc124.二叉树中的最大路径和</title>
     <link>https://sheny1xuan.github.io/lc124/</link>
     <pubDate>Thu, 04 Nov 2021 00:00:00 &#43;0000</pubDate>
@@ -69,12 +76,5 @@
     <author>作者</author>
     <guid>https://sheny1xuan.github.io/lc453/</guid>
     <description><![CDATA[453.最小操作次数使数组元素相等 使其他每个元素就是相当于对一个元素减1 操作到最后所有元素应该等于最小的元素。 1 2 3 4 5 6 7 8 9 10 11 12 13 class Solution]]></description>
-</item><item>
-    <title>lc211.添加与搜索单词 - 数据结构设计</title>
-    <link>https://sheny1xuan.github.io/lc211/</link>
-    <pubDate>Tue, 19 Oct 2021 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc211/</guid>
-    <description><![CDATA[211.添加与搜索单词 - 数据结构设计 Trie的通配符匹配 需要新建一个TrieNode表示Trie树的结点。 对于通配符.需要遍历所有的子树，所]]></description>
 </item></channel>
 </rss>

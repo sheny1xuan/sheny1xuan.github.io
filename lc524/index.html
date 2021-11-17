@@ -6,7 +6,7 @@
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
         <title>lc524.通过删除字母匹配到字典里最长单词 - stonex</title><meta name="Description" content="Welcome to my&#39;blog!"><meta property="og:title" content="lc524.通过删除字母匹配到字典里最长单词" />
-<meta property="og:description" content="524. 通过删除字母匹配到字典里最长单词 排序&#43;双指针 双指针：判断一个字符串是不是另一个字符串的子串采用双指针,$T:O(n)$ 排序：首先按照字符串" />
+<meta property="og:description" content="524. 通过删除字母匹配到字典里最长单词 排序&#43;双指针 双指针：判断一个字符串是不是另一个字符串的子串采用双指针,$T:O(n&#43;m)$ 如w是s的子序列" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://sheny1xuan.github.io/lc524/" /><meta property="og:image" content="https://sheny1xuan.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-09-14T00:00:00+00:00" />
@@ -16,7 +16,7 @@
 <meta name="twitter:image" content="https://sheny1xuan.github.io/logo.png"/>
 
 <meta name="twitter:title" content="lc524.通过删除字母匹配到字典里最长单词"/>
-<meta name="twitter:description" content="524. 通过删除字母匹配到字典里最长单词 排序&#43;双指针 双指针：判断一个字符串是不是另一个字符串的子串采用双指针,$T:O(n)$ 排序：首先按照字符串"/>
+<meta name="twitter:description" content="524. 通过删除字母匹配到字典里最长单词 排序&#43;双指针 双指针：判断一个字符串是不是另一个字符串的子串采用双指针,$T:O(n&#43;m)$ 如w是s的子序列"/>
 <meta name="application-name" content="Stonex">
 <meta name="apple-mobile-web-app-title" content="Stonex"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/sheny1xuan.github.io\/lc524\/"
-        },"genre": "posts","keywords": "字符串, leetcode, 算法, 双指针","wordcount":  288 ,
+        },"genre": "posts","keywords": "字符串, leetcode, 算法, 双指针","wordcount":  734 ,
         "url": "https:\/\/sheny1xuan.github.io\/lc524\/","datePublished": "2021-09-14T00:00:00+00:00","dateModified": "2021-09-14T00:00:00+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -106,8 +106,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">lc524.通过删除字母匹配到字典里最长单词</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Shen</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/"><i class="far fa-folder fa-fw"></i>每日一题</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-09-14">2021-09-14</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 288 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-09-14">2021-09-14</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 734 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -120,6 +120,7 @@
         <li><a href="#524-通过删除字母匹配到字典里最长单词httpsleetcode-cncomproblemslongest-word-in-dictionary-through-deleting"><a href="https://leetcode-cn.com/problems/longest-word-in-dictionary-through-deleting/">524. 通过删除字母匹配到字典里最长单词</a></a>
           <ul>
             <li><a href="#排序双指针">排序+双指针</a></li>
+            <li><a href="#状态机">状态机</a></li>
           </ul>
         </li>
       </ul>
@@ -129,15 +130,10 @@
             </div><div class="content" id="content"><h2 id="524-通过删除字母匹配到字典里最长单词httpsleetcode-cncomproblemslongest-word-in-dictionary-through-deleting"><a href="https://leetcode-cn.com/problems/longest-word-in-dictionary-through-deleting/" target="_blank" rel="noopener noreffer">524. 通过删除字母匹配到字典里最长单词</a></h2>
 <h3 id="排序双指针">排序+双指针</h3>
 <ul>
-<li>
-<p>双指针：判断一个字符串是不是另一个字符串的子串采用双指针,$T:O(n)$</p>
-</li>
-<li>
-<p>排序：首先按照字符串长度进行排序，在长度相同的情况下，按照字符串的首字母字典序进行排序。</p>
-</li>
-<li>
-<p>$T:O(mlogm+m*n)$，$m$是字符串数组的长度，$n$是单个字符串的平均长度。排序时间复杂度$mlogm$，查询m个字符串是不是该串的子串$O(mn)$.</p>
-</li>
+<li>双指针：判断一个字符串是不是另一个字符串的子串采用双指针,$T:O(n+m)$</li>
+<li>如<code>w</code>是<code>s</code>的子序列， 那么将<code>w</code>中每个字母按顺序匹配到<code>w</code>中对应的最左边的字母。</li>
+<li>排序：首先按照字符串长度进行排序，在长度相同的情况下，按照字符串的首字母字典序进行排序。</li>
+<li>$T:O(klogk+(m+n)*k)$，$k$是字符串数组的长度，$n$是单个字符串的平均长度，<code>m</code>是原串的长度。排序时间复杂度$klogk$，查询k个字符串是不是该串的子串$O(k(n+m))$.</li>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -197,6 +193,114 @@
             <span class="p">}</span>
             <span class="k">if</span><span class="p">(</span><span class="n">j</span> <span class="o">==</span> <span class="n">word</span><span class="p">.</span><span class="n">size</span><span class="p">()){</span>
                 <span class="k">return</span> <span class="n">word</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="状态机">状态机</h3>
+<ul>
+<li>预处理目标字符串，使得匹配每个字符串的时间复杂度为$O(n)$</li>
+<li><code>next[i][j]</code>表示在当前下标<code>i</code>的位置，最靠近该位置的字母<code>j</code>出现的位置。</li>
+<li>如<code>#leetcode</code>,<code>next[0][l]=1, next[0][e]=2,next[0][t]=4</code>。</li>
+<li>通过对每个待匹配的字符串进行进行状态转移，如果没有对应的状态，则说明不存在该子串。</li>
+<li>$T:O(n*k + klogk + m * 26)$</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="k">static</span> <span class="kt">bool</span> <span class="n">cmp</span><span class="p">(</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">,</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">!=</span> <span class="n">y</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">x</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">y</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">string</span> <span class="nf">findLongestWord</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">dictionary</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="s">&#34;#&#34;</span> <span class="o">+</span> <span class="n">s</span><span class="p">;</span>
+
+        <span class="n">sort</span><span class="p">(</span><span class="n">dictionary</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">dictionary</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">cmp</span><span class="p">);</span>
+
+        <span class="c1">// f[i][j], 下标i的最近的右边字母j的位置
+</span><span class="c1"></span>        <span class="k">auto</span> <span class="n">f</span> <span class="o">=</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">26</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">));</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">26</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">f</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
+            <span class="p">}</span>
+            <span class="c1">// 除了字母i，其余字母都可以从更靠后的字母中得到
+</span><span class="c1"></span>            <span class="n">f</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">w</span><span class="p">:</span> <span class="n">dictionary</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="kt">bool</span> <span class="n">ok</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+
+            <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">c</span><span class="p">:</span> <span class="n">w</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">idx</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">c</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="p">];</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="n">idx</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">ok</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+                    <span class="k">break</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">ok</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="n">w</span><span class="p">;</span>
             <span class="p">}</span>
         <span class="p">}</span>
 
