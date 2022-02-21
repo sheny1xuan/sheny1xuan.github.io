@@ -3,12 +3,16 @@
 
 
 
-## Valgrind使用
+# Valgrind使用
 
-### 安装Valgrind
+## 安装Valgrind
 
 + `sudo apt-get install valgrind`
 + 通过源码安装
+
+
+
+## Memcheck
 
 ### 通常使用
 
@@ -59,11 +63,18 @@ Leak Case legend:
 + 主要有两种Directly lost和Indirectly lost，主要是情况3和情况4。
 + Possible lost主要针对后面几种情况。
 
+## callgrind
 
+### profile
+
++ `valgrind --tool=callgrind --callgrind-out-file=callgrind.out ./prog `之后会生成相应的profile文件`callgrind.out.<pid>`
++ 之后可以通过`kcachegrind `可视化查看profile的结果`kcachegrind callgrind.out.*`。
++ 也可以通过`gprof2dot.py`脚本生成svg可视化图片`./gprof2dot.py -f callgrind callgrind.out.x | dot -Tsvg -o output.svg`。
 
 ### 参考
 
 + https://zhuanlan.zhihu.com/p/92074597?utm_source=wechat_session&utm_medium=social&utm_oi=792314251669823488
++ https://stackoverflow.com/questions/375913/how-can-i-profile-c-code-running-on-linux
 
 
 

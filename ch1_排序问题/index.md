@@ -11,8 +11,6 @@
 
 ![img](https://picture-table.oss-cn-beijing.aliyuncs.com/img/849589-20180402133438219-1946132192.png)
 
-![image-20210428205202716](../pic/image-20210428205202716.png)
-
 ## 快速排序
 
 + 基于分治思想
