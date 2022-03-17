@@ -28,19 +28,26 @@
     <guid>https://sheny1xuan.github.io/lc687/</guid>
     <description><![CDATA[687.最长同值路径 如果是普通的图，那么这个题目就是岛屿问题(DFS)，最大的连通图。 但是由于有限制是单条路径，所以要返回左右子树的路径最大]]></description>
 </item><item>
-    <title>top使用</title>
-    <link>https://sheny1xuan.github.io/top/</link>
-    <pubDate>Sun, 31 Oct 2021 00:00:00 &#43;0000</pubDate>
+    <title>lc543.二叉树的直径</title>
+    <link>https://sheny1xuan.github.io/lc543/</link>
+    <pubDate>Mon, 01 Nov 2021 00:00:00 &#43;0000</pubDate>
     <author>作者</author>
-    <guid>https://sheny1xuan.github.io/top/</guid>
-    <description><![CDATA[Top使用 安装Top 默认系统安装 也可以通过源码安装procps-ng获取最新版top. 通常使用 top进入top界面 默认按照cpu使用率从大到]]></description>
+    <guid>https://sheny1xuan.github.io/lc543/</guid>
+    <description><![CDATA[543.二叉树的直径 某个结点二叉树的高度等于左右子树中最高的高度+1。 二叉树最大直径，可以在计算高度过程中计算每个结点左右子树的最大路径长度]]></description>
+</item><item>
+    <title>Python3_Module</title>
+    <link>https://sheny1xuan.github.io/python3_module/</link>
+    <pubDate>Mon, 01 Nov 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/python3_module/</guid>
+    <description><![CDATA[Python模块的位置 查看python模块的位置 python3 -m site 或者在python3命令行中利用sys包查看路径 1 2 3 import sys print(sys.path) dist-packages]]></description>
 </item><item>
     <title>Valgrind使用</title>
     <link>https://sheny1xuan.github.io/valgrind/</link>
     <pubDate>Fri, 29 Oct 2021 00:00:00 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://sheny1xuan.github.io/valgrind/</guid>
-    <description><![CDATA[Valgrind使用 安装Valgrind sudo apt-get install valgrind 通过源码安装 Memcheck 通常使用 valgrid --log-file=output.log --tool=memcheck --leak-check=full --show-leak-kinds=all your_binary_file --log-file设置输出信息路径 --leak-chec]]></description>
+    <description><![CDATA[安装Valgrind sudo apt-get install valgrind Memcheck 通常使用 valgrid --log-file=output.log --tool=memcheck --leak-check=full --show-leak-kinds=all your_binary_file --log-file设置输出信息路径 --leak-check=full检测所有的内存使用问]]></description>
 </item><item>
     <title>lc869.重新排序得到 2 的幂</title>
     <link>https://sheny1xuan.github.io/lc869/</link>
@@ -69,12 +76,5 @@
     <author>作者</author>
     <guid>https://sheny1xuan.github.io/lc1775/</guid>
     <description><![CDATA[1755.最接近目标值的子序列和 折半搜索 数据范围比较小，但是没有到小到可以直接搜索的地步。 可以将整个数据分成两部分分别进行搜索，最后进行合并]]></description>
-</item><item>
-    <title>lc453.最小操作次数使数组元素相等</title>
-    <link>https://sheny1xuan.github.io/lc453/</link>
-    <pubDate>Wed, 20 Oct 2021 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc453/</guid>
-    <description><![CDATA[453.最小操作次数使数组元素相等 使其他每个元素就是相当于对一个元素减1 操作到最后所有元素应该等于最小的元素。 1 2 3 4 5 6 7 8 9 10 11 12 13 class Solution]]></description>
 </item></channel>
 </rss>

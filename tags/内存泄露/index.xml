@@ -10,6 +10,6 @@
     <pubDate>Fri, 29 Oct 2021 00:00:00 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://sheny1xuan.github.io/valgrind/</guid>
-    <description><![CDATA[Valgrind使用 安装Valgrind sudo apt-get install valgrind 通过源码安装 Memcheck 通常使用 valgrid --log-file=output.log --tool=memcheck --leak-check=full --show-leak-kinds=all your_binary_file --log-file设置输出信息路径 --leak-chec]]></description>
+    <description><![CDATA[安装Valgrind sudo apt-get install valgrind Memcheck 通常使用 valgrid --log-file=output.log --tool=memcheck --leak-check=full --show-leak-kinds=all your_binary_file --log-file设置输出信息路径 --leak-check=full检测所有的内存使用问]]></description>
 </item></channel>
 </rss>

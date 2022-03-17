@@ -1,10 +1,10 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>Python - 标签 - stonex</title>
-        <link>https://sheny1xuan.github.io/tags/python/</link>
-        <description>Python - 标签 - stonex</description>
+        <title>Python - 分类 - stonex</title>
+        <link>https://sheny1xuan.github.io/categories/python/</link>
+        <description>Python - 分类 - stonex</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sheny1xuan@163.com (Shen)</managingEditor>
-            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Mon, 01 Nov 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/python/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Mon, 01 Nov 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/categories/python/" rel="self" type="application/rss+xml" /><item>
     <title>Python3_Module</title>
     <link>https://sheny1xuan.github.io/python3_module/</link>
     <pubDate>Mon, 01 Nov 2021 00:00:00 &#43;0000</pubDate>

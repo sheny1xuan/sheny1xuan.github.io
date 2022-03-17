@@ -11,12 +11,5 @@
     <author>作者</author>
     <guid>https://sheny1xuan.github.io/moderncpp-%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8/</guid>
     <description><![CDATA[右值引用：延长临时变量的生命周期，解决将亡值的问题 认识右值引用 考虑如下一种情况，下面这样情况，由于x是一个临时变量，在代码块结束后，因为该变]]></description>
-</item><item>
-    <title>DesignPattern-迭代器</title>
-    <link>https://sheny1xuan.github.io/designpattern-%E8%BF%AD%E4%BB%A3%E5%99%A8/</link>
-    <pubDate>Tue, 05 Oct 2021 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://sheny1xuan.github.io/designpattern-%E8%BF%AD%E4%BB%A3%E5%99%A8/</guid>
-    <description><![CDATA[迭代器模式 对于一个容器提供一种方法顺序访问容器中的各个元素，而不必暴露该对象的内部表示。 常常使用的方法有:next()下一个元素，hasNe]]></description>
 </item></channel>
 </rss>

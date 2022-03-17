@@ -196,8 +196,7 @@ typename remove_reference<T>::type&& move(T&& t) // 万能引用，可以引用�
 ### 参考资料:
 
 + modern-cpp-tutorial
-
-+ [右值引用返回]:https://stackoverflow.com/questions/4986673/c11-rvalues-and-move-semantics-confusion-return-statement?utm_source=wechat_session&utm_medium=social&utm_oi=792314251669823488
++ https://stackoverflow.com/questions/4986673/c11-rvalues-and-move-semantics-confusion-return-statement?utm_source=wechat_session&utm_medium=social&utm_oi=792314251669823488
 
 
 + [C++高阶知识：深入分析移动构造函数及其原理](http://avdancedu.com/a39d51f9/)

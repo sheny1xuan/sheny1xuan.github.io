@@ -14,7 +14,7 @@
 </item><item>
     <title>lc543.二叉树的直径</title>
     <link>https://sheny1xuan.github.io/lc543/</link>
-    <pubDate>Mon, 01 Jan 0001 00:00:00 &#43;0000</pubDate>
+    <pubDate>Mon, 01 Nov 2021 00:00:00 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://sheny1xuan.github.io/lc543/</guid>
     <description><![CDATA[543.二叉树的直径 某个结点二叉树的高度等于左右子树中最高的高度+1。 二叉树最大直径，可以在计算高度过程中计算每个结点左右子树的最大路径长度]]></description>

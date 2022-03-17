@@ -6,7 +6,7 @@
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
         <title>Valgrind使用 - stonex</title><meta name="Description" content="Welcome to my&#39;blog!"><meta property="og:title" content="Valgrind使用" />
-<meta property="og:description" content="Valgrind使用 安装Valgrind sudo apt-get install valgrind 通过源码安装 Memcheck 通常使用 valgrid --log-file=output.log --tool=memcheck --leak-check=full --show-leak-kinds=all your_binary_file --log-file设置输出信息路径 --leak-chec" />
+<meta property="og:description" content="安装Valgrind sudo apt-get install valgrind Memcheck 通常使用 valgrid --log-file=output.log --tool=memcheck --leak-check=full --show-leak-kinds=all your_binary_file --log-file设置输出信息路径 --leak-check=full检测所有的内存使用问" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://sheny1xuan.github.io/valgrind/" /><meta property="og:image" content="https://sheny1xuan.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-10-29T00:00:00+00:00" />
@@ -16,11 +16,11 @@
 <meta name="twitter:image" content="https://sheny1xuan.github.io/logo.png"/>
 
 <meta name="twitter:title" content="Valgrind使用"/>
-<meta name="twitter:description" content="Valgrind使用 安装Valgrind sudo apt-get install valgrind 通过源码安装 Memcheck 通常使用 valgrid --log-file=output.log --tool=memcheck --leak-check=full --show-leak-kinds=all your_binary_file --log-file设置输出信息路径 --leak-chec"/>
+<meta name="twitter:description" content="安装Valgrind sudo apt-get install valgrind Memcheck 通常使用 valgrid --log-file=output.log --tool=memcheck --leak-check=full --show-leak-kinds=all your_binary_file --log-file设置输出信息路径 --leak-check=full检测所有的内存使用问"/>
 <meta name="application-name" content="Stonex">
 <meta name="apple-mobile-web-app-title" content="Stonex"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://sheny1xuan.github.io/valgrind/" /><link rel="prev" href="https://sheny1xuan.github.io/lc869/" /><link rel="next" href="https://sheny1xuan.github.io/top/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://sheny1xuan.github.io/valgrind/" /><link rel="prev" href="https://sheny1xuan.github.io/lc869/" /><link rel="next" href="https://sheny1xuan.github.io/python3_module/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/sheny1xuan.github.io\/valgrind\/"
-        },"genre": "posts","keywords": "valgrind, 内存泄露","wordcount":  603 ,
+        },"genre": "posts","keywords": "valgrind, 内存泄露","wordcount":  1004 ,
         "url": "https:\/\/sheny1xuan.github.io\/valgrind\/","datePublished": "2021-10-29T00:00:00+00:00","dateModified": "2021-10-29T00:00:00+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -106,8 +106,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Valgrind使用</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Shen</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/tools/"><i class="far fa-folder fa-fw"></i>tools</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-10-29">2021-10-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 603 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-10-29">2021-10-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1004 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -115,19 +115,28 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#valgrind使用">Valgrind使用</a>
+    <li>
       <ul>
-        <li><a href="#安装valgrind">安装Valgrind</a></li>
-        <li><a href="#memcheck">Memcheck</a>
+        <li>
           <ul>
-            <li><a href="#通常使用">通常使用</a></li>
-            <li><a href="#内存使用错误">内存使用错误</a></li>
-            <li><a href="#内存泄露的类型">内存泄露的类型</a></li>
-          </ul>
-        </li>
-        <li><a href="#callgrind">callgrind</a>
-          <ul>
-            <li><a href="#profile">profile</a></li>
+            <li><a href="#安装valgrind">安装Valgrind</a></li>
+            <li><a href="#memcheck">Memcheck</a>
+              <ul>
+                <li><a href="#通常使用">通常使用</a></li>
+              </ul>
+            </li>
+            <li><a href="#内存使用错误">内存使用错误</a>
+              <ul>
+                <li><a href="#内存泄露的类型">内存泄露的类型</a></li>
+                <li><a href="#indirectly-lost">Indirectly lost</a></li>
+                <li><a href="#interior-pointer">interior-pointer</a></li>
+              </ul>
+            </li>
+            <li><a href="#callgrind">callgrind</a>
+              <ul>
+                <li><a href="#profile">profile</a></li>
+              </ul>
+            </li>
             <li><a href="#参考">参考</a></li>
           </ul>
         </li>
@@ -135,14 +144,12 @@
     </li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h1 id="valgrind使用">Valgrind使用</h1>
-<h2 id="安装valgrind">安装Valgrind</h2>
+            </div><div class="content" id="content"><h3 id="安装valgrind">安装Valgrind</h3>
 <ul>
 <li><code>sudo apt-get install valgrind</code></li>
-<li>通过源码安装</li>
 </ul>
-<h2 id="memcheck">Memcheck</h2>
-<h3 id="通常使用">通常使用</h3>
+<h3 id="memcheck">Memcheck</h3>
+<h4 id="通常使用">通常使用</h4>
 <ul>
 <li><code>valgrid --log-file=output.log --tool=memcheck --leak-check=full --show-leak-kinds=all your_binary_file</code></li>
 <li><code>--log-file</code>设置输出信息路径</li>
@@ -161,7 +168,7 @@
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Mismatched free() / delete / delete []
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="内存泄露的类型">内存泄露的类型</h3>
+</div><h4 id="内存泄露的类型">内存泄露的类型</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -224,8 +231,153 @@
 <li>主要有两种Directly lost和Indirectly lost，主要是情况3和情况4。</li>
 <li>Possible lost主要针对后面几种情况。</li>
 </ul>
-<h2 id="callgrind">callgrind</h2>
-<h3 id="profile">profile</h3>
+<h4 id="indirectly-lost">Indirectly lost</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;malloc.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdint.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">void</span> <span class="o">*</span><span class="n">RRR</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="o">*</span><span class="n">AAA</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="o">*</span><span class="n">BBB</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">RRR</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">AAA</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">BBB</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">*</span><span class="p">(</span><span class="kt">uint64_t</span><span class="o">*</span><span class="p">)</span><span class="n">RRR</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uint64_t</span><span class="p">)(</span><span class="kt">uint64_t</span><span class="o">*</span><span class="p">)</span><span class="n">AAA</span><span class="p">;</span> <span class="c1">// 将RRR指向的块指向AAA指向的块
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="o">*</span><span class="p">(</span><span class="kt">uint64_t</span><span class="o">*</span><span class="p">)</span><span class="n">AAA</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uint64_t</span><span class="p">)(</span><span class="kt">uint64_t</span><span class="o">*</span><span class="p">)</span><span class="n">BBB</span><span class="p">;</span> <span class="c1">// 将AAA指向的块指向BBB指向的块
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">AAA</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">BBB</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">*</span><span class="p">(</span><span class="kt">uint64_t</span><span class="o">*</span><span class="p">)</span><span class="n">RRR</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6007</span><span class="o">==</span> <span class="n">HEAP</span> <span class="nl">SUMMARY</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6007</span><span class="o">==</span>     <span class="n">in</span> <span class="n">use</span> <span class="n">at</span> <span class="nl">exit</span><span class="p">:</span> <span class="mi">24</span> <span class="n">bytes</span> <span class="n">in</span> <span class="mi">3</span> <span class="n">blocks</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6007</span><span class="o">==</span>   <span class="n">total</span> <span class="n">heap</span> <span class="nl">usage</span><span class="p">:</span> <span class="mi">3</span> <span class="n">allocs</span><span class="p">,</span> <span class="mi">0</span> <span class="n">frees</span><span class="p">,</span> <span class="mi">24</span> <span class="n">bytes</span> <span class="n">allocated</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6007</span><span class="o">==</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6007</span><span class="o">==</span> <span class="n">LEAK</span> <span class="nl">SUMMARY</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6007</span><span class="o">==</span>    <span class="n">definitely</span> <span class="nl">lost</span><span class="p">:</span> <span class="mi">8</span> <span class="n">bytes</span> <span class="n">in</span> <span class="mi">1</span> <span class="n">blocks</span>  <span class="p">(</span><span class="n">AAA</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6007</span><span class="o">==</span>    <span class="n">indirectly</span> <span class="nl">lost</span><span class="p">:</span> <span class="mi">8</span> <span class="n">bytes</span> <span class="n">in</span> <span class="mi">1</span> <span class="n">blocks</span>  <span class="p">(</span><span class="n">BBB</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6007</span><span class="o">==</span>      <span class="n">possibly</span> <span class="nl">lost</span><span class="p">:</span> <span class="mi">0</span> <span class="n">bytes</span> <span class="n">in</span> <span class="mi">0</span> <span class="n">blocks</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6007</span><span class="o">==</span>    <span class="n">still</span> <span class="nl">reachable</span><span class="p">:</span> <span class="mi">8</span> <span class="n">bytes</span> <span class="n">in</span> <span class="mi">1</span> <span class="n">blocks</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6007</span><span class="o">==</span>         <span class="nl">suppressed</span><span class="p">:</span> <span class="mi">0</span> <span class="n">bytes</span> <span class="n">in</span> <span class="mi">0</span> <span class="n">blocks</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6007</span><span class="o">==</span> <span class="n">Rerun</span> <span class="n">with</span> <span class="o">--</span><span class="n">leak</span><span class="o">-</span><span class="n">check</span><span class="o">=</span><span class="n">full</span> <span class="n">to</span> <span class="n">see</span> <span class="n">details</span> <span class="n">of</span> <span class="n">leaked</span> <span class="n">memory</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6007</span><span class="o">==</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6007</span><span class="o">==</span> <span class="n">For</span> <span class="n">counts</span> <span class="n">of</span> <span class="n">detected</span> <span class="n">and</span> <span class="n">suppressed</span> <span class="n">errors</span><span class="p">,</span> <span class="n">rerun</span> <span class="nl">with</span><span class="p">:</span> <span class="o">-</span><span class="n">v</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6007</span><span class="o">==</span> <span class="n">ERROR</span> <span class="nl">SUMMARY</span><span class="p">:</span> <span class="mi">0</span> <span class="n">errors</span> <span class="n">from</span> <span class="mi">0</span> <span class="n">contexts</span> <span class="p">(</span><span class="nl">suppressed</span><span class="p">:</span> <span class="mi">0</span> <span class="n">from</span> <span class="mi">0</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="interior-pointer">interior-pointer</h4>
+<ul>
+<li>指针指向了申请的块，但是并不在该块开始的地方，会产生possible loss。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;malloc.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdint.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">void</span> <span class="o">*</span><span class="n">RRR</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="o">*</span><span class="n">AAA</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="o">*</span><span class="n">BBB</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">RRR</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">*</span><span class="p">(</span><span class="kt">uint64_t</span><span class="o">*</span><span class="p">)</span><span class="n">RRR</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">RRR</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">RRR</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6429</span><span class="o">==</span> <span class="n">HEAP</span> <span class="nl">SUMMARY</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6429</span><span class="o">==</span>     <span class="n">in</span> <span class="n">use</span> <span class="n">at</span> <span class="nl">exit</span><span class="p">:</span> <span class="mi">8</span> <span class="n">bytes</span> <span class="n">in</span> <span class="mi">1</span> <span class="n">blocks</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6429</span><span class="o">==</span>   <span class="n">total</span> <span class="n">heap</span> <span class="nl">usage</span><span class="p">:</span> <span class="mi">1</span> <span class="n">allocs</span><span class="p">,</span> <span class="mi">0</span> <span class="n">frees</span><span class="p">,</span> <span class="mi">8</span> <span class="n">bytes</span> <span class="n">allocated</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6429</span><span class="o">==</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6429</span><span class="o">==</span> <span class="n">LEAK</span> <span class="nl">SUMMARY</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6429</span><span class="o">==</span>    <span class="n">definitely</span> <span class="nl">lost</span><span class="p">:</span> <span class="mi">0</span> <span class="n">bytes</span> <span class="n">in</span> <span class="mi">0</span> <span class="n">blocks</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6429</span><span class="o">==</span>    <span class="n">indirectly</span> <span class="nl">lost</span><span class="p">:</span> <span class="mi">0</span> <span class="n">bytes</span> <span class="n">in</span> <span class="mi">0</span> <span class="n">blocks</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6429</span><span class="o">==</span>      <span class="n">possibly</span> <span class="nl">lost</span><span class="p">:</span> <span class="mi">8</span> <span class="n">bytes</span> <span class="n">in</span> <span class="mi">1</span> <span class="n">blocks</span>  <span class="p">(</span><span class="n">pointer</span> <span class="n">not</span> <span class="n">in</span> <span class="n">block</span> <span class="n">begin</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6429</span><span class="o">==</span>    <span class="n">still</span> <span class="nl">reachable</span><span class="p">:</span> <span class="mi">0</span> <span class="n">bytes</span> <span class="n">in</span> <span class="mi">0</span> <span class="n">blocks</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6429</span><span class="o">==</span>         <span class="nl">suppressed</span><span class="p">:</span> <span class="mi">0</span> <span class="n">bytes</span> <span class="n">in</span> <span class="mi">0</span> <span class="n">blocks</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6429</span><span class="o">==</span> <span class="n">Rerun</span> <span class="n">with</span> <span class="o">--</span><span class="n">leak</span><span class="o">-</span><span class="n">check</span><span class="o">=</span><span class="n">full</span> <span class="n">to</span> <span class="n">see</span> <span class="n">details</span> <span class="n">of</span> <span class="n">leaked</span> <span class="n">memory</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6429</span><span class="o">==</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6429</span><span class="o">==</span> <span class="n">For</span> <span class="n">counts</span> <span class="n">of</span> <span class="n">detected</span> <span class="n">and</span> <span class="n">suppressed</span> <span class="n">errors</span><span class="p">,</span> <span class="n">rerun</span> <span class="nl">with</span><span class="p">:</span> <span class="o">-</span><span class="n">v</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6429</span><span class="o">==</span> <span class="n">ERROR</span> <span class="nl">SUMMARY</span><span class="p">:</span> <span class="mi">0</span> <span class="n">errors</span> <span class="n">from</span> <span class="mi">0</span> <span class="n">contexts</span> <span class="p">(</span><span class="nl">suppressed</span><span class="p">:</span> <span class="mi">0</span> <span class="n">from</span> <span class="mi">0</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="callgrind">callgrind</h3>
+<h4 id="profile">profile</h4>
 <ul>
 <li><code>valgrind --tool=callgrind --callgrind-out-file=callgrind.out ./prog </code>之后会生成相应的profile文件<code>callgrind.out.&lt;pid&gt;</code></li>
 <li>之后可以通过<code>kcachegrind </code>可视化查看profile的结果<code>kcachegrind callgrind.out.*</code>。</li>
@@ -235,6 +387,7 @@
 <ul>
 <li><a href="https://zhuanlan.zhihu.com/p/92074597?utm_source=wechat_session&amp;utm_medium=social&amp;utm_oi=792314251669823488" target="_blank" rel="noopener noreffer">https://zhuanlan.zhihu.com/p/92074597?utm_source=wechat_session&utm_medium=social&utm_oi=792314251669823488</a></li>
 <li><a href="https://stackoverflow.com/questions/375913/how-can-i-profile-c-code-running-on-linux" target="_blank" rel="noopener noreffer">https://stackoverflow.com/questions/375913/how-can-i-profile-c-code-running-on-linux</a></li>
+<li><a href="https://stackoverflow.com/questions/35881610/what-is-a-real-pointer-in-valgrind-when-detecting-memory-leak/48683154" target="_blank" rel="noopener noreffer">https://stackoverflow.com/questions/35881610/what-is-a-real-pointer-in-valgrind-when-detecting-memory-leak/48683154</a></li>
 </ul>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
@@ -260,7 +413,7 @@
     </div>
 
     <div class="post-nav"><a href="/lc869/" class="prev" rel="prev" title="lc869.重新排序得到 2 的幂"><i class="fas fa-angle-left fa-fw"></i>lc869.重新排序得到 2 的幂</a>
-            <a href="/top/" class="next" rel="next" title="top使用">top使用<i class="fas fa-angle-right fa-fw"></i></a></div>
+            <a href="/python3_module/" class="next" rel="next" title="Python3_Module">Python3_Module<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 
 
