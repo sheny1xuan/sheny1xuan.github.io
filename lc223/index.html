@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>lc223.矩形面积 - stonex</title><meta name="Description" content="Welcome to my&#39;blog!"><meta property="og:title" content="lc223.矩形面积" />
+<meta property="og:description" content="223.矩形面积 简单的考虑 计算两个图形的重叠部分，如果两个图形无重复，直接返回两个图的面积和。 考虑不重叠的情况b1x &gt;= ax2 || ax1 &gt;= bx2 || ay2 &lt;= by1 || ay1" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sheny1xuan.github.io/lc223/" /><meta property="og:image" content="https://sheny1xuan.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-09-30T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-09-30T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://sheny1xuan.github.io/logo.png"/>
+
+<meta name="twitter:title" content="lc223.矩形面积"/>
+<meta name="twitter:description" content="223.矩形面积 简单的考虑 计算两个图形的重叠部分，如果两个图形无重复，直接返回两个图的面积和。 考虑不重叠的情况b1x &gt;= ax2 || ax1 &gt;= bx2 || ay2 &lt;= by1 || ay1"/>
+<meta name="application-name" content="Stonex">
+<meta name="apple-mobile-web-app-title" content="Stonex"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://sheny1xuan.github.io/lc223/" /><link rel="prev" href="https://sheny1xuan.github.io/lc437/" /><link rel="next" href="https://sheny1xuan.github.io/lc482/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "lc223.矩形面积",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/sheny1xuan.github.io\/lc223\/"
+        },"genre": "posts","keywords": "模拟, leetcode, 算法","wordcount":  450 ,
+        "url": "https:\/\/sheny1xuan.github.io\/lc223\/","datePublished": "2021-09-30T00:00:00+00:00","dateModified": "2021-09-30T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Shen"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="stonex">Home</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="stonex">Home</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">lc223.矩形面积</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Shen</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/"><i class="far fa-folder fa-fw"></i>每日一题</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-09-30">2021-09-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 450 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#223矩形面积httpsleetcode-cncomproblemsrectangle-area"><a href="https://leetcode-cn.com/problems/rectangle-area/">223.矩形面积</a></a>
+          <ul>
+            <li><a href="#简单的考虑">简单的考虑</a></li>
+            <li><a href="#考虑矩形在轴上的投影">考虑矩形在轴上的投影</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="223矩形面积httpsleetcode-cncomproblemsrectangle-area"><a href="https://leetcode-cn.com/problems/rectangle-area/" target="_blank" rel="noopener noreffer">223.矩形面积</a></h2>
+<!-- raw HTML omitted -->
+<h3 id="简单的考虑">简单的考虑</h3>
+<ul>
+<li>计算两个图形的重叠部分，如果两个图形无重复，直接返回两个图的面积和。</li>
+<li>考虑不重叠的情况<code>b1x &gt;= ax2 || ax1 &gt;= bx2 || ay2 &lt;= by1 || ay1 &gt;= by2</code>这四种情况存在时，直接返回面积和。</li>
+<li>考虑a总在左边的情况，如果<code>ax1&gt;bx1</code>时，将a，b互换</li>
+<li>那么最后重叠的面积就是<code>(min(bx2, ax2) - bx1) * (min(ay2, by2) - max(by1, ay2))</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">computeArea</span><span class="p">(</span><span class="kt">int</span> <span class="n">ax1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">ay1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">ax2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">ay2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">bx1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">by1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">bx2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">by2</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">all</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="n">ax2</span> <span class="o">-</span> <span class="n">ax1</span><span class="p">,</span> <span class="n">ay2</span> <span class="o">-</span> <span class="n">ay1</span><span class="p">)</span> <span class="o">+</span> <span class="n">get</span><span class="p">(</span><span class="n">bx2</span> <span class="o">-</span> <span class="n">bx1</span><span class="p">,</span> <span class="n">by2</span> <span class="o">-</span> <span class="n">by1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">by1</span> <span class="o">&gt;=</span> <span class="n">ay2</span> <span class="o">||</span> <span class="n">ay1</span> <span class="o">&gt;=</span> <span class="n">by2</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">all</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">ax1</span> <span class="o">&gt;=</span> <span class="n">bx2</span> <span class="o">||</span> <span class="n">bx1</span> <span class="o">&gt;=</span> <span class="n">ax2</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">all</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">ax1</span> <span class="o">&gt;</span> <span class="n">bx1</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nf">computeArea</span><span class="p">(</span><span class="n">bx1</span><span class="p">,</span> <span class="n">by1</span><span class="p">,</span> <span class="n">bx2</span><span class="p">,</span> <span class="n">by2</span><span class="p">,</span> <span class="n">ax1</span><span class="p">,</span> <span class="n">ay1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">,</span> <span class="n">ay2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">all</span> <span class="o">-</span> <span class="n">get</span><span class="p">(</span><span class="n">min</span><span class="p">(</span><span class="n">ax2</span><span class="p">,</span> <span class="n">bx2</span><span class="p">)</span> <span class="o">-</span> <span class="n">bx1</span><span class="p">,</span> <span class="n">min</span><span class="p">(</span><span class="n">ay2</span><span class="p">,</span> <span class="n">by2</span><span class="p">)</span> <span class="o">-</span> <span class="n">max</span><span class="p">(</span><span class="n">by1</span><span class="p">,</span> <span class="n">ay1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">get</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="考虑矩形在轴上的投影">考虑矩形在轴上的投影</h3>
+<ul>
+<li>矩形a在x,y轴投影分别为<code>(ax1, ax2)</code>，<code>(ay1, ay2)</code>，b同理</li>
+<li>a,b需要在两个轴上的投影同时存在时，才能计算重叠部分的面积</li>
+<li>在某一个轴上投影有重叠的计算方法<code>min(ax2, bx2) - max(ax1, bx1) &gt; 0</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">computeArea</span><span class="p">(</span><span class="kt">int</span> <span class="n">ax1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">ay1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">ax2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">ay2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">bx1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">by1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">bx2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">by2</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">all</span> <span class="o">=</span> <span class="p">(</span><span class="n">ax2</span> <span class="o">-</span> <span class="n">ax1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">ay2</span> <span class="o">-</span> <span class="n">ay1</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">bx2</span> <span class="o">-</span> <span class="n">bx1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">by2</span> <span class="o">-</span> <span class="n">by1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">x_both</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">ax2</span><span class="p">,</span> <span class="n">bx2</span><span class="p">)</span> <span class="o">-</span> <span class="n">max</span><span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">bx1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">y_both</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">ay2</span><span class="p">,</span> <span class="n">by2</span><span class="p">)</span> <span class="o">-</span> <span class="n">max</span><span class="p">(</span><span class="n">ay1</span><span class="p">,</span> <span class="n">by1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">all</span> <span class="o">-</span> <span class="n">max</span><span class="p">(</span><span class="n">x_both</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="n">max</span><span class="p">(</span><span class="n">y_both</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2021-09-30</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a>,&nbsp;<a href="/tags/leetcode/">leetcode</a>,&nbsp;<a href="/tags/%E7%AE%97%E6%B3%95/">算法</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/lc437/" class="prev" rel="prev" title="lc437.路径总和 III"><i class="fas fa-angle-left fa-fw"></i>lc437.路径总和 III</a>
+            <a href="/lc482/" class="next" rel="next" title="lc482.密钥格式化">lc482.密钥格式化<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      renderMathInElement(document.body, {
+              delimiters: [
+                  {left: "$$", right: "$$", display: true},
+                  {left: "$", right: "$", display: false}
+              ]
+          });
+    });
+</script>
+
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.95.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021 - 2022</span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":30},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

@@ -1,0 +1,78 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>所有文章 - stonex</title>
+        <link>https://sheny1xuan.github.io/posts/</link>
+        <description>所有文章 | stonex</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sheny1xuan@163.com (Shen)</managingEditor>
+            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Wed, 17 Nov 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>lc318.最大单词长度乘积</title>
+    <link>https://sheny1xuan.github.io/lc318/</link>
+    <pubDate>Wed, 17 Nov 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc318/</guid>
+    <description><![CDATA[318.最大单词长度乘积 位运算哈希 考虑暴力求解，对每一个字符串进行哈希，之后遍历剩余的字符串检查是否重复 $T:O(n^2l)$,$n$是字符]]></description>
+</item><item>
+    <title>lc124.二叉树中的最大路径和</title>
+    <link>https://sheny1xuan.github.io/lc124/</link>
+    <pubDate>Thu, 04 Nov 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc124/</guid>
+    <description><![CDATA[124.二叉树中的最大路径和 1 2 a b c 最大路径可能有三种情况 $b \rightarrow a \rightarrow c $ $b \rightarrow a \rightarrow a&rsquo;father$ $c \rightarrow a \rightarrow a&rsquo;father$ 该节点向上返回值为该节点能够提供的最大路径 小于零]]></description>
+</item><item>
+    <title>lc687.最长同值路径</title>
+    <link>https://sheny1xuan.github.io/lc687/</link>
+    <pubDate>Tue, 02 Nov 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc687/</guid>
+    <description><![CDATA[687.最长同值路径 如果是普通的图，那么这个题目就是岛屿问题(DFS)，最大的连通图。 但是由于有限制是单条路径，所以要返回左右子树的路径最大]]></description>
+</item><item>
+    <title>top使用</title>
+    <link>https://sheny1xuan.github.io/top/</link>
+    <pubDate>Sun, 31 Oct 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/top/</guid>
+    <description><![CDATA[Top使用 安装Top 默认系统安装 也可以通过源码安装procps-ng获取最新版top. 通常使用 top进入top界面 默认按照cpu使用率从大到]]></description>
+</item><item>
+    <title>Valgrind使用</title>
+    <link>https://sheny1xuan.github.io/valgrind/</link>
+    <pubDate>Fri, 29 Oct 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/valgrind/</guid>
+    <description><![CDATA[Valgrind使用 安装Valgrind sudo apt-get install valgrind 通过源码安装 Memcheck 通常使用 valgrid --log-file=output.log --tool=memcheck --leak-check=full --show-leak-kinds=all your_binary_file --log-file设置输出信息路径 --leak-chec]]></description>
+</item><item>
+    <title>lc869.重新排序得到 2 的幂</title>
+    <link>https://sheny1xuan.github.io/lc869/</link>
+    <pubDate>Thu, 28 Oct 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc869/</guid>
+    <description><![CDATA[869.重新排序得到 2 的幂 排列+LBit 计算所有的排列 对每一个排列通过LBit判断其是否是2的幂(2的幂只有一位为1)。 T:O(m!)，m是]]></description>
+</item><item>
+    <title>lc378.有序矩阵中第K小的元素</title>
+    <link>https://sheny1xuan.github.io/lc378/</link>
+    <pubDate>Mon, 25 Oct 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc378/</guid>
+    <description><![CDATA[378.有序矩阵中第 K 小的元素 如何判断一个数num在矩阵中处于第k小？从左下角向上移动，如果当前位置matrix[x][y] &lt;= num，那么说]]></description>
+</item><item>
+    <title>lc638.大礼包</title>
+    <link>https://sheny1xuan.github.io/lc638/</link>
+    <pubDate>Sun, 24 Oct 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc638/</guid>
+    <description><![CDATA[638.大礼包 DFS 将每个单独的商品处理成一个礼包 对于每一个礼包有两种选择(好像完全背包问题):直接选择下一个礼包;继续选择这个礼包。 $T:O(]]></description>
+</item><item>
+    <title>lc1755.最接近目标值的子序列和</title>
+    <link>https://sheny1xuan.github.io/lc1775/</link>
+    <pubDate>Thu, 21 Oct 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc1775/</guid>
+    <description><![CDATA[1755.最接近目标值的子序列和 折半搜索 数据范围比较小，但是没有到小到可以直接搜索的地步。 可以将整个数据分成两部分分别进行搜索，最后进行合并]]></description>
+</item><item>
+    <title>lc453.最小操作次数使数组元素相等</title>
+    <link>https://sheny1xuan.github.io/lc453/</link>
+    <pubDate>Wed, 20 Oct 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc453/</guid>
+    <description><![CDATA[453.最小操作次数使数组元素相等 使其他每个元素就是相当于对一个元素减1 操作到最后所有元素应该等于最小的元素。 1 2 3 4 5 6 7 8 9 10 11 12 13 class Solution]]></description>
+</item></channel>
+</rss>

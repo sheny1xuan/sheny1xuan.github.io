@@ -1,0 +1,29 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>DFS - 标签 - stonex</title>
+        <link>https://sheny1xuan.github.io/tags/dfs/</link>
+        <description>DFS - 标签 - stonex</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sheny1xuan@163.com (Shen)</managingEditor>
+            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Thu, 28 Oct 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/dfs/" rel="self" type="application/rss+xml" /><item>
+    <title>lc869.重新排序得到 2 的幂</title>
+    <link>https://sheny1xuan.github.io/lc869/</link>
+    <pubDate>Thu, 28 Oct 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc869/</guid>
+    <description><![CDATA[869.重新排序得到 2 的幂 排列+LBit 计算所有的排列 对每一个排列通过LBit判断其是否是2的幂(2的幂只有一位为1)。 T:O(m!)，m是]]></description>
+</item><item>
+    <title>lc638.大礼包</title>
+    <link>https://sheny1xuan.github.io/lc638/</link>
+    <pubDate>Sun, 24 Oct 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc638/</guid>
+    <description><![CDATA[638.大礼包 DFS 将每个单独的商品处理成一个礼包 对于每一个礼包有两种选择(好像完全背包问题):直接选择下一个礼包;继续选择这个礼包。 $T:O(]]></description>
+</item><item>
+    <title>lc797.所有可能的路径</title>
+    <link>https://sheny1xuan.github.io/lc797/</link>
+    <pubDate>Wed, 25 Aug 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc797/</guid>
+    <description><![CDATA[797. 所有可能的路径 DFS 有向无环图DAG不会重复访问同一个点，所以不需要记录这些点是否访问过。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 class Solution {]]></description>
+</item></channel>
+</rss>

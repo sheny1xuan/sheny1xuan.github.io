@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>ModernCpp-右值引用 - stonex</title><meta name="Description" content="Welcome to my&#39;blog!"><meta property="og:title" content="ModernCpp-右值引用" />
+<meta property="og:description" content="右值引用：延长临时变量的生命周期，解决将亡值的问题 认识右值引用 考虑如下一种情况，下面这样情况，由于x是一个临时变量，在代码块结束后，因为该变" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sheny1xuan.github.io/moderncpp-%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8/" /><meta property="og:image" content="https://sheny1xuan.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-10-08T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-03-17T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://sheny1xuan.github.io/logo.png"/>
+
+<meta name="twitter:title" content="ModernCpp-右值引用"/>
+<meta name="twitter:description" content="右值引用：延长临时变量的生命周期，解决将亡值的问题 认识右值引用 考虑如下一种情况，下面这样情况，由于x是一个临时变量，在代码块结束后，因为该变"/>
+<meta name="application-name" content="Stonex">
+<meta name="apple-mobile-web-app-title" content="Stonex"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://sheny1xuan.github.io/moderncpp-%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8/" /><link rel="prev" href="https://sheny1xuan.github.io/lc434/" /><link rel="next" href="https://sheny1xuan.github.io/lc352/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "ModernCpp-右值引用",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/sheny1xuan.github.io\/moderncpp-%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8\/"
+        },"genre": "posts","keywords": "ModernCpp, 右值引用","wordcount":  1907 ,
+        "url": "https:\/\/sheny1xuan.github.io\/moderncpp-%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8\/","datePublished": "2021-10-08T00:00:00+00:00","dateModified": "2022-03-17T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Shen"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="stonex">Home</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="stonex">Home</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">ModernCpp-右值引用</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Shen</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/cpp/"><i class="far fa-folder fa-fw"></i>cpp</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-10-08">2021-10-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1907 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#右值引用延长临时变量的生命周期解决将亡值的问题">右值引用：延长临时变量的生命周期，解决将亡值的问题</a>
+          <ul>
+            <li><a href="#认识右值引用">认识右值引用</a></li>
+            <li><a href="#实例">实例</a></li>
+            <li><a href="#右值引用与移动构造函数">右值引用与移动构造函数</a></li>
+            <li><a href="#右值引用的返回问题">右值引用的返回问题</a>
+              <ul>
+                <li>
+                  <ul>
+                    <li><a href="#标准">标准</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><a href="#万能引用">万能引用</a></li>
+            <li><a href="#stdmove">std::move</a></li>
+            <li><a href="#引用折叠">引用折叠</a></li>
+            <li><a href="#stdforward">std::forward</a></li>
+            <li><a href="#参考资料">参考资料:</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="右值引用延长临时变量的生命周期解决将亡值的问题">右值引用：延长临时变量的生命周期，解决将亡值的问题</h2>
+<h3 id="认识右值引用">认识右值引用</h3>
+<ul>
+<li>考虑如下一种情况，下面这样情况，由于x是一个临时变量，在代码块结束后，因为该变量生命周期结束，再使用其地址将会不安全，这里直接会出现segement fault，因为引用了错误的地址。</li>
+<li>这里解决方法有两个，可以选择将x定义在堆上，或者直接返回值。定义在堆上，如果管理不慎会出现内存泄露的问题。返回返回值又会产生额外的开销。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span><span class="o">&amp;</span> <span class="n">func1</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// x 是左值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">x</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>所以cpp对左值和右值进行了区分。</p>
+<ul>
+<li>左值简单理解就是等号左边可以赋值的值，代表变量对内存有所有权(变量是内存的别名)，表达式结束后使用该变量的地址是安全的。</li>
+<li>右值是临时变量，表达式结束后就不存在的临时变量。右值又分为<code>将亡值</code>和<code>纯右值</code>。</li>
+<li>纯右值指的是纯粹字面量，求值的临时变量，匿名变量等等。注意字符串在类中是纯右值，普通函数中是左值。</li>
+<li><code>将亡值</code>是指的代码段结束后，即将被销毁，但是可以被移动的值，左值会在代码段结束后转换为将亡值。<code>func1</code>中的x在函数代码块运行中是一个左值，但是在函数结束后，他就是一个将亡值，代码段结束后他即将被销毁。将亡值只是一个概念，并不存在真正的将亡值，如果需要这个这个左值延长生命周期，则通过<code>std::move()</code>将左值转换为右值进行引用。</li>
+</ul>
+</li>
+<li>
+<p>通过右值引用可以延长<code>func1</code>中<code>x</code>的生命周期，但是需要通过<code>std::move()</code>将x转换为右值使用。这里<code>std::move()</code>只是将左值转换为右值，并没有智能指针中转交所有权的意思，被转换的变量仍可以调用这块内存。</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">func2</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// x是左值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">x</span><span class="p">;</span>	
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span><span class="o">&amp;&amp;</span> <span class="n">y</span> <span class="o">=</span> <span class="n">func2</span><span class="p">();</span>	<span class="c1">// y会捕获x的将亡值，延长其生命周期
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>右值引用</code>只可以引用右值，<code>std::move()</code>可以将左值转换为右值，从而延长临时变量的生命周期。左值会在代码段结束后变为将亡值。</li>
+<li><code>非常量左值引用</code>只能引用左值，<code>常量左值引用</code>可以引用右值。</li>
+<li>需要注意的是，一个变量虽然引用的是右值，但这个变量仍是一个左值，它不是一个临时对象，也不是纯粹的字面量。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="c1">// 注意这里a和b虽然都是引用的右值，但是他们是左值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span><span class="o">&amp;&amp;</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">int</span><span class="o">&amp;</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span><span class="o">&amp;</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// error
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="实例">实例</h3>
+<ul>
+<li>两个string对象相加会产生临时的string对象。</li>
+<li>这里<code>std::move()</code>只是将左值转换为右值，并没有智能指针中转交所有权的意思，被转换的变量仍可以调用这块内存。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">lv1</span> <span class="o">=</span> <span class="s">&#34;string&#34;</span><span class="p">;</span>     <span class="c1">// 左值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;&amp;</span> <span class="n">rv1</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">lv1</span><span class="p">);</span>   <span class="c1">// 临时lv1转换为右值，之后lv1仍是一个左值。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// lv1与rv1共享内存
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="n">lv1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;a&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">rv1</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">lv1</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;&amp;</span> <span class="n">lv2</span> <span class="o">=</span> <span class="n">lv1</span> <span class="o">+</span> <span class="n">lv1</span><span class="p">;</span>  <span class="c1">// lv1 + lv1 是一个右值，lv2可以引用右值。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">lv3</span> <span class="o">=</span> <span class="n">lv1</span> <span class="o">+</span> <span class="n">lv2</span><span class="p">;</span>   <span class="c1">// 常量左值引用可以引用右值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>    
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nl">output</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">atring</span>
+</span></span><span class="line"><span class="cl">    <span class="n">atring</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="右值引用与移动构造函数">右值引用与移动构造函数</h3>
+<ul>
+<li>在C++11之前，对象存在构造函数主要有三种，默认构造函数，拷贝构造函数，赋值构造函数，但是这三种构造函数都不支持对临时值的引用。移动构造函数就是通过右值引用，使用临时对象构造新的对象，减少内存分配与释放的次数。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">A</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">A</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;A construct...&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ptr_</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">A</span><span class="p">(</span><span class="k">const</span> <span class="n">A</span> <span class="o">&amp;</span> <span class="n">a</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;A copy construct ...&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ptr_</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">memcpy</span><span class="p">(</span><span class="n">ptr_</span><span class="p">,</span> <span class="n">a</span><span class="p">.</span><span class="n">ptr_</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">        <span class="n">A</span><span class="p">(</span><span class="n">A</span> <span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;A move construct ...&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ptr_</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">ptr_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// must set prev nullptr
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// prevent double free.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">a</span><span class="p">.</span><span class="n">ptr_</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="o">~</span><span class="n">A</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;A deconstruct ...&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">ptr_</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">                <span class="k">delete</span> <span class="n">ptr_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">A</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">A</span> <span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; A operator= ....&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="o">*</span> <span class="nf">getVal</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">ptr_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="o">*</span><span class="n">ptr_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[]){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">vec</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vec</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">A</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="右值引用的返回问题">右值引用的返回问题</h3>
+<h5 id="标准">标准</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">return_vector</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">tmp</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">tmp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">rval_ref</span> <span class="o">=</span> <span class="n">return_vector</span><span class="p">();</span> <span class="c1">// RVO/通过移动构造函数，构造一个新的对象。
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>不需要将返回值转换为右值，在这个函数结束时，它将通过编译器优化为一个右值。</li>
+<li>不需要引用返回值。返回值首先会通过RVO进行优化，如果编译器不支持RVO，之后会调用移动构造函数，如果也不存在移动构造函数的话，则会调用拷贝构造函数构造该对象。</li>
+</ul>
+<h3 id="万能引用">万能引用</h3>
+<ul>
+<li>万能引用（Universal Reference）：可以接收左值也可以接收右值。</li>
+<li>它存在两种使用条件：一种是模板，另外一种是auto(auto也是也是模板)。<strong>只有发生类型推导的时候，T&amp;&amp;才表示万能引用；</strong> 否则，表示右值引用。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">f</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;&amp;</span> <span class="n">param</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;the value is &#34;</span><span class="o">&lt;&lt;</span> <span class="n">param</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="nl">x</span><span class="p">:</span> <span class="n">v</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 如果要修改值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">x</span><span class="p">:</span> <span class="n">v</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 如果不修改值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="stdmove">std::move</h3>
+<ul>
+<li>强制类型转换：将左值转换为右值</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="k">typename</span> <span class="n">remove_reference</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">type</span><span class="o">&amp;&amp;</span> <span class="n">move</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;&amp;</span> <span class="n">t</span><span class="p">)</span> <span class="c1">// 万能引用，可以引用左值，也能引用右值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">static_case</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">remove_reference</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">type</span><span class="o">&amp;&amp;&gt;</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="引用折叠">引用折叠</h3>
+<ul>
+<li><code>int &amp; &amp;</code> 折叠为 <code>int&amp;</code></li>
+<li><code>int &amp; &amp;&amp;</code> 折叠为 <code>int&amp;</code></li>
+<li><code>int &amp;&amp; &amp;</code> 折叠为 <code>int&amp;</code></li>
+<li><code>int &amp;&amp; &amp;&amp;</code> 折叠为 <code>int &amp;&amp;</code></li>
+</ul>
+<h3 id="stdforward">std::forward</h3>
+<ul>
+<li>进行参数多次引用的传递，std::forward可以将原来传递的参数是左引用还是右引用进行区分。</li>
+</ul>
+<h3 id="参考资料">参考资料:</h3>
+<ul>
+<li>
+<p>modern-cpp-tutorial</p>
+</li>
+<li></li>
+<li>
+<p><a href="http://avdancedu.com/a39d51f9/" target="_blank" rel="noopener noreffer">C++高阶知识：深入分析移动构造函数及其原理</a></p>
+</li>
+<li>
+<p><a href="https://shuntan.github.io/posts/%E5%AE%8C%E7%BE%8E%E8%BD%AC%E5%8F%91" target="_blank" rel="noopener noreffer">C++中的万能引用和完美转发</a></p>
+</li>
+<li>
+<p><a href="https://stackoverflow.com/questions/13130708/what-is-the-advantage-of-using-forwarding-references-in-range-based-for-loops" target="_blank" rel="noopener noreffer">https://stackoverflow.com/questions/13130708/what-is-the-advantage-of-using-forwarding-references-in-range-based-for-loops</a></p>
+</li>
+<li>
+<p><a href="https://stackoverflow.com/questions/8399417/why-vectorboolreference-doesnt-return-reference-to-bool" target="_blank" rel="noopener noreffer">https://stackoverflow.com/questions/8399417/why-vectorboolreference-doesnt-return-reference-to-bool</a></p>
+</li>
+<li>
+<p><a href="https://zhuanlan.zhihu.com/p/161039484" target="_blank" rel="noopener noreffer">https://zhuanlan.zhihu.com/p/161039484</a></p>
+</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2022-03-17</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/moderncpp/">ModernCpp</a>,&nbsp;<a href="/tags/%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8/">右值引用</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/lc434/" class="prev" rel="prev" title="lc434.字符串中的单词数"><i class="fas fa-angle-left fa-fw"></i>lc434.字符串中的单词数</a>
+            <a href="/lc352/" class="next" rel="next" title="lc352.将数据流变为多个不相交区间">lc352.将数据流变为多个不相交区间<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      renderMathInElement(document.body, {
+              delimiters: [
+                  {left: "$$", right: "$$", display: true},
+                  {left: "$", right: "$", display: false}
+              ]
+          });
+    });
+</script>
+
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.95.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021 - 2022</span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":30},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

@@ -1,0 +1,22 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>链表 - 标签 - stonex</title>
+        <link>https://sheny1xuan.github.io/tags/%E9%93%BE%E8%A1%A8/</link>
+        <description>链表 - 标签 - stonex</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sheny1xuan@163.com (Shen)</managingEditor>
+            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Fri, 24 Sep 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/%E9%93%BE%E8%A1%A8/" rel="self" type="application/rss+xml" /><item>
+    <title>lc430.扁平化多级双向链表</title>
+    <link>https://sheny1xuan.github.io/lc430/</link>
+    <pubDate>Fri, 24 Sep 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc430/</guid>
+    <description><![CDATA[430.扁平化多级双向链表 迭代 没碰到一个有child部分的节点，找到当前节点儿子链表的尾结点tail，将该链表添加到当前链表中，当前节点的c]]></description>
+</item><item>
+    <title>lc725.分隔链表</title>
+    <link>https://sheny1xuan.github.io/lc725/</link>
+    <pubDate>Wed, 22 Sep 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc725/</guid>
+    <description><![CDATA[725.分隔链表 计算每一部分的长度之后，每次数出指定长度的结点即可。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36]]></description>
+</item></channel>
+</rss>

@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>博弈论 - 标签 - stonex</title>
+        <link>https://sheny1xuan.github.io/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA/</link>
+        <description>博弈论 - 标签 - stonex</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sheny1xuan@163.com (Shen)</managingEditor>
+            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Sat, 18 Sep 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA/" rel="self" type="application/rss+xml" /><item>
+    <title>lc292.Nim 游戏</title>
+    <link>https://sheny1xuan.github.io/lc292/</link>
+    <pubDate>Sat, 18 Sep 2021 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc292/</guid>
+    <description><![CDATA[292. Nim 游戏 博弈论 博弈论问题一般是两方进行对抗的问题 首先如果有3枚以下的石头，那么我方一定获胜。如果有4枚石头，我方一定能获胜。 考虑5颗石头的情]]></description>
+</item></channel>
+</rss>
