@@ -179,50 +179,50 @@
 </span><span class="lnt">43
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">target</span><span class="p">,</span> <span class="n">cnt</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">sum</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">sum</span> <span class="o">+</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">cur</span> <span class="o">==</span> <span class="n">target</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">            <span class="n">cnt</span> <span class="o">++</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">cur</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">cur</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span> 
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">pathSum</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">targetSum</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="n">target</span> <span class="o">=</span> <span class="n">targetSum</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl">        <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">queue</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">*&gt;</span> <span class="n">que</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="n">que</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">que</span><span class="p">.</span><span class="n">empty</span><span class="p">()){</span>
-</span></span><span class="line"><span class="cl">            <span class="k">auto</span> <span class="n">f</span> <span class="o">=</span> <span class="n">que</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">            <span class="n">que</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            <span class="n">dfs</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="c1">// cout &lt;&lt; f-&gt;val &lt;&lt; &#39; &#39; &lt;&lt; cnt &lt;&lt; endl;
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">if</span><span class="p">(</span><span class="n">f</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">                <span class="n">que</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">f</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">f</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">                <span class="n">que</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">f</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">cnt</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">target</span><span class="p">,</span> <span class="n">cnt</span><span class="p">;</span>
+    <span class="kt">void</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">sum</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">){</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="kt">int</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">sum</span> <span class="o">+</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">cur</span> <span class="o">==</span> <span class="n">target</span><span class="p">){</span>
+            <span class="n">cnt</span> <span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">cur</span><span class="p">);</span>
+        <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">cur</span><span class="p">);</span>
+    <span class="p">}</span> 
+    <span class="kt">int</span> <span class="nf">pathSum</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">targetSum</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">){</span>
+            <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="n">targetSum</span><span class="p">;</span> 
+        <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">queue</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">*&gt;</span> <span class="n">que</span><span class="p">;</span>
+
+        <span class="n">que</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+
+        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">que</span><span class="p">.</span><span class="n">empty</span><span class="p">()){</span>
+            <span class="k">auto</span> <span class="n">f</span> <span class="o">=</span> <span class="n">que</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+            <span class="n">que</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+
+            <span class="n">dfs</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+            <span class="c1">// cout &lt;&lt; f-&gt;val &lt;&lt; &#39; &#39; &lt;&lt; cnt &lt;&lt; endl;
+</span><span class="c1"></span>            <span class="k">if</span><span class="p">(</span><span class="n">f</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">){</span>
+                <span class="n">que</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">f</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">f</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">){</span>
+                <span class="n">que</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">f</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">cnt</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
 </div>
 </div><h3 id="dfsdfs">DFS+DFS</h3>
 <ul>
@@ -268,42 +268,42 @@
 </span><span class="lnt">35
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">target</span><span class="p">,</span> <span class="n">cnt</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">sum</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">sum</span> <span class="o">+</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">cur</span> <span class="o">==</span> <span class="n">target</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">            <span class="n">cnt</span> <span class="o">++</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">cur</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">cur</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">pre_travel</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">pre_travel</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">pre_travel</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">pathSum</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">targetSum</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">target</span> <span class="o">=</span> <span class="n">targetSum</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl">        <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="n">pre_travel</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">cnt</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">target</span><span class="p">,</span> <span class="n">cnt</span><span class="p">;</span>
+    <span class="kt">void</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">sum</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">){</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="kt">int</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">sum</span> <span class="o">+</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span>
+        
+        <span class="k">if</span><span class="p">(</span><span class="n">cur</span> <span class="o">==</span> <span class="n">target</span><span class="p">){</span>
+            <span class="n">cnt</span> <span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">cur</span><span class="p">);</span>
+        <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">cur</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="nf">pre_travel</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">){</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="n">pre_travel</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+        <span class="n">pre_travel</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="nf">pathSum</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">targetSum</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="n">targetSum</span><span class="p">;</span> 
+        <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        
+        <span class="n">pre_travel</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="n">cnt</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
 </div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
@@ -350,7 +350,7 @@
 
 <div id="comments"></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.95.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.92.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021 - 2022</span></div>
         </div>
     </footer></div>

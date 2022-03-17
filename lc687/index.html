@@ -180,55 +180,55 @@
 </span><span class="lnt">48
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cm">/**
-</span></span></span><span class="line"><span class="cl"><span class="cm"> * Definition for a binary tree node.
-</span></span></span><span class="line"><span class="cl"><span class="cm"> * struct TreeNode {
-</span></span></span><span class="line"><span class="cl"><span class="cm"> *     int val;
-</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode *left;
-</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode *right;
-</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
-</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-</span></span></span><span class="line"><span class="cl"><span class="cm"> * };
-</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>    
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">longestUnivaluePath</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// 返回与root值相同的最长同值路径的长度。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// 与root-&gt;left相同的最长同值路径长度
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// 与root-&gt;right相同的最长同值路径长度
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="c1">// 如果根节点与左子节点值相同，延伸该子树，否则左边路径长度为0
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">&amp;&amp;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">==</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">l</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">l</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">&amp;&amp;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">==</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">r</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">r</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="c1">// 向上延伸或者包含根节点的最大值。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">l</span> <span class="o">+</span> <span class="n">r</span><span class="p">,</span> <span class="n">ans</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">max</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">r</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cm">/**
+</span><span class="cm"> * Definition for a binary tree node.
+</span><span class="cm"> * struct TreeNode {
+</span><span class="cm"> *     int val;
+</span><span class="cm"> *     TreeNode *left;
+</span><span class="cm"> *     TreeNode *right;
+</span><span class="cm"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span><span class="cm"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span><span class="cm"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span><span class="cm"> * };
+</span><span class="cm"> */</span>
+<span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>    
+    <span class="kt">int</span> <span class="nf">longestUnivaluePath</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 返回与root值相同的最长同值路径的长度。
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="c1">// 与root-&gt;left相同的最长同值路径长度
+</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+        <span class="c1">// 与root-&gt;right相同的最长同值路径长度
+</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+
+        <span class="c1">// 如果根节点与左子节点值相同，延伸该子树，否则左边路径长度为0
+</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">&amp;&amp;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">==</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">l</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">l</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">&amp;&amp;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">==</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">r</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c1">// 向上延伸或者包含根节点的最大值。
+</span><span class="c1"></span>        <span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">l</span> <span class="o">+</span> <span class="n">r</span><span class="p">,</span> <span class="n">ans</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">max</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">r</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
 </div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
@@ -275,7 +275,7 @@
 
 <div id="comments"></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.95.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.92.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021 - 2022</span></div>
         </div>
     </footer></div>

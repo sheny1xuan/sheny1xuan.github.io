@@ -173,31 +173,31 @@
 </span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">ssssssclass</span> <span class="n">Solution</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">strStr</span><span class="p">(</span><span class="n">string</span> <span class="n">haystack</span><span class="p">,</span> <span class="n">string</span> <span class="n">needle</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">needle</span> <span class="o">==</span> <span class="s">&#34;&#34;</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">haystack</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">needle</span><span class="p">.</span><span class="n">size</span><span class="p">()){</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">haystack</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">            <span class="kt">bool</span> <span class="n">flag</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">j</span> <span class="o">&lt;</span> <span class="n">needle</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">haystack</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="p">]</span> <span class="o">!=</span> <span class="n">needle</span><span class="p">[</span><span class="n">j</span><span class="p">]){</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">flag</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                    <span class="k">break</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">flag</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">i</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">ssssssclass</span> <span class="n">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">strStr</span><span class="p">(</span><span class="n">string</span> <span class="n">haystack</span><span class="p">,</span> <span class="n">string</span> <span class="n">needle</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">needle</span> <span class="o">==</span> <span class="s">&#34;&#34;</span><span class="p">){</span>
+            <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">haystack</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">needle</span><span class="p">.</span><span class="n">size</span><span class="p">()){</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">haystack</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="kt">bool</span> <span class="n">flag</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">j</span> <span class="o">&lt;</span> <span class="n">needle</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">){</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">haystack</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="p">]</span> <span class="o">!=</span> <span class="n">needle</span><span class="p">[</span><span class="n">j</span><span class="p">]){</span>
+                    <span class="n">flag</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+                    <span class="k">break</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">flag</span><span class="p">){</span>
+                <span class="k">return</span> <span class="n">i</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
 </div>
 </div><h3 id="kmp算法">KMP算法</h3>
 <blockquote>
@@ -291,50 +291,50 @@
 </span><span class="lnt">43
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="cp">#define N 1000001
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">char</span> <span class="n">s</span><span class="p">[</span><span class="n">N</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">ne</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// 从第1个字符开始
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span> <span class="o">&gt;&gt;</span> <span class="n">p</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&gt;&gt;</span> <span class="n">m</span> <span class="o">&gt;&gt;</span> <span class="n">s</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// ne[1] = 0,因为第一个不匹配时
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 都可以让目标串向后移动一位
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 求ne数组：ne[i]:与下标i结尾的后缀相同的前缀的长度
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">j</span> <span class="o">&amp;&amp;</span> <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">p</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>    <span class="n">j</span> <span class="o">=</span> <span class="n">ne</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">p</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>    <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">ne</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// 查看next数组 j = 0,意味着从零开始匹配，ne[0]无意义。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// for(int i = 0; i &lt;= n; i++){
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//   cout &lt;&lt; ne[i] &lt;&lt; &#39; &#39; ;
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// }
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// cout &lt;&lt; endl;
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// KMP匹配
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// i表示开始匹配的目标串的下标
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// j表示匹配的长度
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">m</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">j</span> <span class="o">&amp;&amp;</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">p</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>    <span class="n">j</span> <span class="o">=</span> <span class="n">ne</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">p</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>    <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">j</span> <span class="o">==</span> <span class="n">n</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">            <span class="c1">// 计数从1开始所以不用减去1
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">-</span> <span class="n">n</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39; &#39;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="c1">// 一定要是ne[j]不能是把整个字符串右移。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">j</span> <span class="o">=</span> <span class="n">ne</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// cout &lt;&lt; ne[n+1];
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="cp">#define N 1000001
+</span><span class="cp"></span><span class="kt">char</span> <span class="n">s</span><span class="p">[</span><span class="n">N</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">ne</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
+
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="c1">// 从第1个字符开始
+</span><span class="c1"></span>    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span> <span class="o">&gt;&gt;</span> <span class="n">p</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&gt;&gt;</span> <span class="n">m</span> <span class="o">&gt;&gt;</span> <span class="n">s</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="c1">// ne[1] = 0,因为第一个不匹配时
+</span><span class="c1"></span>    <span class="c1">// 都可以让目标串向后移动一位
+</span><span class="c1"></span>    <span class="c1">// 求ne数组：ne[i]:与下标i结尾的后缀相同的前缀的长度
+</span><span class="c1"></span>    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">j</span> <span class="o">&amp;&amp;</span> <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">p</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>    <span class="n">j</span> <span class="o">=</span> <span class="n">ne</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">p</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>    <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">ne</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">// 查看next数组 j = 0,意味着从零开始匹配，ne[0]无意义。
+</span><span class="c1"></span>    <span class="c1">// for(int i = 0; i &lt;= n; i++){
+</span><span class="c1"></span>    <span class="c1">//   cout &lt;&lt; ne[i] &lt;&lt; &#39; &#39; ;
+</span><span class="c1"></span>    <span class="c1">// }
+</span><span class="c1"></span>    <span class="c1">// cout &lt;&lt; endl;
+</span><span class="c1"></span>    <span class="c1">// KMP匹配
+</span><span class="c1"></span>    <span class="c1">// i表示开始匹配的目标串的下标
+</span><span class="c1"></span>    <span class="c1">// j表示匹配的长度
+</span><span class="c1"></span>    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">m</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">j</span> <span class="o">&amp;&amp;</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">p</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>    <span class="n">j</span> <span class="o">=</span> <span class="n">ne</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">p</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>    <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">j</span> <span class="o">==</span> <span class="n">n</span><span class="p">){</span>
+            <span class="c1">// 计数从1开始所以不用减去1
+</span><span class="c1"></span>            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">-</span> <span class="n">n</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39; &#39;</span><span class="p">;</span>
+            <span class="c1">// 一定要是ne[j]不能是把整个字符串右移。
+</span><span class="c1"></span>            <span class="n">j</span> <span class="o">=</span> <span class="n">ne</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="c1">// cout &lt;&lt; ne[n+1];
+</span><span class="c1"></span>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
 </div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
@@ -381,7 +381,7 @@
 
 <div id="comments"></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.95.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.92.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021 - 2022</span></div>
         </div>
     </footer></div>

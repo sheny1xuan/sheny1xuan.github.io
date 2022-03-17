@@ -182,35 +182,35 @@
 </span><span class="lnt">28
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">pathInZigZagTree</span><span class="p">(</span><span class="kt">int</span> <span class="n">label</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">label</span> <span class="o">==</span> <span class="mi">1</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="p">{</span><span class="n">label</span><span class="p">};</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// rowStart 是这一行的开始 2**(row - 1)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// rowStart * 2 是下一行的开始 2**row
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// 这一行的结束就是rowStart - 1 = 2**row-1
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">row</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">rowStart</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">rowStart</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">&lt;=</span> <span class="n">label</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">            <span class="n">row</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="n">rowStart</span> <span class="o">*=</span> <span class="mi">2</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">row</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">            <span class="n">res</span><span class="p">[</span><span class="n">row</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">label</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="c1">// 找到对称结点除以2,就是父亲节点
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">label</span> <span class="o">=</span> <span class="p">(</span><span class="n">rowStart</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">label</span> <span class="o">+</span> <span class="n">rowStart</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="n">rowStart</span> <span class="o">/=</span> <span class="mi">2</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="n">row</span> <span class="o">-=</span> <span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">pathInZigZagTree</span><span class="p">(</span><span class="kt">int</span> <span class="n">label</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">label</span> <span class="o">==</span> <span class="mi">1</span><span class="p">){</span>
+            <span class="k">return</span> <span class="p">{</span><span class="n">label</span><span class="p">};</span>
+        <span class="p">}</span>
+        <span class="c1">// rowStart 是这一行的开始 2**(row - 1)
+</span><span class="c1"></span>        <span class="c1">// rowStart * 2 是下一行的开始 2**row
+</span><span class="c1"></span>        <span class="c1">// 这一行的结束就是rowStart - 1 = 2**row-1
+</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">row</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">rowStart</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+        <span class="k">while</span><span class="p">(</span><span class="n">rowStart</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">&lt;=</span> <span class="n">label</span><span class="p">){</span>
+            <span class="n">row</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="n">rowStart</span> <span class="o">*=</span> <span class="mi">2</span><span class="p">;</span>
+        <span class="p">}</span>
+        
+        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">row</span><span class="p">){</span>
+            <span class="n">res</span><span class="p">[</span><span class="n">row</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">label</span><span class="p">;</span>
+            <span class="c1">// 找到对称结点除以2,就是父亲节点
+</span><span class="c1"></span>            <span class="n">label</span> <span class="o">=</span> <span class="p">(</span><span class="n">rowStart</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">label</span> <span class="o">+</span> <span class="n">rowStart</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+            <span class="n">rowStart</span> <span class="o">/=</span> <span class="mi">2</span><span class="p">;</span>
+            <span class="n">row</span> <span class="o">-=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
 </div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
@@ -257,7 +257,7 @@
 
 <div id="comments"></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.95.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.92.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021 - 2022</span></div>
         </div>
     </footer></div>

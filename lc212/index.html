@@ -216,81 +216,81 @@
 </span><span class="lnt">74
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">Trie_Node</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">,</span> <span class="n">Trie_Node</span><span class="o">*&gt;</span> <span class="n">children</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">word</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">Trie_Node</span><span class="p">(){</span>
-</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span><span class="n">word</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Insert_Trie</span><span class="p">(</span><span class="n">Trie_Node</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">s</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">c</span><span class="p">:</span> <span class="n">s</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">children</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">            <span class="n">root</span><span class="o">-&gt;</span><span class="n">children</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Trie_Node</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="n">root</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">children</span><span class="p">[</span><span class="n">c</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="n">root</span><span class="o">-&gt;</span><span class="n">word</span> <span class="o">=</span> <span class="n">s</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="n">dfs</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;&gt;&amp;</span> <span class="n">board</span><span class="p">,</span> <span class="n">Trie_Node</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="n">set</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">ans</span><span class="p">,</span> <span class="kt">int</span> <span class="n">len</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">len</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="kt">char</span> <span class="n">ch</span> <span class="o">=</span> <span class="n">board</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">children</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="n">root</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">children</span><span class="p">[</span><span class="n">ch</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">word</span> <span class="o">!=</span> <span class="s">&#34;&#34;</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">            <span class="n">ans</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">word</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="c1">// 同一个单词内不允许访问两次，进行标记
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">board</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;#&#39;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">tx</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">dir</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">ty</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dir</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">tx</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">tx</span> <span class="o">&lt;</span> <span class="n">board</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">ty</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">ty</span> <span class="o">&lt;</span> <span class="n">board</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">()){</span>
-</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">board</span><span class="p">[</span><span class="n">tx</span><span class="p">][</span><span class="n">ty</span><span class="p">]</span> <span class="o">!=</span> <span class="sc">&#39;#&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">dfs</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">tx</span><span class="p">,</span> <span class="n">ty</span><span class="p">,</span> <span class="n">ans</span><span class="p">,</span> <span class="n">len</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="n">board</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">ch</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">findWords</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;&gt;&amp;</span> <span class="n">board</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">words</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">Trie_Node</span><span class="o">*</span> <span class="n">root</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Trie_Node</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">set</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">ans</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="c1">// 把所有需要查询的结点加入到字典树当中
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">word</span><span class="p">:</span> <span class="n">words</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">            <span class="n">Insert_Trie</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">word</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="c1">// 遍历网格查找是否有合适的单词 
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">board</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">board</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">                <span class="n">dfs</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">ans</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">word</span><span class="p">:</span> <span class="n">ans</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">            <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">word</span><span class="p">);</span>        
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">struct</span> <span class="nc">Trie_Node</span><span class="p">{</span>
+    <span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">,</span> <span class="n">Trie_Node</span><span class="o">*&gt;</span> <span class="n">children</span><span class="p">;</span>
+    <span class="n">string</span> <span class="n">word</span><span class="p">;</span>
+    <span class="n">Trie_Node</span><span class="p">(){</span>
+        <span class="k">this</span><span class="o">-&gt;</span><span class="n">word</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kt">void</span> <span class="nf">Insert_Trie</span><span class="p">(</span><span class="n">Trie_Node</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">s</span><span class="p">){</span>
+    <span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">c</span><span class="p">:</span> <span class="n">s</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">children</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
+            <span class="n">root</span><span class="o">-&gt;</span><span class="n">children</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Trie_Node</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">children</span><span class="p">[</span><span class="n">c</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="n">root</span><span class="o">-&gt;</span><span class="n">word</span> <span class="o">=</span> <span class="n">s</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+
+    <span class="kt">void</span> <span class="n">dfs</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;&gt;&amp;</span> <span class="n">board</span><span class="p">,</span> <span class="n">Trie_Node</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="n">set</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">ans</span><span class="p">,</span> <span class="kt">int</span> <span class="n">len</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">len</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">){</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="kt">char</span> <span class="n">ch</span> <span class="o">=</span> <span class="n">board</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">];</span>
+
+        <span class="k">if</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">children</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+        
+        <span class="n">root</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">children</span><span class="p">[</span><span class="n">ch</span><span class="p">];</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">word</span> <span class="o">!=</span> <span class="s">&#34;&#34;</span><span class="p">){</span>
+            <span class="n">ans</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">word</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">// 同一个单词内不允许访问两次，进行标记
+</span><span class="c1"></span>        <span class="n">board</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;#&#39;</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="kt">int</span> <span class="n">tx</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">dir</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">ty</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dir</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">tx</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">tx</span> <span class="o">&lt;</span> <span class="n">board</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">ty</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">ty</span> <span class="o">&lt;</span> <span class="n">board</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">()){</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">board</span><span class="p">[</span><span class="n">tx</span><span class="p">][</span><span class="n">ty</span><span class="p">]</span> <span class="o">!=</span> <span class="sc">&#39;#&#39;</span><span class="p">)</span>
+                    <span class="n">dfs</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">tx</span><span class="p">,</span> <span class="n">ty</span><span class="p">,</span> <span class="n">ans</span><span class="p">,</span> <span class="n">len</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">board</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">ch</span><span class="p">;</span>
+
+    <span class="p">}</span>
+
+    <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">findWords</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;&gt;&amp;</span> <span class="n">board</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">words</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">Trie_Node</span><span class="o">*</span> <span class="n">root</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Trie_Node</span><span class="p">();</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">;</span>
+        <span class="n">set</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">ans</span><span class="p">;</span>
+
+        <span class="c1">// 把所有需要查询的结点加入到字典树当中
+</span><span class="c1"></span>        <span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">word</span><span class="p">:</span> <span class="n">words</span><span class="p">){</span>
+            <span class="n">Insert_Trie</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">word</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">// 遍历网格查找是否有合适的单词 
+</span><span class="c1"></span>        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">board</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">board</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">){</span>
+                <span class="n">dfs</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">ans</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">word</span><span class="p">:</span> <span class="n">ans</span><span class="p">){</span>
+            <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">word</span><span class="p">);</span>        
+        <span class="p">}</span>
+        
+        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
 </div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
@@ -337,7 +337,7 @@
 
 <div id="comments"></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.95.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.92.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021 - 2022</span></div>
         </div>
     </footer></div>

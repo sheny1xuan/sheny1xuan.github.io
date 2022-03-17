@@ -158,13 +158,13 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span><span class="o">&amp;</span> <span class="n">func1</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// x 是左值
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">x</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span><span class="o">&amp;</span> <span class="n">func1</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// x 是左值
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="n">x</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>
@@ -192,15 +192,15 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">func2</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// x是左值
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">x</span><span class="p">;</span>	
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">int</span><span class="o">&amp;&amp;</span> <span class="n">y</span> <span class="o">=</span> <span class="n">func2</span><span class="p">();</span>	<span class="c1">// y会捕获x的将亡值，延长其生命周期
-</span></span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="nf">func2</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// x是左值
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="n">x</span><span class="p">;</span>	
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="o">&amp;&amp;</span> <span class="n">y</span> <span class="o">=</span> <span class="n">func2</span><span class="p">();</span>	<span class="c1">// y会捕获x的将亡值，延长其生命周期
+</span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li><code>右值引用</code>只可以引用右值，<code>std::move()</code>可以将左值转换为右值，从而延长临时变量的生命周期。左值会在代码段结束后变为将亡值。</li>
@@ -216,12 +216,12 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="c1">// 注意这里a和b虽然都是引用的右值，但是他们是左值
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span><span class="o">&amp;&amp;</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">int</span><span class="o">&amp;</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">	<span class="kt">int</span><span class="o">&amp;</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// error
-</span></span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp">    <span class="c1">// 注意这里a和b虽然都是引用的右值，但是他们是左值
+</span><span class="c1"></span>    <span class="kt">int</span><span class="o">&amp;&amp;</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+    <span class="k">const</span> <span class="kt">int</span><span class="o">&amp;</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+	<span class="kt">int</span><span class="o">&amp;</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// error
+</span></code></pre></td></tr></table>
 </div>
 </div><h3 id="实例">实例</h3>
 <ul>
@@ -252,27 +252,27 @@
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">lv1</span> <span class="o">=</span> <span class="s">&#34;string&#34;</span><span class="p">;</span>     <span class="c1">// 左值
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;&amp;</span> <span class="n">rv1</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">lv1</span><span class="p">);</span>   <span class="c1">// 临时lv1转换为右值，之后lv1仍是一个左值。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// lv1与rv1共享内存
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">    <span class="n">lv1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;a&#39;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">rv1</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">lv1</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;&amp;</span> <span class="n">lv2</span> <span class="o">=</span> <span class="n">lv1</span> <span class="o">+</span> <span class="n">lv1</span><span class="p">;</span>  <span class="c1">// lv1 + lv1 是一个右值，lv2可以引用右值。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">lv3</span> <span class="o">=</span> <span class="n">lv1</span> <span class="o">+</span> <span class="n">lv2</span><span class="p">;</span>   <span class="c1">// 常量左值引用可以引用右值
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>    
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nl">output</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">    <span class="n">atring</span>
-</span></span><span class="line"><span class="cl">    <span class="n">atring</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">lv1</span> <span class="o">=</span> <span class="s">&#34;string&#34;</span><span class="p">;</span>     <span class="c1">// 左值
+</span><span class="c1"></span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;&amp;</span> <span class="n">rv1</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">lv1</span><span class="p">);</span>   <span class="c1">// 临时lv1转换为右值，之后lv1仍是一个左值。
+</span><span class="c1"></span>    <span class="c1">// lv1与rv1共享内存
+</span><span class="c1"></span>
+    <span class="n">lv1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;a&#39;</span><span class="p">;</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">rv1</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">lv1</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;&amp;</span> <span class="n">lv2</span> <span class="o">=</span> <span class="n">lv1</span> <span class="o">+</span> <span class="n">lv1</span><span class="p">;</span>  <span class="c1">// lv1 + lv1 是一个右值，lv2可以引用右值。
+</span><span class="c1"></span>    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">lv3</span> <span class="o">=</span> <span class="n">lv1</span> <span class="o">+</span> <span class="n">lv2</span><span class="p">;</span>   <span class="c1">// 常量左值引用可以引用右值
+</span><span class="c1"></span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>    
+<span class="p">}</span>
+
+<span class="nl">output</span><span class="p">:</span>
+    <span class="n">atring</span>
+    <span class="n">atring</span>
+</code></pre></td></tr></table>
 </div>
 </div><h3 id="右值引用与移动构造函数">右值引用与移动构造函数</h3>
 <ul>
@@ -330,55 +330,55 @@
 </span><span class="lnt">48
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">A</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">        <span class="n">A</span><span class="p">(){</span>
-</span></span><span class="line"><span class="cl">            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;A construct...&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="n">ptr_</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="n">A</span><span class="p">(</span><span class="k">const</span> <span class="n">A</span> <span class="o">&amp;</span> <span class="n">a</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;A copy construct ...&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="n">ptr_</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">            <span class="n">memcpy</span><span class="p">(</span><span class="n">ptr_</span><span class="p">,</span> <span class="n">a</span><span class="p">.</span><span class="n">ptr_</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">        <span class="n">A</span><span class="p">(</span><span class="n">A</span> <span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;A move construct ...&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="n">ptr_</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">ptr_</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="c1">// must set prev nullptr
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// prevent double free.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">a</span><span class="p">.</span><span class="n">ptr_</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="o">~</span><span class="n">A</span><span class="p">(){</span>
-</span></span><span class="line"><span class="cl">            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;A deconstruct ...&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">ptr_</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">                <span class="k">delete</span> <span class="n">ptr_</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="n">A</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">A</span> <span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; A operator= ....&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="o">*</span> <span class="nf">getVal</span><span class="p">(){</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">ptr_</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="k">private</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="o">*</span><span class="n">ptr_</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[]){</span>
-</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">vec</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">vec</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">A</span><span class="p">());</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="k">class</span> <span class="nc">A</span> <span class="p">{</span>
+    <span class="k">public</span><span class="o">:</span>
+        <span class="n">A</span><span class="p">(){</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;A construct...&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+            <span class="n">ptr_</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="n">A</span><span class="p">(</span><span class="k">const</span> <span class="n">A</span> <span class="o">&amp;</span> <span class="n">a</span><span class="p">){</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;A copy construct ...&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+            <span class="n">ptr_</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">();</span>
+            <span class="n">memcpy</span><span class="p">(</span><span class="n">ptr_</span><span class="p">,</span> <span class="n">a</span><span class="p">.</span><span class="n">ptr_</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+        <span class="p">}</span>
+    
+        <span class="n">A</span><span class="p">(</span><span class="n">A</span> <span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">){</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;A move construct ...&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+            <span class="n">ptr_</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">ptr_</span><span class="p">;</span>
+            <span class="c1">// must set prev nullptr
+</span><span class="c1"></span>            <span class="c1">// prevent double free.
+</span><span class="c1"></span>            <span class="n">a</span><span class="p">.</span><span class="n">ptr_</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="o">~</span><span class="n">A</span><span class="p">(){</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;A deconstruct ...&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">ptr_</span><span class="p">){</span>
+                <span class="k">delete</span> <span class="n">ptr_</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="n">A</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">A</span> <span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; A operator= ....&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+            <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="kt">int</span> <span class="o">*</span> <span class="nf">getVal</span><span class="p">(){</span>
+            <span class="k">return</span> <span class="n">ptr_</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="k">private</span><span class="o">:</span>
+        <span class="kt">int</span> <span class="o">*</span><span class="n">ptr_</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[]){</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">vec</span><span class="p">;</span>
+    <span class="n">vec</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">A</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
 </div>
 </div><h3 id="右值引用的返回问题">右值引用的返回问题</h3>
 <h5 id="标准">标准</h5>
@@ -393,14 +393,14 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">return_vector</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">tmp</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">};</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">tmp</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">rval_ref</span> <span class="o">=</span> <span class="n">return_vector</span><span class="p">();</span> <span class="c1">// RVO/通过移动构造函数，构造一个新的对象。
-</span></span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">return_vector</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">tmp</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">};</span>
+    <span class="k">return</span> <span class="n">tmp</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">rval_ref</span> <span class="o">=</span> <span class="n">return_vector</span><span class="p">();</span> <span class="c1">// RVO/通过移动构造函数，构造一个新的对象。
+</span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>不需要将返回值转换为右值，在这个函数结束时，它将通过编译器优化为一个右值。</li>
@@ -427,19 +427,19 @@
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">f</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;&amp;</span> <span class="n">param</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;the value is &#34;</span><span class="o">&lt;&lt;</span> <span class="n">param</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="nl">x</span><span class="p">:</span> <span class="n">v</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// 如果要修改值
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">x</span><span class="p">:</span> <span class="n">v</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// 如果不修改值
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">f</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;&amp;</span> <span class="n">param</span><span class="p">){</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;the value is &#34;</span><span class="o">&lt;&lt;</span> <span class="n">param</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="nl">x</span><span class="p">:</span> <span class="n">v</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 如果要修改值
+</span><span class="c1"></span><span class="p">}</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">x</span><span class="p">:</span> <span class="n">v</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 如果不修改值
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
 </div>
 </div><h3 id="stdmove">std::move</h3>
 <ul>
@@ -454,12 +454,12 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="k">typename</span> <span class="n">remove_reference</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">type</span><span class="o">&amp;&amp;</span> <span class="n">move</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;&amp;</span> <span class="n">t</span><span class="p">)</span> <span class="c1">// 万能引用，可以引用左值，也能引用右值
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">static_case</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">remove_reference</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">type</span><span class="o">&amp;&amp;&gt;</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="k">typename</span> <span class="n">remove_reference</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">type</span><span class="o">&amp;&amp;</span> <span class="n">move</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;&amp;</span> <span class="n">t</span><span class="p">)</span> <span class="c1">// 万能引用，可以引用左值，也能引用右值
+</span><span class="c1"></span><span class="p">{</span>
+    <span class="k">return</span> <span class="n">static_case</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">remove_reference</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">type</span><span class="o">&amp;&amp;&gt;</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
 </div>
 </div><h3 id="引用折叠">引用折叠</h3>
 <ul>
@@ -541,7 +541,7 @@
 
 <div id="comments"></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.95.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.92.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021 - 2022</span></div>
         </div>
     </footer></div>

@@ -161,28 +161,28 @@
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">computeArea</span><span class="p">(</span><span class="kt">int</span> <span class="n">ax1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">ay1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">ax2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">ay2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">bx1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">by1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">bx2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">by2</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">all</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="n">ax2</span> <span class="o">-</span> <span class="n">ax1</span><span class="p">,</span> <span class="n">ay2</span> <span class="o">-</span> <span class="n">ay1</span><span class="p">)</span> <span class="o">+</span> <span class="n">get</span><span class="p">(</span><span class="n">bx2</span> <span class="o">-</span> <span class="n">bx1</span><span class="p">,</span> <span class="n">by2</span> <span class="o">-</span> <span class="n">by1</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">by1</span> <span class="o">&gt;=</span> <span class="n">ay2</span> <span class="o">||</span> <span class="n">ay1</span> <span class="o">&gt;=</span> <span class="n">by2</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">all</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">ax1</span> <span class="o">&gt;=</span> <span class="n">bx2</span> <span class="o">||</span> <span class="n">bx1</span> <span class="o">&gt;=</span> <span class="n">ax2</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">all</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">ax1</span> <span class="o">&gt;</span> <span class="n">bx1</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nf">computeArea</span><span class="p">(</span><span class="n">bx1</span><span class="p">,</span> <span class="n">by1</span><span class="p">,</span> <span class="n">bx2</span><span class="p">,</span> <span class="n">by2</span><span class="p">,</span> <span class="n">ax1</span><span class="p">,</span> <span class="n">ay1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">,</span> <span class="n">ay2</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">all</span> <span class="o">-</span> <span class="n">get</span><span class="p">(</span><span class="n">min</span><span class="p">(</span><span class="n">ax2</span><span class="p">,</span> <span class="n">bx2</span><span class="p">)</span> <span class="o">-</span> <span class="n">bx1</span><span class="p">,</span> <span class="n">min</span><span class="p">(</span><span class="n">ay2</span><span class="p">,</span> <span class="n">by2</span><span class="p">)</span> <span class="o">-</span> <span class="n">max</span><span class="p">(</span><span class="n">by1</span><span class="p">,</span> <span class="n">ay1</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">get</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">computeArea</span><span class="p">(</span><span class="kt">int</span> <span class="n">ax1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">ay1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">ax2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">ay2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">bx1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">by1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">bx2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">by2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">all</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="n">ax2</span> <span class="o">-</span> <span class="n">ax1</span><span class="p">,</span> <span class="n">ay2</span> <span class="o">-</span> <span class="n">ay1</span><span class="p">)</span> <span class="o">+</span> <span class="n">get</span><span class="p">(</span><span class="n">bx2</span> <span class="o">-</span> <span class="n">bx1</span><span class="p">,</span> <span class="n">by2</span> <span class="o">-</span> <span class="n">by1</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">by1</span> <span class="o">&gt;=</span> <span class="n">ay2</span> <span class="o">||</span> <span class="n">ay1</span> <span class="o">&gt;=</span> <span class="n">by2</span><span class="p">){</span>
+            <span class="k">return</span> <span class="n">all</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">ax1</span> <span class="o">&gt;=</span> <span class="n">bx2</span> <span class="o">||</span> <span class="n">bx1</span> <span class="o">&gt;=</span> <span class="n">ax2</span><span class="p">){</span>
+            <span class="k">return</span> <span class="n">all</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">ax1</span> <span class="o">&gt;</span> <span class="n">bx1</span><span class="p">){</span>
+            <span class="k">return</span> <span class="nf">computeArea</span><span class="p">(</span><span class="n">bx1</span><span class="p">,</span> <span class="n">by1</span><span class="p">,</span> <span class="n">bx2</span><span class="p">,</span> <span class="n">by2</span><span class="p">,</span> <span class="n">ax1</span><span class="p">,</span> <span class="n">ay1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">,</span> <span class="n">ay2</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">all</span> <span class="o">-</span> <span class="n">get</span><span class="p">(</span><span class="n">min</span><span class="p">(</span><span class="n">ax2</span><span class="p">,</span> <span class="n">bx2</span><span class="p">)</span> <span class="o">-</span> <span class="n">bx1</span><span class="p">,</span> <span class="n">min</span><span class="p">(</span><span class="n">ay2</span><span class="p">,</span> <span class="n">by2</span><span class="p">)</span> <span class="o">-</span> <span class="n">max</span><span class="p">(</span><span class="n">by1</span><span class="p">,</span> <span class="n">ay1</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="kt">int</span> <span class="nf">get</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">){</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
 </div>
 </div><h3 id="考虑矩形在轴上的投影">考虑矩形在轴上的投影</h3>
 <ul>
@@ -205,18 +205,18 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">computeArea</span><span class="p">(</span><span class="kt">int</span> <span class="n">ax1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">ay1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">ax2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">ay2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">bx1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">by1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">bx2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">by2</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">all</span> <span class="o">=</span> <span class="p">(</span><span class="n">ax2</span> <span class="o">-</span> <span class="n">ax1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">ay2</span> <span class="o">-</span> <span class="n">ay1</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">bx2</span> <span class="o">-</span> <span class="n">bx1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">by2</span> <span class="o">-</span> <span class="n">by1</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">x_both</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">ax2</span><span class="p">,</span> <span class="n">bx2</span><span class="p">)</span> <span class="o">-</span> <span class="n">max</span><span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">bx1</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">y_both</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">ay2</span><span class="p">,</span> <span class="n">by2</span><span class="p">)</span> <span class="o">-</span> <span class="n">max</span><span class="p">(</span><span class="n">ay1</span><span class="p">,</span> <span class="n">by1</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">all</span> <span class="o">-</span> <span class="n">max</span><span class="p">(</span><span class="n">x_both</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="n">max</span><span class="p">(</span><span class="n">y_both</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">computeArea</span><span class="p">(</span><span class="kt">int</span> <span class="n">ax1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">ay1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">ax2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">ay2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">bx1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">by1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">bx2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">by2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">all</span> <span class="o">=</span> <span class="p">(</span><span class="n">ax2</span> <span class="o">-</span> <span class="n">ax1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">ay2</span> <span class="o">-</span> <span class="n">ay1</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">bx2</span> <span class="o">-</span> <span class="n">bx1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">by2</span> <span class="o">-</span> <span class="n">by1</span><span class="p">);</span>
+
+        <span class="kt">int</span> <span class="n">x_both</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">ax2</span><span class="p">,</span> <span class="n">bx2</span><span class="p">)</span> <span class="o">-</span> <span class="n">max</span><span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">bx1</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="n">y_both</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">ay2</span><span class="p">,</span> <span class="n">by2</span><span class="p">)</span> <span class="o">-</span> <span class="n">max</span><span class="p">(</span><span class="n">ay1</span><span class="p">,</span> <span class="n">by1</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="n">all</span> <span class="o">-</span> <span class="n">max</span><span class="p">(</span><span class="n">x_both</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="n">max</span><span class="p">(</span><span class="n">y_both</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
 </div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
@@ -263,7 +263,7 @@
 
 <div id="comments"></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.95.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.92.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021 - 2022</span></div>
         </div>
     </footer></div>

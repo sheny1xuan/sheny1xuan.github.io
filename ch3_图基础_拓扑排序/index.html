@@ -173,13 +173,13 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 邻接表
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">h</span><span class="p">[</span><span class="n">N</span><span class="p">],</span> <span class="n">e</span><span class="p">[</span><span class="n">N</span> <span class="o">*</span> <span class="mi">2</span><span class="p">],</span> <span class="n">ne</span><span class="p">[</span><span class="n">N</span> <span class="o">*</span> <span class="mi">2</span><span class="p">],</span> <span class="n">idx</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="c1">// add a -&gt; b
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">e</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">ne</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">h</span><span class="p">[</span><span class="n">a</span><span class="p">],</span> <span class="n">h</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="n">idx</span><span class="o">++</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// 邻接表
+</span><span class="c1"></span><span class="kt">int</span> <span class="n">h</span><span class="p">[</span><span class="n">N</span><span class="p">],</span> <span class="n">e</span><span class="p">[</span><span class="n">N</span> <span class="o">*</span> <span class="mi">2</span><span class="p">],</span> <span class="n">ne</span><span class="p">[</span><span class="n">N</span> <span class="o">*</span> <span class="mi">2</span><span class="p">],</span> <span class="n">idx</span><span class="p">;</span>
+<span class="c1">// add a -&gt; b
+</span><span class="c1"></span><span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">e</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">ne</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">h</span><span class="p">[</span><span class="n">a</span><span class="p">],</span> <span class="n">h</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="n">idx</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
 </div>
 </div><h3 id="树与图的深度优先搜索">树与图的深度优先搜索</h3>
 <h4 id="有向图dfs模板">有向图DFS模板</h4>
@@ -197,17 +197,17 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 需要标记数组st[N],  遍历节点的每个相邻的边
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">u</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">st</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span> <span class="c1">// 标记，j
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">h</span><span class="p">[</span><span class="n">u</span><span class="p">];</span> <span class="n">i</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">ne</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">st</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">dfs</span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// 需要标记数组st[N],  遍历节点的每个相邻的边
+</span><span class="c1"></span><span class="kt">void</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">u</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">st</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span> <span class="c1">// 标记，j
+</span><span class="c1"></span>    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">h</span><span class="p">[</span><span class="n">u</span><span class="p">];</span> <span class="n">i</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">ne</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">st</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="p">{</span>
+            <span class="n">dfs</span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
 </div>
 </div><h4 id="树的重心">树的重心</h4>
 <p><img
@@ -291,65 +291,65 @@
 </span><span class="lnt">58
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">int</span> <span class="n">N</span> <span class="o">=</span> <span class="mf">1e5</span><span class="o">+</span><span class="mi">10</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="c1">// h表示每个节点的链表头节点，e表示使用的下标为idx的节点的值
-</span></span></span><span class="line"><span class="cl"><span class="c1">// ne表示下标为idx的节点的下一个节点，idx表示当前使用的节点个数。
-</span></span></span><span class="line"><span class="cl"><span class="c1">// 注意所有节点的链表节点头要初始化为-1
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">h</span><span class="p">[</span><span class="n">N</span><span class="p">],</span> <span class="n">e</span><span class="p">[</span><span class="n">N</span><span class="o">*</span><span class="mi">2</span><span class="p">],</span> <span class="n">ne</span><span class="p">[</span><span class="n">N</span><span class="o">*</span><span class="mi">2</span><span class="p">],</span> <span class="n">idx</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">vis</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">N</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// 有向图邻接表
-</span></span></span><span class="line"><span class="cl"><span class="c1">// a-&gt;b插入一个节点
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">    <span class="n">e</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">ne</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">h</span><span class="p">[</span><span class="n">a</span><span class="p">],</span> <span class="n">h</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="n">idx</span><span class="o">++</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="c1">// 相当于是后序遍历，dfs返回每个子树节点的个数。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">u</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">    <span class="n">vis</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">h</span><span class="p">[</span><span class="n">u</span><span class="p">];</span> <span class="n">i</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">ne</span><span class="p">[</span><span class="n">i</span><span class="p">]){</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">vis</span><span class="p">[</span><span class="n">j</span><span class="p">]){</span>
-</span></span><span class="line"><span class="cl">            <span class="n">vis</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">t</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="n">num</span> <span class="o">+=</span> <span class="n">t</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// n-num为树上半部分的节点数
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">res</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="n">num</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">ans</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">ans</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">num</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-</span></span><span class="line"><span class="cl">    <span class="n">memset</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">h</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">&gt;&gt;</span> <span class="n">b</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// 无向图
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="n">add</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="n">dfs</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ans</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="k">const</span> <span class="kt">int</span> <span class="n">N</span> <span class="o">=</span> <span class="mf">1e5</span><span class="o">+</span><span class="mi">10</span><span class="p">;</span>
+<span class="c1">// h表示每个节点的链表头节点，e表示使用的下标为idx的节点的值
+</span><span class="c1">// ne表示下标为idx的节点的下一个节点，idx表示当前使用的节点个数。
+</span><span class="c1">// 注意所有节点的链表节点头要初始化为-1
+</span><span class="c1"></span><span class="kt">int</span> <span class="n">h</span><span class="p">[</span><span class="n">N</span><span class="p">],</span> <span class="n">e</span><span class="p">[</span><span class="n">N</span><span class="o">*</span><span class="mi">2</span><span class="p">],</span> <span class="n">ne</span><span class="p">[</span><span class="n">N</span><span class="o">*</span><span class="mi">2</span><span class="p">],</span> <span class="n">idx</span><span class="p">;</span>
+<span class="kt">bool</span> <span class="n">vis</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">N</span><span class="p">;</span>
+
+<span class="c1">// 有向图邻接表
+</span><span class="c1">// a-&gt;b插入一个节点
+</span><span class="c1"></span><span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">){</span>
+    <span class="n">e</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">ne</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">h</span><span class="p">[</span><span class="n">a</span><span class="p">],</span> <span class="n">h</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="n">idx</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// 相当于是后序遍历，dfs返回每个子树节点的个数。
+</span><span class="c1"></span><span class="kt">int</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">u</span><span class="p">){</span>
+    <span class="n">vis</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+    
+    <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">h</span><span class="p">[</span><span class="n">u</span><span class="p">];</span> <span class="n">i</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">ne</span><span class="p">[</span><span class="n">i</span><span class="p">]){</span>
+        <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">vis</span><span class="p">[</span><span class="n">j</span><span class="p">]){</span>
+            <span class="n">vis</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+            
+            <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">t</span><span class="p">);</span>
+            <span class="n">num</span> <span class="o">+=</span> <span class="n">t</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="c1">// n-num为树上半部分的节点数
+</span><span class="c1"></span>    <span class="n">res</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="n">num</span><span class="p">);</span>
+    <span class="n">ans</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">ans</span><span class="p">);</span>
+    
+    <span class="k">return</span> <span class="n">num</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">h</span><span class="p">));</span>
+    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span><span class="p">;</span>
+    
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">;</span>
+        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">&gt;&gt;</span> <span class="n">b</span><span class="p">;</span>
+        <span class="c1">// 无向图
+</span><span class="c1"></span>        <span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="n">add</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="n">dfs</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ans</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
 </div>
 </div><h3 id="树与图的宽度优先搜索">树与图的宽度优先搜索</h3>
 <ul>
@@ -366,13 +366,13 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">queue</span> <span class="o">&lt;-</span> <span class="n">head</span>
-</span></span><span class="line"><span class="cl"><span class="k">while</span><span class="p">(</span><span class="n">queue</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">    <span class="n">t</span> <span class="o">&lt;-</span> <span class="n">queue</span> <span class="n">head</span>
-</span></span><span class="line"><span class="cl">    <span class="err">标记</span><span class="n">t已经访问</span>
-</span></span><span class="line"><span class="cl">    <span class="err">拓展</span><span class="n">t</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">queue</span> <span class="o">&lt;-</span> <span class="n">head</span>
+<span class="k">while</span><span class="p">(</span><span class="n">queue</span><span class="p">){</span>
+    <span class="n">t</span> <span class="o">&lt;-</span> <span class="n">queue</span> <span class="n">head</span>
+    <span class="err">标记</span><span class="n">t已经访问</span>
+    <span class="err">拓展</span><span class="n">t</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
 </div>
 </div><h4 id="图中点的层次">图中点的层次</h4>
 <p><img
@@ -450,67 +450,67 @@
 </span><span class="lnt">60
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;queue&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">int</span> <span class="n">N</span> <span class="o">=</span> <span class="mf">1e5</span><span class="o">+</span><span class="mi">10</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">h</span><span class="p">[</span><span class="n">N</span><span class="p">],</span> <span class="n">e</span><span class="p">[</span><span class="n">N</span><span class="p">],</span> <span class="n">ne</span><span class="p">[</span><span class="n">N</span><span class="p">],</span> <span class="n">idx</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="c1">// d表示每个节点到1节点的距离。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">d</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">    <span class="n">e</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">ne</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">h</span><span class="p">[</span><span class="n">a</span><span class="p">],</span> <span class="n">h</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="n">idx</span><span class="o">++</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">bfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">    <span class="n">queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">que</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="n">que</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="n">memset</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">d</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">    <span class="n">d</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">que</span><span class="p">.</span><span class="n">empty</span><span class="p">()){</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">que</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="n">que</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">h</span><span class="p">[</span><span class="n">t</span><span class="p">];</span> <span class="n">i</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">ne</span><span class="p">[</span><span class="n">i</span><span class="p">]){</span>
-</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">                <span class="n">d</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                <span class="n">que</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">d</span><span class="p">[</span><span class="n">n</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-</span></span><span class="line"><span class="cl">    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span> <span class="o">&gt;&gt;</span> <span class="n">m</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="n">memset</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">h</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="k">while</span><span class="p">(</span><span class="n">m</span><span class="o">--</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">&gt;&gt;</span> <span class="n">b</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">bfs</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;queue&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="k">const</span> <span class="kt">int</span> <span class="n">N</span> <span class="o">=</span> <span class="mf">1e5</span><span class="o">+</span><span class="mi">10</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="n">h</span><span class="p">[</span><span class="n">N</span><span class="p">],</span> <span class="n">e</span><span class="p">[</span><span class="n">N</span><span class="p">],</span> <span class="n">ne</span><span class="p">[</span><span class="n">N</span><span class="p">],</span> <span class="n">idx</span><span class="p">;</span>
+<span class="c1">// d表示每个节点到1节点的距离。
+</span><span class="c1"></span><span class="kt">int</span> <span class="n">d</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">){</span>
+    <span class="n">e</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">ne</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">h</span><span class="p">[</span><span class="n">a</span><span class="p">],</span> <span class="n">h</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="n">idx</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">bfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
+    <span class="n">queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">que</span><span class="p">;</span>
+    
+    <span class="n">que</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+    
+    <span class="n">memset</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">d</span><span class="p">));</span>
+    <span class="n">d</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    
+    <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">que</span><span class="p">.</span><span class="n">empty</span><span class="p">()){</span>
+        <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">que</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+
+        <span class="n">que</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+        
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">h</span><span class="p">[</span><span class="n">t</span><span class="p">];</span> <span class="n">i</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">ne</span><span class="p">[</span><span class="n">i</span><span class="p">]){</span>
+            <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+
+            <span class="k">if</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">){</span>
+                <span class="n">d</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+                <span class="n">que</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
+            <span class="p">}</span>
+            
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="n">d</span><span class="p">[</span><span class="n">n</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span> <span class="o">&gt;&gt;</span> <span class="n">m</span><span class="p">;</span>
+    
+    <span class="n">memset</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">h</span><span class="p">));</span>
+    
+    <span class="k">while</span><span class="p">(</span><span class="n">m</span><span class="o">--</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">;</span>
+        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">&gt;&gt;</span> <span class="n">b</span><span class="p">;</span>
+        <span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">bfs</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
 </div>
 </div><h2 id="拓扑排序">拓扑排序</h2>
 <ul>
@@ -620,78 +620,78 @@
 </span><span class="lnt">71
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;queue&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">int</span> <span class="n">N</span> <span class="o">=</span> <span class="mf">1e5</span><span class="o">+</span><span class="mi">10</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">h</span><span class="p">[</span><span class="n">N</span><span class="p">],</span> <span class="n">e</span><span class="p">[</span><span class="n">N</span><span class="o">*</span><span class="mi">2</span><span class="p">],</span> <span class="n">ne</span><span class="p">[</span><span class="n">N</span><span class="o">*</span><span class="mi">2</span><span class="p">],</span> <span class="n">idx</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="c1">// d存储每个节点的入度个数。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">d</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">    <span class="n">e</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">ne</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">h</span><span class="p">[</span><span class="n">a</span><span class="p">],</span> <span class="n">h</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="n">idx</span><span class="o">++</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">d</span><span class="p">[</span><span class="n">b</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="nf">topsort</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">res</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">    <span class="n">queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">que</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">            <span class="n">que</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">in_que</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">que</span><span class="p">.</span><span class="n">empty</span><span class="p">()){</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">que</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// 出队顺序就是拓扑排序的顺序
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">que</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="n">in_que</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">h</span><span class="p">[</span><span class="n">t</span><span class="p">];</span> <span class="n">i</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">ne</span><span class="p">[</span><span class="n">i</span><span class="p">]){</span>
-</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">            <span class="n">d</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">                <span class="n">que</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">in_que</span> <span class="o">==</span> <span class="n">n</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-</span></span><span class="line"><span class="cl">    <span class="n">memset</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">h</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span> <span class="o">&gt;&gt;</span> <span class="n">m</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">&gt;&gt;</span> <span class="n">b</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">topsort</span><span class="p">(</span><span class="n">res</span><span class="p">)){</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">res</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39; &#39;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;queue&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="k">const</span> <span class="kt">int</span> <span class="n">N</span> <span class="o">=</span> <span class="mf">1e5</span><span class="o">+</span><span class="mi">10</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="n">h</span><span class="p">[</span><span class="n">N</span><span class="p">],</span> <span class="n">e</span><span class="p">[</span><span class="n">N</span><span class="o">*</span><span class="mi">2</span><span class="p">],</span> <span class="n">ne</span><span class="p">[</span><span class="n">N</span><span class="o">*</span><span class="mi">2</span><span class="p">],</span> <span class="n">idx</span><span class="p">;</span>
+<span class="c1">// d存储每个节点的入度个数。
+</span><span class="c1"></span><span class="kt">int</span> <span class="n">d</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">){</span>
+    <span class="n">e</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">ne</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">h</span><span class="p">[</span><span class="n">a</span><span class="p">],</span> <span class="n">h</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="n">idx</span><span class="o">++</span><span class="p">;</span>
+    <span class="n">d</span><span class="p">[</span><span class="n">b</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">bool</span> <span class="nf">topsort</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">res</span><span class="p">){</span>
+    <span class="n">queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">que</span><span class="p">;</span>
+    
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
+            <span class="n">que</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="n">in_que</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">que</span><span class="p">.</span><span class="n">empty</span><span class="p">()){</span>
+        <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">que</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+        <span class="c1">// 出队顺序就是拓扑排序的顺序
+</span><span class="c1"></span>        <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+        <span class="n">que</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+        <span class="n">in_que</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+        
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">h</span><span class="p">[</span><span class="n">t</span><span class="p">];</span> <span class="n">i</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">ne</span><span class="p">[</span><span class="n">i</span><span class="p">]){</span>
+            <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
+                <span class="n">que</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="n">in_que</span> <span class="o">==</span> <span class="n">n</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">h</span><span class="p">));</span>
+    
+    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span> <span class="o">&gt;&gt;</span> <span class="n">m</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">;</span>
+        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">&gt;&gt;</span> <span class="n">b</span><span class="p">;</span>
+        <span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">topsort</span><span class="p">(</span><span class="n">res</span><span class="p">)){</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">res</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39; &#39;</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
 </div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
@@ -738,7 +738,7 @@
 
 <div id="comments"></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.95.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.92.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021 - 2022</span></div>
         </div>
     </footer></div>

@@ -165,8 +165,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Mismatched free() / delete / delete []
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Mismatched free() / delete / delete []
+</code></pre></td></tr></table>
 </div>
 </div><h4 id="内存泄露的类型">内存泄露的类型</h4>
 <div class="highlight"><div class="chroma">
@@ -199,33 +199,33 @@
 </span><span class="lnt">26
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">     Pointer chain            AAA Leak Case   BBB Leak Case
-</span></span><span class="line"><span class="cl">     -------------            -------------   -------------
-</span></span><span class="line"><span class="cl">(1)  RRR ------------&gt; BBB                    DR
-</span></span><span class="line"><span class="cl">(2)  RRR ---&gt; AAA ---&gt; BBB    DR              IR
-</span></span><span class="line"><span class="cl">(3)  RRR               BBB                    DL
-</span></span><span class="line"><span class="cl">(4)  RRR      AAA ---&gt; BBB    DL              IL
-</span></span><span class="line"><span class="cl">(5)  RRR ------?-----&gt; BBB                    (y)DR, (n)DL
-</span></span><span class="line"><span class="cl">(6)  RRR ---&gt; AAA -?-&gt; BBB    DR              (y)IR, (n)DL
-</span></span><span class="line"><span class="cl">(7)  RRR -?-&gt; AAA ---&gt; BBB    (y)DR, (n)DL    (y)IR, (n)IL
-</span></span><span class="line"><span class="cl">(8)  RRR -?-&gt; AAA -?-&gt; BBB    (y)DR, (n)DL    (y,y)IR, (n,y)IL, (_,n)DL
-</span></span><span class="line"><span class="cl">(9)  RRR      AAA -?-&gt; BBB    DL              (y)IL, (n)DL
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Pointer chain legend:
-</span></span><span class="line"><span class="cl">- RRR: a root set node or DR block
-</span></span><span class="line"><span class="cl">- AAA, BBB: heap blocks
-</span></span><span class="line"><span class="cl">- ---&gt;: a start-pointer
-</span></span><span class="line"><span class="cl">- -?-&gt;: an interior-pointer
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Leak Case legend:
-</span></span><span class="line"><span class="cl">- DR: Directly reachable
-</span></span><span class="line"><span class="cl">- IR: Indirectly reachable
-</span></span><span class="line"><span class="cl">- DL: Directly lost
-</span></span><span class="line"><span class="cl">- IL: Indirectly lost
-</span></span><span class="line"><span class="cl">- (y)XY: it&#39;s XY if the interior-pointer is a real pointer
-</span></span><span class="line"><span class="cl">- (n)XY: it&#39;s XY if the interior-pointer is not a real pointer
-</span></span><span class="line"><span class="cl">- (_)XY: it&#39;s XY in either case
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">     Pointer chain            AAA Leak Case   BBB Leak Case
+     -------------            -------------   -------------
+(1)  RRR ------------&gt; BBB                    DR
+(2)  RRR ---&gt; AAA ---&gt; BBB    DR              IR
+(3)  RRR               BBB                    DL
+(4)  RRR      AAA ---&gt; BBB    DL              IL
+(5)  RRR ------?-----&gt; BBB                    (y)DR, (n)DL
+(6)  RRR ---&gt; AAA -?-&gt; BBB    DR              (y)IR, (n)DL
+(7)  RRR -?-&gt; AAA ---&gt; BBB    (y)DR, (n)DL    (y)IR, (n)IL
+(8)  RRR -?-&gt; AAA -?-&gt; BBB    (y)DR, (n)DL    (y,y)IR, (n,y)IL, (_,n)DL
+(9)  RRR      AAA -?-&gt; BBB    DL              (y)IL, (n)DL
+
+Pointer chain legend:
+- RRR: a root set node or DR block
+- AAA, BBB: heap blocks
+- ---&gt;: a start-pointer
+- -?-&gt;: an interior-pointer
+
+Leak Case legend:
+- DR: Directly reachable
+- IR: Indirectly reachable
+- DL: Directly lost
+- IL: Indirectly lost
+- (y)XY: it&#39;s XY if the interior-pointer is a real pointer
+- (n)XY: it&#39;s XY if the interior-pointer is not a real pointer
+- (_)XY: it&#39;s XY in either case
+</code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>主要有两种Directly lost和Indirectly lost，主要是情况3和情况4。</li>
@@ -270,41 +270,41 @@
 </span><span class="lnt">34
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;malloc.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdint.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">void</span> <span class="o">*</span><span class="n">RRR</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="o">*</span><span class="n">AAA</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="o">*</span><span class="n">BBB</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">RRR</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">AAA</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">BBB</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="o">*</span><span class="p">(</span><span class="kt">uint64_t</span><span class="o">*</span><span class="p">)</span><span class="n">RRR</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uint64_t</span><span class="p">)(</span><span class="kt">uint64_t</span><span class="o">*</span><span class="p">)</span><span class="n">AAA</span><span class="p">;</span> <span class="c1">// 将RRR指向的块指向AAA指向的块
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="o">*</span><span class="p">(</span><span class="kt">uint64_t</span><span class="o">*</span><span class="p">)</span><span class="n">AAA</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uint64_t</span><span class="p">)(</span><span class="kt">uint64_t</span><span class="o">*</span><span class="p">)</span><span class="n">BBB</span><span class="p">;</span> <span class="c1">// 将AAA指向的块指向BBB指向的块
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">AAA</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">BBB</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="o">*</span><span class="p">(</span><span class="kt">uint64_t</span><span class="o">*</span><span class="p">)</span><span class="n">RRR</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6007</span><span class="o">==</span> <span class="n">HEAP</span> <span class="nl">SUMMARY</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6007</span><span class="o">==</span>     <span class="n">in</span> <span class="n">use</span> <span class="n">at</span> <span class="nl">exit</span><span class="p">:</span> <span class="mi">24</span> <span class="n">bytes</span> <span class="n">in</span> <span class="mi">3</span> <span class="n">blocks</span>
-</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6007</span><span class="o">==</span>   <span class="n">total</span> <span class="n">heap</span> <span class="nl">usage</span><span class="p">:</span> <span class="mi">3</span> <span class="n">allocs</span><span class="p">,</span> <span class="mi">0</span> <span class="n">frees</span><span class="p">,</span> <span class="mi">24</span> <span class="n">bytes</span> <span class="n">allocated</span>
-</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6007</span><span class="o">==</span>
-</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6007</span><span class="o">==</span> <span class="n">LEAK</span> <span class="nl">SUMMARY</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6007</span><span class="o">==</span>    <span class="n">definitely</span> <span class="nl">lost</span><span class="p">:</span> <span class="mi">8</span> <span class="n">bytes</span> <span class="n">in</span> <span class="mi">1</span> <span class="n">blocks</span>  <span class="p">(</span><span class="n">AAA</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6007</span><span class="o">==</span>    <span class="n">indirectly</span> <span class="nl">lost</span><span class="p">:</span> <span class="mi">8</span> <span class="n">bytes</span> <span class="n">in</span> <span class="mi">1</span> <span class="n">blocks</span>  <span class="p">(</span><span class="n">BBB</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6007</span><span class="o">==</span>      <span class="n">possibly</span> <span class="nl">lost</span><span class="p">:</span> <span class="mi">0</span> <span class="n">bytes</span> <span class="n">in</span> <span class="mi">0</span> <span class="n">blocks</span>
-</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6007</span><span class="o">==</span>    <span class="n">still</span> <span class="nl">reachable</span><span class="p">:</span> <span class="mi">8</span> <span class="n">bytes</span> <span class="n">in</span> <span class="mi">1</span> <span class="n">blocks</span>
-</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6007</span><span class="o">==</span>         <span class="nl">suppressed</span><span class="p">:</span> <span class="mi">0</span> <span class="n">bytes</span> <span class="n">in</span> <span class="mi">0</span> <span class="n">blocks</span>
-</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6007</span><span class="o">==</span> <span class="n">Rerun</span> <span class="n">with</span> <span class="o">--</span><span class="n">leak</span><span class="o">-</span><span class="n">check</span><span class="o">=</span><span class="n">full</span> <span class="n">to</span> <span class="n">see</span> <span class="n">details</span> <span class="n">of</span> <span class="n">leaked</span> <span class="n">memory</span>
-</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6007</span><span class="o">==</span>
-</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6007</span><span class="o">==</span> <span class="n">For</span> <span class="n">counts</span> <span class="n">of</span> <span class="n">detected</span> <span class="n">and</span> <span class="n">suppressed</span> <span class="n">errors</span><span class="p">,</span> <span class="n">rerun</span> <span class="nl">with</span><span class="p">:</span> <span class="o">-</span><span class="n">v</span>
-</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6007</span><span class="o">==</span> <span class="n">ERROR</span> <span class="nl">SUMMARY</span><span class="p">:</span> <span class="mi">0</span> <span class="n">errors</span> <span class="n">from</span> <span class="mi">0</span> <span class="n">contexts</span> <span class="p">(</span><span class="nl">suppressed</span><span class="p">:</span> <span class="mi">0</span> <span class="n">from</span> <span class="mi">0</span><span class="p">)</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;malloc.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;stdint.h&gt;</span><span class="cp">
+</span><span class="cp"></span><span class="kt">void</span> <span class="o">*</span><span class="n">RRR</span><span class="p">;</span>
+<span class="kt">void</span> <span class="o">*</span><span class="n">AAA</span><span class="p">;</span>
+<span class="kt">void</span> <span class="o">*</span><span class="n">BBB</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">RRR</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
+    <span class="n">AAA</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
+    <span class="n">BBB</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
+
+    <span class="o">*</span><span class="p">(</span><span class="kt">uint64_t</span><span class="o">*</span><span class="p">)</span><span class="n">RRR</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uint64_t</span><span class="p">)(</span><span class="kt">uint64_t</span><span class="o">*</span><span class="p">)</span><span class="n">AAA</span><span class="p">;</span> <span class="c1">// 将RRR指向的块指向AAA指向的块
+</span><span class="c1"></span>    <span class="o">*</span><span class="p">(</span><span class="kt">uint64_t</span><span class="o">*</span><span class="p">)</span><span class="n">AAA</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uint64_t</span><span class="p">)(</span><span class="kt">uint64_t</span><span class="o">*</span><span class="p">)</span><span class="n">BBB</span><span class="p">;</span> <span class="c1">// 将AAA指向的块指向BBB指向的块
+</span><span class="c1"></span>    <span class="n">AAA</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="n">BBB</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="o">*</span><span class="p">(</span><span class="kt">uint64_t</span><span class="o">*</span><span class="p">)</span><span class="n">RRR</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="o">==</span><span class="mi">6007</span><span class="o">==</span> <span class="n">HEAP</span> <span class="nl">SUMMARY</span><span class="p">:</span>
+<span class="o">==</span><span class="mi">6007</span><span class="o">==</span>     <span class="n">in</span> <span class="n">use</span> <span class="n">at</span> <span class="nl">exit</span><span class="p">:</span> <span class="mi">24</span> <span class="n">bytes</span> <span class="n">in</span> <span class="mi">3</span> <span class="n">blocks</span>
+<span class="o">==</span><span class="mi">6007</span><span class="o">==</span>   <span class="n">total</span> <span class="n">heap</span> <span class="nl">usage</span><span class="p">:</span> <span class="mi">3</span> <span class="n">allocs</span><span class="p">,</span> <span class="mi">0</span> <span class="n">frees</span><span class="p">,</span> <span class="mi">24</span> <span class="n">bytes</span> <span class="n">allocated</span>
+<span class="o">==</span><span class="mi">6007</span><span class="o">==</span>
+<span class="o">==</span><span class="mi">6007</span><span class="o">==</span> <span class="n">LEAK</span> <span class="nl">SUMMARY</span><span class="p">:</span>
+<span class="o">==</span><span class="mi">6007</span><span class="o">==</span>    <span class="n">definitely</span> <span class="nl">lost</span><span class="p">:</span> <span class="mi">8</span> <span class="n">bytes</span> <span class="n">in</span> <span class="mi">1</span> <span class="n">blocks</span>  <span class="p">(</span><span class="n">AAA</span><span class="p">)</span>
+<span class="o">==</span><span class="mi">6007</span><span class="o">==</span>    <span class="n">indirectly</span> <span class="nl">lost</span><span class="p">:</span> <span class="mi">8</span> <span class="n">bytes</span> <span class="n">in</span> <span class="mi">1</span> <span class="n">blocks</span>  <span class="p">(</span><span class="n">BBB</span><span class="p">)</span>
+<span class="o">==</span><span class="mi">6007</span><span class="o">==</span>      <span class="n">possibly</span> <span class="nl">lost</span><span class="p">:</span> <span class="mi">0</span> <span class="n">bytes</span> <span class="n">in</span> <span class="mi">0</span> <span class="n">blocks</span>
+<span class="o">==</span><span class="mi">6007</span><span class="o">==</span>    <span class="n">still</span> <span class="nl">reachable</span><span class="p">:</span> <span class="mi">8</span> <span class="n">bytes</span> <span class="n">in</span> <span class="mi">1</span> <span class="n">blocks</span>
+<span class="o">==</span><span class="mi">6007</span><span class="o">==</span>         <span class="nl">suppressed</span><span class="p">:</span> <span class="mi">0</span> <span class="n">bytes</span> <span class="n">in</span> <span class="mi">0</span> <span class="n">blocks</span>
+<span class="o">==</span><span class="mi">6007</span><span class="o">==</span> <span class="n">Rerun</span> <span class="n">with</span> <span class="o">--</span><span class="n">leak</span><span class="o">-</span><span class="n">check</span><span class="o">=</span><span class="n">full</span> <span class="n">to</span> <span class="n">see</span> <span class="n">details</span> <span class="n">of</span> <span class="n">leaked</span> <span class="n">memory</span>
+<span class="o">==</span><span class="mi">6007</span><span class="o">==</span>
+<span class="o">==</span><span class="mi">6007</span><span class="o">==</span> <span class="n">For</span> <span class="n">counts</span> <span class="n">of</span> <span class="n">detected</span> <span class="n">and</span> <span class="n">suppressed</span> <span class="n">errors</span><span class="p">,</span> <span class="n">rerun</span> <span class="nl">with</span><span class="p">:</span> <span class="o">-</span><span class="n">v</span>
+<span class="o">==</span><span class="mi">6007</span><span class="o">==</span> <span class="n">ERROR</span> <span class="nl">SUMMARY</span><span class="p">:</span> <span class="mi">0</span> <span class="n">errors</span> <span class="n">from</span> <span class="mi">0</span> <span class="n">contexts</span> <span class="p">(</span><span class="nl">suppressed</span><span class="p">:</span> <span class="mi">0</span> <span class="n">from</span> <span class="mi">0</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
 </div><h4 id="interior-pointer">interior-pointer</h4>
 <ul>
@@ -344,37 +344,37 @@
 </span><span class="lnt">30
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;malloc.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdint.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">void</span> <span class="o">*</span><span class="n">RRR</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="o">*</span><span class="n">AAA</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="o">*</span><span class="n">BBB</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">RRR</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="o">*</span><span class="p">(</span><span class="kt">uint64_t</span><span class="o">*</span><span class="p">)</span><span class="n">RRR</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">RRR</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">RRR</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6429</span><span class="o">==</span> <span class="n">HEAP</span> <span class="nl">SUMMARY</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6429</span><span class="o">==</span>     <span class="n">in</span> <span class="n">use</span> <span class="n">at</span> <span class="nl">exit</span><span class="p">:</span> <span class="mi">8</span> <span class="n">bytes</span> <span class="n">in</span> <span class="mi">1</span> <span class="n">blocks</span>
-</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6429</span><span class="o">==</span>   <span class="n">total</span> <span class="n">heap</span> <span class="nl">usage</span><span class="p">:</span> <span class="mi">1</span> <span class="n">allocs</span><span class="p">,</span> <span class="mi">0</span> <span class="n">frees</span><span class="p">,</span> <span class="mi">8</span> <span class="n">bytes</span> <span class="n">allocated</span>
-</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6429</span><span class="o">==</span>
-</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6429</span><span class="o">==</span> <span class="n">LEAK</span> <span class="nl">SUMMARY</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6429</span><span class="o">==</span>    <span class="n">definitely</span> <span class="nl">lost</span><span class="p">:</span> <span class="mi">0</span> <span class="n">bytes</span> <span class="n">in</span> <span class="mi">0</span> <span class="n">blocks</span>
-</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6429</span><span class="o">==</span>    <span class="n">indirectly</span> <span class="nl">lost</span><span class="p">:</span> <span class="mi">0</span> <span class="n">bytes</span> <span class="n">in</span> <span class="mi">0</span> <span class="n">blocks</span>
-</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6429</span><span class="o">==</span>      <span class="n">possibly</span> <span class="nl">lost</span><span class="p">:</span> <span class="mi">8</span> <span class="n">bytes</span> <span class="n">in</span> <span class="mi">1</span> <span class="n">blocks</span>  <span class="p">(</span><span class="n">pointer</span> <span class="n">not</span> <span class="n">in</span> <span class="n">block</span> <span class="n">begin</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6429</span><span class="o">==</span>    <span class="n">still</span> <span class="nl">reachable</span><span class="p">:</span> <span class="mi">0</span> <span class="n">bytes</span> <span class="n">in</span> <span class="mi">0</span> <span class="n">blocks</span>
-</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6429</span><span class="o">==</span>         <span class="nl">suppressed</span><span class="p">:</span> <span class="mi">0</span> <span class="n">bytes</span> <span class="n">in</span> <span class="mi">0</span> <span class="n">blocks</span>
-</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6429</span><span class="o">==</span> <span class="n">Rerun</span> <span class="n">with</span> <span class="o">--</span><span class="n">leak</span><span class="o">-</span><span class="n">check</span><span class="o">=</span><span class="n">full</span> <span class="n">to</span> <span class="n">see</span> <span class="n">details</span> <span class="n">of</span> <span class="n">leaked</span> <span class="n">memory</span>
-</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6429</span><span class="o">==</span>
-</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6429</span><span class="o">==</span> <span class="n">For</span> <span class="n">counts</span> <span class="n">of</span> <span class="n">detected</span> <span class="n">and</span> <span class="n">suppressed</span> <span class="n">errors</span><span class="p">,</span> <span class="n">rerun</span> <span class="nl">with</span><span class="p">:</span> <span class="o">-</span><span class="n">v</span>
-</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="mi">6429</span><span class="o">==</span> <span class="n">ERROR</span> <span class="nl">SUMMARY</span><span class="p">:</span> <span class="mi">0</span> <span class="n">errors</span> <span class="n">from</span> <span class="mi">0</span> <span class="n">contexts</span> <span class="p">(</span><span class="nl">suppressed</span><span class="p">:</span> <span class="mi">0</span> <span class="n">from</span> <span class="mi">0</span><span class="p">)</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;malloc.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;stdint.h&gt;</span><span class="cp">
+</span><span class="cp"></span><span class="kt">void</span> <span class="o">*</span><span class="n">RRR</span><span class="p">;</span>
+<span class="kt">void</span> <span class="o">*</span><span class="n">AAA</span><span class="p">;</span>
+<span class="kt">void</span> <span class="o">*</span><span class="n">BBB</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">RRR</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
+
+    <span class="o">*</span><span class="p">(</span><span class="kt">uint64_t</span><span class="o">*</span><span class="p">)</span><span class="n">RRR</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">RRR</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">RRR</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span>
+    
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="o">==</span><span class="mi">6429</span><span class="o">==</span> <span class="n">HEAP</span> <span class="nl">SUMMARY</span><span class="p">:</span>
+<span class="o">==</span><span class="mi">6429</span><span class="o">==</span>     <span class="n">in</span> <span class="n">use</span> <span class="n">at</span> <span class="nl">exit</span><span class="p">:</span> <span class="mi">8</span> <span class="n">bytes</span> <span class="n">in</span> <span class="mi">1</span> <span class="n">blocks</span>
+<span class="o">==</span><span class="mi">6429</span><span class="o">==</span>   <span class="n">total</span> <span class="n">heap</span> <span class="nl">usage</span><span class="p">:</span> <span class="mi">1</span> <span class="n">allocs</span><span class="p">,</span> <span class="mi">0</span> <span class="n">frees</span><span class="p">,</span> <span class="mi">8</span> <span class="n">bytes</span> <span class="n">allocated</span>
+<span class="o">==</span><span class="mi">6429</span><span class="o">==</span>
+<span class="o">==</span><span class="mi">6429</span><span class="o">==</span> <span class="n">LEAK</span> <span class="nl">SUMMARY</span><span class="p">:</span>
+<span class="o">==</span><span class="mi">6429</span><span class="o">==</span>    <span class="n">definitely</span> <span class="nl">lost</span><span class="p">:</span> <span class="mi">0</span> <span class="n">bytes</span> <span class="n">in</span> <span class="mi">0</span> <span class="n">blocks</span>
+<span class="o">==</span><span class="mi">6429</span><span class="o">==</span>    <span class="n">indirectly</span> <span class="nl">lost</span><span class="p">:</span> <span class="mi">0</span> <span class="n">bytes</span> <span class="n">in</span> <span class="mi">0</span> <span class="n">blocks</span>
+<span class="o">==</span><span class="mi">6429</span><span class="o">==</span>      <span class="n">possibly</span> <span class="nl">lost</span><span class="p">:</span> <span class="mi">8</span> <span class="n">bytes</span> <span class="n">in</span> <span class="mi">1</span> <span class="n">blocks</span>  <span class="p">(</span><span class="n">pointer</span> <span class="n">not</span> <span class="n">in</span> <span class="n">block</span> <span class="n">begin</span><span class="p">)</span>
+<span class="o">==</span><span class="mi">6429</span><span class="o">==</span>    <span class="n">still</span> <span class="nl">reachable</span><span class="p">:</span> <span class="mi">0</span> <span class="n">bytes</span> <span class="n">in</span> <span class="mi">0</span> <span class="n">blocks</span>
+<span class="o">==</span><span class="mi">6429</span><span class="o">==</span>         <span class="nl">suppressed</span><span class="p">:</span> <span class="mi">0</span> <span class="n">bytes</span> <span class="n">in</span> <span class="mi">0</span> <span class="n">blocks</span>
+<span class="o">==</span><span class="mi">6429</span><span class="o">==</span> <span class="n">Rerun</span> <span class="n">with</span> <span class="o">--</span><span class="n">leak</span><span class="o">-</span><span class="n">check</span><span class="o">=</span><span class="n">full</span> <span class="n">to</span> <span class="n">see</span> <span class="n">details</span> <span class="n">of</span> <span class="n">leaked</span> <span class="n">memory</span>
+<span class="o">==</span><span class="mi">6429</span><span class="o">==</span>
+<span class="o">==</span><span class="mi">6429</span><span class="o">==</span> <span class="n">For</span> <span class="n">counts</span> <span class="n">of</span> <span class="n">detected</span> <span class="n">and</span> <span class="n">suppressed</span> <span class="n">errors</span><span class="p">,</span> <span class="n">rerun</span> <span class="nl">with</span><span class="p">:</span> <span class="o">-</span><span class="n">v</span>
+<span class="o">==</span><span class="mi">6429</span><span class="o">==</span> <span class="n">ERROR</span> <span class="nl">SUMMARY</span><span class="p">:</span> <span class="mi">0</span> <span class="n">errors</span> <span class="n">from</span> <span class="mi">0</span> <span class="n">contexts</span> <span class="p">(</span><span class="nl">suppressed</span><span class="p">:</span> <span class="mi">0</span> <span class="n">from</span> <span class="mi">0</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
 </div><h3 id="callgrind">callgrind</h3>
 <h4 id="profile">profile</h4>
@@ -434,7 +434,7 @@
 
 <div id="comments"></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.95.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.92.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021 - 2022</span></div>
         </div>
     </footer></div>
