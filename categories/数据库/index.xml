@@ -1,0 +1,36 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>数据库 - 分类 - stonex</title>
+        <link>https://sheny1xuan.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+        <description>数据库 - 分类 - stonex</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sheny1xuan@163.com (Shen)</managingEditor>
+            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Sat, 07 May 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://sheny1xuan.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="self" type="application/rss+xml" /><item>
+    <title>cmu15-445-project4</title>
+    <link>https://sheny1xuan.github.io/cmu15-445-project4/</link>
+    <pubDate>Sat, 07 May 2022 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/cmu15-445-project4/</guid>
+    <description><![CDATA[2021 FALL cmu15-445-project4 实现基于抢占的读写锁(lock manager)，涉及的知识点为ppt15-18章。 事务 事务是一系列数据库请求，这些请求的执行要么全部成]]></description>
+</item><item>
+    <title>cmu15-445-project0,1</title>
+    <link>https://sheny1xuan.github.io/cmu15-445-project0_1/</link>
+    <pubDate>Wed, 27 Apr 2022 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/cmu15-445-project0_1/</guid>
+    <description><![CDATA[2021 FALL cmu15-445-project0,1 写在前面 过去也看了一些公开课了，但是从来没有完整的做完一个课程的实验，cmu15-445也相当于我第一个完整做完的课程实验。由于202]]></description>
+</item><item>
+    <title>cmu15-445-project2</title>
+    <link>https://sheny1xuan.github.io/cmu15-445-project2/</link>
+    <pubDate>Wed, 27 Apr 2022 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/cmu15-445-project2/</guid>
+    <description><![CDATA[2021 FALL cmu15-445-project2 实现哈希索引，涉及的的知识点为ppt6-8章。 哈希索引 哈希表关键问题 哈希函数 哈希冲突处理 常用哈希函数 哈希分类 静态哈希：散列函数不随数据]]></description>
+</item><item>
+    <title>cmu15-445-project3</title>
+    <link>https://sheny1xuan.github.io/cmu15-445-project3/</link>
+    <pubDate>Wed, 27 Apr 2022 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/cmu15-445-project3/</guid>
+    <description><![CDATA[2021 FALL cmu15-445-project3 实现数据库执行器(Query Executor)，涉及的知识点为ppt9-14章。 通过迭代器模型(iterator model/Volcano model)实现增删]]></description>
+</item></channel>
+</rss>

@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>cmu15-445-project3 - stonex</title><meta name="Description" content="Welcome to my&#39;blog!"><meta property="og:title" content="cmu15-445-project3" />
+<meta property="og:description" content="2021 FALL cmu15-445-project3 实现数据库执行器(Query Executor)，涉及的知识点为ppt9-14章。 通过迭代器模型(iterator model/Volcano model)实现增删" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sheny1xuan.github.io/cmu15-445-project3/" /><meta property="og:image" content="https://sheny1xuan.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-04-27T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-05-01T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://sheny1xuan.github.io/logo.png"/>
+
+<meta name="twitter:title" content="cmu15-445-project3"/>
+<meta name="twitter:description" content="2021 FALL cmu15-445-project3 实现数据库执行器(Query Executor)，涉及的知识点为ppt9-14章。 通过迭代器模型(iterator model/Volcano model)实现增删"/>
+<meta name="application-name" content="Stonex">
+<meta name="apple-mobile-web-app-title" content="Stonex"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://sheny1xuan.github.io/cmu15-445-project3/" /><link rel="prev" href="https://sheny1xuan.github.io/tcp%E8%BF%9E%E6%8E%A5%E8%AF%BB%E5%86%99%E6%B5%8B%E8%AF%95/" /><link rel="next" href="https://sheny1xuan.github.io/cmu15-445-project2/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "cmu15-445-project3",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/sheny1xuan.github.io\/cmu15-445-project3\/"
+        },"genre": "posts","keywords": "cmu15-445","wordcount":  5275 ,
+        "url": "https:\/\/sheny1xuan.github.io\/cmu15-445-project3\/","datePublished": "2022-04-27T00:00:00+00:00","dateModified": "2022-05-01T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Shen"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="stonex">Home</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="stonex">Home</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">cmu15-445-project3</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Shen</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"><i class="far fa-folder fa-fw"></i>数据库</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-27">2022-04-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 5275 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 11 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#2021-fall-cmu15-445-project3">2021 FALL cmu15-445-project3</a>
+          <ul>
+            <li>
+              <ul>
+                <li><a href="#排序">排序</a>
+                  <ul>
+                    <li><a href="#外部归并排序external-merge-sort">外部归并排序(External Merge Sort)</a></li>
+                    <li><a href="#b树索引排序">B+树索引排序</a></li>
+                  </ul>
+                </li>
+                <li><a href="#聚集函数">聚集函数</a>
+                  <ul>
+                    <li><a href="#外部哈希聚集">外部哈希聚集</a>
+                      <ul>
+                        <li><a href="#动态哈希disk">动态哈希(Disk)</a></li>
+                        <li><a href="#rehashmemory">Rehash(Memory)</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li><a href="#连接算法">连接算法</a>
+                  <ul>
+                    <li><a href="#连接分类">连接分类</a></li>
+                    <li><a href="#早物化与晚物化">早物化与晚物化</a></li>
+                    <li><a href="#连接表假设">连接表假设</a></li>
+                    <li><a href="#nested-loop-join循环">Nested Loop Join（循环）</a>
+                      <ul>
+                        <li><a href="#simple">Simple</a></li>
+                        <li><a href="#block">Block</a></li>
+                        <li><a href="#index">Index</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="#sort-merge-join排序">Sort-Merge Join（排序）</a></li>
+                    <li><a href="#hash-join哈希">Hash Join（哈希）</a>
+                      <ul>
+                        <li><a href="#basic-hash-join">Basic Hash Join</a></li>
+                        <li><a href="#grace-hash-join">Grace Hash Join</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li><a href="#连接算法io时间对比">连接算法IO时间对比</a></li>
+                <li><a href="#关系操作符">关系操作符</a>
+                  <ul>
+                    <li><a href="#执行计划">执行计划</a></li>
+                    <li><a href="#迭代模型">迭代模型</a></li>
+                    <li><a href="#物化模型">物化模型</a></li>
+                    <li><a href="#矢量化模型">矢量化模型</a></li>
+                  </ul>
+                </li>
+                <li><a href="#请求执行">请求执行</a>
+                  <ul>
+                    <li><a href="#查询请求">查询请求</a>
+                      <ul>
+                        <li><a href="#顺序扫描">顺序扫描</a></li>
+                        <li><a href="#单个索引">单个索引</a></li>
+                        <li><a href="#多个索引">多个索引</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="#修改请求">修改请求</a></li>
+                  </ul>
+                </li>
+                <li><a href="#请求并行">请求并行</a>
+                  <ul>
+                    <li><a href="#进程模型">进程模型</a></li>
+                    <li><a href="#线程模型">线程模型</a></li>
+                    <li><a href="#多请求并行">多请求并行</a></li>
+                    <li><a href="#单请求并行">单请求并行</a></li>
+                  </ul>
+                </li>
+                <li><a href="#请求优化">请求优化</a>
+                  <ul>
+                    <li><a href="#优化方式">优化方式</a></li>
+                    <li><a href="#请求重写">请求重写</a>
+                      <ul>
+                        <li><a href="#关系代数等效">关系代数等效</a></li>
+                        <li><a href="#逻辑请求优化">逻辑请求优化</a></li>
+                        <li><a href="#子查询">子查询</a></li>
+                        <li><a href="#表达式重写">表达式重写</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="#执行计划损耗">执行计划损耗</a>
+                      <ul>
+                        <li><a href="#统计数据">统计数据</a></li>
+                        <li><a href="#逻辑损耗">逻辑损耗</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li><a href="#实验代码">实验代码</a>
+                  <ul>
+                    <li><a href="#代码框架">代码框架</a>
+                      <ul>
+                        <li><a href="#abstractplannode">AbstractPlanNode</a></li>
+                        <li><a href="#abstractexecutor">AbstractExecutor</a></li>
+                        <li><a href="#请求的执行过程">请求的执行过程</a></li>
+                        <li><a href="#常用api">常用API</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="#增删改查">增删改查</a>
+                      <ul>
+                        <li><a href="#seqscanexecutor">SeqScanExecutor</a></li>
+                        <li><a href="#insertexecutor">InsertExecutor</a></li>
+                        <li><a href="#updateexecutor">UpdateExecutor</a></li>
+                        <li><a href="#deleteexecutor">DeleteExecutor</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="#连接算法-1">连接算法</a>
+                      <ul>
+                        <li><a href="#nested-loop-join">Nested Loop Join</a></li>
+                        <li><a href="#hash-join">Hash Join</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="#聚集函数-1">聚集函数</a>
+                      <ul>
+                        <li><a href="#group-having-实现">GROUP HAVING 实现</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="#其他">其他</a>
+                      <ul>
+                        <li><a href="#limit">LIMIT</a></li>
+                        <li><a href="#distinct">DISTINCT</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li><a href="#参考博客">参考博客</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="2021-fall-cmu15-445-project3">2021 FALL cmu15-445-project3</h2>
+<p>实现数据库执行器(Query Executor)，涉及的知识点为ppt9-14章。</p>
+<p>通过迭代器模型(iterator model/Volcano model)实现增删改查，连接，排序（这里不需要实现）和聚集函数。</p>
+<ul>
+<li><strong>Access Methods</strong>: Sequential Scan</li>
+<li><strong>Modifications</strong>: Insert, Update, Delete</li>
+<li><strong>Miscellaneous</strong>: Nested Loop Join, Hash Join, Aggregation, Limit, Distinct</li>
+</ul>
+<h4 id="排序">排序</h4>
+<p>面向磁盘的数据库系统，并不能保证查询的结果能够容纳在内存中，因此需要将结果保存到磁盘当中。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220503195805354.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220503195805354.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220503195805354.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220503195805354.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220503195805354.png"
+        title="image-20220503195805354" /></p>
+<h5 id="外部归并排序external-merge-sort">外部归并排序(External Merge Sort)</h5>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220503200359664.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220503200359664.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220503200359664.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220503200359664.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220503200359664.png"
+        title="image-20220503200359664" /></p>
+<p>假设有<code>N</code>页数据页，缓冲池中有<code>B</code>页容量，遍历一轮数据页(Sort/Merge)称为一轮(1Pass)。可以执行k(k=B-1)路External Merge Sort。经历<code>i</code>轮操作之后，每$k^i$页内部有序。<code>i=0, Sorting</code>，每1($k^0$)页内部有序，<code>i=1, Merging</code>，每k($k^1$)页内部有序&hellip;。</p>
+<ul>
+<li>Pass #0：遍历每一页，排序后写回。</li>
+<li>Pass #i：每$k^i$页进行合并，直到($k^i&gt;=N$)。</li>
+</ul>
+<p>共有$1+log_kN$轮操作(sort：1Pass，Merge：$log_kN$ Pass)，每一轮操作需要读入N页，写入N页。</p>
+<p>总共的IO操作：<strong>$2N*(1+log_kN)$</strong></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220503202011010.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220503202011010.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220503202011010.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220503202011010.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220503202011010.png"
+        title="image-20220503202011010" /></p>
+<p>缓冲池中至少需要3页，两页用于输入，一页用于输出，执行2路外部归并排序。</p>
+<h5 id="b树索引排序">B+树索引排序</h5>
+<ul>
+<li>B+树聚簇索引有序，包含所有的数据记录，直接进行遍历即可排序。</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220503203743975.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220503203743975.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220503203743975.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220503203743975.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220503203743975.png"
+        title="image-20220503203743975" /></p>
+<ul>
+<li>非聚簇索引回表产生大量的随机IO。</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220503204054855.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220503204054855.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220503204054855.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220503204054855.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220503204054855.png"
+        title="image-20220503204054855" /></p>
+<h4 id="聚集函数">聚集函数</h4>
+<p>聚集函数包括<code>ORDER BY</code>,<code>JOIN</code>,<code>GROUP BY</code>,<code>AVG</code>,<code>LIMIT</code>,<code>Distinct</code>等对某一列进行操作，主要通过哈希和排序进行实现。</p>
+<p><strong><code>Distinct</code>，<code>GROUP BY</code>可以通过排序实现，但是如果没有显式地排序地话，哈希将会是一种更好的处理方式。</strong></p>
+<h5 id="外部哈希聚集">外部哈希聚集</h5>
+<h6 id="动态哈希disk">动态哈希(Disk)</h6>
+<p>假设缓冲池中有B页，B-1页用于哈希，1页用于输入数据。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220503210606639.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220503210606639.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220503210606639.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220503210606639.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220503210606639.png"
+        title="image-20220503210606639" /></p>
+<h6 id="rehashmemory">Rehash(Memory)</h6>
+<p>通过二次哈希产生中间结果，实现聚集函数。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220503211144992.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220503211144992.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220503211144992.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220503211144992.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220503211144992.png"
+        title="image-20220503211144992" /></p>
+<h4 id="连接算法">连接算法</h4>
+<h5 id="连接分类">连接分类</h5>
+<p>例子可以参考https://www.jianshu.com/p/c4c43f32b66f。</p>
+<ul>
+<li>
+<p>内连(Inner-Join)：连接相同的两列，用ON表示条件。</p>
+</li>
+<li>
+<p>外连(Outer-Join)：左连，右连，全连。</p>
+</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504150627195.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504150627195.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504150627195.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504150627195.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504150627195.png"
+        title="image-20220504150627195" /></p>
+<h5 id="早物化与晚物化">早物化与晚物化</h5>
+<p>早物化在连接过程中会产生临时表，最后结果无需再去表中寻找其他的记录。晚物化在连接过程中只会记录结果的RowID，后续如果需要使用该记录需要利用该RowID进行查找。</p>
+<h5 id="连接表假设">连接表假设</h5>
+<p>表R有M页共m行数据，表S有N页共n行数据，计算连接两表需要的IO操作。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504151659032.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504151659032.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504151659032.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504151659032.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504151659032.png"
+        title="image-20220504151659032" /></p>
+<h5 id="nested-loop-join循环">Nested Loop Join（循环）</h5>
+<p>较小的表做驱动表</p>
+<h6 id="simple">Simple</h6>
+<p>对于表R中的每条记录，都要从S中扫描一遍。</p>
+<p>Cost：$M+(m*N)$(<code>M</code>是从表R中取出每一页，<code>m*N</code>是表R中的每一行都需要扫描表S)</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504152752143.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504152752143.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504152752143.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504152752143.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504152752143.png"
+        title="image-20220504152752143" /></p>
+<h6 id="block">Block</h6>
+<p>按页进行扫描</p>
+<p>Cost：$M + M*N$</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504153038820.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504153038820.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504153038820.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504153038820.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504153038820.png"
+        title="image-20220504153038820" /></p>
+<p>假设缓冲池可以存放B页，B-2页存放驱动表R，1页存放被驱动表S，1页用于输出。</p>
+<p>Cost：$M+\lceil M/(B-2)\rceil * N$</p>
+<h6 id="index">Index</h6>
+<p>遍历R中的每一行，利用S中的索引查找$r_i=s_j$，每次查找的时间为$C$</p>
+<p>Cost：$M+(m*C)$</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504154940771.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504154940771.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504154940771.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504154940771.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504154940771.png"
+        title="image-20220504154940771" /></p>
+<h5 id="sort-merge-join排序">Sort-Merge Join（排序）</h5>
+<p>将两表排序后，利用双指针查找有效结果。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504155249938.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504155249938.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504155249938.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504155249938.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504155249938.png"
+        title="image-20220504155249938" /></p>
+<ul>
+<li>Sort R：$2M*(1+\lceil log_{B-1} \lceil M/b \rceil \rceil)$</li>
+<li>Sort S：$2N*(1+\lceil log_{B-1} \lceil N/b \rceil \rceil)$</li>
+<li>Merge：M+N</li>
+<li>Total：Sort+Merge</li>
+</ul>
+<p>如果两个表已经被排序好，或者结果也需要排序，那么通过排序连接将会是十分高效的。</p>
+<h5 id="hash-join哈希">Hash Join（哈希）</h5>
+<h6 id="basic-hash-join">Basic Hash Join</h6>
+<ul>
+<li>首先对表R建立哈希表$HT_R$（Build），之后对于S中的每一行，查找$HT_R$中是否存在该元素（Probe）。</li>
+<li>哈希值子在哈希表中存在两种情况：早物化或者晚物化</li>
+<li>Basic Hash Join 只能在内存可以完全容纳哈希表时使用</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504165358231.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504165358231.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504165358231.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504165358231.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504165358231.png"
+        title="image-20220504165358231" /></p>
+<p>在查找过程中可以通过布隆过滤器进行加速，布隆过滤器通过多个哈希函数确定该key是不是一定不在哈希表之中。其主要思想是位图和多个哈希函数。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504165736883.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504165736883.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504165736883.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504165736883.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504165736883.png"
+        title="image-20220504165736883" /></p>
+<h6 id="grace-hash-join">Grace Hash Join</h6>
+<p>分别对R和S进行哈希，之后将有相同哈希值的数据页进行Nest Block Join</p>
+<p>Hash：$2(M+N)$</p>
+<p>Probe：$M+N$</p>
+<p>Total：$3(M+N)$</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504170626874.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504170626874.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504170626874.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504170626874.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504170626874.png"
+        title="image-20220504170626874" /></p>
+<h4 id="连接算法io时间对比">连接算法IO时间对比</h4>
+<p>Hash Join最优，所以通常使用Hash Join，如果输入数据已经排序那么Sort-Merge Join的效率更高。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504165939982.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504165939982.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504165939982.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504165939982.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504165939982.png"
+        title="image-20220504165939982" /></p>
+<h4 id="关系操作符">关系操作符</h4>
+<p>关系relation就是一个表，关系操作符就是对一个表或两个表之间的操作运算符。</p>
+<h5 id="执行计划">执行计划</h5>
+<p>所有的关系操作符组成表达式树，通过后序遍历自下而上计算关系运算符得出最后的结果。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220503192043047.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220503192043047.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220503192043047.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220503192043047.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220503192043047.png"
+        title="image-20220503192043047" /></p>
+<h5 id="迭代模型">迭代模型</h5>
+<p>每一个请求通过<code>Next</code>实现：</p>
+<ul>
+<li>返回True，得到一行数据。</li>
+<li>返回False，请求结束。</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504172050800.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504172050800.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504172050800.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504172050800.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504172050800.png"
+        title="image-20220504172050800" /></p>
+<h5 id="物化模型">物化模型</h5>
+<p>将计算产生的中间结果生成临时表供上层操作符使用</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504172257025.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504172257025.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504172257025.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504172257025.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504172257025.png"
+        title="image-20220504172257025" /></p>
+<h5 id="矢量化模型">矢量化模型</h5>
+<p>介于物化模型和迭代模型之间，每次迭代产生一定数量的行</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504184844942.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504184844942.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504184844942.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504184844942.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504184844942.png"
+        title="image-20220504184844942" /></p>
+<h4 id="请求执行">请求执行</h4>
+<h5 id="查询请求">查询请求</h5>
+<h6 id="顺序扫描">顺序扫描</h6>
+<p>按照顺序访问数据库中的每一页，通过游标(cursor)记录当前访问的页。</p>
+<p>常用的优化方式：</p>
+<ul>
+<li>预取</li>
+<li>增大缓冲池</li>
+<li>并行化</li>
+<li>堆聚类</li>
+<li>Zone Map：提前计算聚集函数的参数。</li>
+<li>晚物化：最终使用聚集函数可以通过RowID延迟物化。</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="C:/Users/shen/AppData/Roaming/Typora/typora-user-images/image-20220504185909392.png"
+        data-srcset="C:/Users/shen/AppData/Roaming/Typora/typora-user-images/image-20220504185909392.png, C:/Users/shen/AppData/Roaming/Typora/typora-user-images/image-20220504185909392.png 1.5x, C:/Users/shen/AppData/Roaming/Typora/typora-user-images/image-20220504185909392.png 2x"
+        data-sizes="auto"
+        alt="C:/Users/shen/AppData/Roaming/Typora/typora-user-images/image-20220504185909392.png"
+        title="image-20220504185909392" /></p>
+<h6 id="单个索引">单个索引</h6>
+<h6 id="多个索引">多个索引</h6>
+<h5 id="修改请求">修改请求</h5>
+<p>修改主要包括：插入，删除，更新。修改过程中要同时修改行和索引数据。如果修改后的数据再次被检索到则会产生HALLOWEEN问题。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504190122062.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504190122062.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504190122062.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504190122062.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220504190122062.png"
+        title="image-20220504190122062" /></p>
+<h4 id="请求并行">请求并行</h4>
+<p>并行与分布式的差别在于资源间通信的速度，并行通信的速度远高于分布式。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505143448525.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505143448525.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505143448525.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505143448525.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505143448525.png"
+        title="image-20220505143448525" /></p>
+<h5 id="进程模型">进程模型</h5>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505144020562.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505144020562.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505144020562.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505144020562.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505144020562.png"
+        title="image-20220505144020562" /></p>
+<h5 id="线程模型">线程模型</h5>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505144027313.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505144027313.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505144027313.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505144027313.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505144027313.png"
+        title="image-20220505144027313" /></p>
+<h5 id="多请求并行">多请求并行</h5>
+<h5 id="单请求并行">单请求并行</h5>
+<p>水平并行，垂直并行，IO并行(RAID)</p>
+<h4 id="请求优化">请求优化</h4>
+<h5 id="优化方式">优化方式</h5>
+<p>重写请求：按照一定规则重写请求，提高执行效率。</p>
+<p>损耗对比：对于所有可行的执行计划，计算其执行损耗，选择损耗最小的计划进行执行。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505145245224.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505145245224.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505145245224.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505145245224.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505145245224.png"
+        title="image-20220505145245224" /></p>
+<h5 id="请求重写">请求重写</h5>
+<h6 id="关系代数等效">关系代数等效</h6>
+<p>谓词下放：提前进行投影，或者选择减少数据的规模，还可以对选择的语句进行化简。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505150125907.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505150125907.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505150125907.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505150125907.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505150125907.png"
+        title="image-20220505150125907" /></p>
+<h6 id="逻辑请求优化">逻辑请求优化</h6>
+<p>优化方法：分离谓词，谓词下放，替换笛卡尔积，投影下放</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505150813968.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505150813968.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505150813968.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505150813968.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505150813968.png"
+        title="image-20220505150813968" /></p>
+<p>分离谓词</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505150921271.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505150921271.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505150921271.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505150921271.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505150921271.png"
+        title="image-20220505150921271" />谓词下放</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505151008727.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505151008727.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505151008727.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505151008727.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505151008727.png"
+        title="image-20220505151008727" /></p>
+<p>替换笛卡尔积</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505150955133.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505150955133.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505150955133.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505150955133.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505150955133.png"
+        title="image-20220505150955133" /></p>
+<p>投影下放：执行过程中只选择参与请求的列。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505151044250.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505151044250.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505151044250.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505151044250.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505151044250.png"
+        title="image-20220505151044250" /></p>
+<h6 id="子查询">子查询</h6>
+<p>重写子查询和分解子查询。</p>
+<h6 id="表达式重写">表达式重写</h6>
+<h5 id="执行计划损耗">执行计划损耗</h5>
+<p>物理损耗必须要考虑顺序IO和随机IO，顺序IO的访问速度是随机IO的4倍。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505153007739.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505153007739.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505153007739.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505153007739.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505153007739.png"
+        title="image-20220505153007739" /></p>
+<h6 id="统计数据">统计数据</h6>
+<p>每个表内都会存有关于表，索引，表项的统计数据。这些数据可以用于估计执行查询的代价。</p>
+<h6 id="逻辑损耗">逻辑损耗</h6>
+<p>选择谓词可以通过选择性(selectivity近似为概率)计算损失，选择性也可以通过采样进行计算。</p>
+<p>计算时需要满足以下三个条件：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505155505442.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505155505442.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505155505442.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505155505442.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220505155505442.png"
+        title="image-20220505155505442" /></p>
+<h4 id="实验代码">实验代码</h4>
+<h5 id="代码框架">代码框架</h5>
+<h6 id="abstractplannode">AbstractPlanNode</h6>
+<p>AbstractPlanNode是执行计划表达式树中的一个节点（即关系运算符），由它组成一棵多叉的表达式树。所有的关系运算符的实现都需要继承该抽象基类。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// src/include/execution/plans/abstract_plan.h
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * AbstractPlanNode represents all the possible types of plan nodes in our system.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Plan nodes are modeled as trees, so each plan node can have a variable number of children.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Per the Volcano model, the plan node receives the tuples of its children.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * The ordering of the children may matter.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">AbstractPlanNode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"> <span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * Create a new AbstractPlanNode with the specified output schema and children.
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * @param output_schema the schema for the output of this plan node
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * @param children the children of this plan node
+</span></span></span><span class="line"><span class="cl"><span class="cm">   */</span>
+</span></span><span class="line"><span class="cl">  <span class="n">AbstractPlanNode</span><span class="p">(</span><span class="k">const</span> <span class="n">Schema</span> <span class="o">*</span><span class="n">output_schema</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">AbstractPlanNode</span> <span class="o">*&gt;</span> <span class="o">&amp;&amp;</span><span class="n">children</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="o">:</span> <span class="n">output_schema_</span><span class="p">(</span><span class="n">output_schema</span><span class="p">),</span> <span class="n">children_</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">children</span><span class="p">))</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="cm">/** @return the type of this plan node */</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 抽象基类
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">virtual</span> <span class="n">PlanType</span> <span class="nf">GetType</span><span class="p">()</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> <span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * The schema for the output of this plan node. In the volcano model, every plan node will spit out tuples,
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * and this tells you what schema this plan node&#39;s tuples will have.
+</span></span></span><span class="line"><span class="cl"><span class="cm">   */</span>
+</span></span><span class="line"><span class="cl">  <span class="k">const</span> <span class="n">Schema</span> <span class="o">*</span><span class="n">output_schema_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/** The children of this plan node. */</span>
+</span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">AbstractPlanNode</span> <span class="o">*&gt;</span> <span class="n">children_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="abstractexecutor">AbstractExecutor</h6>
+<p>AbstractExecutor用来计算关系运算符向上的返回值。<code>AbstractExecutor</code>是<code>AbstractPlanNode</code>对应运算符的具体实现。关系运算符具体的运算过程通过继承该抽象基类实现，<code>exec_ctx_</code>中存放了该关系运算符需要的信息。它实现了迭代器模型中的<code>Next</code>和<code>Init</code>方法。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// src/include/execution/executors/abstract_executor.h
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * The AbstractExecutor implements the Volcano tuple-at-a-time iterator model.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * This is the base class from which all executors in the BustTub execution
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * engine inherit, and defines the minimal interface that all executors support.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">AbstractExecutor</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"> <span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * Construct a new AbstractExecutor instance.
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * @param exec_ctx the executor context that the executor runs with
+</span></span></span><span class="line"><span class="cl"><span class="cm">   */</span>
+</span></span><span class="line"><span class="cl">  <span class="k">explicit</span> <span class="n">AbstractExecutor</span><span class="p">(</span><span class="n">ExecutorContext</span> <span class="o">*</span><span class="n">exec_ctx</span><span class="p">)</span> <span class="o">:</span> <span class="n">exec_ctx_</span><span class="p">{</span><span class="n">exec_ctx</span><span class="p">}</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="cm">/** Virtual destructor. */</span>
+</span></span><span class="line"><span class="cl">  <span class="k">virtual</span> <span class="o">~</span><span class="n">AbstractExecutor</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * Initialize the executor.
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * @warning This function must be called before Next() is called!
+</span></span></span><span class="line"><span class="cl"><span class="cm">   */</span>
+</span></span><span class="line"><span class="cl">  <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">Init</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * Yield the next tuple from this executor.
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * @param[out] tuple The next tuple produced by this executor
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * @param[out] rid The next tuple RID produced by this executor
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * @return `true` if a tuple was produced, `false` if there are no more tuples
+</span></span></span><span class="line"><span class="cl"><span class="cm">   */</span>
+</span></span><span class="line"><span class="cl">  <span class="k">virtual</span> <span class="kt">bool</span> <span class="nf">Next</span><span class="p">(</span><span class="n">Tuple</span> <span class="o">*</span><span class="n">tuple</span><span class="p">,</span> <span class="n">RID</span> <span class="o">*</span><span class="n">rid</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="cm">/** @return The schema of the tuples that this executor produces */</span>
+</span></span><span class="line"><span class="cl">  <span class="k">virtual</span> <span class="k">const</span> <span class="n">Schema</span> <span class="o">*</span><span class="nf">GetOutputSchema</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="cm">/** @return The executor context in which this executor runs */</span>
+</span></span><span class="line"><span class="cl">  <span class="n">ExecutorContext</span> <span class="o">*</span><span class="nf">GetExecutorContext</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">exec_ctx_</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> <span class="k">protected</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/** The executor context in which the executor runs */</span>
+</span></span><span class="line"><span class="cl">  <span class="n">ExecutorContext</span> <span class="o">*</span><span class="n">exec_ctx_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="请求的执行过程">请求的执行过程</h6>
+<p>分析测试顺序扫描的测试文件<code>SimpleSeqScanTest</code>。通过输出的表头，投影信息，表的oid构造了以<code>SeqScanPlanNode</code>，<code>SeqScanPlanNode</code>继承了<code>AbstractPlanNode</code>。之后通过<code>ExecutionEngine</code>的<code>Execute</code>方法执行该执行计划。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// SELECT col_a, col_b FROM test_1 WHERE col_a &lt; 500
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">TEST_F</span><span class="p">(</span><span class="n">ExecutorTest</span><span class="p">,</span> <span class="n">SimpleSeqScanTest</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Construct query plan
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">TableInfo</span> <span class="o">*</span><span class="n">table_info</span> <span class="o">=</span> <span class="n">GetExecutorContext</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetCatalog</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetTable</span><span class="p">(</span><span class="s">&#34;test_1&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">const</span> <span class="n">Schema</span> <span class="o">&amp;</span><span class="n">schema</span> <span class="o">=</span> <span class="n">table_info</span><span class="o">-&gt;</span><span class="n">schema_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">auto</span> <span class="o">*</span><span class="n">col_a</span> <span class="o">=</span> <span class="n">MakeColumnValueExpression</span><span class="p">(</span><span class="n">schema</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&#34;colA&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">auto</span> <span class="o">*</span><span class="n">col_c</span> <span class="o">=</span> <span class="n">MakeColumnValueExpression</span><span class="p">(</span><span class="n">schema</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&#34;colC&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">auto</span> <span class="o">*</span><span class="n">const500</span> <span class="o">=</span> <span class="n">MakeConstantValueExpression</span><span class="p">(</span><span class="n">ValueFactory</span><span class="o">::</span><span class="n">GetIntegerValue</span><span class="p">(</span><span class="mi">500</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">  <span class="k">auto</span> <span class="o">*</span><span class="n">predicate</span> <span class="o">=</span> <span class="n">MakeComparisonExpression</span><span class="p">(</span><span class="n">col_a</span><span class="p">,</span> <span class="n">const500</span><span class="p">,</span> <span class="n">ComparisonType</span><span class="o">::</span><span class="n">LessThan</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">auto</span> <span class="o">*</span><span class="n">out_schema</span> <span class="o">=</span> <span class="n">MakeOutputSchema</span><span class="p">({{</span><span class="s">&#34;colA&#34;</span><span class="p">,</span> <span class="n">col_a</span><span class="p">},</span> <span class="p">{</span><span class="s">&#34;colC&#34;</span><span class="p">,</span> <span class="n">col_c</span><span class="p">}});</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Create plan node
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">SeqScanPlanNode</span> <span class="n">plan</span><span class="p">{</span><span class="n">out_schema</span><span class="p">,</span> <span class="n">predicate</span><span class="p">,</span> <span class="n">table_info</span><span class="o">-&gt;</span><span class="n">oid_</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Execute
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tuple</span><span class="o">&gt;</span> <span class="n">result_set</span><span class="p">{};</span>
+</span></span><span class="line"><span class="cl">  <span class="n">GetExecutionEngine</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">Execute</span><span class="p">(</span><span class="o">&amp;</span><span class="n">plan</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">result_set</span><span class="p">,</span> <span class="n">GetTxn</span><span class="p">(),</span> <span class="n">GetExecutorContext</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>Execute</code>方法执行执行计划，通过<code>ExecutorFactory</code>工厂函数构造<code>AbstractPlanNode</code>对应<code>AbstractExecutor</code>完成执行过程。对于<code>SeqScanPlanNode</code>则构造了对应的<code>SeqScanExecutor</code>进行执行。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">  <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * Execute a query plan.
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * @param plan The query plan to execute
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * @param result_set The set of tuples produced by executing the plan
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * @param txn The transaction context in which the query executes
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * @param exec_ctx The executor context in which the query executes
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * @return `true` if execution of the query plan succeeds, `false` otherwise
+</span></span></span><span class="line"><span class="cl"><span class="cm">   */</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">Execute</span><span class="p">(</span><span class="k">const</span> <span class="n">AbstractPlanNode</span> <span class="o">*</span><span class="n">plan</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tuple</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">result_set</span><span class="p">,</span> <span class="n">Transaction</span> <span class="o">*</span><span class="n">txn</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">               <span class="n">ExecutorContext</span> <span class="o">*</span><span class="n">exec_ctx</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Construct and executor for the plan
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">auto</span> <span class="n">executor</span> <span class="o">=</span> <span class="n">ExecutorFactory</span><span class="o">::</span><span class="n">CreateExecutor</span><span class="p">(</span><span class="n">exec_ctx</span><span class="p">,</span> <span class="n">plan</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Prepare the root executor
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">executor</span><span class="o">-&gt;</span><span class="n">Init</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Execute the query plan
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">Tuple</span> <span class="n">tuple</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">RID</span> <span class="n">rid</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">while</span> <span class="p">(</span><span class="n">executor</span><span class="o">-&gt;</span><span class="n">Next</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tuple</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">rid</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">result_set</span> <span class="o">!=</span> <span class="k">nullptr</span> <span class="o">&amp;&amp;</span> <span class="n">executor</span><span class="o">-&gt;</span><span class="n">GetOutputSchema</span><span class="p">()</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="n">result_set</span><span class="o">-&gt;</span><span class="n">push_back</span><span class="p">(</span><span class="n">tuple</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">TransactionAbortException</span> <span class="o">&amp;</span><span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">LOG_DEBUG</span><span class="p">(</span><span class="s">&#34;execute txn abort exception:%s&#34;</span><span class="p">,</span> <span class="n">e</span><span class="p">.</span><span class="n">GetInfo</span><span class="p">().</span><span class="n">c_str</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">      <span class="n">txn_mgr_</span><span class="o">-&gt;</span><span class="n">Abort</span><span class="p">(</span><span class="n">txn</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="o">&amp;</span><span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">LOG_DEBUG</span><span class="p">(</span><span class="s">&#34;execute exception!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="n">txn_mgr_</span><span class="o">-&gt;</span><span class="n">Abort</span><span class="p">(</span><span class="n">txn</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="常用api">常用API</h6>
+<ul>
+<li>获取一个表的oid：<code>oid = plan_-&gt;GetTableOid();</code></li>
+<li>通过oid获取表：<code>auto table = exec_ctx_-&gt;GetCatalog()-&gt;GetTable(oid);</code></li>
+<li>投影过程：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="nl">col</span> <span class="p">:</span> <span class="n">output_schma</span><span class="o">-&gt;</span><span class="n">GetColumns</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">values</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">col</span><span class="p">.</span><span class="n">GetExpr</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">Evaluate</span><span class="p">(</span><span class="n">tuple</span><span class="p">,</span> <span class="n">schema</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>判断tuple是否满足过滤条件</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">predicate</span> <span class="o">!=</span> <span class="k">nullptr</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">predicate</span><span class="o">-&gt;</span><span class="n">Evaluate</span><span class="p">(</span><span class="n">tuple</span><span class="p">,</span> <span class="n">schema</span><span class="p">).</span><span class="n">GetAs</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>获取索引，更新索引</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">auto</span> <span class="n">affect_indexes</span> <span class="o">=</span> <span class="n">exec_ctx_</span><span class="o">-&gt;</span><span class="n">GetCatalog</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetTableIndexes</span><span class="p">(</span><span class="n">table</span><span class="o">-&gt;</span><span class="n">name_</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Insert/Update index
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span> <span class="o">&amp;</span><span class="nl">table_index</span> <span class="p">:</span> <span class="n">affect_indexes</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">table_index</span><span class="o">-&gt;</span><span class="n">index_</span><span class="o">-&gt;</span><span class="n">InsertEntry</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">row</span><span class="p">.</span><span class="n">KeyFromTuple</span><span class="p">(</span><span class="n">schema</span><span class="p">,</span> <span class="o">*</span><span class="n">table_index</span><span class="o">-&gt;</span><span class="n">index_</span><span class="o">-&gt;</span><span class="n">GetKeySchema</span><span class="p">(),</span> <span class="n">table_index</span><span class="o">-&gt;</span><span class="n">index_</span><span class="o">-&gt;</span><span class="n">GetKeyAttrs</span><span class="p">()),</span> <span class="o">*</span><span class="n">rid</span><span class="p">,</span> <span class="n">txn</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// delete index
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span> <span class="o">&amp;</span><span class="nl">table_index</span> <span class="p">:</span> <span class="n">affect_indexes</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">txn</span><span class="o">-&gt;</span><span class="n">GetIndexWriteSet</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">emplace_back</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">IndexWriteRecord</span><span class="p">(</span><span class="o">*</span><span class="n">rid</span><span class="p">,</span> <span class="n">info</span><span class="o">-&gt;</span><span class="n">oid_</span><span class="p">,</span> <span class="n">WType</span><span class="o">::</span><span class="n">DELETE</span><span class="p">,</span> <span class="o">*</span><span class="n">tuple</span><span class="p">,</span> <span class="n">table_index</span><span class="o">-&gt;</span><span class="n">index_oid_</span><span class="p">,</span> <span class="n">exec_ctx_</span><span class="o">-&gt;</span><span class="n">GetCatalog</span><span class="p">()));</span>
+</span></span><span class="line"><span class="cl">    <span class="n">table_index</span><span class="o">-&gt;</span><span class="n">index_</span><span class="o">-&gt;</span><span class="n">DeleteEntry</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">tuple</span><span class="o">-&gt;</span><span class="n">KeyFromTuple</span><span class="p">(</span><span class="n">info</span><span class="o">-&gt;</span><span class="n">schema_</span><span class="p">,</span> <span class="o">*</span><span class="n">table_index</span><span class="o">-&gt;</span><span class="n">index_</span><span class="o">-&gt;</span><span class="n">GetKeySchema</span><span class="p">(),</span> <span class="n">table_index</span><span class="o">-&gt;</span><span class="n">index_</span><span class="o">-&gt;</span><span class="n">GetKeyAttrs</span><span class="p">()),</span>
+</span></span><span class="line"><span class="cl">        <span class="o">*</span><span class="n">rid</span><span class="p">,</span> <span class="n">txn</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>修改表中的行</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 插入
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">table</span><span class="o">-&gt;</span><span class="n">table_</span><span class="o">-&gt;</span><span class="n">InsertTuple</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">rid</span><span class="p">,</span> <span class="n">txn</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 更新
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">table</span><span class="o">-&gt;</span><span class="n">table_</span><span class="o">-&gt;</span><span class="n">UpdateTuple</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">rid</span><span class="p">,</span> <span class="n">txn</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="c1">// 删除
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">table</span><span class="o">-&gt;</span><span class="n">table_</span><span class="o">-&gt;</span><span class="n">MarkDelete</span><span class="p">(</span><span class="n">rid</span><span class="p">,</span> <span class="n">txn</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="增删改查">增删改查</h5>
+<h6 id="seqscanexecutor">SeqScanExecutor</h6>
+<ul>
+<li>Init：初始化表迭代器</li>
+<li>Next：从表迭代器中拿出一行，知道该行满足过滤条件。</li>
+</ul>
+<h6 id="insertexecutor">InsertExecutor</h6>
+<p>有两种方法获取插入的行，获得插入的行后。将其插入到表中，插入成功后插入索引。</p>
+<ul>
+<li>从原始数据插入
+<ul>
+<li>Init：初始化下标索引，<code>index_=0;</code></li>
+<li>Next：<code>std::vector&lt;Value&gt; raw_values = plan_-&gt;RawValuesAt(index_);</code></li>
+</ul>
+</li>
+<li>从其他Executor的返回结果插入
+<ul>
+<li>Init：<code>child_executor_-&gt;Init();</code></li>
+<li>Next：<code>child_executor_-&gt;Next(tuple, rid)</code></li>
+</ul>
+</li>
+</ul>
+<h6 id="updateexecutor">UpdateExecutor</h6>
+<p>更新表信息，更新索引。</p>
+<h6 id="deleteexecutor">DeleteExecutor</h6>
+<p>标记删除，删除索引。</p>
+<h5 id="连接算法-1">连接算法</h5>
+<h6 id="nested-loop-join">Nested Loop Join</h6>
+<p>Init：初始化左子节点和右子节点，并且获取左子节点的第一行。</p>
+<p>Next：</p>
+<ul>
+<li>如果左子节点的行数据无效，返回false</li>
+<li>如果右子节点的行数据无效，获取左子节点的下一行，重新初始化右子节点。</li>
+<li>使用<code>predicate</code>判断这左右节点的两行数据是否满足连接条件。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">predicate</span> <span class="o">!=</span> <span class="k">nullptr</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">!</span><span class="n">predicate</span><span class="o">-&gt;</span><span class="n">EvaluateJoin</span><span class="p">(</span><span class="o">&amp;</span><span class="n">left_tuple_</span><span class="p">,</span> <span class="n">left_schema</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">right_tuple</span><span class="p">,</span> <span class="n">right_schema</span><span class="p">).</span><span class="n">GetAs</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>获取左右两行中的有效数据，构造一行新数据后返回true</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="nl">col</span> <span class="p">:</span> <span class="n">schema</span><span class="o">-&gt;</span><span class="n">GetColumns</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">values</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">col</span><span class="p">.</span><span class="n">GetExpr</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">EvaluateJoin</span><span class="p">(</span><span class="o">&amp;</span><span class="n">left_tuple_</span><span class="p">,</span> <span class="n">left_schema</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">right_tuple</span><span class="p">,</span> <span class="n">right_schema</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">*</span><span class="n">tuple</span> <span class="o">=</span> <span class="n">Tuple</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">schema</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">found</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="hash-join">Hash Join</h6>
+<ul>
+<li>哈希表的实现：只需要实现内存中的哈希表即可，是对<code>unordered_map</code>的封装。</li>
+</ul>
+<p><code>HashJoinKey</code>是一种数据库可表示的数据类型<code>Value</code>，<code>Value</code>由<code>uint64, uint32, uint8, uint32</code>组成，由于对其问题，一个<code>Value</code>占用24字节。</p>
+<p><code>HashJoinKey</code>需要定义其构造函数以及比较函数。</p>
+<p><code>HashJoinValue</code>表示相同的key的所有的行。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"> <span class="k">protected</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// The actual value item
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">union</span> <span class="nc">Val</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int8_t</span> <span class="n">boolean_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int8_t</span> <span class="n">tinyint_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int16_t</span> <span class="n">smallint_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int32_t</span> <span class="n">integer_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int64_t</span> <span class="n">bigint_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">double</span> <span class="n">decimal_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint64_t</span> <span class="n">timestamp_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="o">*</span><span class="n">varlen_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">const_varlen_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="n">value_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">union</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint32_t</span> <span class="n">len_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TypeId</span> <span class="n">elem_type_id_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="n">size_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="n">manage_data_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// The data type
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">TypeId</span> <span class="n">type_id_</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">namespace</span> <span class="n">bustub</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/** AggregateKey represents a key in an aggregation operation */</span>
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">HashJoinKey</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Value</span> <span class="n">key_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">explicit</span> <span class="nf">HashJoinKey</span><span class="p">(</span><span class="k">const</span> <span class="n">Value</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">)</span> <span class="o">:</span> <span class="n">key_</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * Compares two aggregate keys for equality.
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * @param other the other aggregate key to be compared with
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * @return `true` if both aggregate keys have equivalent group-by expressions, `false` otherwise
+</span></span></span><span class="line"><span class="cl"><span class="cm">   */</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 这里实现的是，所有相同的key。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// 也可以通过下面实现相同的哈希值的key，与ppt中的相同，但是后面还需进行多余的比较key是否相同。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">HashJoinKey</span> <span class="o">&amp;</span><span class="n">other</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">key_</span><span class="p">.</span><span class="n">CompareEquals</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">key_</span><span class="p">)</span> <span class="o">==</span> <span class="n">CmpBool</span><span class="o">::</span><span class="n">CmpTrue</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// bool operator==(const HashJoinKey &amp;other) const { return bustub::HashUtil::HashValue(&amp;key_) == bustub::HashUtil::HashValue(&amp;other.key_); }
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/** HashJoinValue represents a value for each tuple of same key */</span>
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">HashJoinValue</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/** The tuple values */</span>
+</span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tuple</span><span class="o">&gt;</span> <span class="n">values_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>  <span class="c1">// namespace bustub
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>除此之外，还需要对通过模板函数<code>hash</code>的特化实现<code>HashJoinKey</code>的哈希函数。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">namespace</span> <span class="n">std</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/** Implements std::hash on AggregateKey */</span>
+</span></span><span class="line"><span class="cl"><span class="k">template</span> <span class="o">&lt;&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">hash</span><span class="o">&lt;</span><span class="n">bustub</span><span class="o">::</span><span class="n">HashJoinKey</span><span class="o">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">size_t</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">bustub</span><span class="o">::</span><span class="n">HashJoinKey</span> <span class="o">&amp;</span><span class="n">hash_key</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">hash_key</span><span class="p">.</span><span class="n">key_</span><span class="p">.</span><span class="n">IsNull</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">bustub</span><span class="o">::</span><span class="n">HashUtil</span><span class="o">::</span><span class="n">HashValue</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hash_key</span><span class="p">.</span><span class="n">key_</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>最后实现<code>SimpleJoinHashTable</code>的插入和查找方法，相当于适配器模式。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * A simplified hash table that has all the necessary functionality for aggregations.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">SimpleJoinHashTable</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"> <span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="n">Insert</span><span class="p">(</span><span class="k">const</span> <span class="n">HashJoinKey</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">,</span> <span class="k">const</span> <span class="n">Tuple</span> <span class="o">&amp;</span><span class="n">value</span><span class="p">)</span> <span class="p">{</span> <span class="n">ht_</span><span class="p">[</span><span class="n">key</span><span class="p">].</span><span class="n">values_</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">value</span><span class="p">);</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">HashJoinValue</span> <span class="nf">GetValues</span><span class="p">(</span><span class="k">const</span> <span class="n">HashJoinKey</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">ht_</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="n">ht_</span><span class="p">[</span><span class="n">key</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">HashJoinValue</span><span class="p">{};</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> <span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="n">HashJoinKey</span><span class="p">,</span> <span class="n">HashJoinValue</span><span class="o">&gt;</span> <span class="n">ht_</span><span class="p">{};</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>连接的实现
+<ul>
+<li>Build：通过<code>SimpleJoinHashTable</code>对左子节点进行哈希。</li>
+<li>Probe：对右子节点的每一行进行哈希，然后将符合条件左子节点的行逐次返回。如果没有符合的哈希值，那么右子节点的该行无法与左子节点进行连接。</li>
+</ul>
+</li>
+</ul>
+<h5 id="聚集函数-1">聚集函数</h5>
+<h6 id="group-having-实现">GROUP HAVING 实现</h6>
+<ul>
+<li>根据GROUP的表项建立哈希表<code>SimpleAggregationHashTable</code>，在初始化过程中便可以实现MAX，MIN，COUNT，SUM。并且初始化哈希表的迭代器<code>aht_iterator_</code>，对哈希表中的每个桶便实现了GROUP。</li>
+<li>之后通过迭代器遍历哈希表中的每一项，并且使用having进行判断。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="k">auto</span> <span class="n">having</span> <span class="o">=</span> <span class="n">plan_</span><span class="o">-&gt;</span><span class="n">GetHaving</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">++</span><span class="n">aht_iterator_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">having</span> <span class="o">!=</span> <span class="k">nullptr</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">having</span><span class="o">-&gt;</span><span class="n">EvaluateAggregate</span><span class="p">(</span><span class="n">key</span><span class="p">.</span><span class="n">group_bys_</span><span class="p">,</span> <span class="n">value</span><span class="p">.</span><span class="n">aggregates_</span><span class="p">).</span><span class="n">GetAs</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="其他">其他</h5>
+<h6 id="limit">LIMIT</h6>
+<ul>
+<li>计数即可。</li>
+</ul>
+<h6 id="distinct">DISTINCT</h6>
+<ul>
+<li>实现类似的哈希表进行去重。</li>
+</ul>
+<h4 id="参考博客">参考博客</h4>
+<ul>
+<li><a href="https://www.inlighting.org/archives/cmu-15-445-notes/" target="_blank" rel="noopener noreffer">https://www.inlighting.org/archives/cmu-15-445-notes/</a></li>
+<li><a href="https://www.cnblogs.com/JayL-zxl/category/1919605.html" target="_blank" rel="noopener noreffer">https://www.cnblogs.com/JayL-zxl/category/1919605.html</a></li>
+<li><a href="https://15445.courses.cs.cmu.edu/fall2021/" target="_blank" rel="noopener noreffer">https://15445.courses.cs.cmu.edu/fall2021/</a></li>
+<li><a href="https://segmentfault.com/a/1190000015856311" target="_blank" rel="noopener noreffer">https://segmentfault.com/a/1190000015856311</a></li>
+<li><a href="https://www.jianshu.com/p/c4e4d55706ff" target="_blank" rel="noopener noreffer">https://www.jianshu.com/p/c4e4d55706ff</a></li>
+<li><a href="https://www.liaoxuefeng.com/wiki/1177760294764384/1179610888796448" target="_blank" rel="noopener noreffer">https://www.liaoxuefeng.com/wiki/1177760294764384/1179610888796448</a></li>
+<li><a href="https://www.inlighting.org/archives/database-query-processing" target="_blank" rel="noopener noreffer">https://www.inlighting.org/archives/database-query-processing</a></li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2022-05-01</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/cmu15-445/">cmu15-445</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/tcp%E8%BF%9E%E6%8E%A5%E8%AF%BB%E5%86%99%E6%B5%8B%E8%AF%95/" class="prev" rel="prev" title="读写已经关闭的TCP连接会发生什么"><i class="fas fa-angle-left fa-fw"></i>读写已经关闭的TCP连接会发生什么</a>
+            <a href="/cmu15-445-project2/" class="next" rel="next" title="cmu15-445-project2">cmu15-445-project2<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      renderMathInElement(document.body, {
+              delimiters: [
+                  {left: "$$", right: "$$", display: true},
+                  {left: "$", right: "$", display: false}
+              ]
+          });
+    });
+</script>
+
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.95.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021 - 2022</span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":30},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

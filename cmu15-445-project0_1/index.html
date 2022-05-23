@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>cmu15-445-project0,1 - stonex</title><meta name="Description" content="Welcome to my&#39;blog!"><meta property="og:title" content="cmu15-445-project0,1" />
+<meta property="og:description" content="2021 FALL cmu15-445-project0,1 写在前面 过去也看了一些公开课了，但是从来没有完整的做完一个课程的实验，cmu15-445也相当于我第一个完整做完的课程实验。由于202" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sheny1xuan.github.io/cmu15-445-project0_1/" /><meta property="og:image" content="https://sheny1xuan.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-04-27T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-05-01T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://sheny1xuan.github.io/logo.png"/>
+
+<meta name="twitter:title" content="cmu15-445-project0,1"/>
+<meta name="twitter:description" content="2021 FALL cmu15-445-project0,1 写在前面 过去也看了一些公开课了，但是从来没有完整的做完一个课程的实验，cmu15-445也相当于我第一个完整做完的课程实验。由于202"/>
+<meta name="application-name" content="Stonex">
+<meta name="apple-mobile-web-app-title" content="Stonex"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://sheny1xuan.github.io/cmu15-445-project0_1/" /><link rel="prev" href="https://sheny1xuan.github.io/cmu15-445-project2/" /><link rel="next" href="https://sheny1xuan.github.io/cmu15-445-project4/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "cmu15-445-project0,1",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/sheny1xuan.github.io\/cmu15-445-project0_1\/"
+        },"genre": "posts","keywords": "cmu15-445","wordcount":  3801 ,
+        "url": "https:\/\/sheny1xuan.github.io\/cmu15-445-project0_1\/","datePublished": "2022-04-27T00:00:00+00:00","dateModified": "2022-05-01T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Shen"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="stonex">Home</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="stonex">Home</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">cmu15-445-project0,1</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Shen</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"><i class="far fa-folder fa-fw"></i>数据库</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-27">2022-04-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3801 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 8 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#2021-fall-cmu15-445-project01">2021 FALL cmu15-445-project0,1</a>
+          <ul>
+            <li><a href="#写在前面">写在前面</a></li>
+            <li><a href="#project0">project0</a></li>
+            <li><a href="#project1">project1</a>
+              <ul>
+                <li><a href="#缓冲池理论">缓冲池理论</a>
+                  <ul>
+                    <li><a href="#为什么需要缓冲池与磁盘直接进行交互而不用操作系统的普通文件系统">为什么需要缓冲池与磁盘直接进行交互而不用操作系统的普通文件系统：</a></li>
+                    <li><a href="#io分类">IO分类：</a></li>
+                    <li><a href="#缓冲池总体架构image-20220430194844125httpspicture-tableoss-cn-beijingaliyuncscomimgimage-20220430194844125png">缓冲池总体架构<img src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430194844125.png" alt="image-20220430194844125"></a></li>
+                    <li><a href="#单一缓冲池主要由两部分组成">单一缓冲池主要由两部分组成：</a></li>
+                    <li><a href="#组相联缓冲池与缓存组相联类似">组相联缓冲池，与缓存组相联类似：</a></li>
+                    <li><a href="#页面置换算法">页面置换算法</a></li>
+                  </ul>
+                </li>
+                <li><a href="#数据库系统中的页">数据库系统中的页</a>
+                  <ul>
+                    <li><a href="#每一行数据的组成">每一行数据的组成</a></li>
+                    <li><a href="#每一行数据的表示">每一行数据的表示</a></li>
+                    <li><a href="#两种不同的事务类型">两种不同的事务类型</a></li>
+                  </ul>
+                </li>
+                <li><a href="#实验代码">实验代码</a>
+                  <ul>
+                    <li><a href="#实现lru换页">实现LRU换页</a></li>
+                    <li><a href="#单个缓冲池">单个缓冲池</a></li>
+                    <li><a href="#线程安全组相联缓冲池">线程安全组相联缓冲池</a></li>
+                  </ul>
+                </li>
+                <li><a href="#参考博客">参考博客</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="2021-fall-cmu15-445-project01">2021 FALL cmu15-445-project0,1</h2>
+<h3 id="写在前面">写在前面</h3>
+<p>过去也看了一些公开课了，但是从来没有完整的做完一个课程的实验，cmu15-445也相当于我第一个完整做完的课程实验。<del>由于2021FALL的课程并不是<a href="http://www.cs.cmu.edu/~pavlo" target="_blank" rel="noopener noreffer"> Andy Pavlo</a>主讲的，少了点意思</del>（是我时间不够，并且不想看公开课了），我并没看公开课，而是通过ppt和书进行学习的（主要是PPT）。虽然都能够通过gradescope上所有的测试，但是很多东西都是面向测试用例编程的，并没有自己的理解。我的感觉与<a href="https://www.inlighting.org/" target="_blank" rel="noopener noreffer">沧海月明</a>大佬一样，如果只是面向测试用例编程，以通过gradescope为目的的话，是远远不够的，后期还需要仔细对着PPT和《数据库系统概念 第七版》进行理解与复习。这篇博客是我以实验为中心，通过PPT学习的一个简单的总结，大部分内容都是我从PPT中拿出来认为比较重要的部分，或者是对实验的梳理。</p>
+<p>2021年的实验主要由<a href="https://15445.courses.cs.cmu.edu/fall2021/assignments.html" target="_blank" rel="noopener noreffer">四个小实验构成</a>，每个实验都有详细的实验介绍。每个实验开始前，通读实验。的基础要求，然后去补对应的知识点（一般都忘记了），之后去看对应文件的代码，最后就是实现和测试了。</p>
+<p>下面是一些注意事项</p>
+<ul>
+<li>每一个实验的要求和介绍都需要详细的阅读。除此之外，对于每一个需要实现的方法，它的注释都是很关键的。</li>
+<li>实验不需要特别多的c++的知识。但是最困难的是c++编译和设置调试的过程，如果没有c++和cmake开发的基础，还是最好使用clion之类的集成编译环境会更省心一点。<del>我是通过vscode进行调试的，利用自己写vscode的task进行编译的。配置文件很麻烦，感觉没什么用。</del></li>
+</ul>
+<h3 id="project0">project0</h3>
+<p>project0是一个用来熟悉代码环境的准备性的实验。这个实验至少要实现一下几个目标，这个也是开头最困难的地方。</p>
+<ol>
+<li>创建你的私有仓库，并且初始化开发环境，学习编译测试与格式化代码。这些内容在project0的介绍里都有详细的教程。</li>
+<li>学会使用LOG，这个对于后续调试有很重要的作用。我没有成功通过环境变量修改或者编译选项过这日志等级，是通过修改<a href="https://github.com/cmu-db/bustub/blob/ed3fdb6a71e23051d91d1c14dad6385d3e44f213/src/include/common/logger.h#L75" target="_blank" rel="noopener noreffer">这一行</a>实现的。</li>
+<li>学会在线测试，本地测试都是比较基础的简单测试，真的困难的测试需要在gradescope上，上传代码到gradesocpe并且进行测试。困难的测试是<strong>推荐自己写</strong>（我不会写，太菜了），没有测试用例很难找出来问题。如果有需要测试用例，也可以来找我，我当时找了好久。gradescope可以通过压缩文件包上传文件，也可以直接通过github的分支直接上传，这里推荐使用第二种，更方便管理。可以通过简单的脚本来实现。project0只能通过打包文件实现。</li>
+</ol>
+<p>可参考的代码提交测试脚本 <code>./script labname commitmsg</code>或者是通过<code>./script check</code>进行代码format。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span><span class="lnt">91
+</span><span class="lnt">92
+</span><span class="lnt">93
+</span><span class="lnt">94
+</span><span class="lnt">95
+</span><span class="lnt">96
+</span><span class="lnt">97
+</span><span class="lnt">98
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># !/usr/bin/bash</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">lab</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$2</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">check<span class="o">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -ne <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">echo</span> <span class="s2">&#34;command error.&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">exit</span> <span class="m">10</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">echo</span> <span class="s2">&#34;ok&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">fi</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="nv">$lab</span><span class="s2">&#34;</span> <span class="o">=</span> <span class="s2">&#34;check&#34;</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">cd</span> build
+</span></span><span class="line"><span class="cl">    make format
+</span></span><span class="line"><span class="cl">    make check-lint
+</span></span><span class="line"><span class="cl">    make check-clang-tidy
+</span></span><span class="line"><span class="cl">    <span class="nb">cd</span> ..
+</span></span><span class="line"><span class="cl">    <span class="nb">exit</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="nv">$lab</span><span class="s2">&#34;</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span> <span class="o">]</span> <span class="o">||</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="nv">$msg</span><span class="s2">&#34;</span> <span class="o">==</span> <span class="s2">&#34;&#34;</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">echo</span> <span class="s2">&#34;lab or msg error.&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">exit</span> <span class="m">10</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> build
+</span></span><span class="line"><span class="cl">make format
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> ..
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">check
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">git add .
+</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;</span><span class="nv">$msg</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">git push origin dev
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">check
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">lab0File</span><span class="o">=</span><span class="s2">&#34;test/primer/starter_test.cpp&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">lab1File</span><span class="o">=</span><span class="s2">&#34;src/include/buffer/lru_replacer.h \
+</span></span></span><span class="line"><span class="cl"><span class="s2">        src/buffer/lru_replacer.cpp \
+</span></span></span><span class="line"><span class="cl"><span class="s2">        src/include/buffer/buffer_pool_manager_instance.h \
+</span></span></span><span class="line"><span class="cl"><span class="s2">        src/buffer/buffer_pool_manager_instance.cpp \
+</span></span></span><span class="line"><span class="cl"><span class="s2">        src/include/buffer/parallel_buffer_pool_manager.h \
+</span></span></span><span class="line"><span class="cl"><span class="s2">        src/buffer/parallel_buffer_pool_manager.cpp\
+</span></span></span><span class="line"><span class="cl"><span class="s2">        src/include/common/logger.h&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">lab2File</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$lab1File</span><span class="s2"> src/include/storage/page/hash_table_directory_page.h \
+</span></span></span><span class="line"><span class="cl"><span class="s2">        src/storage/page/hash_table_directory_page.cpp \
+</span></span></span><span class="line"><span class="cl"><span class="s2">        src/include/storage/page/hash_table_bucket_page.h \
+</span></span></span><span class="line"><span class="cl"><span class="s2">        src/storage/page/hash_table_bucket_page.cpp \
+</span></span></span><span class="line"><span class="cl"><span class="s2">        src/include/container/hash/extendible_hash_table.h \
+</span></span></span><span class="line"><span class="cl"><span class="s2">        src/container/hash/extendible_hash_table.cpp \
+</span></span></span><span class="line"><span class="cl"><span class="s2">        src/include/storage/page/tmp_tuple_page.h&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">lab3File</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$lab2File</span><span class="s2"> src/include/execution/execution_engine.h \
+</span></span></span><span class="line"><span class="cl"><span class="s2">        src/include/execution/executors/seq_scan_executor.h \
+</span></span></span><span class="line"><span class="cl"><span class="s2">        src/include/execution/executors/insert_executor.h \
+</span></span></span><span class="line"><span class="cl"><span class="s2">        src/include/execution/executors/update_executor.h \
+</span></span></span><span class="line"><span class="cl"><span class="s2">        src/include/execution/executors/delete_executor.h \
+</span></span></span><span class="line"><span class="cl"><span class="s2">        src/include/execution/executors/nested_loop_join_executor.h \
+</span></span></span><span class="line"><span class="cl"><span class="s2">        src/include/execution/executors/hash_join_executor.h \
+</span></span></span><span class="line"><span class="cl"><span class="s2">        src/include/execution/executors/aggregation_executor.h \
+</span></span></span><span class="line"><span class="cl"><span class="s2">        src/include/execution/executors/limit_executor.h \
+</span></span></span><span class="line"><span class="cl"><span class="s2">        src/include/execution/executors/distinct_executor.h \
+</span></span></span><span class="line"><span class="cl"><span class="s2">        src/execution/seq_scan_executor.cpp \
+</span></span></span><span class="line"><span class="cl"><span class="s2">        src/execution/insert_executor.cpp \
+</span></span></span><span class="line"><span class="cl"><span class="s2">        src/execution/update_executor.cpp \
+</span></span></span><span class="line"><span class="cl"><span class="s2">        src/execution/delete_executor.cpp \
+</span></span></span><span class="line"><span class="cl"><span class="s2">        src/execution/nested_loop_join_executor.cpp \
+</span></span></span><span class="line"><span class="cl"><span class="s2">        src/execution/hash_join_executor.cpp \
+</span></span></span><span class="line"><span class="cl"><span class="s2">        src/execution/aggregation_executor.cpp \
+</span></span></span><span class="line"><span class="cl"><span class="s2">        src/execution/limit_executor.cpp \
+</span></span></span><span class="line"><span class="cl"><span class="s2">        src/execution/distinct_executor.cpp&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">lab4File</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$lab3File</span><span class="s2"> src/concurrency/lock_manager.cpp\
+</span></span></span><span class="line"><span class="cl"><span class="s2">        src/include/concurrency/lock_manager.h&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="nv">$lab</span><span class="s2">&#34;</span> <span class="o">=</span> <span class="s2">&#34;l0&#34;</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">labFile</span> <span class="o">=</span> lab0File
+</span></span><span class="line"><span class="cl"><span class="k">elif</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="nv">$lab</span><span class="s2">&#34;</span> <span class="o">=</span> <span class="s2">&#34;l1&#34;</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">labFile</span> <span class="o">=</span> lab1File
+</span></span><span class="line"><span class="cl"><span class="k">elif</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="nv">$lab</span><span class="s2">&#34;</span> <span class="o">=</span> <span class="s2">&#34;l2&#34;</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">labFile</span> <span class="o">=</span> lab2File
+</span></span><span class="line"><span class="cl"><span class="k">elif</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="nv">$lab</span><span class="s2">&#34;</span> <span class="o">=</span> <span class="s2">&#34;l3&#34;</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">labFile</span> <span class="o">=</span> lab3File
+</span></span><span class="line"><span class="cl"><span class="k">elif</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="nv">$lab</span><span class="s2">&#34;</span> <span class="o">=</span> <span class="s2">&#34;l4&#34;</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">labFile</span> <span class="o">=</span> lab4File
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="nv">$msg</span><span class="s2">&#34;</span> !<span class="o">=</span> <span class="s2">&#34;&#34;</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">    git checkout -b <span class="s2">&#34;</span><span class="nv">$lab</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    git reset --hard dev
+</span></span><span class="line"><span class="cl">    git rm -r --cached .
+</span></span><span class="line"><span class="cl">    git add <span class="nv">$labFile</span>
+</span></span><span class="line"><span class="cl">    git commit -m <span class="s2">&#34;</span><span class="nv">$msg</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    git push -f origin <span class="s2">&#34;</span><span class="nv">$lab</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    git checkout dev -f
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="project1">project1</h3>
+<p>实现一个线程安全的缓冲池，涉及的的知识点为ppt1-5章。</p>
+<h4 id="缓冲池理论">缓冲池理论</h4>
+<p>各级存储的访问时间是有显著差异的，磁盘即使是SSD的访问时间(ms)也是内存DRAM(us)的访问时间的1000倍。对于磁盘而言，磁盘的随机访问的效率也远低于顺序访问。因此，对于磁盘的访问，需要最大化顺序IO，减少对磁盘的随机访问。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220428205830968.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220428205830968.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220428205830968.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220428205830968.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220428205830968.png"
+        title="image-20220428205830968" /></p>
+<h5 id="为什么需要缓冲池与磁盘直接进行交互而不用操作系统的普通文件系统">为什么需要缓冲池与磁盘直接进行交互而不用操作系统的普通文件系统：</h5>
+<p>数据库系统需要做根据数据库系统的IO操作特点进行优化，尽可能多的减少IO的读写</p>
+<ul>
+<li>按照顺序IO写入磁盘</li>
+<li>预读</li>
+<li>页面置换策略</li>
+<li>线程切换</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430195409319.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430195409319.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430195409319.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430195409319.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430195409319.png"
+        title="image-20220430195409319" /></p>
+<h5 id="io分类">IO分类：</h5>
+<ul>
+<li>无缓冲IO：内存中的数据-&gt;内核缓冲区-&gt;磁盘</li>
+<li>缓冲IO：内存中的数据-&gt;用户缓冲区-&gt;内核缓冲区-&gt;磁盘</li>
+<li>DIO/CIO：内存中的数据-&gt;磁盘(数据库使用)</li>
+</ul>
+<p>直接IO减少了数据的拷贝，操作系统使用mmap直接将文件映射到数据库程序当中的虚拟地址空间中。而虚拟地址空间中的页与实际物理地址映射与换入换出仍通过操作系统管理。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430195012745.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430195012745.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430195012745.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430195012745.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430195012745.png"
+        title="image-20220430195012745" /></p>
+<h5 id="缓冲池总体架构image-20220430194844125httpspicture-tableoss-cn-beijingaliyuncscomimgimage-20220430194844125png">缓冲池总体架构<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430194844125.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430194844125.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430194844125.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430194844125.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430194844125.png"
+        title="image-20220430194844125" /></h5>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430205102536.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430205102536.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430205102536.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430205102536.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430205102536.png"
+        title="image-20220430205102536" /></p>
+<h5 id="单一缓冲池主要由两部分组成">单一缓冲池主要由两部分组成：</h5>
+<ol>
+<li>PageTable：将全局页号(page_id)映射为该页在缓冲池中的位置索引(frame_id)。</li>
+<li>BufferPool：存储每一页的内存，数据库的堆内存。</li>
+</ol>
+<p>操作过程：</p>
+<ol>
+<li>拿出一页需要Pin，引用计数加一，不允许被换入换出。</li>
+<li>不需要使用某一页时，需要Unpin，引用计数减一，当引用计数为0时，允许换入换出。</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220428204717614.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220428204717614.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220428204717614.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220428204717614.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220428204717614.png"
+        title="image-20220428204717614" /></p>
+<h5 id="组相联缓冲池与缓存组相联类似">组相联缓冲池，与缓存组相联类似：</h5>
+<ul>
+<li>减少锁的竞争</li>
+<li>提升局部性</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430205453587.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430205453587.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430205453587.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430205453587.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430205453587.png"
+        title="image-20220430205453587" /></p>
+<h5 id="页面置换算法">页面置换算法</h5>
+<p>时钟算法</p>
+<ul>
+<li>被访问到，标志位置为1。</li>
+<li>当需要置换时，如果标志位为1，置为0；如果标志位为0，则将其置换。</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430205712851.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430205712851.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430205712851.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430205712851.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430205712851.png"
+        title="image-20220430205712851" /></p>
+<p>顺序淘汰：RoundRobin</p>
+<p>LRU：https://leetcode-cn.com/problems/lru-cache/，通过哈希表和双向链表实现。</p>
+<p>LRU-K：防止遍历导致的缓存污染。访问k次后才加入缓存，淘汰过时的页面。</p>
+<h4 id="数据库系统中的页">数据库系统中的页</h4>
+<ul>
+<li>数据库系统中的每一页有固定的大小，不同于操作系统中的页(4KB)，数据库系统中的页通常为(4-16KB)。</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430222801590.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430222801590.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430222801590.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430222801590.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430222801590.png"
+        title="image-20220430222801590" /></p>
+<p>这些页被分配在堆内存中，而这些页可以通过链表或者目录项的方式组织起来。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430223422575.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430223422575.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430223422575.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430223422575.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430223422575.png"
+        title="image-20220430223422575" /></p>
+<p>每一页由页头和页数据组成。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430223620546.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430223620546.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430223620546.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430223620546.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430223620546.png"
+        title="image-20220430223620546" /></p>
+<p>数据页中的行数据(tuple)由行ID唯一的表示，访问该行通过页号和页内偏移进行访问。<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430223926464.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430223926464.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430223926464.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430223926464.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430223926464.png"
+        title="image-20220430223926464" /></p>
+<h5 id="每一行数据的组成">每一行数据的组成</h5>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430224132868.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430224132868.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430224132868.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430224132868.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430224132868.png"
+        title="image-20220430224132868" /></p>
+<h5 id="每一行数据的表示">每一行数据的表示</h5>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430224323580.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430224323580.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430224323580.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430224323580.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430224323580.png"
+        title="image-20220430224323580" /></p>
+<h5 id="两种不同的事务类型">两种不同的事务类型</h5>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430224517751.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430224517751.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430224517751.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430224517751.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430224517751.png"
+        title="image-20220430224517751" /></p>
+<h4 id="实验代码">实验代码</h4>
+<h5 id="实现lru换页">实现LRU换页</h5>
+<p>参考https://leetcode-cn.com/problems/lru-cache/。主要由哈希表，链表以及保证线程安全的锁组成。</p>
+<ul>
+<li>Pin：该页正在被使用，从LRU队列中取出不允许被换入换出。</li>
+<li>Unpin：该页不需要使用，放入LRU队列中准备换入换出。</li>
+<li>Victim：LRU队列中队尾的页，返回true。如果队列为空，返回false。</li>
+</ul>
+<h5 id="单个缓冲池">单个缓冲池</h5>
+<p><code>BufferPoolManagerInstance()</code>继承了<code>BufferPoolManager</code>，其成员主要由下面的成员构成</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="c1">// src/include/buffer/buffer_pool_manager_instance.h
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	
+</span></span><span class="line"><span class="cl">	<span class="cm">/** Array of buffer pool pages. */</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 堆内存
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Page</span> <span class="o">*</span><span class="n">pages_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/** Pointer to the disk manager. */</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 没有实现wal，只是简单的文件读写
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">DiskManager</span> <span class="o">*</span><span class="n">disk_manager_</span> <span class="nf">__attribute__</span><span class="p">((</span><span class="n">__unused__</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/** Pointer to the log manager. */</span>
+</span></span><span class="line"><span class="cl">    <span class="n">LogManager</span> <span class="o">*</span><span class="n">log_manager_</span> <span class="nf">__attribute__</span><span class="p">((</span><span class="n">__unused__</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/** Page table for keeping track of buffer pool pages. */</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="n">page_id_t</span><span class="p">,</span> <span class="n">frame_id_t</span><span class="o">&gt;</span> <span class="n">page_table_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/** Replacer to find unpinned pages for replacement. */</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Replacer</span> <span class="o">*</span><span class="n">replacer_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/** List of free pages. */</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">list</span><span class="o">&lt;</span><span class="n">frame_id_t</span><span class="o">&gt;</span> <span class="n">free_list_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/** This latch protects shared data structures. We recommend updating this comment to describe what it protects. */</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/** Protect free_list_, page_table_*/</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">mutex</span> <span class="n">latch_</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>缓冲池中的每一页<code>page</code>包含了控制信息和页内数据，控制信息包括PIN该页的次数，页号，脏页标志位，以及一个读写锁。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">  <span class="c1">// src/include/storage/page/page.h
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="cm">/** Zeroes out the data that is held within the page. */</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">inline</span> <span class="kt">void</span> <span class="nf">ResetMemory</span><span class="p">()</span> <span class="p">{</span> <span class="n">memset</span><span class="p">(</span><span class="n">data_</span><span class="p">,</span> <span class="n">OFFSET_PAGE_START</span><span class="p">,</span> <span class="n">PAGE_SIZE</span><span class="p">);</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="cm">/** The actual data that is stored within a page. */</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">char</span> <span class="n">data_</span><span class="p">[</span><span class="n">PAGE_SIZE</span><span class="p">]{};</span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/** The ID of this page. */</span>
+</span></span><span class="line"><span class="cl">  <span class="n">page_id_t</span> <span class="n">page_id_</span> <span class="o">=</span> <span class="n">INVALID_PAGE_ID</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/** The pin count of this page. */</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">pin_count_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/** True if the page is dirty, i.e. it is different from its corresponding page on disk. */</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="n">is_dirty_</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/** Page latch. */</span>
+</span></span><span class="line"><span class="cl">  <span class="n">ReaderWriterLatch</span> <span class="n">rwlatch_</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>对于堆内存中的每一页其存在的位置只有在空闲链表，lru队列，正在使用(PIN)三种状态。因此空闲的页都存在于空闲链表或者lru队列中，对于lru队列中被换出的页需要检查其是否是脏页，如果是脏页的化需要利用<code>disk_manager_</code>写回到磁盘当中。寻找空闲的frame的逻辑可以进行简单的封装<code>bool FindFrame(frame_id_t *frame_id)</code>。需要注意的是，<code>page_table_</code>中映射的页不一定都是被PIN的状态，有些可能正处于LRU队列中。主要需要实现一下方法，其中最主要的是FetchPgImp，UnpinPgImp（需要详细阅读注释）：</p>
+<ul>
+<li>FetchPgImp：寻找该页，如果该页不在<code>page_table_</code>中，需要找到合适的空闲页，利用<code>disk_manager_</code>读出该页。之后将该页引用计数加一，从LRU队列中取出。</li>
+<li>UnpinPgImp：这里需要注意注释里的<code>*false if the page pin count is &lt;= 0 before this call, true otherwise*</code>，只有<code>pin_count &lt;=0</code>时才返回false，其余情况下都返回true。除此之外，即使该页<code>pin_count&lt;=0</code>，不需要将该页从<code>page_table_</code>中删除，否则FetchPage时，该页在lru队列中不能被拿出，导致不一致。脏页也只需要进行标记即可后续被换出时写回磁盘即可。</li>
+<li>FlushPgImp：利用<code>disk_manager_</code>写回。</li>
+<li>NewPgImp：先找到空闲的页，之后<code>AllocatePage()</code>申请<code>page_id</code>。</li>
+<li>DeletePgImp：删除该页，需要注意只有<code>pin_count_ &lt;= 0</code>才能删除，感觉应该还需要在磁盘中删除该页，这部分不是很确定。</li>
+</ul>
+<h5 id="线程安全组相联缓冲池">线程安全组相联缓冲池</h5>
+<p><code>ParallelBufferPoolManager</code>包含多个<code>BufferPoolManagerInstance</code>，对于每一页需要通过取余找到合适的<code>BufferPoolManagerInstance</code>，之后调用单个缓冲池的api即可。</p>
+<p>NewPgImp比较复杂一些，需要轮询所有的缓冲池，直到成功拿到一页，或者是失败。</p>
+<h4 id="参考博客">参考博客</h4>
+<p>实验主要参考的博客，后面不在一一列出。</p>
+<ul>
+<li><a href="https://www.inlighting.org/archives/cmu-15-445-notes/" target="_blank" rel="noopener noreffer">https://www.inlighting.org/archives/cmu-15-445-notes/</a></li>
+<li><a href="https://www.cnblogs.com/JayL-zxl/category/1919605.html" target="_blank" rel="noopener noreffer">https://www.cnblogs.com/JayL-zxl/category/1919605.html</a></li>
+<li><a href="https://15445.courses.cs.cmu.edu/fall2021/" target="_blank" rel="noopener noreffer">https://15445.courses.cs.cmu.edu/fall2021/</a></li>
+<li><a href="https://segmentfault.com/a/1190000015856311" target="_blank" rel="noopener noreffer">https://segmentfault.com/a/1190000015856311</a></li>
+<li><a href="https://www.jianshu.com/p/c4e4d55706ff" target="_blank" rel="noopener noreffer">https://www.jianshu.com/p/c4e4d55706ff</a></li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2022-05-01</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/cmu15-445/">cmu15-445</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/cmu15-445-project2/" class="prev" rel="prev" title="cmu15-445-project2"><i class="fas fa-angle-left fa-fw"></i>cmu15-445-project2</a>
+            <a href="/cmu15-445-project4/" class="next" rel="next" title="cmu15-445-project4">cmu15-445-project4<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      renderMathInElement(document.body, {
+              delimiters: [
+                  {left: "$$", right: "$$", display: true},
+                  {left: "$", right: "$", display: false}
+              ]
+          });
+    });
+</script>
+
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.95.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021 - 2022</span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":30},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

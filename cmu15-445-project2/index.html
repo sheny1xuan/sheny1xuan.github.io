@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>cmu15-445-project2 - stonex</title><meta name="Description" content="Welcome to my&#39;blog!"><meta property="og:title" content="cmu15-445-project2" />
+<meta property="og:description" content="2021 FALL cmu15-445-project2 实现哈希索引，涉及的的知识点为ppt6-8章。 哈希索引 哈希表关键问题 哈希函数 哈希冲突处理 常用哈希函数 哈希分类 静态哈希：散列函数不随数据" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sheny1xuan.github.io/cmu15-445-project2/" /><meta property="og:image" content="https://sheny1xuan.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-04-27T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-05-01T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://sheny1xuan.github.io/logo.png"/>
+
+<meta name="twitter:title" content="cmu15-445-project2"/>
+<meta name="twitter:description" content="2021 FALL cmu15-445-project2 实现哈希索引，涉及的的知识点为ppt6-8章。 哈希索引 哈希表关键问题 哈希函数 哈希冲突处理 常用哈希函数 哈希分类 静态哈希：散列函数不随数据"/>
+<meta name="application-name" content="Stonex">
+<meta name="apple-mobile-web-app-title" content="Stonex"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://sheny1xuan.github.io/cmu15-445-project2/" /><link rel="prev" href="https://sheny1xuan.github.io/cmu15-445-project3/" /><link rel="next" href="https://sheny1xuan.github.io/cmu15-445-project0_1/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "cmu15-445-project2",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/sheny1xuan.github.io\/cmu15-445-project2\/"
+        },"genre": "posts","keywords": "cmu15-445","wordcount":  4033 ,
+        "url": "https:\/\/sheny1xuan.github.io\/cmu15-445-project2\/","datePublished": "2022-04-27T00:00:00+00:00","dateModified": "2022-05-01T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Shen"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="stonex">Home</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="stonex">Home</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">cmu15-445-project2</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Shen</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"><i class="far fa-folder fa-fw"></i>数据库</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-27">2022-04-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 4033 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 9 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#2021-fall-cmu15-445-project2">2021 FALL cmu15-445-project2</a>
+          <ul>
+            <li>
+              <ul>
+                <li><a href="#哈希索引">哈希索引</a>
+                  <ul>
+                    <li><a href="#哈希表关键问题">哈希表关键问题</a></li>
+                    <li><a href="#常用哈希函数">常用哈希函数</a></li>
+                    <li><a href="#哈希分类">哈希分类</a>
+                      <ul>
+                        <li><a href="#1-线性探查">1. 线性探查</a></li>
+                        <li><a href="#2-robin-hood哈希">2. ROBIN HOOD哈希</a></li>
+                        <li><a href="#3-cuckoo哈希">3. CUCKOO哈希</a></li>
+                        <li><a href="#4-开链表哈希">4. 开链表哈希</a></li>
+                        <li><a href="#5-可扩充散列">5. 可扩充散列</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li><a href="#b树索引">B+树索引</a>
+                  <ul>
+                    <li><a href="#b树结构">B+树结构</a></li>
+                    <li><a href="#聚簇索引">聚簇索引</a></li>
+                  </ul>
+                </li>
+                <li><a href="#并发控制">并发控制</a>
+                  <ul>
+                    <li><a href="#b树并发控制">B+树并发控制</a></li>
+                  </ul>
+                </li>
+                <li><a href="#哈希索引与b树索引对比">哈希索引与B+树索引对比</a></li>
+                <li><a href="#实验代码">实验代码</a>
+                  <ul>
+                    <li><a href="#实现目录页和数据页">实现目录页和数据页</a></li>
+                    <li><a href="#实现哈希表">实现哈希表</a>
+                      <ul>
+                        <li><a href="#构造函数以及辅助函数">构造函数以及辅助函数</a></li>
+                        <li><a href="#插入以及删除">插入以及删除</a></li>
+                        <li><a href="#读取">读取</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="#并发哈希表">并发哈希表</a></li>
+                  </ul>
+                </li>
+                <li><a href="#参考博客">参考博客</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="2021-fall-cmu15-445-project2">2021 FALL cmu15-445-project2</h2>
+<p>实现哈希索引，涉及的的知识点为ppt6-8章。</p>
+<h4 id="哈希索引">哈希索引</h4>
+<h5 id="哈希表关键问题">哈希表关键问题</h5>
+<ul>
+<li>哈希函数</li>
+<li>哈希冲突处理</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502151738784.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502151738784.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502151738784.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502151738784.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502151738784.png"
+        title="image-20220502151738784" /></p>
+<h5 id="常用哈希函数">常用哈希函数</h5>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502151900612.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502151900612.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502151900612.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502151900612.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502151900612.png"
+        title="image-20220502151900612" /></p>
+<h5 id="哈希分类">哈希分类</h5>
+<p><strong>静态哈希</strong>：散列函数不随数据规模而改变，(1,2,3,4)</p>
+<p><strong>动态哈希</strong>：散列函数随数据规模动态变化，可以动态适应数据规模的变化，性能不随数据规模增大而降低。方法(5)</p>
+<h6 id="1-线性探查">1. 线性探查</h6>
+<p>需要注意删除过程中：需要墓碑或者移动后面多余的键使其连续</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502152104038.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502152104038.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502152104038.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502152104038.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502152104038.png"
+        title="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502152104038.png" /></p>
+<h6 id="2-robin-hood哈希">2. ROBIN HOOD哈希</h6>
+<p>线性探查的变种，对于产生哈希冲突的键会赋予一个移动的位置次数。尽量减少所有键的移动次数。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502152444989.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502152444989.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502152444989.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502152444989.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502152444989.png"
+        title="image-20220502152444989" /></p>
+<h6 id="3-cuckoo哈希">3. CUCKOO哈希</h6>
+<p>使用多个哈希函数，多个哈希表。如果产生哈希冲突，尝试在其他哈希表上重新进行哈希解决冲突问题。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502153135301.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502153135301.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502153135301.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502153135301.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502153135301.png"
+        title="image-20220502153135301" /></p>
+<h6 id="4-开链表哈希">4. 开链表哈希</h6>
+<p>将所有产生相同哈希值的key通过链表连接到该哈希值。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502153400030.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502153400030.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502153400030.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502153400030.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502153400030.png"
+        title="image-20220502153400030" /></p>
+<h6 id="5-可扩充散列">5. 可扩充散列</h6>
+<p>这也是这个实验实现的重点，这里可扩充的意思就是无需关注该哈希中哈希冲突的数量，会随数据规模的变化自动处理哈希冲突。这里只做简单介绍，重点参考<code>《数据库系统概念》11.7动态散列</code>。</p>
+<p>可扩充散列本质上相当于在静态散列的基础上加了一个中间层。首先通过散列函数得到散列值，b位的二进制数，通常为32位。在这基础上，需要维护散列目录页和散列数据页(桶)。散列目录页维护全局的散列位数，前缀到数据页的映射以及每个数据页的局部位数。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502155019582.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502155019582.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502155019582.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502155019582.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502155019582.png"
+        title="image-20220502155019582" /></p>
+<p>关键点在于如何处理扩容和缩容：</p>
+<p><strong>扩容操作</strong>：当某个桶的容量已满时，提升当前桶的局部深度$h_i$。需要将当前桶中所有的key按照哈希值的$h_i$分为两类，一类与当前桶的索引相同，一类与当前桶的索引最高位不同。如下图中插入C，可以将10桶中的key分为(100)和(101)前缀两类。之后修改散列目录页对应桶的指针。</p>
+<p>通过与散列目录页的深度$h_g$对比，可以分为两种条件：</p>
+<ul>
+<li>需要全局扩容：$h_g==h_i$，需要重新定位新产生的指针对应的桶</li>
+<li>不需要全局扩容：$h_g &gt; h_i$，仅需要修改这两类前缀的指针。</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502160020300.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502160020300.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502160020300.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502160020300.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502160020300.png"
+        title="image-20220502160020300" /></p>
+<p>考虑一种特殊的情况，如果需要分裂的页所有的key的哈希值在局部深度$h_i$都相同，这时无法分裂，需要附加桶来解决，该实验中无需考虑这种特殊情况。</p>
+<p><strong>缩容操作</strong>：</p>
+<p>局部缩容：如果删除key后，该桶为空则可以尝试与对称的桶进行合并，如上图删除C后，100和101可以进行合并。并且降低非空的桶的深度$h_i$。</p>
+<p>全局缩容：如果所有的局部深度$h_i$都小于全局深度$h_g$的话，可以进行全局缩容。</p>
+<h4 id="b树索引">B+树索引</h4>
+<h5 id="b树结构">B+树结构</h5>
+<ul>
+<li>完全平衡</li>
+<li>左节点小于key，右节点大于等于key</li>
+<li>除根结点外所有节点半满</li>
+<li>叶子节点通过双向链表连接</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502164305470.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502164305470.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502164305470.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502164305470.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502164305470.png"
+        title="image-20220502164305470" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502164406313.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502164406313.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502164406313.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502164406313.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502164406313.png"
+        title="image-20220502164406313" /></p>
+<p>插入：从下往上插入</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502164930161.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502164930161.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502164930161.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502164930161.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502164930161.png"
+        title="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502164930161.png" /></p>
+<p>删除：如果不满足半满的条件，需要合并节点</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502165102693.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502165102693.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502165102693.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502165102693.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502165102693.png"
+        title="image-20220502165102693" /></p>
+<h5 id="聚簇索引">聚簇索引</h5>
+<p>利用主键作为key创建索引存储数据库的所有行(行在叶子节点中)。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502165209464.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502165209464.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502165209464.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502165209464.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502165209464.png"
+        title="image-20220502165209464" /></p>
+<p>利用聚簇索引排序是高效的。非聚簇索引通过回表进行排序，会产生大量的随机IO。越慢的存储介质，需要越大的B+树节点，减少IO操作。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502165434083.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502165434083.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502165434083.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502165434083.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502165434083.png"
+        title="image-20220502165434083" /></p>
+<h4 id="并发控制">并发控制</h4>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502171352080.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502171352080.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502171352080.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502171352080.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502171352080.png"
+        title="image-20220502171352080" /></p>
+<p>Latch保证数据结构物理性正确，Lock属于事务中逻辑性正确。latch不支持死锁检测与死锁避免。</p>
+<p>Latch分类</p>
+<ul>
+<li>Mutex：pthread通过futex实现。</li>
+<li>SpinLock：自旋锁</li>
+<li>读写锁</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502171401194.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502171401194.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502171401194.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502171401194.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502171401194.png"
+        title="image-20220502171401194" /></p>
+<h5 id="b树并发控制">B+树并发控制</h5>
+<p>从根节点向下依次获取锁，先拿到父节点的锁，之后获取子节点的锁，缺人父节点安全后，释放该锁。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502172556133.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502172556133.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502172556133.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502172556133.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502172556133.png"
+        title="image-20220502172556133" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502172645771.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502172645771.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502172645771.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502172645771.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502172645771.png"
+        title="image-20220502172645771" /></p>
+<p>写的次数多的情况下，根节点的写锁将成为性能瓶颈。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502172858293.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502172858293.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502172858293.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502172858293.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502172858293.png"
+        title="image-20220502172858293" /></p>
+<p>假设所有写操作都是安全的，从上到下获取读锁，只有目标节点获取写锁。如果发现需要分离，则执行上述的操作流程。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502173006982.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502173006982.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502173006982.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502173006982.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220502173006982.png"
+        title="image-20220502173006982" /></p>
+<h4 id="哈希索引与b树索引对比">哈希索引与B+树索引对比</h4>
+<ul>
+<li>B+树索引有序</li>
+<li>支持部分键的查找。</li>
+</ul>
+<h4 id="实验代码">实验代码</h4>
+<h5 id="实现目录页和数据页">实现目录页和数据页</h5>
+<p>目录页<code>HashTableDirectoryPage</code>的结构，后续通过将缓冲池中的一页<code>Page</code>强转为<code>HashTableDirectoryPage</code>进行使用，该对象无虚函数表，所以该对象开始的地址即为该类成员的起始地址。Directory Page: - GetGlobalDepth - IncrGlobalDepth - SetLocalDepth - SetBucketPageId - GetBucketPageId。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// src/include/storage/page/hash_table_directory_page.h 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Directory Page for extendible hash table.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Directory format (size in byte):
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * --------------------------------------------------------------------------------------------
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * | LSN (4) | PageId(4) | GlobalDepth(4) | LocalDepths(512) | BucketPageIds(2048) | Free(1524)
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * --------------------------------------------------------------------------------------------
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">page_id_t</span> <span class="n">page_id_</span><span class="p">;</span>  <span class="c1">// 目录页的页号
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">lsn_t</span> <span class="n">lsn_</span><span class="p">;</span>  <span class="c1">// 本实验没用到
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint32_t</span> <span class="n">global_depth_</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>  <span class="c1">// 全局的位数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint8_t</span> <span class="n">local_depths_</span><span class="p">[</span><span class="n">DIRECTORY_ARRAY_SIZE</span><span class="p">];</span> <span class="c1">// 数据页的局部位数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">page_id_t</span> <span class="n">bucket_page_ids_</span><span class="p">[</span><span class="n">DIRECTORY_ARRAY_SIZE</span><span class="p">];</span> <span class="c1">// 数据页的页号映射
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>数据页<code>HashTableBucketPage</code>，实现数据页的增删改查。<code>Bucket Page: - Insert - Remove - IsOccupied - IsReadable - KeyAt - ValueAt</code>。这里需要理解<code>occupied_</code>和<code>readable_</code>，相当于该页中数据的位图，数据段中下标为<code>bucket_idx</code>的状态由<code>occupied_</code>和<code>readable_</code>中的第<code>bucket_idx/8</code>个字符中第<code>bucket%8</code>位决定。<code>occupied_</code>意思为被占用过，但是在这里我觉得并没有多大用处，并不能提高检索的速度，<code>readable_</code>表示当前下标是可读的，有效的。初始所有的下标都是<code>occupied_</code>和<code>readable_</code>都是0，当<code>bucket_idx</code>被写入时，为<code>occupied_</code>和<code>readable_</code>对应位置位。当<code>bucket_idx</code>被删除时，将<code>readable_</code>对应位复位为0。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// src/include/storage/page/hash_table_bucket_page.h
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Store indexed key and and value together within bucket page. Supports
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * non-unique keys.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Bucket page format (keys are stored in order):
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *  ----------------------------------------------------------------
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * | KEY(1) + VALUE(1) | KEY(2) + VALUE(2) | ... | KEY(n) + VALUE(n)
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *  ----------------------------------------------------------------
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *  Here &#39;+&#39; means concatenation.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *  The above format omits the space required for the occupied_ and
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *  readable_ arrays. More information is in storage/page/hash_table_page_defs.h.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl">  <span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">//  For more on BUCKET_ARRAY_SIZE see storage/page/hash_table_page_defs.h
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	  <span class="c1">// 00010001 -&gt; bucket_idx occupied are [0, 4].
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="kt">char</span> <span class="n">occupied_</span><span class="p">[(</span><span class="n">BUCKET_ARRAY_SIZE</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">8</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// 0 if tombstone/brand new (never occupied), 1 otherwise.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="kt">char</span> <span class="n">readable_</span><span class="p">[(</span><span class="n">BUCKET_ARRAY_SIZE</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">8</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">      <span class="n">MappingType</span> <span class="n">array_</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>首先实现<code>IsOccupied </code>,<code>IsReadable </code>以及<code>KeyAt </code>,<code>KeyAt </code>，同时建议实现<code>SetOccupied</code>和<code>SetReadable</code>，方便插入和删除时使用。插入和删除逻辑一定要检查绝对正确，否则后续出问题，很难定位。</p>
+<p>实现插入Insert，两种情况下插入失败：当前页已满或键值对重复。找到一个未被使用或者不可读的下标进行插入。</p>
+<p>实现删除Remove，设置标志位即可。</p>
+<h5 id="实现哈希表">实现哈希表</h5>
+<p><code>ExtendibleHashTable</code>位于<code>src/container/hash/extendible_hash_table.cpp</code>主要实现构造函数，插入<code>Insert</code>，删除<code>Remove</code>，查找<code>GetValue</code>。</p>
+<h6 id="构造函数以及辅助函数">构造函数以及辅助函数</h6>
+<p><code>ExtendibleHashTable</code>，传入缓冲池，key的比较函数以及key的哈希函数。创建两页初始页，一页作为目录页，一页作为数据页，初始化目录页对应的位数和页面指针。目录页使用通过缓冲池中的页构造方式</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">  <span class="k">auto</span> <span class="n">page</span> <span class="o">=</span> <span class="n">buffer_pool_manager_</span><span class="o">-&gt;</span><span class="n">NewPage</span><span class="p">(</span><span class="o">&amp;</span><span class="n">directory_page_id_</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">directory_page_id_</span> <span class="o">==</span> <span class="n">INVALID_PAGE_ID</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">throw</span> <span class="nf">Exception</span><span class="p">(</span><span class="n">ExceptionType</span><span class="o">::</span><span class="n">OUT_OF_MEMORY</span><span class="p">,</span> <span class="s">&#34;Can&#39;t get page from BFP for HashTable.&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">auto</span> <span class="n">dir_page</span> <span class="o">=</span> <span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="n">HashTableDirectoryPage</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">page</span><span class="o">-&gt;</span><span class="n">GetData</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">  <span class="n">buffer_pool_manager_</span><span class="o">-&gt;</span><span class="n">UnpinPage</span><span class="p">(</span><span class="n">directory_page_id_</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>通过<code>buffer_pool_manager_</code>拿出的页，在使用结束后一定要<code>Unpin</code>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">KeyType</span><span class="p">,</span> <span class="k">typename</span> <span class="n">ValueType</span><span class="p">,</span> <span class="k">typename</span> <span class="n">KeyComparator</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">inline</span> <span class="kt">uint32_t</span> <span class="n">HASH_TABLE_TYPE</span><span class="o">::</span><span class="n">KeyToDirectoryIndex</span><span class="p">(</span><span class="n">KeyType</span> <span class="n">key</span><span class="p">,</span> <span class="n">HashTableDirectoryPage</span> <span class="o">*</span><span class="n">dir_page</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nf">Hash</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">dir_page</span><span class="o">-&gt;</span><span class="n">GetGlobalDepthMask</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">KeyType</span><span class="p">,</span> <span class="k">typename</span> <span class="n">ValueType</span><span class="p">,</span> <span class="k">typename</span> <span class="n">KeyComparator</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">inline</span> <span class="kt">uint32_t</span> <span class="n">HASH_TABLE_TYPE</span><span class="o">::</span><span class="n">KeyToPageId</span><span class="p">(</span><span class="n">KeyType</span> <span class="n">key</span><span class="p">,</span> <span class="n">HashTableDirectoryPage</span> <span class="o">*</span><span class="n">dir_page</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">uint32_t</span> <span class="n">bucket_index</span> <span class="o">=</span> <span class="n">KeyToDirectoryIndex</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">dir_page</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">dir_page</span><span class="o">-&gt;</span><span class="n">GetBucketPageId</span><span class="p">(</span><span class="n">bucket_index</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>KeyToDirectoryIndex</code>，<code>KeyToPageId</code>：通过key拿到对应桶在目录页中的下标和页指针，这里使用的是哈希值的后缀，方便取掩码。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">KeyType</span><span class="p">,</span> <span class="k">typename</span> <span class="n">ValueType</span><span class="p">,</span> <span class="k">typename</span> <span class="n">KeyComparator</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">HashTableDirectoryPage</span> <span class="o">*</span><span class="n">HASH_TABLE_TYPE</span><span class="o">::</span><span class="n">FetchDirectoryPage</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// No virtual table, so the page and page_data_ have same pointer address.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Page</span> <span class="o">*</span><span class="n">page</span> <span class="o">=</span> <span class="n">buffer_pool_manager_</span><span class="o">-&gt;</span><span class="n">FetchPage</span><span class="p">(</span><span class="n">directory_page_id_</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="n">HashTableDirectoryPage</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">page</span><span class="o">-&gt;</span><span class="n">GetData</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">KeyType</span><span class="p">,</span> <span class="k">typename</span> <span class="n">ValueType</span><span class="p">,</span> <span class="k">typename</span> <span class="n">KeyComparator</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">HASH_TABLE_BUCKET_TYPE</span> <span class="o">*</span><span class="n">HASH_TABLE_TYPE</span><span class="o">::</span><span class="n">FetchBucketPage</span><span class="p">(</span><span class="n">page_id_t</span> <span class="n">bucket_page_id</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">bucket_page_id</span> <span class="o">==</span> <span class="n">INVALID_PAGE_ID</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">throw</span> <span class="nf">Exception</span><span class="p">(</span><span class="n">ExceptionType</span><span class="o">::</span><span class="n">OUT_OF_MEMORY</span><span class="p">,</span> <span class="s">&#34;Invalild page id to get&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// No virtual table, so the page and page_data_ have same pointer address.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Page</span> <span class="o">*</span><span class="n">page</span> <span class="o">=</span> <span class="n">buffer_pool_manager_</span><span class="o">-&gt;</span><span class="n">FetchPage</span><span class="p">(</span><span class="n">bucket_page_id</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">assert</span><span class="p">(</span><span class="n">page</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="n">HASH_TABLE_BUCKET_TYPE</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">page</span><span class="o">-&gt;</span><span class="n">GetData</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>从缓冲池中拿出目录页和数据页，并且转换为对应的页表示形式，通过<code>reinterpret_cast</code>进行指针的重新解释。</p>
+<h6 id="插入以及删除">插入以及删除</h6>
+<p>插入和删除建议先不考虑split和merge的情况，先简化问题，完成最基础的插入和删除。</p>
+<p>在当前页已满的条件下进行split_insert，插入逻辑如下。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 1. Update local depth, get a new page from buffer poll.
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 2. Separate bucket_idx same with new_bucket_idx, and remove them from previous bucket.
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 3. Insert these keys same with new_bucket_idx to new bucket.
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 4. Insert new k,v to corresponding bucket.
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 5. The bucket haven&#39;t been influenced, don&#39;t need change the bucket.
+</span></span></span><span class="line"><span class="cl"><span class="c1">//    But if grow global depths, need to point new hash code to correct bucket.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">//  Global depth need&#39;t update.
+</span></span></span><span class="line"><span class="cl"><span class="c1">//  Eg:
+</span></span></span><span class="line"><span class="cl"><span class="c1">//  Global: 1                                                      local depth
+</span></span></span><span class="line"><span class="cl"><span class="c1">//    00 -&gt; (data1(00), data2(10)) -----&gt; same bucket with 10           1
+</span></span></span><span class="line"><span class="cl"><span class="c1">//    01 -&gt; (data3(01), data4(01))                                      2
+</span></span></span><span class="line"><span class="cl"><span class="c1">//    10 -&gt; (data1(00), data2(10)) -----&gt; same bucket with 00           1
+</span></span></span><span class="line"><span class="cl"><span class="c1">//    11 -&gt; (data5(11))                                                 2
+</span></span></span><span class="line"><span class="cl"><span class="c1">//  After insert data6(00): 00&#39; bucket split                       local depth
+</span></span></span><span class="line"><span class="cl"><span class="c1">//    00 -&gt; (data1(00), data6(00))                                      2
+</span></span></span><span class="line"><span class="cl"><span class="c1">//    01 -&gt; (data3(01), data4(01))                                      2
+</span></span></span><span class="line"><span class="cl"><span class="c1">//    10 -&gt; (data2(10))                                                 2
+</span></span></span><span class="line"><span class="cl"><span class="c1">//    11 -&gt; (data5(11))                                                 2
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Global depth need update.
+</span></span></span><span class="line"><span class="cl"><span class="c1">//  Eg:
+</span></span></span><span class="line"><span class="cl"><span class="c1">//     0 -&gt; (data1(00), data2(10))
+</span></span></span><span class="line"><span class="cl"><span class="c1">//     1 -&gt; (data3(11))
+</span></span></span><span class="line"><span class="cl"><span class="c1">//  After insert data4(00):                        local depth
+</span></span></span><span class="line"><span class="cl"><span class="c1">//    00 -&gt; (data1(00), data4(00))                      2
+</span></span></span><span class="line"><span class="cl"><span class="c1">//    01 -&gt; (data3(11))  -----&gt; same with 11            1
+</span></span></span><span class="line"><span class="cl"><span class="c1">//    10 -&gt; (data2(10))                                 2
+</span></span></span><span class="line"><span class="cl"><span class="c1">//    11 -&gt; (data3(11))  -----&gt; same with 01            1
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>在split和merge的过程中最重要的就是查找当前数据页哈希值对称的页的下标，如10(2)在进行split过程中，提升局部位数为3后变为010(3)，其对称页为110(3)。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">KeyType</span><span class="p">,</span> <span class="k">typename</span> <span class="n">ValueType</span><span class="p">,</span> <span class="k">typename</span> <span class="n">KeyComparator</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">uint32_t</span> <span class="n">HASH_TABLE_TYPE</span><span class="o">::</span><span class="n">GetSymmetryBucketIndex</span><span class="p">(</span><span class="kt">uint32_t</span> <span class="n">bucket_index</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">mask_depth</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">mask_depth</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">uint32_t</span> <span class="n">new_bucket_index</span> <span class="o">=</span> <span class="n">bucket_index</span> <span class="o">^</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">mask_depth</span> <span class="o">-</span> <span class="mi">1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">new_bucket_index</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>当删除元素后，该页为空时，进行merge操作：删除空页，将目录页的指针指向非空页，非空页的局部深度减1。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">//  Eg:
+</span></span></span><span class="line"><span class="cl"><span class="c1">//  Global: 1                                                      local depth
+</span></span></span><span class="line"><span class="cl"><span class="c1">//    00 -&gt; (data1(00), data2(10)) -----&gt; same bucket with 10           1
+</span></span></span><span class="line"><span class="cl"><span class="c1">//    01 -&gt; (data3(01), data4(01))                                      2
+</span></span></span><span class="line"><span class="cl"><span class="c1">//    10 -&gt; (data1(00), data2(10)) -----&gt; same bucket with 00           1
+</span></span></span><span class="line"><span class="cl"><span class="c1">//    11 -&gt; (data5(11))                                                 2
+</span></span></span><span class="line"><span class="cl"><span class="c1">//  After delete data5(11):                                        local depth
+</span></span></span><span class="line"><span class="cl"><span class="c1">//    00 -&gt; (data1(00), data2(10)) -----&gt; same bucket with 10           1
+</span></span></span><span class="line"><span class="cl"><span class="c1">//    01 -&gt; (data3(01), data4(01))                                      2
+</span></span></span><span class="line"><span class="cl"><span class="c1">//    10 -&gt; (data1(00), data2(10)) -----&gt; same bucket with 00           1
+</span></span></span><span class="line"><span class="cl"><span class="c1">//    11 -&gt; ()                                                          2
+</span></span></span><span class="line"><span class="cl"><span class="c1">//  Merge 01 and 11                                                local depth
+</span></span></span><span class="line"><span class="cl"><span class="c1">//    00 -&gt; (data1(00), data2(10)) -----&gt; same bucket with 10           1
+</span></span></span><span class="line"><span class="cl"><span class="c1">//    01 -&gt; (data3(01), data4(01)) -----&gt; same bucket with 01           1
+</span></span></span><span class="line"><span class="cl"><span class="c1">//    10 -&gt; (data1(00), data2(10)) -----&gt; same bucket with 00           1
+</span></span></span><span class="line"><span class="cl"><span class="c1">//    11 -&gt; (data3(01), data4(01)) -----&gt; same bucket with 11           1
+</span></span></span><span class="line"><span class="cl"><span class="c1">//  Shrink                                                         local depth
+</span></span></span><span class="line"><span class="cl"><span class="c1">//    0 -&gt; (data1(00), data2(10))                                       1
+</span></span></span><span class="line"><span class="cl"><span class="c1">//    1 -&gt; (data3(01), data4(01))                                       1
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>之后需要尝试持续进行shrink，可以shrink的条件是，所有数据页的局部深度都小于全局深度。这其中调试很恼火，需要多打一些类似下图中的日志。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">  <span class="k">while</span> <span class="p">(</span><span class="n">dir_page</span><span class="o">-&gt;</span><span class="n">CanShrink</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 多打log
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">LOG_TRACE</span><span class="p">(</span><span class="s">&#34;HashTable Shrink: From (%u) to (%u) &#34;</span><span class="p">,</span> <span class="n">dir_page</span><span class="o">-&gt;</span><span class="n">GetGlobalDepth</span><span class="p">(),</span> <span class="n">dir_page</span><span class="o">-&gt;</span><span class="n">GetGlobalDepth</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">dir_page</span><span class="o">-&gt;</span><span class="n">DecrGlobalDepth</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">uint32_t</span> <span class="n">bucket_index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">bucket_index</span> <span class="o">&lt;=</span> <span class="n">dir_page</span><span class="o">-&gt;</span><span class="n">GetGlobalDepthMask</span><span class="p">();</span> <span class="n">bucket_index</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">MergeEmptyBucket</span><span class="p">(</span><span class="n">dir_page</span><span class="p">,</span> <span class="n">bucket_index</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>调试哈希表打印哈希表的信息，调试过程中最困难的还是需要官方的测试用例进行调试，要不然很难定位到问题。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">KeyType</span><span class="p">,</span> <span class="k">typename</span> <span class="n">ValueType</span><span class="p">,</span> <span class="k">typename</span> <span class="n">KeyComparator</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">HASH_TABLE_TYPE</span><span class="o">::</span><span class="n">PrintHashTable</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">HashTableDirectoryPage</span> <span class="o">*</span><span class="n">dir_page</span> <span class="o">=</span> <span class="n">FetchDirectoryPage</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="n">dir_page</span><span class="o">-&gt;</span><span class="n">PrintDirectory</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kt">uint32_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">dir_page</span><span class="o">-&gt;</span><span class="n">GetGlobalDepthMask</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">auto</span> <span class="n">page_id</span> <span class="o">=</span> <span class="n">dir_page</span><span class="o">-&gt;</span><span class="n">GetBucketPageId</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">auto</span> <span class="n">page</span> <span class="o">=</span> <span class="n">FetchBucketPage</span><span class="p">(</span><span class="n">page_id</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">LOG_INFO</span><span class="p">(</span><span class="s">&#34;Bucket Info: %u, Full: %u, Empty: %u.&#34;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">page</span><span class="o">-&gt;</span><span class="n">IsFull</span><span class="p">(),</span> <span class="n">page</span><span class="o">-&gt;</span><span class="n">IsEmpty</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">    <span class="n">page</span><span class="o">-&gt;</span><span class="n">PrintBucket</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">buffer_pool_manager_</span><span class="o">-&gt;</span><span class="n">UnpinPage</span><span class="p">(</span><span class="n">page_id</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">assert</span><span class="p">(</span><span class="n">buffer_pool_manager_</span><span class="o">-&gt;</span><span class="n">UnpinPage</span><span class="p">(</span><span class="n">directory_page_id_</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="读取">读取</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">HASH_TABLE_TYPE</span><span class="o">::</span><span class="n">GetValue</span><span class="p">(</span><span class="n">Transaction</span> <span class="o">*</span><span class="n">transaction</span><span class="p">,</span> <span class="k">const</span> <span class="n">KeyType</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">ValueType</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">result</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">调用数据页的</span><span class="n">api</span><span class="err">，注意不能清空传入的</span><span class="n">result数组</span><span class="err">。</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="并发哈希表">并发哈希表</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">  <span class="c1">// Responsible for dirpage
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// Bucket page use page&#39;s lock.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">std</span><span class="o">::</span><span class="n">shared_mutex</span> <span class="n">table_latch_</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>首先要不考虑性能，通过加全局的<code>table_latch_</code>通过所有测试用例。</li>
+<li>考虑使用读写锁
+<ul>
+<li>读取：<code>table_latch_</code>读锁，<code>bucket_page</code>读锁</li>
+<li>插入：<code>table_latch_</code>读锁，<code>bucket_page</code>写锁。如果需要进行split，依次释放对应的锁<code>table_latch_</code>升级为写锁，<code>bucket_page</code>写锁，需要重新检查是否还需要split。</li>
+<li>删除：与插入同理。</li>
+</ul>
+</li>
+</ul>
+<h4 id="参考博客">参考博客</h4>
+<ul>
+<li><a href="https://www.inlighting.org/archives/cmu-15-445-notes/" target="_blank" rel="noopener noreffer">https://www.inlighting.org/archives/cmu-15-445-notes/</a></li>
+<li><a href="https://www.cnblogs.com/JayL-zxl/category/1919605.html" target="_blank" rel="noopener noreffer">https://www.cnblogs.com/JayL-zxl/category/1919605.html</a></li>
+<li><a href="https://15445.courses.cs.cmu.edu/fall2021/" target="_blank" rel="noopener noreffer">https://15445.courses.cs.cmu.edu/fall2021/</a></li>
+<li><a href="https://segmentfault.com/a/1190000015856311" target="_blank" rel="noopener noreffer">https://segmentfault.com/a/1190000015856311</a></li>
+<li><a href="https://www.jianshu.com/p/c4e4d55706ff" target="_blank" rel="noopener noreffer">https://www.jianshu.com/p/c4e4d55706ff</a></li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2022-05-01</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/cmu15-445/">cmu15-445</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/cmu15-445-project3/" class="prev" rel="prev" title="cmu15-445-project3"><i class="fas fa-angle-left fa-fw"></i>cmu15-445-project3</a>
+            <a href="/cmu15-445-project0_1/" class="next" rel="next" title="cmu15-445-project0,1">cmu15-445-project0,1<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      renderMathInElement(document.body, {
+              delimiters: [
+                  {left: "$$", right: "$$", display: true},
+                  {left: "$", right: "$", display: false}
+              ]
+          });
+    });
+</script>
+
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.95.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021 - 2022</span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":30},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

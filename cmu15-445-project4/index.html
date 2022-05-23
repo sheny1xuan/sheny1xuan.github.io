@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>cmu15-445-project4 - stonex</title><meta name="Description" content="Welcome to my&#39;blog!"><meta property="og:title" content="cmu15-445-project4" />
+<meta property="og:description" content="2021 FALL cmu15-445-project4 实现基于抢占的读写锁(lock manager)，涉及的知识点为ppt15-18章。 事务 事务是一系列数据库请求，这些请求的执行要么全部成" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sheny1xuan.github.io/cmu15-445-project4/" /><meta property="og:image" content="https://sheny1xuan.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-05-07T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-05-07T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://sheny1xuan.github.io/logo.png"/>
+
+<meta name="twitter:title" content="cmu15-445-project4"/>
+<meta name="twitter:description" content="2021 FALL cmu15-445-project4 实现基于抢占的读写锁(lock manager)，涉及的知识点为ppt15-18章。 事务 事务是一系列数据库请求，这些请求的执行要么全部成"/>
+<meta name="application-name" content="Stonex">
+<meta name="apple-mobile-web-app-title" content="Stonex"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://sheny1xuan.github.io/cmu15-445-project4/" /><link rel="prev" href="https://sheny1xuan.github.io/cmu15-445-project0_1/" /><link rel="next" href="https://sheny1xuan.github.io/dubbo-go-protobuf/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "cmu15-445-project4",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/sheny1xuan.github.io\/cmu15-445-project4\/"
+        },"genre": "posts","keywords": "cmu15-445","wordcount":  3924 ,
+        "url": "https:\/\/sheny1xuan.github.io\/cmu15-445-project4\/","datePublished": "2022-05-07T00:00:00+00:00","dateModified": "2022-05-07T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Shen"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="stonex">Home</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="stonex">Home</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">cmu15-445-project4</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Shen</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"><i class="far fa-folder fa-fw"></i>数据库</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-07">2022-05-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3924 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 8 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#2021-fall-cmu15-445-project4">2021 FALL cmu15-445-project4</a>
+          <ul>
+            <li>
+              <ul>
+                <li><a href="#事务">事务</a>
+                  <ul>
+                    <li><a href="#原子性">原子性</a></li>
+                    <li><a href="#一致性">一致性</a></li>
+                    <li><a href="#隔离性">隔离性</a>
+                      <ul>
+                        <li><a href="#并发控制协议">并发控制协议</a></li>
+                        <li><a href="#正确性">正确性</a></li>
+                        <li><a href="#事务冲突">事务冲突</a></li>
+                        <li><a href="#串行化分类">串行化分类</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="#持久性">持久性</a></li>
+                  </ul>
+                </li>
+                <li><a href="#2pl">2PL</a>
+                  <ul>
+                    <li><a href="#锁的类型">锁的类型</a></li>
+                    <li><a href="#两阶段锁">两阶段锁</a></li>
+                    <li><a href="#严格两阶段锁">严格两阶段锁</a></li>
+                    <li><a href="#两阶段锁对比">两阶段锁对比</a></li>
+                  </ul>
+                </li>
+                <li><a href="#死锁">死锁</a>
+                  <ul>
+                    <li><a href="#死锁检测">死锁检测</a></li>
+                    <li><a href="#死锁避免">死锁避免</a></li>
+                    <li><a href="#意向锁">意向锁</a></li>
+                  </ul>
+                </li>
+                <li><a href="#基于时间戳的并发控制">基于时间戳的并发控制</a>
+                  <ul>
+                    <li><a href="#概念">概念</a></li>
+                    <li><a href="#thomas写规则">THOMAS写规则</a></li>
+                    <li><a href="#乐观并发控制occ">乐观并发控制OCC</a>
+                      <ul>
+                        <li><a href="#occ执行的阶段">OCC执行的阶段</a></li>
+                        <li><a href="#验证方法">验证方法</a></li>
+                        <li><a href="#使用场景">使用场景：</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="#事务隔离级别">事务隔离级别</a></li>
+                  </ul>
+                </li>
+                <li><a href="#mvcc">MVCC</a>
+                  <ul>
+                    <li><a href="#概念-1">概念</a></li>
+                    <li><a href="#mvcc设计思想">MVCC设计思想</a>
+                      <ul>
+                        <li><a href="#并发控制协议-1">并发控制协议</a></li>
+                        <li><a href="#版本链设计">版本链设计</a></li>
+                        <li><a href="#垃圾清理">垃圾清理</a></li>
+                        <li><a href="#索引管理">索引管理</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li><a href="#实验代码">实验代码</a>
+                  <ul>
+                    <li><a href="#lock-manager">Lock Manager</a>
+                      <ul>
+                        <li><a href="#代码框架">代码框架</a></li>
+                        <li><a href="#locksharedlockexclusive">LockShared/LockExclusive</a></li>
+                        <li><a href="#获得锁的实现">获得锁的实现</a></li>
+                        <li><a href="#updatelatch">UpdateLatch</a></li>
+                        <li><a href="#unlock">Unlock</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="#concurrent-query-execution">Concurrent Query Execution</a>
+                      <ul>
+                        <li><a href="#不同隔离级别加锁情况">不同隔离级别加锁情况</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li><a href="#参考博客">参考博客</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="2021-fall-cmu15-445-project4">2021 FALL cmu15-445-project4</h2>
+<p>实现基于抢占的读写锁(lock manager)，涉及的知识点为ppt15-18章。</p>
+<h4 id="事务">事务</h4>
+<p>事务是一系列数据库请求，这些请求的执行要么全部成功，要么全部失败。</p>
+<p>事务的四大特性：ACID</p>
+<h5 id="原子性">原子性</h5>
+<p>事务的执行要么全部成功，要么全部失败。</p>
+<p>原子性的保证：UndoLog（回滚未提交的操作），RedoLog（执行已经提交的操作）。</p>
+<h5 id="一致性">一致性</h5>
+<p>数据库一致性：数据库中的数据是对现实世界中的模拟，并且满足约束的规则。</p>
+<p>事务一致性：事务执行前后数据库均满足一致性。</p>
+<p>无论事务如何执行，最终应该满足总额为2120的一致性</p>
+<!-- raw HTML omitted -->
+<h5 id="隔离性">隔离性</h5>
+<p>多个事务并发执行就像事务单独执行一样并不会相互影响。</p>
+<h6 id="并发控制协议">并发控制协议</h6>
+<p>为了达到事务并发执行的目的，需要并发控制协议来进行协调。</p>
+<ul>
+<li>悲观锁：事务执行时获取需要的锁，不会导致冲突的发生。</li>
+<li>乐观锁：假设事务间冲突是罕见的，遇到冲突后再处理。</li>
+</ul>
+<h6 id="正确性">正确性</h6>
+<p>为了保证结果正确（一致性），并发执行的顺序必须等同于某种串行执行的顺序。</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<h6 id="事务冲突">事务冲突</h6>
+<p>两个事务不同的事务，如果至少有一个事务对对象有写的操作便会产生冲突。</p>
+<p>读写冲突：不可重复读</p>
+<p>写读冲突：读未提交（脏读）</p>
+<p>写写冲突：覆盖写（更新丢失）</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<h6 id="串行化分类">串行化分类</h6>
+<p>冲突的串行化：冲突的串行化执行可以通过一定的转换为某种串行化的结果。</p>
+<p>判断是否可转化未串行化的方法：</p>
+<ol>
+<li>移动不冲突的操作</li>
+<li>通过资源依赖图：如果有环存在则不可转换。</li>
+</ol>
+<!-- raw HTML omitted -->
+<p>视图串行化：允许一定的冲突但是不影响正确性，如覆盖写。</p>
+<!-- raw HTML omitted -->
+<h5 id="持久性">持久性</h5>
+<p>所有已经提交的事务必须是持久的，通过LOG日志实现持久性，这是一个复杂的话题。</p>
+<h4 id="2pl">2PL</h4>
+<h5 id="锁的类型">锁的类型</h5>
+<!-- raw HTML omitted -->
+<h5 id="两阶段锁">两阶段锁</h5>
+<p>分为Growing和Shrinking两阶段。只有在Growing阶段才能获取锁，释放过锁后进入Shrinking阶段。</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p>缺点：</p>
+<ul>
+<li>级联回滚：由于脏读，当一个事务取消时，其他与只有关的事务也需要回滚。</li>
+</ul>
+<p>T1执行失败时，T2读到了A的脏数据，也需要回滚，这种连锁反应就叫级联回滚。</p>
+<!-- raw HTML omitted -->
+<h5 id="严格两阶段锁">严格两阶段锁</h5>
+<p>只有在事务执行完之后才允许释放所有相关的锁。</p>
+<!-- raw HTML omitted -->
+<h5 id="两阶段锁对比">两阶段锁对比</h5>
+<p>普通两阶段锁并不满足串行化的要求，只有严格两阶段锁满足串行化要求。</p>
+<!-- raw HTML omitted -->
+<h4 id="死锁">死锁</h4>
+<p>解决方法有两种：死锁检测和死锁避免。</p>
+<h5 id="死锁检测">死锁检测</h5>
+<p>通过依赖图检测死锁，如果出现了环那么就为出现了死锁。当出现死锁后，按照一定的规则挑选出需要回滚的事务进行回滚。</p>
+<h5 id="死锁避免">死锁避免</h5>
+<p>利用事务唯一的id避免死锁，较小的时间戳有更高的优先级。（T1&gt;T2）</p>
+<p>Wait-Die：只有较高优先级的事务才能等待锁，否则直接回滚。</p>
+<p>Wound-Wait（抢占）：较高优先级的事务会抢占低优先级的事务的锁，低优先级事务直接回滚。低优先级的事务会等待其释放锁。</p>
+<!-- raw HTML omitted -->
+<h5 id="意向锁">意向锁</h5>
+<p>意向锁是为了解决多层级加锁中隐式加锁的问题。在意向锁使用的情况下，向根节点加锁无需遍历所有的儿孙节点的锁使用情况。</p>
+<p>读意向锁(IS)：该节点的儿孙节点中有加读锁。</p>
+<p>写意向锁(IX)：该节点的儿孙节点中有加写锁。</p>
+<p>读写意向锁(SIX)：该节点加读锁并且获得其儿子节点写锁。</p>
+<p>对一个节点加S锁，IS锁之前，首先要获得其父节点的IS锁。</p>
+<p>对一个节点加X锁，IX锁之前，首先要获得其父节点的IX锁。</p>
+<!-- raw HTML omitted -->
+<h4 id="基于时间戳的并发控制">基于时间戳的并发控制</h4>
+<h5 id="概念">概念</h5>
+<p>每个事务维护一个事务的时间戳TS(T)，数据库中的每个资源xX维护其最后被读写(W-TS(X)或R-TS(X))的时间戳。</p>
+<ul>
+<li>
+<p>读取：如果事务的TS(T) &lt; W-TS(X)，回滚T。否则允许T读取该记录，并且更新R-TS(X)，为T维护一份X的副本。</p>
+</li>
+<li>
+<p>写入：如果事务的TS(T)&lt;W-TS(X)或TS(T)&lt;R-TS(X)，回滚T。否则允许T更新X并且个更新W-TS(X)</p>
+</li>
+</ul>
+<h5 id="thomas写规则">THOMAS写规则</h5>
+<ul>
+<li>TS(T)&lt;R-TS(X)：回滚T。</li>
+<li>TS(T)&lt;W-TS(X)：当前写入无效，忽略这次写入，并且继续执行T。</li>
+<li>否则允许T更新X并且个更新W-TS(X)。</li>
+</ul>
+<h5 id="乐观并发控制occ">乐观并发控制OCC</h5>
+<p>如果事务持续时间很短，获取锁的损耗会很大。数据库系统为每个事务维护一份资源的工作区：</p>
+<ul>
+<li>读取时将数据放入工作区，修改也是应用到工作区。</li>
+<li>当事务提交时，对比当前工作区与数据库是否存在冲突。</li>
+</ul>
+<h6 id="occ执行的阶段">OCC执行的阶段</h6>
+<ul>
+<li>读写阶段：将数据放入工作区，修改也是应用到工作区。</li>
+<li>验证阶段：当事务提交时，对比当前工作区与数据库是否存在冲突。</li>
+<li>写阶段：如果不存在冲突，将其写入数据库。</li>
+</ul>
+<p>只有在验证写入阶段才会为该事务分配事务时间戳。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220507170557570.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220507170557570.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220507170557570.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220507170557570.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220507170557570.png"
+        title="image-20220507170557570" /></p>
+<h6 id="验证方法">验证方法</h6>
+<p>验证阶段需要保证事务的串行化，验证执行的事务是否存在读写冲突。</p>
+<p>反向验证：验证是否与已经提交的事务存在冲突。</p>
+<p>前向验证：验证是否与未提交的事务存在冲突。</p>
+<h6 id="使用场景">使用场景：</h6>
+<ul>
+<li>事务间冲突较少：读多写少，事务间访问数据无交集。</li>
+<li>拷贝数据存在性能损耗，验证和写入阶段是性能的瓶颈，重新执行该事务损耗更大。</li>
+</ul>
+<h5 id="事务隔离级别">事务隔离级别</h5>
+<!-- raw HTML omitted -->
+<p>2PL实现不同事务隔离级别的方法：对索引加锁可以解决幻读问题。</p>
+<!-- raw HTML omitted -->
+<h4 id="mvcc">MVCC</h4>
+<h5 id="概念-1">概念</h5>
+<p>对同一行数据，MVCC有多个版本，形成版本链。读写不会相互阻塞，但是写写之间会阻塞。写操作会创建一个新的版本，读操作会通过快照的可见性进行读取。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220507201536928.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220507201536928.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220507201536928.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220507201536928.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220507201536928.png"
+        title="image-20220507201536928" /></p>
+<h5 id="mvcc设计思想">MVCC设计思想</h5>
+<h6 id="并发控制协议-1">并发控制协议</h6>
+<p>MVCC并不是一种并发控制协议，可以通过不同的并发控制协议实现，涉及整个数据库系统。MV-2PL：版本链决定版本是否可见，而该版本的可读可写由2PL实现。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/v2-81a01b066f7fce6f2b0f37fff7103cff_720w.jpg"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/v2-81a01b066f7fce6f2b0f37fff7103cff_720w.jpg, https://picture-table.oss-cn-beijing.aliyuncs.com/img/v2-81a01b066f7fce6f2b0f37fff7103cff_720w.jpg 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/v2-81a01b066f7fce6f2b0f37fff7103cff_720w.jpg 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/v2-81a01b066f7fce6f2b0f37fff7103cff_720w.jpg"
+        title="img" /></p>
+<h6 id="版本链设计">版本链设计</h6>
+<p>对于逻辑上的一行，创建一个版本链。</p>
+<p>APPEND：新产生的版本连接到旧版本的后面，在同一表中。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220507202943480.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220507202943480.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220507202943480.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220507202943480.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220507202943480.png"
+        title="image-20220507202943480" /></p>
+<p>TIME-TRAVEL TABLE：新产生的版本不在同一个表中，而是存储在其他区域。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220507203102400.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220507203102400.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220507203102400.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220507203102400.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220507203102400.png"
+        title="image-20220507203102400" /></p>
+<p>DELTA Storage：版本链表中存储的不是具体表的数据，而是表的变化。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220507203129521.png"
+        data-srcset="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220507203129521.png, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220507203129521.png 1.5x, https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220507203129521.png 2x"
+        data-sizes="auto"
+        alt="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220507203129521.png"
+        title="image-20220507203129521" /></p>
+<h6 id="垃圾清理">垃圾清理</h6>
+<h6 id="索引管理">索引管理</h6>
+<p>主键索引指向版本链的头部，版本链从新到旧，更新主键相当于先删除后增加一个新的主键。二级索引有两种方式指向版本链，一种直接指向版本链，另一种是通过主键查询版本链。</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<h4 id="实验代码">实验代码</h4>
+<h5 id="lock-manager">Lock Manager</h5>
+<h6 id="代码框架">代码框架</h6>
+<p><code>LockRequest</code>是一个读写请求，主要有两个字段，一个是tid，另一个是加锁方式(X/S)，以及是否获得了锁。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">  <span class="k">class</span> <span class="nc">LockRequest</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">LockRequest</span><span class="p">(</span><span class="n">txn_id_t</span> <span class="n">txn_id</span><span class="p">,</span> <span class="n">LockMode</span> <span class="n">lock_mode</span><span class="p">)</span> <span class="o">:</span> <span class="n">txn_id_</span><span class="p">(</span><span class="n">txn_id</span><span class="p">),</span> <span class="n">lock_mode_</span><span class="p">(</span><span class="n">lock_mode</span><span class="p">),</span> <span class="n">granted_</span><span class="p">(</span><span class="nb">false</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">txn_id_t</span> <span class="n">txn_id_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">LockMode</span> <span class="n">lock_mode_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">granted_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>LockRequestQueue</code>是请求队列的管理，它包含一个请求队列，以及一个条件变量用来唤醒正在队列中等待的线程。可以通过<code>Print</code>函数打印当前队列获得锁的情况进行基础的Debug。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">  <span class="k">class</span> <span class="nc">LockRequestQueue</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">list</span><span class="o">&lt;</span><span class="n">LockRequest</span><span class="o">&gt;</span> <span class="n">request_queue_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// for notifying blocked transactions on this rid
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">std</span><span class="o">::</span><span class="n">condition_variable</span> <span class="n">cv_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">Print</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">out_string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="nl">req</span> <span class="p">:</span> <span class="n">request_queue_</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">info</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">info</span> <span class="o">+=</span> <span class="n">req</span><span class="p">.</span><span class="n">lock_mode_</span> <span class="o">==</span> <span class="n">LockMode</span><span class="o">::</span><span class="n">EXCLUSIVE</span> <span class="o">?</span> <span class="s">&#34;X(&#34;</span> <span class="o">:</span> <span class="s">&#34;S(&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">info</span> <span class="o">+=</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">req</span><span class="p">.</span><span class="n">txn_id_</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">info</span> <span class="o">+=</span> <span class="n">req</span><span class="p">.</span><span class="n">granted_</span> <span class="o">?</span> <span class="s">&#34;,true)&#34;</span> <span class="o">:</span> <span class="s">&#34;,false)&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">info</span> <span class="o">+=</span> <span class="s">&#34; &#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">out_string</span> <span class="o">+=</span> <span class="n">info</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="n">LOG_DEBUG</span><span class="p">(</span><span class="s">&#34;%s&#34;</span><span class="p">,</span> <span class="n">out_string</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"> <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>LockManager</code>通过2PL实现了对每一行数据读写锁的管理，通过哈希表管理每一行的读写队列，以及mutex实现对互斥量的保护。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">  <span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * [LOCK_NOTE]: For all locking functions, we:
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * 1. return false if the transaction is aborted; and
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * 2. block on wait, return true when the lock request is granted; and
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * 3. it is undefined behavior to try locking an already locked RID in the
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * same transaction, i.e. the transaction is responsible for keeping track of
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * its current locks.
+</span></span></span><span class="line"><span class="cl"><span class="cm">   */</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * Acquire a lock on RID in shared mode. See [LOCK_NOTE] in header file.
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * @param txn the transaction requesting the shared lock
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * @param rid the RID to be locked in shared mode
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * @return true if the lock is granted, false otherwise
+</span></span></span><span class="line"><span class="cl"><span class="cm">   */</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">LockShared</span><span class="p">(</span><span class="n">Transaction</span> <span class="o">*</span><span class="n">txn</span><span class="p">,</span> <span class="k">const</span> <span class="n">RID</span> <span class="o">&amp;</span><span class="n">rid</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * Acquire a lock on RID in exclusive mode. See [LOCK_NOTE] in header file.
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * @param txn the transaction requesting the exclusive lock
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * @param rid the RID to be locked in exclusive mode
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * @return true if the lock is granted, false otherwise
+</span></span></span><span class="line"><span class="cl"><span class="cm">   */</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">LockExclusive</span><span class="p">(</span><span class="n">Transaction</span> <span class="o">*</span><span class="n">txn</span><span class="p">,</span> <span class="k">const</span> <span class="n">RID</span> <span class="o">&amp;</span><span class="n">rid</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * Upgrade a lock from a shared lock to an exclusive lock.
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * @param txn the transaction requesting the lock upgrade
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * @param rid the RID that should already be locked in shared mode by the
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * requesting transaction
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * @return true if the upgrade is successful, false otherwise
+</span></span></span><span class="line"><span class="cl"><span class="cm">   */</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">LockUpgrade</span><span class="p">(</span><span class="n">Transaction</span> <span class="o">*</span><span class="n">txn</span><span class="p">,</span> <span class="k">const</span> <span class="n">RID</span> <span class="o">&amp;</span><span class="n">rid</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * Release the lock held by the transaction.
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * @param txn the transaction releasing the lock, it should actually hold the
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * lock
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * @param rid the RID that is locked by the transaction
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * @return true if the unlock is successful, false otherwise
+</span></span></span><span class="line"><span class="cl"><span class="cm">   */</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">Unlock</span><span class="p">(</span><span class="n">Transaction</span> <span class="o">*</span><span class="n">txn</span><span class="p">,</span> <span class="k">const</span> <span class="n">RID</span> <span class="o">&amp;</span><span class="n">rid</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> <span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">mutex</span> <span class="n">latch_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="cm">/** Lock table for lock requests. */</span>
+</span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="n">RID</span><span class="p">,</span> <span class="n">LockRequestQueue</span><span class="o">&gt;</span> <span class="n">lock_table_</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="locksharedlockexclusive">LockShared/LockExclusive</h6>
+<ul>
+<li>
+<p>检查当前事务状态是否为<code>abort</code>，如果是返回false。</p>
+</li>
+<li>
+<p>检查是否满足2PL，只有在Growing阶段才能获取锁。</p>
+</li>
+<li>
+<p>检查事务隔离级别，<code>Read uncommited</code>无需获取S锁。</p>
+</li>
+<li>
+<p>检查是否重复加锁，已经获得锁直接返回true。</p>
+</li>
+<li>
+<p>获取LockManager中的latch_，并将等待的读写请求插入到<code>lock_table_</code>中。</p>
+</li>
+<li>
+<p>检查条件变量是否满足获得读写锁的条件（这一步可以封装到GetLatch中）。</p>
+<ul>
+<li>
+<p><code>LockManager::GetLatch(Transaction *txn, LockRequestQueue *lock_queue)</code>：txn请求从lock_queue中获得锁。</p>
+</li>
+<li>
+<p>不满足的话，等待被唤醒再次检查是否可以获得锁。在检查之前需要先检查当前事务是否为<code>abort</code>。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>获得锁，修改请求中的<code>granted_</code>变量，将rid添加到事务获得锁的集合当中。</p>
+</li>
+</ul>
+<h6 id="获得锁的实现">获得锁的实现</h6>
+<ul>
+<li>
+<p><strong>检查是否可以获得锁<code>TryGetLatch(txn, lock_queue)</code></strong></p>
+<ol>
+<li>该请求在等待队列的队头，无论是X锁还是S锁都可以直接获得。</li>
+<li>该请求为S锁，其之前所有的请求均为S锁。</li>
+</ol>
+</li>
+<li>
+<p><strong>抢占的条件<code>Would wait</code>：</strong></p>
+<ol>
+<li>该请求为X锁，其之前所有低优先级txn均应该abort</li>
+<li>该请求为S锁，其之前低优先级txn的X锁应该abort</li>
+</ol>
+</li>
+<li>
+<p><strong><code>GetLatch</code>的流程：</strong></p>
+</li>
+</ul>
+<ol>
+<li><code>TryGetLatch</code>尝试直接获取锁。</li>
+<li>尝试抢占锁，首先abort满足抢占条件的txn，之后通过<code>TryGetLatch</code>再次获得锁。</li>
+</ol>
+<ul>
+<li><strong>注意事项</strong>
+<ol>
+<li>如果可以获得S锁，那么需要唤醒其他等待的锁，唤醒在队列中该S锁之后的的S锁。存在<code>S S S S</code>的情况。</li>
+<li>如果在抢占过程中存在被abort的txn，需要唤醒其他等待的txn获得锁。</li>
+</ol>
+</li>
+</ul>
+<h6 id="updatelatch">UpdateLatch</h6>
+<ul>
+<li>检查当前事务状态是否为<code>abort</code>，如果是返回false。</li>
+<li>检查是否满足2PL，只有在Growing阶段才能获取锁。</li>
+<li>如果没有获得S锁返回false，如果已经获得了X锁返回true。</li>
+<li>检查是否满足升级锁的条件
+<ul>
+<li>首先将队列中该txn的S锁删除，之后插入新的X锁。然后通过<code>GetLatch</code>检查是否可以获得锁。</li>
+</ul>
+</li>
+<li>将该txn中rid从读锁集合中删除，插入到写锁的集合中。</li>
+</ul>
+<h6 id="unlock">Unlock</h6>
+<ul>
+<li>如果隔离级别为可重复读，进入Shrinking状态。</li>
+<li>删除rid所有的锁，并且从读写锁的集合中删除。</li>
+</ul>
+<h5 id="concurrent-query-execution">Concurrent Query Execution</h5>
+<h6 id="不同隔离级别加锁情况">不同隔离级别加锁情况</h6>
+<ul>
+<li>串行化：Strict 2PL，索引锁。</li>
+<li>可重复读：Strict 2PL。</li>
+<li>读已提交：Strict 2PL但是S锁使用完后可以立即释放。</li>
+<li>读未提交：Strict 2PL但是无S锁，允许脏读。</li>
+</ul>
+<h4 id="参考博客">参考博客</h4>
+<ul>
+<li><a href="https://www.inlighting.org/archives/cmu-15-445-notes/" target="_blank" rel="noopener noreffer">https://www.inlighting.org/archives/cmu-15-445-notes/</a></li>
+<li><a href="https://www.cnblogs.com/JayL-zxl/category/1919605.html" target="_blank" rel="noopener noreffer">https://www.cnblogs.com/JayL-zxl/category/1919605.html</a></li>
+<li><a href="https://15445.courses.cs.cmu.edu/fall2021/" target="_blank" rel="noopener noreffer">https://15445.courses.cs.cmu.edu/fall2021/</a></li>
+<li><a href="https://juejin.cn/post/6844904096378404872" target="_blank" rel="noopener noreffer">https://juejin.cn/post/6844904096378404872</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/127274032" target="_blank" rel="noopener noreffer">https://zhuanlan.zhihu.com/p/127274032</a></li>
+<li><a href="https://www.modb.pro/db/41656" target="_blank" rel="noopener noreffer">https://www.modb.pro/db/41656</a></li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2022-05-07</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/cmu15-445/">cmu15-445</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/cmu15-445-project0_1/" class="prev" rel="prev" title="cmu15-445-project0,1"><i class="fas fa-angle-left fa-fw"></i>cmu15-445-project0,1</a>
+            <a href="/dubbo-go-protobuf/" class="next" rel="next" title="dubbo-go-Protocol Buffers">dubbo-go-Protocol Buffers<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      renderMathInElement(document.body, {
+              delimiters: [
+                  {left: "$$", right: "$$", display: true},
+                  {left: "$", right: "$", display: false}
+              ]
+          });
+    });
+</script>
+
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.95.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021 - 2022</span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":30},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
