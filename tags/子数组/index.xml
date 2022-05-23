@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>子数组 - 标签 - stonex</title>
+        <link>https://sheny1xuan.github.io/tags/%E5%AD%90%E6%95%B0%E7%BB%84/</link>
+        <description>子数组 - 标签 - stonex</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sheny1xuan@163.com (Shen)</managingEditor>
+            <webMaster>sheny1xuan@163.com (Shen)</webMaster><atom:link href="https://sheny1xuan.github.io/tags/%E5%AD%90%E6%95%B0%E7%BB%84/" rel="self" type="application/rss+xml" /><item>
+    <title>152. 乘积最大子数组</title>
+    <link>https://sheny1xuan.github.io/lc152/</link>
+    <pubDate>Mon, 01 Jan 0001 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/lc152/</guid>
+    <description><![CDATA[152. 乘积最大子数组 f[i]以第i个数字结尾的乘积最大的子数组，与和最大的子数组不同，乘积最大的子数组由两部分转移而来。 nums[i - 1] &lt; 0, $f[i] = max(fmin[i - 1] * nums[i]]></description>
+</item></channel>
+</rss>

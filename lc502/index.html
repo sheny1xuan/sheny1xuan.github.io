@@ -176,45 +176,45 @@
 </span><span class="lnt">38
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">typedef</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">PII</span><span class="p">;</span>
-
-<span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-    <span class="c1">// 如果没有k的限制：依次将资本消耗从小到大进行排序，然后投资capital[i],之后w+=profits[i]
-</span><span class="c1"></span>    <span class="c1">// 有了k的限制
-</span><span class="c1"></span>    <span class="c1">// 首先仍是将资本消耗从小到大排序
-</span><span class="c1"></span>    <span class="c1">// 但是在选择项目时需要考虑利润的因素，每一次需要选择所有满足资本投资capital[i] &lt; w中利润最大的项目，可以利用最大堆获取。
-</span><span class="c1"></span>    <span class="c1">// 这里需要注意的是，在每次投资之后资本w1会变大为w2，每次只需将w1-&gt;w2之间的项目入堆即可。
-</span><span class="c1"></span>    <span class="c1">// $O(n + k)logn$
-</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">findMaximizedCapital</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">,</span> <span class="kt">int</span> <span class="n">w</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">profits</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">capital</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">vector</span><span class="o">&lt;</span><span class="n">PII</span><span class="o">&gt;</span> <span class="n">projects</span><span class="p">;</span>
-        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">profits</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-        <span class="n">priority_queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">hp</span><span class="p">;</span>
-
-        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
-            <span class="n">projects</span><span class="p">.</span><span class="n">push_back</span><span class="p">({</span><span class="n">capital</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">profits</span><span class="p">[</span><span class="n">i</span><span class="p">]});</span>
-        <span class="p">}</span>
-        <span class="c1">// 排序
-</span><span class="c1"></span>        <span class="n">sort</span><span class="p">(</span><span class="n">projects</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">projects</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
-
-        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
-            <span class="k">while</span><span class="p">(</span><span class="n">idx</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">&amp;&amp;</span> <span class="n">projects</span><span class="p">[</span><span class="n">idx</span><span class="p">].</span><span class="n">first</span> <span class="o">&lt;=</span> <span class="n">w</span><span class="p">){</span>
-                <span class="n">hp</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">projects</span><span class="p">[</span><span class="n">idx</span><span class="p">].</span><span class="n">second</span><span class="p">);</span>
-                <span class="n">idx</span><span class="o">++</span><span class="p">;</span>
-            <span class="p">}</span>
-
-            <span class="k">if</span><span class="p">(</span><span class="n">hp</span><span class="p">.</span><span class="n">empty</span><span class="p">()){</span>
-                <span class="k">break</span><span class="p">;</span>
-            <span class="p">}</span><span class="k">else</span><span class="p">{</span>
-                <span class="n">w</span> <span class="o">+=</span> <span class="n">hp</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
-                <span class="n">hp</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-
-        <span class="k">return</span> <span class="n">w</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">};</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">typedef</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">PII</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 如果没有k的限制：依次将资本消耗从小到大进行排序，然后投资capital[i],之后w+=profits[i]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 有了k的限制
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 首先仍是将资本消耗从小到大排序
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 但是在选择项目时需要考虑利润的因素，每一次需要选择所有满足资本投资capital[i] &lt; w中利润最大的项目，可以利用最大堆获取。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 这里需要注意的是，在每次投资之后资本w1会变大为w2，每次只需将w1-&gt;w2之间的项目入堆即可。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// $O(n + k)logn$
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">findMaximizedCapital</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">,</span> <span class="kt">int</span> <span class="n">w</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">profits</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">capital</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">PII</span><span class="o">&gt;</span> <span class="n">projects</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">profits</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">priority_queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">hp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">            <span class="n">projects</span><span class="p">.</span><span class="n">push_back</span><span class="p">({</span><span class="n">capital</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">profits</span><span class="p">[</span><span class="n">i</span><span class="p">]});</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 排序
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">sort</span><span class="p">(</span><span class="n">projects</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">projects</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span><span class="p">(</span><span class="n">idx</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">&amp;&amp;</span> <span class="n">projects</span><span class="p">[</span><span class="n">idx</span><span class="p">].</span><span class="n">first</span> <span class="o">&lt;=</span> <span class="n">w</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">                <span class="n">hp</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">projects</span><span class="p">[</span><span class="n">idx</span><span class="p">].</span><span class="n">second</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">idx</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">hp</span><span class="p">.</span><span class="n">empty</span><span class="p">()){</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">w</span> <span class="o">+=</span> <span class="n">hp</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="n">hp</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">w</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
@@ -261,7 +261,7 @@
 
 <div id="comments"></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.92.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.95.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021 - 2022</span></div>
         </div>
     </footer></div>

@@ -82,20 +82,21 @@ int qury(int x, int y){
 + OOP
 
 ``` cpp
-class findUnionSet{
+const int N = 1e5+10;
+
+class UnionFindSet{
   private:
   vector<int> f;
   public:
-  findUnionSet(int n = N){
+  UnionFindSet(int n = N){
       f = vector<int>(n + 1, 0);
       for(int i = 1; i <= n; i++){
           f[i] = i;
       }
   }
   int find(int x) {
-      if(x == f[x])	return x;
-      f[x] = find(f[x]);
-      return f[]
+      if(x != f[x]) f[x] = find(f[x]);
+      return f[x];
   }
   
   void un(int x, int y) {

@@ -4,9 +4,23 @@
         <link>https://sheny1xuan.github.io/</link>
         <description>Welcome to my&#39;blog!</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sheny1xuan@163.com (Shen)</managingEditor>
-            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Wed, 17 Nov 2021 00:00:00 &#43;0000</lastBuildDate>
+            <webMaster>sheny1xuan@163.com (Shen)</webMaster><lastBuildDate>Wed, 18 May 2022 00:00:00 &#43;0000</lastBuildDate>
             <atom:link href="https://sheny1xuan.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>dubbo-go-Protocol Buffers</title>
+    <link>https://sheny1xuan.github.io/dubbo-go-protobuf/</link>
+    <pubDate>Wed, 18 May 2022 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/dubbo-go-protobuf/</guid>
+    <description><![CDATA[Protocol Buffers 语法 版本号：第一行为版本号。 message定义了传输的对象，对于每一个定义的基础类型，后面的编号决定了其在对象序列化中的位置。其中1-1]]></description>
+</item><item>
+    <title>读写已经关闭的TCP连接会发生什么</title>
+    <link>https://sheny1xuan.github.io/tcp%E8%BF%9E%E6%8E%A5%E8%AF%BB%E5%86%99%E6%B5%8B%E8%AF%95/</link>
+    <pubDate>Thu, 21 Apr 2022 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://sheny1xuan.github.io/tcp%E8%BF%9E%E6%8E%A5%E8%AF%BB%E5%86%99%E6%B5%8B%E8%AF%95/</guid>
+    <description><![CDATA[读写已经关闭的TCP连接 TCP连接状态图 连接关闭的两种方式 关闭一个连接，有两种方式：1.使用四次挥手，正常关闭一个TCP连接。2.在紧急情况]]></description>
+</item><item>
     <title>lc318.最大单词长度乘积</title>
     <link>https://sheny1xuan.github.io/lc318/</link>
     <pubDate>Wed, 17 Nov 2021 00:00:00 &#43;0000</pubDate>
@@ -62,19 +76,5 @@
     <author>作者</author>
     <guid>https://sheny1xuan.github.io/lc378/</guid>
     <description><![CDATA[378.有序矩阵中第 K 小的元素 如何判断一个数num在矩阵中处于第k小？从左下角向上移动，如果当前位置matrix[x][y] &lt;= num，那么说]]></description>
-</item><item>
-    <title>lc638.大礼包</title>
-    <link>https://sheny1xuan.github.io/lc638/</link>
-    <pubDate>Sun, 24 Oct 2021 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc638/</guid>
-    <description><![CDATA[638.大礼包 DFS 将每个单独的商品处理成一个礼包 对于每一个礼包有两种选择(好像完全背包问题):直接选择下一个礼包;继续选择这个礼包。 $T:O(]]></description>
-</item><item>
-    <title>lc1755.最接近目标值的子序列和</title>
-    <link>https://sheny1xuan.github.io/lc1775/</link>
-    <pubDate>Thu, 21 Oct 2021 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://sheny1xuan.github.io/lc1775/</guid>
-    <description><![CDATA[1755.最接近目标值的子序列和 折半搜索 数据范围比较小，但是没有到小到可以直接搜索的地步。 可以将整个数据分成两部分分别进行搜索，最后进行合并]]></description>
 </item></channel>
 </rss>
