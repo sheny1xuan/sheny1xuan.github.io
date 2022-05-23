@@ -408,7 +408,6 @@ TEST_F(ExecutorTest, SimpleSeqScanTest) {
   auto *col_c = MakeColumnValueExpression(schema, 0, "colC");
   auto *const500 = MakeConstantValueExpression(ValueFactory::GetIntegerValue(500));
   auto *predicate = MakeComparisonExpression(col_a, const500, ComparisonType::LessThan);
-  auto *out_schema = MakeOutputSchema({{"colA", col_a}, {"colC", col_c}});
   // Create plan node
   SeqScanPlanNode plan{out_schema, predicate, table_info->oid_};
 
