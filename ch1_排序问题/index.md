@@ -192,6 +192,7 @@ int main(){
 
 + 平均复杂度：$T:O(n),S:O(logn)$
 + 最坏复杂度：$T:O(n^2),S:O(n)$
++ 时间复杂度计算方法：https://blog.csdn.net/rainchxy/article/details/78957851
 
 ###### 快慢指针的快速选择切分
 

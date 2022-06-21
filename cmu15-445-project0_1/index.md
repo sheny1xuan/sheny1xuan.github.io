@@ -137,7 +137,7 @@ fi
 
 ##### 为什么需要缓冲池与磁盘直接进行交互而不用操作系统的普通文件系统：
 
-数据库系统需要做根据数据库系统的IO操作特点进行优化，尽可能多的减少IO的读写
+数据库系统需要做根据数据库系统的IO操作特点进行优化，**尽可能多地减少IO的读写**
 
 + 按照顺序IO写入磁盘
 + 预读
@@ -150,32 +150,35 @@ fi
 
 + 无缓冲IO：内存中的数据->内核缓冲区->磁盘
 + 缓冲IO：内存中的数据->用户缓冲区->内核缓冲区->磁盘
-+ DIO/CIO：内存中的数据->磁盘(数据库使用)
-
-直接IO减少了数据的拷贝，操作系统使用mmap直接将文件映射到数据库程序当中的虚拟地址空间中。而虚拟地址空间中的页与实际物理地址映射与换入换出仍通过操作系统管理。
++ DIO/CIO：内存中的数据->数据库地缓冲池->磁盘
++ 直接IO减少了数据的拷贝，操作系统使用mmap直接将文件映射到数据库程序当中的虚拟地址空间中。而虚拟地址空间中的页与实际物理地址映射与换入换出仍通过操作系统管理。
 
 ![image-20220430195012745](https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430195012745.png)
 
-##### 缓冲池总体架构![image-20220430194844125](https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430194844125.png)
+##### 缓冲池总体架构
+
+![image-20220430194844125](https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430194844125.png)
 
 ![image-20220430205102536](https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430205102536.png)
 
 ##### 单一缓冲池主要由两部分组成：
 
 1. PageTable：将全局页号(page_id)映射为该页在缓冲池中的位置索引(frame_id)。
-2. BufferPool：存储每一页的内存，数据库的堆内存。
+2. BufferPool：存储每一页的内存，以及对应页的元信息。这两使用双锁机制，缓冲池的锁保护每一页的元信息，数据页的锁保护每一页数据读写。
 
 操作过程：
 
 1. 拿出一页需要Pin，引用计数加一，不允许被换入换出。
 2. 不需要使用某一页时，需要Unpin，引用计数减一，当引用计数为0时，允许换入换出。
 
+**唯一性：**缓冲池中同一个页号只能对应一份内存。
+
 ![image-20220428204717614](https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220428204717614.png)
 
 ##### 组相联缓冲池，与缓存组相联类似：
 
 + 减少锁的竞争
-+ 提升局部性
++ 提升局部性，防止遍历导致的缓存污染。
 
 ![image-20220430205453587](https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220430205453587.png)
 
@@ -280,7 +283,7 @@ LRU-K：防止遍历导致的缓存污染。访问k次后才加入缓存，淘�
 对于堆内存中的每一页其存在的位置只有在空闲链表，lru队列，正在使用(PIN)三种状态。因此空闲的页都存在于空闲链表或者lru队列中，对于lru队列中被换出的页需要检查其是否是脏页，如果是脏页的化需要利用`disk_manager_`写回到磁盘当中。寻找空闲的frame的逻辑可以进行简单的封装`bool FindFrame(frame_id_t *frame_id)`。需要注意的是，`page_table_`中映射的页不一定都是被PIN的状态，有些可能正处于LRU队列中。主要需要实现一下方法，其中最主要的是FetchPgImp，UnpinPgImp（需要详细阅读注释）：
 
 + FetchPgImp：寻找该页，如果该页不在`page_table_`中，需要找到合适的空闲页，利用`disk_manager_`读出该页。之后将该页引用计数加一，从LRU队列中取出。
-+ UnpinPgImp：这里需要注意注释里的`*false if the page pin count is <= 0 before this call, true otherwise*`，只有`pin_count <=0`时才返回false，其余情况下都返回true。除此之外，即使该页`pin_count<=0`，不需要将该页从`page_table_`中删除，否则FetchPage时，该页在lru队列中不能被拿出，导致不一致。脏页也只需要进行标记即可后续被换出时写回磁盘即可。
++ UnpinPgImp：这里需要注意注释里的`*false if the page pin count is <= 0 before this call, true otherwise*`，只有`pin_count <=0`时才返回false，其余情况下都返回true。除此之外，即使该页`pin_count<=0`，不需要将该页从`page_table_`中删除，否则FetchPage时，该页在lru队列中不能被拿出，**导致不唯一**。脏页也只需要进行标记即可后续被换出时写回磁盘即可。内存中的页只会存在三个位置：空闲链表，缓冲池，LRU队列。
 + FlushPgImp：利用`disk_manager_`写回。
 + NewPgImp：先找到空闲的页，之后`AllocatePage()`申请`page_id`。
 + DeletePgImp：删除该页，需要注意只有`pin_count_ <= 0`才能删除，感觉应该还需要在磁盘中删除该页，这部分不是很确定。

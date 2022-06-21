@@ -71,49 +71,56 @@ public:
 > $T:O(2*m+n)$，$j$在`while(j && p[i] != p[j + 1])​`中最多减$m$次，而$j$在for循环中最多加$m$次。
 
 ``` cpp
-#include <iostream>
-#include <string>
-#include <algorithm>
+class Solution {
+public:
+    int strStr(string haystack, string needle) {
+        int n = haystack.size(), m = needle.size();
 
-#define N 1000001
-char s[N], p[N];
-int n, m;
-int ne[N];
-
-using namespace std;
-
-int main(){
-    // 从第1个字符开始
-    cin >> n >> p + 1 >> m >> s + 1;
-    // ne[1] = 0,因为第一个不匹配时
-    // 都可以让目标串向后移动一位
-    // 求ne数组：ne[i]:与下标i结尾的后缀相同的前缀的长度
-    for(int i = 2, j = 0; i <= n; i++){
-        while(j && p[i] != p[j + 1])    j = ne[j];
-        if(p[i] == p[j + 1])    j += 1;
-        ne[i] = j;
-    }
-    // 查看next数组 j = 0,意味着从零开始匹配，ne[0]无意义。
-    // for(int i = 0; i <= n; i++){
-    //   cout << ne[i] << ' ' ;
-    // }
-    // cout << endl;
-    // KMP匹配
-    // i表示开始匹配的目标串的下标
-    // j表示匹配的长度
-    for(int i = 1, j = 0; i <= m; i++){
-        while(j && s[i] != p[j + 1])    j = ne[j];
-        if(s[i] == p[j + 1])    j += 1;
-        if(j == n){
-            // 计数从1开始所以不用减去1
-            cout << i - n << ' ';
-            // 一定要是ne[j]不能是把整个字符串右移。
-            j = ne[j];
+        if (m == 0) {
+            return 0;
         }
+
+        vector<int> ne(m);
+        // ne[i] -> 前缀与第i位为结尾的后缀匹配的长度
+        // ababa -> ne = [0, 0, 1, ,2, 3]
+        for (int i = 1, j = 0; i < m; i++) {
+            while (j > 0 && needle[i] != needle[j]) {
+                j = ne[j - 1];
+            }
+            if (needle[i] == needle[j]) {
+                j++;
+            }
+            ne[i] = j;
+        }
+
+        // s:deabcababa
+        // p:ababa
+        // i < 2 : (j = 0, i += 1)
+        // s:deabacababa
+        // p:  ababa
+        // i < 5 : (i += 1, j += 1)
+        // i == 5, j = 4: (j = ne[j - 1] = 2)
+        // s:deabacababa
+        // p:    ababa
+        // i == 5, j = 2 (j = ne[j - 1] = 0)
+        // s:deabacababa
+        // p:      ababa
+        for (int i = 0, j = 0; i < n; i++) {
+            while (j > 0 && haystack[i] != needle[j]) {
+                j = ne[j - 1];
+            }
+            // if j == 0 && haystack[i] != needle[j]
+            // i += 1从头进行匹配
+            if (haystack[i] == needle[j]) {
+                j++;
+            }
+            if (j == m) {
+                return i - m + 1;
+            }
+        }
+        return -1;
     }
-    // cout << ne[n+1];
-    return 0;
-}
+};
 ```
 
 
