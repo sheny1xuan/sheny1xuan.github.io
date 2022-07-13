@@ -44,7 +44,7 @@
 
 ##### 对端同时关闭读写
 
-+ 第一次写入后可以返回，但是发送到对端后，对端发送RST报文，关闭该连接。之后再次写入会产生SIGPIPE信号。
++ 第一次写入后可以返回，但是发送到对端后，对端处于close_wait状态(并且已经在操作系统内关闭读端)，此时发送RST报文，关闭该连接。之后再次写入会产生SIGPIPE信号，再次读返回-1，并且产生错误read error Connection reset by peer, errorno: 104。
 
 #### 读异常
 
@@ -55,10 +55,6 @@
 ##### 对端关闭写端
 
 + read返回0。
-
-##### 对端同时关闭读写
-
-+ 返回-1，并且产生错误read error Connection reset by peer, errorno: 104。
 
 #### 测试读写异常
 
@@ -271,4 +267,5 @@ int main () {
 
 + https://stackoverflow.com/questions/4160347/close-vs-shutdown-socket
 + https://blog.csdn.net/BryantLmm/article/details/81671457
++ https://www.cnblogs.com/lit10050528/p/5116566.html
 

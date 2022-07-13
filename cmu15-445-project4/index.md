@@ -105,7 +105,7 @@ T1执行失败时，T2读到了A的脏数据，也需要回滚，这种连锁反
 
 ##### 两阶段锁对比
 
-普通两阶段锁并不满足串行化的要求，只有严格两阶段锁满足串行化要求。
+普通两阶段锁并不满足串行化的要求，只有严格两阶段锁满足冲出的串行化要求。
 
 <img src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220507160002491.png" alt="image-20220507160002491" style="zoom:67%;" />
 
@@ -235,7 +235,7 @@ DELTA Storage：版本链表中存储的不是具体表的数据，而是表的�
 
 主键索引指向版本链的头部，版本链从新到旧，更新主键相当于先删除后增加一个新的主键。二级索引有两种方式指向版本链，一种直接指向版本链，另一种是通过主键查询版本链。
 
-<img src="C:/Users/shen/AppData/Roaming/Typora/typora-user-images/image-20220507204337215.png" alt="image-20220507204337215" style="zoom: 33%;" /><img src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220507204356316.png" alt="image-20220507204356316" style="zoom:33%;" />
+<img src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220507204337215.png" alt="image-20220507204337215" style="zoom: 33%;" /><img src="https://picture-table.oss-cn-beijing.aliyuncs.com/img/image-20220507204356316.png" alt="image-20220507204356316" style="zoom:33%;" />
 
 #### 实验代码
 
@@ -385,7 +385,7 @@ DELTA Storage：版本链表中存储的不是具体表的数据，而是表的�
 
 ###### Unlock
 
-+ 如果隔离级别为可重复读，进入Shrinking状态。
++ 如果隔离级别为可重复读，进入Shrinking状态（注意这里是针对的S锁的Unlock，所有的X锁只会在事务结束时释放）。
 + 删除rid所有的锁，并且从读写锁的集合中删除。
 
 ##### Concurrent Query Execution

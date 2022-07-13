@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/sheny1xuan.github.io\/tcp%E8%BF%9E%E6%8E%A5%E8%AF%BB%E5%86%99%E6%B5%8B%E8%AF%95\/"
-        },"genre": "posts","keywords": "网络编程","wordcount":  1602 ,
+        },"genre": "posts","keywords": "网络编程","wordcount":  1631 ,
         "url": "https:\/\/sheny1xuan.github.io\/tcp%E8%BF%9E%E6%8E%A5%E8%AF%BB%E5%86%99%E6%B5%8B%E8%AF%95\/","datePublished": "2022-04-21T00:00:00+00:00","dateModified": "2022-04-21T00:00:00+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -106,7 +106,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">读写已经关闭的TCP连接会发生什么</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Shen</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"><i class="far fa-folder fa-fw"></i>网络编程</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-21">2022-04-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1602 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-21">2022-04-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1631 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -140,7 +140,6 @@
                   <ul>
                     <li><a href="#主动关闭读端">主动关闭读端</a></li>
                     <li><a href="#对端关闭写端">对端关闭写端</a></li>
-                    <li><a href="#对端同时关闭读写-1">对端同时关闭读写</a></li>
                   </ul>
                 </li>
                 <li><a href="#测试读写异常">测试读写异常</a>
@@ -201,7 +200,7 @@
 </ul>
 <h5 id="对端同时关闭读写">对端同时关闭读写</h5>
 <ul>
-<li>第一次写入后可以返回，但是发送到对端后，对端发送RST报文，关闭该连接。之后再次写入会产生SIGPIPE信号。</li>
+<li>第一次写入后可以返回，但是发送到对端后，对端处于close_wait状态(并且已经在操作系统内关闭读端)，此时发送RST报文，关闭该连接。之后再次写入会产生SIGPIPE信号，再次读返回-1，并且产生错误read error Connection reset by peer, errorno: 104。</li>
 </ul>
 <h4 id="读异常">读异常</h4>
 <h5 id="主动关闭读端">主动关闭读端</h5>
@@ -211,10 +210,6 @@
 <h5 id="对端关闭写端">对端关闭写端</h5>
 <ul>
 <li>read返回0。</li>
-</ul>
-<h5 id="对端同时关闭读写-1">对端同时关闭读写</h5>
-<ul>
-<li>返回-1，并且产生错误read error Connection reset by peer, errorno: 104。</li>
 </ul>
 <h4 id="测试读写异常">测试读写异常</h4>
 <ul>
@@ -619,6 +614,7 @@
 <ul>
 <li><a href="https://stackoverflow.com/questions/4160347/close-vs-shutdown-socket" target="_blank" rel="noopener noreffer">https://stackoverflow.com/questions/4160347/close-vs-shutdown-socket</a></li>
 <li><a href="https://blog.csdn.net/BryantLmm/article/details/81671457" target="_blank" rel="noopener noreffer">https://blog.csdn.net/BryantLmm/article/details/81671457</a></li>
+<li><a href="https://www.cnblogs.com/lit10050528/p/5116566.html" target="_blank" rel="noopener noreffer">https://www.cnblogs.com/lit10050528/p/5116566.html</a></li>
 </ul>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
